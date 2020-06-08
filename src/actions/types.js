@@ -1,0 +1,1 @@
+export const SET_DAY = "SET_DAY";
