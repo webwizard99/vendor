@@ -1,0 +1,11 @@
+.Title {
+  width: 60%;
+  height: 4rem;
+  margin: auto;
+  padding-top: 1rem;
+  font-size: 3rem;
+  color: rgba(40, 30, 45, .9);
+  font-family: 'Piedra', sans-serif;
+  text-align: center;
+
+}

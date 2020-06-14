@@ -1,0 +1,51 @@
+.StartScreen {
+  height: 100%;
+  width: 100%;
+  background: rgb(240, 245, 250);
+}
+
+.Title {
+  width: 60%;
+  height: 4rem;
+  margin: auto;
+  padding-top: 1rem;
+  font-size: 3rem;
+  color: rgba(40, 30, 45, .9);
+  font-family: 'Piedra', sans-serif;
+  text-align: center;
+
+}
+
+.NameInput {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  margin: auto;
+  font-family: "Roboto Slab", serif;
+  background: rgba(80, 140, 80, .2);
+}
+
+#name {
+  font-family: "Roboto Slab", serif;
+  font-size: 1rem;
+}
+
+.NameLabel {
+  padding-left: 1.2rem;
+  font-size: 1.2rem;
+}
+
+.StartButton {
+  float: right;
+  margin-right: 1.2rem;
+  font-size: 1.5rem;
+  background: rgb(180, 220, 200);
+  border-radius: .3rem;
+  padding: .4rem;
+}
+
+.StartButton:hover {
+  background: rgb(100, 220, 120);
+}
