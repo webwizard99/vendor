@@ -1,8 +1,17 @@
 import days from './days';
 import store from './store';
+import storeInventory from './storeInventory';
 
 const main = (function() {
   
+  const testPotionCount = 5;
+
+  const createTestPotions = function() {
+    for (let x = 0; x < testPotionCount; x++) {
+      storeInventory.addTestPotion();
+    }
+    
+  }
 
   return {
     init: function(payload) {
@@ -17,6 +26,8 @@ const main = (function() {
 
       const startingGold = store.getStartingGold();
       store.setGold(startingGold);
+
+      createTestPotions();
     }
 
   }

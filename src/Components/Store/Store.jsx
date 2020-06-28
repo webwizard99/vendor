@@ -3,6 +3,8 @@ import './Store.css';
 
 import gameStore from '../../Utilities/store';
 
+import StoreInventory from '../StoreInventory/StoreInventory';
+
 import { SET_STORE_GOLD } from '../../actions/types';
 import { connect } from 'react-redux';
 
@@ -33,6 +35,7 @@ class Store extends React.Component {
             {this.props.gold}
           </div>
         </div>
+        <StoreInventory />
         
       </div>
     )

@@ -13,6 +13,7 @@ class StartScreen extends React.Component {
     super(props);
 
     this.handleStart = this.handleStart.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
   }
   
   handleStart() {
@@ -22,6 +23,12 @@ class StartScreen extends React.Component {
     }
     game.init({ name: newName });
     this.props.setStarted(true);
+  }
+
+  handleNameInput(e) {
+    if (e.charCode === 13) {
+      this.handleStart();
+    }
   }
 
   render() {
@@ -35,6 +42,7 @@ class StartScreen extends React.Component {
               value={this.props.name}
               type="text"
               onChange={(val) => this.props.setStoreName(val.target.value)}
+              onKeyPress={this.handleNameInput}
             />
           </div>
           <button onClick={this.handleStart} 
