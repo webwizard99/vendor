@@ -18,8 +18,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// This comment exists to trigger a push and build dispatch on github
-// aaand again...
+// This is a comment made to test the build pipeline to the backend.
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
