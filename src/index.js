@@ -19,6 +19,7 @@ ReactDOM.render(
 );
 
 // This is a comment made to test the build pipeline to the backend.
+// aaand again.
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
