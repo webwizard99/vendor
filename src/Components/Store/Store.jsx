@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 class Store extends React.Component {
   constructor(props) {
     super(props);
+
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   // ~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*
@@ -29,9 +31,9 @@ class Store extends React.Component {
       <div className="Store">
         <div className="StoreMenuBar">
           <h2 className="StoreName">{this.props.storeName}</h2>
-          <span className="Inspect">&#128269; </span>
+          <span className="Inspect" role="img" aria-label="inspect">&#128269; </span>
           <div className="GoldDisplay">
-            <span className="CoinSymbol">&#x2689; </span>
+            <span className="CoinSymbol" role="img" aria-label="coin">&#x2689; </span>
             {this.props.gold}
           </div>
         </div>

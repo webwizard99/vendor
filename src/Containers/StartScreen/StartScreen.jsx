@@ -18,7 +18,7 @@ class StartScreen extends React.Component {
   
   handleStart() {
     const newName = this.props.name;
-    if (!newName || newName == '') {
+    if (!newName || newName === '') {
       return;
     }
     game.init({ name: newName });

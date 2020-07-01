@@ -2,7 +2,6 @@ import React from 'react';
 import './reset.css';
 import './App.css';
 
-import MainGame from '../../Utilities/main';
 import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
 

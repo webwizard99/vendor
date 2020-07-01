@@ -1,5 +1,4 @@
 import Items from './items';
-import gameStore from './store';
 
 
 const storeInventory = (function(){
