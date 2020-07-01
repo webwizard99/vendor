@@ -4,7 +4,7 @@ import './Title.css';
 class Title extends React.Component {
   render() {
     return (
-      <div className="Title">VENDOR :)</div>
+      <div className="Title">VENDOR :o</div>
     )
   }
 }
