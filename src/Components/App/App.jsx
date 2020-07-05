@@ -6,12 +6,18 @@ import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
 
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.getMainView = this.getMainView.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchUser();
   }
 
   getMainView() {
@@ -42,4 +48,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, actions)(App);
