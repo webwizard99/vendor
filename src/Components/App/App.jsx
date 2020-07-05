@@ -17,6 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log(actions);
     this.props.fetchUser();
   }
 
