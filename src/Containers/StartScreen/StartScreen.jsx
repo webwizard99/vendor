@@ -2,11 +2,13 @@ import React from 'react';
 import './StartScreen.css';
 
 import Title from '../../Components/Title/Title';
+import MenuBar from '../../Components/MenuBar/MenuBar';
 
 import game from '../../Utilities/main';
 
 import { connect } from 'react-redux';
 import { SET_STORE_NAME, SET_GAME_STATE } from '../../actions/types';
+
 
 class StartScreen extends React.Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class StartScreen extends React.Component {
   render() {
     return (
       <div className="StartScreen">
+        <MenuBar />
         <Title />
         <div className="NameInput">
           <div className="nameInputGroup">

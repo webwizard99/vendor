@@ -5,3 +5,4 @@ export const SET_STORE_GOLD = "SET_STORE_GOLD";
 export const SET_UPDATES = "SET_UPDATES";
 export const SET_STORE_UPDATE = "SET_STORE_UPDATE";
 export const SET_STORE_INVENTORY = 'SET_STORE_INVENTORY';
+export const FETCH_USER = 'FETCH_USER';

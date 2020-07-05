@@ -1,0 +1,8 @@
+.MenuBar {
+  height: 2rem;
+  width: 100%;
+  border-bottom: rgb(30, 35, 30);
+  font-family: "Roboto Slab", serif;
+  background: rgb(80, 100, 80);
+  color: white;
+}
