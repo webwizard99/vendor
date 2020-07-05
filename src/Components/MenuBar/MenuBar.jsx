@@ -3,9 +3,35 @@ import { connect } from 'react-redux';
 import './MenuBar.css';
 
 class MenuBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.renderLogin = this.renderLogin.bind(this);
+  }
+
+  renderLogin() {
+    switch(this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <li><a href="/auth/facebook">Login with Facebook</a></li>
+        );
+      default:
+        return (
+          <li><a href="/api/logout">Logout</a></li>
+        );
+    }
+  }
+  
   render() {
     return (
-      <div>MenuBar  (auth: {this.props.auth})</div>
+      <div className="MenuBar">
+        <span>MenuBar  (auth: {this.props.auth})</span>
+        <ul className="LoginContainer">
+        {this.renderLogin()}
+        </ul>
+      </div>
     );
   }
 }
