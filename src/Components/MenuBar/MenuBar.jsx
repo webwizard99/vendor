@@ -27,9 +27,9 @@ class MenuBar extends React.Component {
   render() {
     return (
       <div className="MenuBar">
-        <span>MenuBar  (auth: {this.props.auth})</span>
+        <span>MenuBar </span>
         <ul className="LoginContainer">
-        {this.renderLogin()}
+          {this.renderLogin()}
         </ul>
       </div>
     );
