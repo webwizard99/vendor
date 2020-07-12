@@ -36,7 +36,7 @@ class MenuBar extends React.Component {
         const userType = this.props.auth.type;
         if (userType === 'owner') {
           return (
-            <a href="/editor">editor</a>
+            <a className="EditorLink" href="/editor">editor</a>
           )
         } else {
           return false;
