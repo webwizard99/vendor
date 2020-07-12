@@ -18,11 +18,11 @@
 }
 
 .LoginContainer {
-  margin-left: 1.5rem;
   display: flex;
   justify-content: right;
 }
 
 .LoginContainer a, .EditorLink {
   color: white;
+  margin-left: 1.5rem;
 }
