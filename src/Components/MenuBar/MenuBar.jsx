@@ -48,7 +48,7 @@ class MenuBar extends React.Component {
   render() {
     return (
       <div className="MenuBar">
-        <span className="MenuTitle">VENDOR</span>
+        <span className="MenuTitle"><a href="/">VENDOR</a></span>
         <ul className="LoginContainer">
           {this.renderEditorLink()}
           {this.renderLogin()}
