@@ -5,4 +5,14 @@
   font-family: "Roboto Slab", serif;
   background: rgb(80, 100, 80);
   color: white;
+  display: flex;
+}
+
+.MenuTitle {
+  font-family: 'Piedra', sans-serif;
+  width: 60%;
+}
+
+.LoginContainer {
+  
 }

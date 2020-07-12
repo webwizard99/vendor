@@ -7,6 +7,7 @@ class MenuBar extends React.Component {
     super(props);
 
     this.renderLogin = this.renderLogin.bind(this);
+    this.renderEditorLink = this.renderEditorLink.bind(this);
   }
 
   renderLogin() {
@@ -24,11 +25,32 @@ class MenuBar extends React.Component {
         );
     }
   }
+
+  renderEditorLink() {
+    switch(this.props.auth) {
+      case null:
+        return false;
+      case false:
+        return false;
+      default:
+        console.log(this.props.auth.dataValues.type);
+        const userType = this.props.auth.dataValues.type;
+        if (userType === 'owner') {
+          return (
+            <a href="/editor">editor</a>
+          )
+        } else {
+          return false;
+        }
+    }
+
+  }
   
   render() {
     return (
       <div className="MenuBar">
-        <span>MenuBar </span>
+        <span className="MenuTitle">VENDOR</span>
+        {this.renderEditorLink()}
         <ul className="LoginContainer">
           {this.renderLogin()}
         </ul>
