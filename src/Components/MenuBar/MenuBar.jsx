@@ -17,11 +17,11 @@ class MenuBar extends React.Component {
         return;
       case false:
         return (
-          <li><a href="/auth/facebook">Login with Facebook</a></li>
+          <li key="login"><a href="/auth/facebook">Login with Facebook</a></li>
         );
       default:
         return (
-          <li><a href="/api/logout">Logout</a></li>
+          <li key="login"><a href="/api/logout">Logout</a></li>
         );
     }
   }
@@ -36,7 +36,7 @@ class MenuBar extends React.Component {
         const userType = this.props.auth.type;
         if (userType === 'owner') {
           return (
-            <a className="EditorLink" href="/editor">editor</a>
+            <li key="editorLink"><a className="EditorLink" href="/editor">editor</a></li>
           )
         } else {
           return false;
@@ -49,8 +49,8 @@ class MenuBar extends React.Component {
     return (
       <div className="MenuBar">
         <span className="MenuTitle">VENDOR</span>
-        {this.renderEditorLink()}
         <ul className="LoginContainer">
+          {this.renderEditorLink()}
           {this.renderLogin()}
         </ul>
       </div>

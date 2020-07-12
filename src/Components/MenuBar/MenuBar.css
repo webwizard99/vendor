@@ -11,7 +11,7 @@
 
 .MenuTitle {
   font-family: 'Piedra', sans-serif;
-  width: 60%;
+  width: 80%;
   font-size: 1.2rem;
   padding-left: 1rem;
   text-shadow: 1px 1px 1px rgba(30, 40, 30, .7);
@@ -19,6 +19,8 @@
 
 .LoginContainer {
   margin-left: 1.5rem;
+  display: flex;
+  justify-content: right;
 }
 
 .LoginContainer a, .EditorLink {
