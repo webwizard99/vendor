@@ -13,10 +13,14 @@
   font-family: 'Piedra', sans-serif;
   width: 60%;
   font-size: 1.2rem;
-  text-shadow: rgba(30, 40, 30, .7);
+  padding-left: 1rem;
+  text-shadow: 1px 1px 1px rgba(30, 40, 30, .7);
 }
 
 .LoginContainer {
   margin-left: 1.5rem;
+}
+
+.LoginContainer a {
   color: white;
 }
