@@ -33,15 +33,15 @@ class MenuBar extends React.Component {
       case false:
         return false;
       default:
-        console.log(this.props.auth.dataValues.type);
-        const userType = this.props.auth.dataValues.type;
-        if (userType === 'owner') {
-          return (
-            <a href="/editor">editor</a>
-          )
-        } else {
-          return false;
-        }
+        console.dir(this.props.auth);
+        // const userType = this.props.auth.dataValues.type;
+        // if (userType === 'owner') {
+        //   return (
+        //     <a href="/editor">editor</a>
+        //   )
+        // } else {
+        //   return false;
+        // }
     }
 
   }
