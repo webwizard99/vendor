@@ -9,11 +9,14 @@
   align-items: center;
 }
 
+.MenuTitle {
+  width: 80%;
+  padding-left: 1rem;
+}
+
 .MenuTitle a {
   font-family: 'Piedra', sans-serif;
-  width: 80%;
   font-size: 1.2rem;
-  padding-left: 1rem;
   text-decoration: none;
   text-shadow: 2px 2px 3px rgba(30, 40, 30, .9);
 }
