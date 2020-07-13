@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.MenuTitle {
+.MenuTitle a {
   font-family: 'Piedra', sans-serif;
   width: 80%;
   font-size: 1.2rem;
@@ -22,7 +22,7 @@
   justify-content: right;
 }
 
-.LoginContainer a, .EditorLink {
+.LoginContainer a {
   color: white;
   margin-left: 1.5rem;
   text-decoration: none;
