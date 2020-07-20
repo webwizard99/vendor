@@ -2,7 +2,6 @@ import React from 'react';
 import './StartScreen.css';
 
 import Title from '../../Components/Title/Title';
-import MenuBar from '../../Components/MenuBar/MenuBar';
 
 import game from '../../Utilities/main';
 
@@ -36,7 +35,6 @@ class StartScreen extends React.Component {
   render() {
     return (
       <div className="StartScreen">
-        <MenuBar />
         <Title />
         <div className="NameInput">
           <div className="nameInputGroup">

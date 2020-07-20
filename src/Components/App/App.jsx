@@ -5,6 +5,8 @@ import './App.css';
 import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
 
+import MenuBar from '../../Components/MenuBar/MenuBar';
+
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -36,6 +38,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <MenuBar />
         {this.getMainView()}
       </div>
     )

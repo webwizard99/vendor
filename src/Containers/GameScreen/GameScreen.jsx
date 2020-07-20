@@ -1,6 +1,7 @@
 import React from 'react';
 import './GameScreen.css';
 
+import MenuBar from '../../Components/MenuBar/MenuBar';
 import Title from '../../Components/Title/Title';
 import Store from '../../Components/Store/Store';
 import Days from '../../Components/Days/Days';
