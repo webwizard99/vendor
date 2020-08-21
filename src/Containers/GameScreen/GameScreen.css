@@ -3,3 +3,16 @@
   width: 100vw;
   background: rgb(240, 245, 250);
 }
+
+.flex-container {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.CommerceColumn {
+  width: 66%;
+}
