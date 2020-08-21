@@ -2,6 +2,12 @@ const suppliers = (function(){
 
   let suppliers = [];
 
+  const Supplier = function(payload) {
+    const { name, offerings } = payload;
+    this.name = name;
+    this.offerings = offerings;
+  }
+
   const fetchSuppliers = async function() {
     let initSuppliers;
       try {
@@ -25,7 +31,9 @@ const suppliers = (function(){
               const pushIndex = Math.floor(Math.random() * drainSuppliers.length);
               let newSupplier = drainSuppliers.splice(pushIndex, 1);
               newSupplier = newSupplier[0];
-              suppliers.push(newSupplier);
+              const supplierPayload = { name: newSupplier.name, offerings: newSupplier.offerings };
+              let thisSupplier = new Supplier(supplierPayload);
+              suppliers.push(thisSupplier);
             }
           }
         });

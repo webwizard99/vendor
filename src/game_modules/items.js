@@ -3,16 +3,22 @@ import PotionTypes from '../Utilities/potionTypes';
 
 const items = (function(){
   const itemTypes = ItemTypes;
-
   const potionTypes = PotionTypes;
+
+  let allItems = [];
+  let lastIndex = 0;
   
-  const Item = function(type, name, value) {
+  const Item = function(payload) {
+    const { type, name, value } = payload;
     this.type = type;
     this.name = name;
     this.value = value;
+    this.id = lastIndex;
+    lastIndex++;
   }
 
-  const Potion = function(type, level) {
+  const Potion = function(payload) {
+    const { type, level } = payload;
     this.type = type;
     this.level = level;
   }
@@ -25,7 +31,8 @@ const items = (function(){
         return;
       }
       
-      const newItem = new Item(type, name, value);
+      const newPayload = { type, name, value }
+      const newItem = new Item(newPayload);
       
       switch (newItem.type) {
         case itemTypes.potion:
@@ -39,12 +46,24 @@ const items = (function(){
             console.log('attempted to create a potion with an invalid level');
             return;
           }
-          newItem[newItem.type] = new Potion(newPotionType, newPotionLevel);
+          const potionPayload = { type: newPotionType, level: newPotionLevel };
+          newItem[newItem.type] = new Potion(potionPayload);
           break;
         default:
           break;
       }
-      return newItem;
+
+      allItems.push(newItem);
+      return newItem.id;
+    },
+
+    getItem(id) {
+      let thisItem = allItems.find(item => item.id === id);
+      if (thisItem) {
+        return thisItem;
+      } else {
+        console.log('attempted to retrieve invalid item.')
+      }
     },
 
     createTestPotion: function(lvl) {
