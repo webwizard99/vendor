@@ -40,6 +40,8 @@ const supplies = (function(){
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
+        console.log(itemsOfLevel);
+        console.log(typeof itemsOfLevel);
         if (typeof itemsOfLevel === 'object') {
           newItem = itemsOfLevel;
         } else {
@@ -48,6 +50,7 @@ const supplies = (function(){
         }
       })
       .catch(err => console.log(err));
+
     return newItem;
   }
   
