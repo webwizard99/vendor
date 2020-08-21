@@ -13,6 +13,7 @@ const suppliers = (function(){
       if (initSuppliers) {
         console.log(initSuppliers);
       }
+      suppliers = initSuppliers;
     }
   }
 }());
