@@ -65,6 +65,7 @@ const supplies = (function(){
         payload.name = newItem.item.name;
         payload.value = newItem.item.value;
         let itemId = Items.createItem(payload);
+        console.log(itemId);
         supplies.push(itemId);
 
         return newItem;
