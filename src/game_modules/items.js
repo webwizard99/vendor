@@ -68,7 +68,7 @@ const items = (function(){
 
     createTestPotion: function(lvl) {
       const newItem = new Item({ type: itemTypes.potion, name: 'Healing Potion', value: 60});
-      newItem[itemTypes.potion] = new Potion(potionTypes.healing, lvl);
+      newItem[itemTypes.potion] = new Potion({ type: potionTypes.healing, level: lvl});
       return newItem;
     },
 
