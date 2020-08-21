@@ -16,6 +16,7 @@ const supplies = (function(){
     if (typeToFetch !== 'armor') {
       typeToFetch += 's';
     }
+    console.log(`typetofetch: ${typeToFetch}`);
 
     const minLvl = 1;
     const maxLvl = lvl;
@@ -36,8 +37,9 @@ const supplies = (function(){
 
   const getItemForSupply = function(lvl) {
     let newItem;
-    fetchItemArrForSupply()
+    fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
+        console.log(itemsOfLevel);
         let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
         newItem = itemsOfLevel[randomChoice];
       })
