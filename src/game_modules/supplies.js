@@ -16,13 +16,11 @@ const supplies = (function(){
     if (typeToFetch !== 'armor') {
       typeToFetch += 's';
     }
-    console.log(`typetofetch: ${typeToFetch}`);
 
     const minLvl = 1;
     const maxLvl = lvl;
 
     const fetchURL = `/${typeToFetch}-in-level-range?min-level=${minLvl}&max-level=${maxLvl}`;
-    console.log(fetchURL);
     
     let possibleItems;
     try {
@@ -42,9 +40,12 @@ const supplies = (function(){
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
-        console.log(itemsOfLevel);
-        let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
-        newItem = itemsOfLevel[randomChoice];
+        if (itemsOfLevel.length > 1) {
+          let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
+          newItem = itemsOfLevel[randomChoice];
+        } else {
+          newItem = itemsOfLevel[0];
+        }
       })
       .catch(err => console.log(err));
     return newItem;
@@ -54,9 +55,9 @@ const supplies = (function(){
     getSupplies: function() {
       return supplies;
     },
-    fillSupplies: function(lvl) {
+    fillSupplies: async function(lvl) {
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        supplies.push(getItemForSupply(lvl));
+        supplies.push(await getItemForSupply(lvl));
       }
     }
   }
