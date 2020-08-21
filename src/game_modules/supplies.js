@@ -23,7 +23,7 @@ const supplies = (function(){
     
     let possibleItems;
     try {
-      possibleItems = await fetch(`${typeToFetch}-in-level-range/${minLvl}/${maxLvl}`);
+      possibleItems = await fetch(`/${typeToFetch}-in-level-range/${minLvl}/${maxLvl}`);
     } catch (err) {
       console.log(err);
     }
