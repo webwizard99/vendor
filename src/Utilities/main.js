@@ -1,6 +1,7 @@
 import days from './days';
 import store from './store';
 import storeInventory from './storeInventory';
+import suppliers from './suppliers';
 
 const main = (function() {
   
@@ -28,6 +29,8 @@ const main = (function() {
       store.setGold(startingGold);
 
       createTestPotions();
+
+      suppliers.initializeSuppliers();
     }
 
   }

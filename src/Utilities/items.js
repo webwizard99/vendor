@@ -1,13 +1,10 @@
-const items = (function(){
-  const itemTypes = {
-    potion: 'potion',
-    weapon: 'weapon',
-    armor: 'armor'
-  }
+import ItemTypes from './itemTypes';
+import PotionTypes from './potionTypes';
 
-  const potionTypes = {
-    healing: 'healing'
-  }
+const items = (function(){
+  const itemTypes = ItemTypes;
+
+  const potionTypes = PotionTypes;
   
   const Item = function(type, name, value) {
     this.type = type;
@@ -21,7 +18,8 @@ const items = (function(){
   }
   
   return {
-    createItem: function(type, name, value, payload) {
+    createItem: function(payload) {
+      let { type, name, value, itemPayload } = payload;
       if (!type[type]) {
         console.log('invalid item type passed to items.createItem()');
         return;
@@ -31,12 +29,12 @@ const items = (function(){
       
       switch (newItem.type) {
         case itemTypes.potion:
-          const newPotionType = payload.type;  
+          const newPotionType = itemPayload.type;  
           if (!newPotionType) {
             console.log('attempted to create invalid potion type');
             return;
           }
-          const newPotionLevel = payload.level;
+          const newPotionLevel = itemPayload.level;
           if (!newPotionLevel) {
             console.log('attempted to create a potion with an invalid level');
             return;
@@ -50,7 +48,7 @@ const items = (function(){
     },
 
     createTestPotion: function(lvl) {
-      const newItem = new Item(itemTypes.potion, 'Healing Potion', 60);
+      const newItem = new Item({ type: itemTypes.potion, name: 'Healing Potion', value: 60});
       newItem[itemTypes.potion] = new Potion(potionTypes.healing, lvl);
       return newItem;
     },
