@@ -6,6 +6,8 @@ import suppliers from './suppliers';
 const main = (function() {
   
   const testPotionCount = 5;
+  const maxSuppliers = 3;
+  // const dailySupplies = 10;
 
   const createTestPotions = function() {
     for (let x = 0; x < testPotionCount; x++) {
@@ -30,7 +32,8 @@ const main = (function() {
 
       createTestPotions();
 
-      suppliers.initializeSuppliers();
+      suppliers.initializeSuppliers(maxSuppliers);
+      console.log(suppliers.getSuppliers());
     }
 
   }

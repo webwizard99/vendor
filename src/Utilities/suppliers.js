@@ -3,7 +3,7 @@ const suppliers = (function(){
   let suppliers = [];
 
   return {
-    initializeSuppliers: async function() {
+    initializeSuppliers: async function(maxSuppliers) {
       let initSuppliers;
       try {
         initSuppliers = await fetch('/suppliers');
@@ -14,9 +14,18 @@ const suppliers = (function(){
         console.log(initSuppliers);
         initSuppliers = initSuppliers.json();
         console.log(initSuppliers);
+        while (suppliers.length < maxSuppliers && initSuppliers.length > 0) {
+          const pushIndex = Math.floor(Math.random() * initSuppliers.length);
+          console.log(`pushIndex: ${pushIndex}`);
+          let newSupplier = initSuppliers.splice(pushIndex, 1);
+          suppliers.push(newSupplier);
+        }
       }
-      suppliers = initSuppliers;
+      
       console.log(suppliers);
+    },
+    getSuppliers: function() {
+      return suppliers;
     }
   }
 }());
