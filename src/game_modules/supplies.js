@@ -40,6 +40,7 @@ const supplies = (function(){
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
+        console.log(itemsOfLevel);
         if (itemsOfLevel.length > 1) {
           let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
           newItem = itemsOfLevel[randomChoice];
