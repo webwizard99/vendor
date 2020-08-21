@@ -68,7 +68,7 @@ const items = (function(){
             return;
           }
           const newWeaponLevel = itemPayload.level;
-          if (!newPotionLevel) {
+          if (!newWeaponLevel) {
             console.log('attempted to create a weapon with an invalid level');
             return;
           }
