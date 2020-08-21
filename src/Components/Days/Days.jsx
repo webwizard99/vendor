@@ -2,7 +2,7 @@ import React from 'react';
 import './Days.css';
 
 // import days controller from game code
-import days from '../../Utilities/days';
+import days from '../../game_modules/days';
 
 // import redux modules
 import { SET_DAY } from '../../actions/types';

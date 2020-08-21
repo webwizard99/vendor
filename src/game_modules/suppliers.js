@@ -20,12 +20,11 @@ const suppliers = (function(){
       fetchSuppliers()
         .then(initSuppliers => {
           if (initSuppliers) {
-            console.log(initSuppliers);
             let drainSuppliers = initSuppliers;
             while (suppliers.length < maxSuppliers && drainSuppliers.length > 0) {
               const pushIndex = Math.floor(Math.random() * drainSuppliers.length);
-              console.log(`pushIndex: ${pushIndex}`);
               let newSupplier = drainSuppliers.splice(pushIndex, 1);
+              newSupplier = newSupplier[0];
               suppliers.push(newSupplier);
             }
           }

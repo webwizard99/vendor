@@ -2,12 +2,13 @@ import days from './days';
 import store from './store';
 import storeInventory from './storeInventory';
 import suppliers from './suppliers';
+import supplies from './supplies';
 
 const main = (function() {
   
   const testPotionCount = 5;
   const maxSuppliers = 3;
-  // const dailySupplies = 10;
+  let currentMaxLevel = 1;
 
   const createTestPotions = function() {
     for (let x = 0; x < testPotionCount; x++) {
@@ -34,6 +35,9 @@ const main = (function() {
 
       suppliers.initializeSuppliers(maxSuppliers);
       console.log(suppliers.getSuppliers());
+
+      supplies.fillSupplies();
+      console.log(supplies.getSupplies());
     }
 
   }

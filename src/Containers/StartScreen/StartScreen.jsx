@@ -3,7 +3,7 @@ import './StartScreen.css';
 
 import Title from '../../Components/Title/Title';
 
-import game from '../../Utilities/main';
+import game from '../../game_modules/main';
 
 import { connect } from 'react-redux';
 import { SET_STORE_NAME, SET_GAME_STATE } from '../../actions/types';

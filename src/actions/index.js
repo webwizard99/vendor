@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FETCH_USER, SET_STORE_GOLD } from './types';
 
 // game imports
-import gameStore from '../Utilities/store';
+import gameStore from '../game_modules/store';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');

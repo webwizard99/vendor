@@ -4,7 +4,7 @@ import './StoreInventory.css';
 import { connect } from 'react-redux';
 import { SET_STORE_INVENTORY } from '../../actions/types';
 
-import storeInventory from '../../Utilities/storeInventory';
+import storeInventory from '../../game_modules/storeInventory';
 
 class StoreInventory extends React.Component {
   constructor(props) {

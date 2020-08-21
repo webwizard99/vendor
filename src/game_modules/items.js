@@ -1,5 +1,5 @@
-import ItemTypes from './itemTypes';
-import PotionTypes from './potionTypes';
+import ItemTypes from '../Utilities/itemTypes';
+import PotionTypes from '../Utilities/potionTypes';
 
 const items = (function(){
   const itemTypes = ItemTypes;
