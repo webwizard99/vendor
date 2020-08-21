@@ -36,7 +36,7 @@ const main = (function() {
       suppliers.initializeSuppliers(maxSuppliers);
       console.log(suppliers.getSuppliers());
 
-      supplies.fillSupplies();
+      supplies.fillSupplies(currentMaxLevel);
       console.log(supplies.getSupplies());
     }
 
