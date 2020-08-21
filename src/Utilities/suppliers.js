@@ -4,7 +4,7 @@ const suppliers = (function(){
 
   let suppliers = [];
 
-  async const fetchSuppliers = function() {
+  const fetchSuppliers = async function() {
     let initSuppliers;
       try {
         initSuppliers = await fetch('/suppliers');
