@@ -1,11 +1,12 @@
 import React from 'react';
 import './Store.css';
 
-import gameStore from '../../Utilities/store';
+// import gameStore from '../../Utilities/store';
 
 import StoreInventory from '../StoreInventory/StoreInventory';
 
 import { SET_STORE_GOLD } from '../../actions/types';
+import { fetchGold } from '../../actions';
 import { connect } from 'react-redux';
 
 class Store extends React.Component {
@@ -20,8 +21,7 @@ class Store extends React.Component {
   // ~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*
   
   componentDidMount() {
-    const currentGold = gameStore.getGold();
-    this.props.setStoreGold(currentGold);
+    this.props.fetchGold();
   }
 
   
@@ -54,7 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setStoreGold: (newGold) => dispatch({ type: SET_STORE_GOLD, amount: newGold })
+    setStoreGold: (newGold) => dispatch({ type: SET_STORE_GOLD, amount: newGold }),
+    fetchGold: () => dispatch(fetchGold())
   }
 }
 
