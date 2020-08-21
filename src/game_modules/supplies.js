@@ -17,13 +17,15 @@ const supplies = (function(){
       typeToFetch += 's';
     }
     console.log(`typetofetch: ${typeToFetch}`);
+    const fetchURL = `/${typeToFetch}-in-level-range/?min-level=${minLvl}&max-level=${maxLvl}`;
+    console.log(fetchURL);
 
     const minLvl = 1;
     const maxLvl = lvl;
     
     let possibleItems;
     try {
-      possibleItems = await fetch(`/${typeToFetch}-in-level-range/${minLvl}/${maxLvl}`);
+      possibleItems = await fetch(fetchURL);
     } catch (err) {
       console.log(err);
     }
