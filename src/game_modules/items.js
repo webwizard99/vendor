@@ -31,7 +31,7 @@ const items = (function(){
         return;
       }
       
-      const newPayload = { type, name, value }
+      const newPayload = { type: type , name: name , value: value }
       const newItem = new Item(newPayload);
       
       switch (newItem.type) {
