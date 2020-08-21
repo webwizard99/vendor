@@ -37,9 +37,6 @@ const main = (function() {
       console.log(suppliers.getSuppliers());
 
       supplies.fillSupplies(currentMaxLevel);
-      window.setTimeout(() => {
-        console.log(supplies.getSupplies());
-      }, 1000);
       
     }
 

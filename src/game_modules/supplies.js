@@ -45,7 +45,8 @@ const supplies = (function(){
           let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
           newItem = itemsOfLevel[randomChoice];
         }
-        console.log(newItem);
+
+        // compose payload for Item constructor
         let itemPayload = {};
         itemPayload.level = newItem.level;
         switch(newItem.item.type) {
@@ -66,15 +67,14 @@ const supplies = (function(){
         payload.type = newItem.item.type;
         payload.name = newItem.item.name;
         payload.value = newItem.item.value;
+
+        // create item and add to total inventory in Items module
         let itemId = Items.createItem(payload);
-        console.log(itemId);
+        // push item id into supplies
         supplies.push(itemId);
 
-        return newItem;
+        return true;
       }).catch(err => console.log(err));
-      
-
-    
   }
   
   return {
@@ -83,9 +83,7 @@ const supplies = (function(){
     },
     fillSupplies: function(lvl) {
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        let newItem = getItemForSupply(lvl);
-        console.log(newItem);
-        // supplies.push(newItem);
+        getItemForSupply(lvl);
       }
     }
   }
