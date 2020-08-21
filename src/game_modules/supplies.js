@@ -40,13 +40,11 @@ const supplies = (function(){
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
-        console.log(itemsOfLevel);
-        console.log(typeof itemsOfLevel);
-        if (itemsOfLevel.length > 1) {
+        if (typeof itemsOfLevel === 'object') {
+          newItem = itemsOfLevel;
+        } else {
           let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
           newItem = itemsOfLevel[randomChoice];
-        } else {
-          newItem = itemsOfLevel[0];
         }
       })
       .catch(err => console.log(err));
