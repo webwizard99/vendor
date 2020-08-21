@@ -55,9 +55,9 @@ const supplies = (function(){
     getSupplies: function() {
       return supplies;
     },
-    fillSupplies: async function(lvl) {
+    fillSupplies: function(lvl) {
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        supplies.push(await getItemForSupply(lvl));
+        supplies.push(getItemForSupply(lvl));
       }
     }
   }
