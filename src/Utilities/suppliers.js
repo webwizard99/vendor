@@ -1,5 +1,3 @@
-import { fetchSuppliers } from "../../../vendor-editor/src/actions";
-
 const suppliers = (function(){
 
   let suppliers = [];
