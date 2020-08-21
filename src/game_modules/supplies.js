@@ -17,11 +17,12 @@ const supplies = (function(){
       typeToFetch += 's';
     }
     console.log(`typetofetch: ${typeToFetch}`);
-    const fetchURL = `/${typeToFetch}-in-level-range/?min-level=${minLvl}&max-level=${maxLvl}`;
-    console.log(fetchURL);
 
     const minLvl = 1;
     const maxLvl = lvl;
+
+    const fetchURL = `/${typeToFetch}-in-level-range/?min-level=${minLvl}&max-level=${maxLvl}`;
+    console.log(fetchURL);
     
     let possibleItems;
     try {
