@@ -13,9 +13,8 @@ class GameScreen extends React.Component {
   render() {
     return (
       <div className="GameScreen flex-container">
-        <Title />
-        <Days />
         <div className="CommerceColumn">
+          <Days />
           <Store />
           <Suppliers />
         </div>
