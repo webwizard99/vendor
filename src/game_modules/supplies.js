@@ -58,6 +58,8 @@ const supplies = (function(){
           case ItemTypes.armor:
             itemPayload.armor = newItem.armor;
             break;
+          default:
+            break;
         }
         let payload = {};
         payload.itemPayload = itemPayload;
