@@ -14,6 +14,7 @@ const suppliers = (function(){
         console.log(initSuppliers);
       }
       suppliers = initSuppliers;
+      console.log(suppliers);
     }
   }
 }());
