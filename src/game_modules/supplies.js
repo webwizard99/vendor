@@ -41,6 +41,7 @@ const supplies = (function(){
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
         console.log(itemsOfLevel);
+        console.log(itemsOfLevel[0]);
         console.log(typeof itemsOfLevel);
         if (typeof itemsOfLevel === 'object') {
           newItem = itemsOfLevel;
