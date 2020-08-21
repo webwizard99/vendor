@@ -1,7 +1,7 @@
 import React from 'react';
 import './GameScreen.css';
 
-import Title from '../../Components/Title/Title';
+// import Title from '../../Components/Title/Title';
 import Store from '../../Components/Store/Store';
 import Suppliers from '../../Components/Suppliers/Suppliers';
 import Days from '../../Components/Days/Days';
