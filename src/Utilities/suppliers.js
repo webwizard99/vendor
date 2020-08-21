@@ -12,6 +12,8 @@ const suppliers = (function(){
       }
       if (initSuppliers) {
         console.log(initSuppliers);
+        initSuppliers = initSuppliers.json();
+        console.log(initSuppliers);
       }
       suppliers = initSuppliers;
       console.log(suppliers);
