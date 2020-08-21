@@ -1,5 +1,6 @@
 import ItemTypes from '../Utilities/itemTypes';
 import PotionTypes from '../Utilities/potionTypes';
+import Armor from '../../../vendor-backend/models/Armor';
 
 const items = (function(){
   const itemTypes = ItemTypes;
@@ -20,6 +21,12 @@ const items = (function(){
   const Potion = function(payload) {
     const { type, level } = payload;
     this.type = type;
+    this.level = level;
+  }
+
+  const Weapon = function(payload) {
+    const { damage, level } = payload;
+    this.damage = damage;
     this.level = level;
   }
   
@@ -48,6 +55,34 @@ const items = (function(){
           }
           const potionPayload = { type: newPotionType, level: newPotionLevel };
           newItem[newItem.type] = new Potion(potionPayload);
+          break;
+        case itemTypes.weapon:
+          const newWeaponDamage = itemPayload.damage;
+          if (!newWeaponDamage) {
+            console.log('attempted to create a weapon without damage');
+            return;
+          }
+          const newWeaponLevel = itemPayload.level;
+          if (!newPotionLevel) {
+            console.log('attempted to create a weapon with an invalid level');
+            return;
+          }
+          const weaponPayload = { damage: newWeaponDamage, level: newWeaponLevel };
+          newItem[newItem.type] = new Weapon(weaponPayload);
+          break;
+        case itemTypes.armor:
+          const newArmorArmor = itemPayload.armor;
+          if (!newArmorArmor) {
+            console.log('attempted to make a new armor without an armor value');
+            return;
+          }
+          const newArmorLevel = itemPayload.level;
+          if (!newArmorLevel) {
+            console.log('attempted to make a new armor without a level value');
+            return;
+          }
+          const armorPayload = { armor: newArmorArmor, level: newArmorLevel };
+          newItem[newItem.type] = new Armor(armorPayload);
           break;
         default:
           break;

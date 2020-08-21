@@ -1,4 +1,5 @@
 import ItemTypes from '../Utilities/itemTypes';
+import Items from './items';
 
 const supplies = (function(){
   let supplies = [];
@@ -45,6 +46,27 @@ const supplies = (function(){
           newItem = itemsOfLevel[randomChoice];
         }
         console.log(newItem);
+        let itemPayload = {};
+        itemPayload.level = newItem.level;
+        switch(newItem.item.type) {
+          case ItemTypes.potion:
+            itemPayload.type = newItem.type;
+            break;
+          case ItemTypes.weapon:
+            itemPayload.damage = newItem.damage;
+            break;
+          case ItemTypes.armor:
+            itemPayload.armor = newItem.armor;
+            break;
+        }
+        let payload = {};
+        payload.itemPayload = itemPayload;
+        payload.type = newItem.item.type;
+        payload.name = newItem.item.name;
+        payload.value = newItem.item.value;
+        let itemId = Items.createItem(payload);
+        supplies.push(itemId);
+
         return newItem;
       }).catch(err => console.log(err));
       
@@ -60,7 +82,7 @@ const supplies = (function(){
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
         let newItem = getItemForSupply(lvl);
         console.log(newItem);
-        supplies.push(newItem);
+        // supplies.push(newItem);
       }
     }
   }
