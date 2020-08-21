@@ -21,7 +21,7 @@ const supplies = (function(){
     const minLvl = 1;
     const maxLvl = lvl;
 
-    const fetchURL = `/${typeToFetch}-in-level-range/?min-level=${minLvl}&max-level=${maxLvl}`;
+    const fetchURL = `/${typeToFetch}-in-level-range?min-level=${minLvl}&max-level=${maxLvl}`;
     console.log(fetchURL);
     
     let possibleItems;
