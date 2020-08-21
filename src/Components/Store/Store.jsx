@@ -22,9 +22,7 @@ class Store extends React.Component {
   
   componentDidMount() {
     this.props.fetchGold();
-  }
-
-  
+  }  
   
   render() {
     return (

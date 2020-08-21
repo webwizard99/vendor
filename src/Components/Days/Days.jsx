@@ -5,7 +5,7 @@ import './Days.css';
 import days from '../../game_modules/days';
 
 // import redux modules
-import { SET_DAY } from '../../actions/types';
+import { fetchDay } from '../../actions';
 import { connect } from 'react-redux'
 
 class Days extends React.Component {
@@ -13,6 +13,11 @@ class Days extends React.Component {
   constructor(props) {
     super(props);
     this.handleNextDay = this.handleNextDay.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchDay();
   }
 
   handleNextDay() {
@@ -20,7 +25,7 @@ class Days extends React.Component {
     // set day in game
     days.setDay(currentDay + 1);
     // set day in redux state;
-    this.props.setDay(days.getDay());
+    this.props.fetchDay();
   }
 
   render() {
@@ -42,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setDay: (day) => dispatch({ type: SET_DAY, day: day })
+    fetchDay: () => dispatch(fetchDay())
   }
 }
 

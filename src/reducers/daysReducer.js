@@ -1,8 +1,7 @@
 import { SET_DAY } from '../actions/types';
-import days from '../Utilities/days';
 
 const initialState = {
-  day: days.getDay()
+  day: 1
 }
 
 export default function(state = initialState, action) {
