@@ -1,6 +1,5 @@
 import ItemTypes from '../Utilities/itemTypes';
 import PotionTypes from '../Utilities/potionTypes';
-import Armor from '../../../vendor-backend/models/Armor';
 
 const items = (function(){
   const itemTypes = ItemTypes;
@@ -29,11 +28,17 @@ const items = (function(){
     this.damage = damage;
     this.level = level;
   }
+
+  const Armor = function(payload) {
+    const { armor, level } = payload;
+    this.armor = armor;
+    this.level = level;
+  }
   
   return {
     createItem: function(payload) {
       let { type, name, value, itemPayload } = payload;
-      if (!type[type]) {
+      if (!itemTypes[type]) {
         console.log('invalid item type passed to items.createItem()');
         return;
       }
