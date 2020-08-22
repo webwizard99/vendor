@@ -67,13 +67,13 @@ const suppliers = (function(){
       } 
 
       // if supplier inventory not initialized, set to empty array
-      if (supplier[currentSupplier].inventory === null) {
-        supplier[currentSupplier].invenotory = [];
+      if (suppliers[currentSupplier].inventory === null) {
+        suppliers[currentSupplier].invenotory = [];
       }
       // remove item from supply
       const thisSupply = supplies.depleteSupply(remainingSupplies[itemIndex]);
       // put item in supplier's inventory
-      supplier[currentSupplier].inventory.push(thisSupply);
+      suppliers[currentSupplier].inventory.push(thisSupply);
       // remove reference to item from local supplies array and supplyTypes array
       remainingSupplies.splice(itemIndex, 1);
       supplyTypes.splice(itemIndex, 1);
