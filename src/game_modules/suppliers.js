@@ -4,7 +4,7 @@ import items from './items';
 
 // redux imports
 import { store } from '../index';
-import { SET_SUPPLIERS } from '../actions/types';
+import { SET_SUPPLIERS, SET_SUPPLY_READY } from '../actions/types';
 
 const suppliers = (function(){
 
@@ -24,7 +24,7 @@ const suppliers = (function(){
       bestOfferings.push(this.offerings[i]);
     }
     bestOfferings.sort((off1, off2) => {
-      return off1.markup > off2.markup;
+      return off1.markup < off2.markup;
     });
     this.rankedOfferings = bestOfferings;
   }
@@ -33,6 +33,14 @@ const suppliers = (function(){
     const payload = {
       type: SET_SUPPLIERS,
       payload: newSuppliers
+    }
+    store.dispatch(payload);
+  }
+
+  const dispatchSupplyReady = function(value) {
+    const payload = {
+      type: SET_SUPPLY_READY,
+      value: value
     }
     store.dispatch(payload);
   }
@@ -173,6 +181,7 @@ const suppliers = (function(){
     takeSupplierTurn: function() {
       takeSupplies();
       dispatchSuppliers(suppliers);
+      dispatchSupplyReady(false);
     }
   }
 }());

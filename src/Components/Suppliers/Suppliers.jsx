@@ -21,7 +21,7 @@ class Suppliers extends React.Component {
   }
 
   componentDidUpdate() {
-    if (Array.isArray(this.props.suppliers)) {
+    if (Array.isArray(this.props.suppliers && this.props.supplyReady)) {
       if (!this.state.suppliersInitialized) {
         gameSupplier.takeSupplierTurn();
         this.setState({
@@ -64,7 +64,8 @@ class Suppliers extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    suppliers: state.suppliers.suppliers
+    suppliers: state.suppliers.suppliers,
+    supplyReady: state.supplies.ready
   }
 }
 

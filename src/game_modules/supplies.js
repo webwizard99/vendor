@@ -1,10 +1,22 @@
 import ItemTypes from '../Utilities/itemTypes';
 import Items from './items';
 
+// redux imports
+import { store } from '../index';
+import { SET_SUPPLY_READY } from '../actions/types';
+
 const supplies = (function(){
   let supplies = [];
 
   const dailySupplies = 10;
+
+  const dispatchReady = function(value) {
+    const payload = {
+      type: SET_SUPPLY_READY,
+      value: value
+    }
+    store.dispatch(payload);
+  }
 
   const fetchItemArrForSupply = async function(lvl) {
     if (!lvl) return;
@@ -85,6 +97,7 @@ const supplies = (function(){
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
         getItemForSupply(lvl);
       }
+      dispatchReady(true);
     },
     depleteSupply: function(id) {
       let supplyIndex = supplies.findIndex(thisSupply => thisSupply.id === id);
