@@ -5,7 +5,7 @@ import suppliers from './suppliers';
 import supplies from './supplies';
 
 // redux imports
-import store from '../index';
+import { store } from '../index';
 import { SET_SUPPLIERS } from '../actions/types';
 
 const main = (function() {
