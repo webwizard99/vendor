@@ -9,6 +9,7 @@ const supplies = (function(){
   let supplies = [];
 
   let filledSupplies = 0;
+  console.log(filledSupplies);
 
   const dailySupplies = 10;
 
