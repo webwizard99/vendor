@@ -85,6 +85,13 @@ const supplies = (function(){
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
         getItemForSupply(lvl);
       }
+    },
+    depleteSupply: function(id) {
+      let supplyIndex = supplies.findIndex(id);
+      if (supplyIndex >= 0) {
+        let chosenSupply = supplies.splice(supplyIndex, 1);
+        return chosenSupply;
+      }
     }
   }
 }());

@@ -36,10 +36,10 @@ const main = (function() {
 
       createTestPotions();
 
+      supplies.fillSupplies(currentMaxLevel);
+      console.log(supplies.getSupplies());
       suppliers.initializeSuppliers(maxSuppliers);
 
-      supplies.fillSupplies(currentMaxLevel);
-      
     }
 
   }

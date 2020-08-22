@@ -1,3 +1,8 @@
+// game imports
+import supplies from './supplies';
+import items from './items';
+
+// redux imports
 import { store } from '../index';
 import { SET_SUPPLIERS } from '../actions/types';
 
@@ -36,6 +41,53 @@ const suppliers = (function(){
     yield fetchSuppliers();
   }
 
+  const takeSupplies = function() {
+    let remainingSupplies = supplies.getSupplies();
+    let supplyTypes = [];
+    remainingSupplies.forEach(remainingSupply => {
+      const supplyItem = items.getItem(remainingSupply);
+      supplyTypes.push(supplyItem.type);
+    });
+    console.log(supplyTypes);
+    let currentSupplier = 0;
+    const supplierCount = suppliers.length;
+    while (remainingSupplies.length > 0) {
+      let preferredOffering = 0;
+      let preferredMarkup = 0;
+      suppliers[currentSupplier].offerings.forEach((offering, offN) => {
+        if (offering.markup > preferredMarkup) {
+          preferredOffering = offN;
+          preferredMarkup = offering.markup;
+        } 
+      });
+      // check if offering of type with highest markup is in remaining supplies
+      let itemIndex = supplyTypes.find(itemType => itemType === suppliers[currentSupplier].offerings[preferredOffering].type);
+      if (itemIndex === undefined) {
+        itemIndex = 0;
+      } 
+
+      // if supplier inventory not initialized, set to empty array
+      if (supplier[currentSupplier].inventory === null) {
+        supplier[currentSupplier].invenotory = [];
+      }
+      // remove item from supply
+      const thisSupply = supplies.depleteSupply(remainingSupplies[itemIndex]);
+      // put item in supplier's inventory
+      supplier[currentSupplier].inventory.push(thisSupply);
+      // remove reference to item from local supplies array and supplyTypes array
+      remainingSupplies.splice(itemIndex, 1);
+      supplyTypes.splice(itemIndex, 1);
+
+      // advance index of supplier to next supplier
+      currentSupplier++;
+      if (currentSupplier >= supplierCount) {
+        currentSupplier = 0;
+      }
+    }
+
+    // dispatchSuppliers(suppliers);
+  }
+
   return {
     initializeSuppliers: async function(maxSuppliers) {
       const gGetSuppliers = getSuppliers();
@@ -51,6 +103,7 @@ const suppliers = (function(){
               let thisSupplier = new Supplier(supplierPayload);
               suppliers.push(thisSupplier);
             }
+            takeSupplies();
             dispatchSuppliers(suppliers);
             return suppliers;
           }
