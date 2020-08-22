@@ -14,3 +14,9 @@
   color: white;
   padding-left: .5rem;
 }
+
+.SupplierInventory {
+  height: 8.8rem;
+  width: 100%;
+  background: rgb(220, 225, 215);
+}

@@ -9,7 +9,7 @@ const supplies = (function(){
   let supplies = [];
 
   let filledSupplies = 0;
-  console.log(filledSupplies);
+  // console.log(filledSupplies);
 
   const dailySupplies = 10;
 
@@ -20,7 +20,7 @@ const supplies = (function(){
     }
     store.dispatch(payload);
   }
-  
+
   // fetch an item from backend
   const fetchItemArrForSupply = async function(lvl) {
     if (!lvl) return;
@@ -111,11 +111,9 @@ const supplies = (function(){
       getItemForSupply(lvl); 
     },
     depleteSupply: function(id) {
-      console.log(supplies);
       let supplyIndex = supplies.indexOf(id);
       if (supplyIndex >= 0) {
         let chosenSupply = supplies.splice(supplyIndex, 1);
-        console.log(chosenSupply);
         return chosenSupply;
       }
     }

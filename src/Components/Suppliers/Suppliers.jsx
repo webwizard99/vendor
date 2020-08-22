@@ -21,13 +21,8 @@ class Suppliers extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.supplyReady) {
-      console.log('supply ready in Suppliers.jsx')
-    }
     if (Array.isArray(this.props.suppliers) && this.props.supplyReady) {
-      console.log(this.state.suppliersInitialized);
       if (!this.state.suppliersInitialized) {
-        console.log('reached logic to run takeSupplierTurn');
         gameSupplier.takeSupplierTurn();
         this.setState({
           suppliersInitialized: true
@@ -37,10 +32,7 @@ class Suppliers extends React.Component {
   }
 
   getSuppliers() {
-    
-    
-    let currentSuppliers = this.props.suppliers;
-    
+    let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
       console.log(currentSuppliers);
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
