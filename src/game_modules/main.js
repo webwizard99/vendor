@@ -1,5 +1,5 @@
 import days from './days';
-import store from './store';
+import gameStore from './store';
 import storeInventory from './storeInventory';
 import suppliers from './suppliers';
 import supplies from './supplies';
@@ -38,10 +38,10 @@ const main = (function() {
       if (!payload.name) {
         console.log('Game must be started with a payload object that contains a store name!');
       }
-      store.setName(payload.name);
+      gameStore.setName(payload.name);
 
-      const startingGold = store.getStartingGold();
-      store.setGold(startingGold);
+      const startingGold = gameStore.getStartingGold();
+      gameStore.setGold(startingGold);
 
       createTestPotions();
 
