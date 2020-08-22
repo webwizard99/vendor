@@ -101,7 +101,6 @@ const suppliers = (function(){
               }
 
               // remove item from supply
-              console.log(remSupply);
               const thisSupply = supplies.depleteSupply(remSupply);
               // put item in supplier's inventory
               suppliers[supplierIndex].inventory.push(thisSupply);

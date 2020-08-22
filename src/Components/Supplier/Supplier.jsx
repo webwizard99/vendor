@@ -3,6 +3,9 @@ import './Supplier.css';
 
 import Items from '../../game_modules/items';
 
+// redux imports
+import { connect } from 'react-redux';
+
 class Supplier extends React.Component {
   constructor(props) {
     super(props);
@@ -10,10 +13,11 @@ class Supplier extends React.Component {
     this.getSuppllierInventory = this.getSuppllierInventory.bind(this);
   }
   getSuppllierInventory() {
-    if (!this.props.supplier.inventory) {
+    if (!this.props.supplier.inventory || !Array.isArray(this.props.supplier.inventory || this.props.supplier.inventory.length <=0)) {
       return ''
     }
     const thisInventory = this.props.supplier.inventory.map(id => {
+      console.log(`mapping id(${id}) to items module`);
       return Items.getItem(id);
     });
 
@@ -47,4 +51,10 @@ class Supplier extends React.Component {
   }
 }
 
-export default Supplier;
+const mapStateToProps = state => {
+  return {
+    supplyReady: state.supplies.ready
+  }
+}
+
+export default connect(mapStateToProps)(Supplier);
