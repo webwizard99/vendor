@@ -27,8 +27,8 @@ const suppliers = (function(){
 
   return {
     initializeSuppliers: async function(maxSuppliers) {
-      const getSuppliers = this.getSuppliers();
-      getSuppliers.next().value
+      const gGetSuppliers = getSuppliers();
+      gGetSuppliers.next().value
         .then(initSuppliers => {
           console.log(initSuppliers);
           if (initSuppliers) {
