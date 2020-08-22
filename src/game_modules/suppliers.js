@@ -24,7 +24,7 @@ const suppliers = (function(){
       bestOfferings.push(this.offerings[i]);
     }
     bestOfferings.sort((off1, off2) => {
-      return off1.markup < off2.markup;
+      return off1.markup - off2.markup;
     });
     this.rankedOfferings = bestOfferings;
   }
@@ -87,6 +87,7 @@ const suppliers = (function(){
         supplierTries.push(thisIndex);
       }
       let taken = false;
+      console.log(supplierTries);
       
       // check with each supplier if type of current supply is
       // in their offerings

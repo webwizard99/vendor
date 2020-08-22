@@ -18,6 +18,7 @@ const supplies = (function(){
     store.dispatch(payload);
   }
 
+  // fetch an item from backend
   const fetchItemArrForSupply = async function(lvl) {
     if (!lvl) return;
 
@@ -49,6 +50,8 @@ const supplies = (function(){
     return possibleItems;
   }
 
+  // take an item that was fetched from backend and create it
+  // with item constructors and put it into state
   const getItemForSupply = function(lvl, num) {
     let newItem;
     fetchItemArrForSupply(lvl)
@@ -85,7 +88,7 @@ const supplies = (function(){
         // push item id into supplies
         supplies.push(itemId);
 
-        if (num === dailySupplies) {
+        if (num === dailySupplies - 1) {
           dispatchReady(true);
         }
 
