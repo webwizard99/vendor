@@ -64,7 +64,7 @@ const suppliers = (function(){
 
   const takeSupplies = function() {
     // copy supplies to local array
-    const remainingSupplies = supplies.getSupplies();
+    const remainingSupplies = JSON.parse(JSON.stringify(supplies.getSupplies()));
     let supplyTypes = [];
     remainingSupplies.forEach(remainingSupply => {
       const supplyItem = items.getItem(remainingSupply);
