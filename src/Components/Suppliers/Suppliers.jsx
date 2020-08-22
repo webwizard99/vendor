@@ -27,6 +27,7 @@ class Suppliers extends React.Component {
     console.log(Array.isArray(currentSuppliers));
     
     if (Array.isArray(currentSuppliers)) {
+      console.log(currentSuppliers.length);
       console.log(currentSuppliers.map(sup => { return sup.toString()}));
       return (
         <div className="suppliersContainer">
