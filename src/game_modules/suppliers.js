@@ -162,7 +162,6 @@ const suppliers = (function(){
               suppliers.push(thisSupplier);
             }
             suppliers.forEach(supplier => supplier.rankFavorites());
-            takeSupplies();
             dispatchSuppliers(suppliers);
             return suppliers;
           }
@@ -170,6 +169,10 @@ const suppliers = (function(){
     },
     getSuppliers: function() {
       return suppliers;
+    },
+    takeSupplierTurn: function() {
+      takeSupplies();
+      dispatchSuppliers(suppliers);
     }
   }
 }());

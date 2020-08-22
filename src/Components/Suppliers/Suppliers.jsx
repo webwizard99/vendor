@@ -5,11 +5,30 @@ import Supplier from '../Supplier/Supplier';
 // redux imports
 import { connect } from 'react-redux';
 
+// game imports
+import gameSupplier from '../../game_modules/suppliers';
+
 class Suppliers extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      suppliersInitialized = false
+    }
+
     this.getSuppliers = this.getSuppliers.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (Array.isArray(currentSuppliers)) {
+      if (!this.state.suppliersInitialized) {
+        gameSupplier.takeSupplierTurn();
+        this.setState({
+          suppliersInitialized: true
+        })
+      }
+    }
   }
 
   getSuppliers() {
