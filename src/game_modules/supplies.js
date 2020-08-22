@@ -82,8 +82,10 @@ const supplies = (function(){
 
         // create item and add to total inventory in Items module
         let itemId = Items.createItem(payload);
+        console.log(itemId);
         // push item id into supplies
         supplies.push(itemId);
+        console.log(supplies);
 
         return true;
       }).catch(err => console.log(err));
