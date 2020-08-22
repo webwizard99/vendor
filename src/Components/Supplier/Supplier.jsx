@@ -13,7 +13,8 @@ class Supplier extends React.Component {
     this.getSuppllierInventory = this.getSuppllierInventory.bind(this);
   }
   getSuppllierInventory() {
-    if (!this.props.supplier.inventory || !Array.isArray(this.props.supplier.inventory || this.props.supplier.inventory.length <=0)) {
+    console.log(this.props.supplier.inventory);
+    if (!this.props.initialized) {
       return ''
     }
     const thisInventory = this.props.supplier.inventory.map(id => {
