@@ -25,7 +25,9 @@ class Suppliers extends React.Component {
     let currentSuppliers = this.props.suppliers;
     console.log(currentSuppliers);
     console.log(Array.isArray(currentSuppliers));
+    
     if (Array.isArray(currentSuppliers)) {
+      console.log(currentSuppliers.map(sup => sup.name));
       return (
         <div className="suppliersContainer">
           {currentSuppliers.map(renderSupplier => {
