@@ -87,7 +87,7 @@ const supplies = (function(){
       }
     },
     depleteSupply: function(id) {
-      let supplyIndex = supplies.findIndex(id);
+      let supplyIndex = supplies.findIndex(thisSupply => thisSupply.id === id);
       if (supplyIndex >= 0) {
         let chosenSupply = supplies.splice(supplyIndex, 1);
         return chosenSupply;
