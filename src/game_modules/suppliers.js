@@ -14,6 +14,7 @@ const suppliers = (function(){
     const { name, offerings } = payload;
     this.name = name;
     this.offerings = offerings;
+    this.inventory = [];
   }
 
   Supplier.prototype.rankFavorites = function() {
@@ -89,7 +90,7 @@ const suppliers = (function(){
             if (!taken) {
               // if supplier inventory not initialized, set to empty array
               if (suppliers[supplierIndex].inventory === null) {
-                suppliers[supplierIndex].invenotory = [];
+                suppliers[supplierIndex].inventory = [];
               }
 
               // remove item from supply
