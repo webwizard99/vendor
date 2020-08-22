@@ -87,7 +87,6 @@ const suppliers = (function(){
         supplierTries.push(thisIndex);
       }
       let taken = false;
-      console.log(supplierTries);
       
       // check with each supplier if type of current supply is
       // in their offerings
@@ -103,6 +102,7 @@ const suppliers = (function(){
               }
 
               // remove item from supply
+              console.log(remSupply);
               const thisSupply = supplies.depleteSupply(remSupply);
               // put item in supplier's inventory
               suppliers[supplierIndex].inventory.push(thisSupply);
