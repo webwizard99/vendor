@@ -38,7 +38,8 @@ class Suppliers extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    suppliers: state.suppliers.suppliers
+    suppliers: state.suppliers.suppliers,
+    suppliersCount: state.suppliers.count
   }
 }
 
