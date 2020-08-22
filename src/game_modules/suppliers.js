@@ -16,6 +16,18 @@ const suppliers = (function(){
     this.offerings = offerings;
   }
 
+  Supplier.prototype.rankFavorites = function() {
+    let bestOfferings = [];
+    const offeringsCount = this.offerings.length;
+    for (let i = 0; i < offeringsCount; i++) {
+      bestOfferings.push(this.offerings[i]);
+    }
+    bestOfferings.sort((off1, off2) => {
+      return off1.markup > off2.markup;
+    });
+    this.rankedOfferings = bestOfferings;
+  }
+
   const dispatchSuppliers = function(newSuppliers) {
     const payload = {
       type: SET_SUPPLIERS,
@@ -42,9 +54,9 @@ const suppliers = (function(){
   }
 
   const takeSupplies = function() {
-    let remainingSupplies = supplies.getSupplies();
+    // copy supplies to local array
+    const remainingSupplies = supplies.getSupplies();
     let supplyTypes = [];
-    const initialSupplyCount = remainingSupplies.length;
     remainingSupplies.forEach(remainingSupply => {
       const supplyItem = items.getItem(remainingSupply);
       supplyTypes.push(supplyItem.type);
@@ -52,39 +64,83 @@ const suppliers = (function(){
     console.log(supplyTypes);
     let currentSupplier = 0;
     const supplierCount = suppliers.length;
-    for (let i = 0; i < initialSupplyCount; i++) {
-      let preferredOffering = 0;
-      let preferredMarkup = 0;
-      suppliers[currentSupplier].offerings.forEach((offering, offN) => {
-        if (offering.markup > preferredMarkup) {
-          preferredOffering = offN;
-          preferredMarkup = offering.markup;
-        } 
+    // loop through each supply item
+    remainingSupplies.forEach((remSupply, remNum) => {
+      // create an order based on last supplier to take an
+      // item and proceeded sequentially to include all
+      // suppliers
+      let supplierTries = [];
+      for (let i = 0; i < supplierCount; i++) {
+        let thisIndex = currentSupplier + i;
+        if (thisIndex >= supplierCount) {
+          thisIndex -= supplierCount;
+        }
+        supplierTries.push(thisIndex);
+      }
+      let taken = false;
+      
+      // check with each supplier if type of current supply is
+      // in their offerings
+      supplierTries.forEach(supplierIndex => {
+        let favorites = suppliers[supplierIndex].rankedOfferings;
+        for (let fave of favorites) {
+          // if type of supplier's offering equals type of this supply
+          if (fave.type === supplyTypes[remNum]) {
+            if (!taken) {
+              // if supplier inventory not initialized, set to empty array
+              if (suppliers[supplierIndex].inventory === null) {
+                suppliers[supplierIndex].invenotory = [];
+              }
+
+              // remove item from supply
+              const thisSupply = supplies.depleteSupply(remSupply);
+              // put item in supplier's inventory
+              suppliers[currentSupplier].inventory.push(thisSupply);
+
+              // mark item taken;
+              taken = true;
+              currentSupplier = supplierIndex + 1;
+              if (currentSupplier > supplierCount) {
+                currentSupplier = 0;
+              }
+            }
+          }
+        }
       });
-      // check if offering of type with highest markup is in remaining supplies
-      let itemIndex = supplyTypes.find(itemType => itemType === suppliers[currentSupplier].offerings[preferredOffering].type);
-      if (itemIndex === undefined) {
-        itemIndex = 0;
-      } 
 
-      // if supplier inventory not initialized, set to empty array
-      if (suppliers[currentSupplier].inventory === null) {
-        suppliers[currentSupplier].invenotory = [];
-      }
-      // remove item from supply
-      const thisSupply = supplies.depleteSupply(remainingSupplies[itemIndex]);
-      // put item in supplier's inventory
-      suppliers[currentSupplier].inventory.push(thisSupply);
-      // remove reference to item from local supplies array and supplyTypes array
-      remainingSupplies.splice(itemIndex, 1);
-      supplyTypes.splice(itemIndex, 1);
 
-      // advance index of supplier to next supplier
-      currentSupplier++;
-      if (currentSupplier >= supplierCount) {
-        currentSupplier = 0;
-      }
-    }
+      // let preferredOffering = 0;
+      // let preferredMarkup = 0;
+      // suppliers[currentSupplier].offerings.forEach((offering, offN) => {
+      //   if (offering.markup > preferredMarkup) {
+      //     preferredOffering = offN;
+      //     preferredMarkup = offering.markup;
+      //   } 
+      // });
+      // // check if offering of type with highest markup is in remaining supplies
+      // let itemIndex = supplyTypes.find(itemType => itemType === suppliers[currentSupplier].offerings[preferredOffering].type);
+      // if (itemIndex === undefined) {
+      //   itemIndex = 0;
+      // } 
+
+      // // if supplier inventory not initialized, set to empty array
+      // if (suppliers[currentSupplier].inventory === null) {
+      //   suppliers[currentSupplier].invenotory = [];
+      // }
+      // // remove item from supply
+      // const thisSupply = supplies.depleteSupply(remainingSupplies[itemIndex]);
+      // // put item in supplier's inventory
+      // suppliers[currentSupplier].inventory.push(thisSupply);
+      // // remove reference to item from local supplies array and supplyTypes array
+      // remainingSupplies.splice(itemIndex, 1);
+      // supplyTypes.splice(itemIndex, 1);
+
+      // // advance index of supplier to next supplier
+      // currentSupplier++;
+      // if (currentSupplier >= supplierCount) {
+      //   currentSupplier = 0;
+      // }
+    });
 
     // dispatchSuppliers(suppliers);
   }
@@ -104,6 +160,7 @@ const suppliers = (function(){
               let thisSupplier = new Supplier(supplierPayload);
               suppliers.push(thisSupplier);
             }
+            suppliers.forEach(supplier => supplier.rankFavorites());
             takeSupplies();
             dispatchSuppliers(suppliers);
             return suppliers;
