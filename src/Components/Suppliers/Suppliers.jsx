@@ -24,17 +24,20 @@ class Suppliers extends React.Component {
     
     let currentSuppliers = this.props.suppliers;
     console.log(currentSuppliers);
+    console.log(currentSuppliers.length);
     console.log(Array.isArray(currentSuppliers));
     
     if (Array.isArray(currentSuppliers)) {
-      console.log(this.props.suppliers.length);
-      console.log(currentSuppliers.map(sup => { return sup.toString()}));
+      console.log(currentSuppliers.length);
+      
+      const suppliersDisplay = currentSuppliers.map(renderSupplier => {
+        return (<Supplier supplierName={renderSupplier.name} />);
+      });
+      console.log(suppliersDisplay);
+
       return (
         <div className="suppliersContainer">
-          {currentSuppliers.map(renderSupplier => {
-            console.log(renderSupplier);
-            return (<Supplier supplierName={renderSupplier.name} />);
-          })}
+          {suppliersDisplay}
         </div>
       );
     } else {
