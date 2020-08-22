@@ -6,7 +6,7 @@ class Supplier extends React.Component {
     return (
       <div className="Supplier">
         <div className="SupplierName">
-          {this.props.supplierName}
+          Supplier
         </div>
       </div>
     )

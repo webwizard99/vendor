@@ -28,14 +28,14 @@ class Suppliers extends React.Component {
     if (Array.isArray(currentSuppliers)) {
       return (
         <div className="suppliersContainer">
-          {currentSuppliers.map(supplier => {
-            console.log(supplier);
-            return <Supplier supplierName={supplier.name} />
+          {currentSuppliers.map(renderSupplier => {
+            console.log(renderSupplier);
+            return (<Supplier supplierName={renderSupplier.name} />);
           })}
         </div>
       );
     } else {
-      return '';
+      return 'no suppliers to render';
     }
     
   }
