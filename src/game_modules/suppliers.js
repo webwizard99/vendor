@@ -41,7 +41,6 @@ const suppliers = (function(){
       const gGetSuppliers = getSuppliers();
       gGetSuppliers.next().value
         .then(initSuppliers => {
-          console.log(initSuppliers);
           if (initSuppliers) {
             let drainSuppliers = initSuppliers;
             while (suppliers.length < maxSuppliers && drainSuppliers.length > 0) {
@@ -52,7 +51,6 @@ const suppliers = (function(){
               let thisSupplier = new Supplier(supplierPayload);
               suppliers.push(thisSupplier);
             }
-            console.log(suppliers);
             dispatchSuppliers(suppliers);
             return suppliers;
           }

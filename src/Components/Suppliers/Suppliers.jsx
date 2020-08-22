@@ -4,35 +4,24 @@ import Supplier from '../Supplier/Supplier';
 
 // redux imports
 import { connect } from 'react-redux';
-import { fetchSuppliers } from '../../actions';
 
 class Suppliers extends React.Component {
   constructor(props) {
     super(props);
 
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.getSuppliers = this.getSuppliers.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('in Suppliers component lifecycle method');
-    // this.props.fetchSuppliers();
   }
 
   getSuppliers() {
     
     
     let currentSuppliers = this.props.suppliers;
-    console.log(currentSuppliers);
-    console.log(Array.isArray(currentSuppliers));
     
     if (Array.isArray(currentSuppliers)) {
-      console.log(currentSuppliers.length);
       
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
-        return (<Supplier supplierName={renderSupplier.name} />);
+        return (<Supplier supplier={renderSupplier} />);
       });
-      console.log(suppliersDisplay);
 
       return (
         <div className="suppliersContainer">
@@ -56,14 +45,8 @@ class Suppliers extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    suppliers: state.suppliers.suppliers,
-    suppliersCount: state.suppliers.count
+    suppliers: state.suppliers.suppliers
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchSuppliers: () => dispatch(fetchSuppliers())
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Suppliers);
+export default connect(mapStateToProps)(Suppliers);
