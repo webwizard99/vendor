@@ -21,8 +21,15 @@ const supplies = (function(){
     store.dispatch(payload);
   }
 
+  const awaitSuppliesFilled = function() {
+    while (filledSupplies !== dailySupplies) {
+
+    }
+    return true
+  }
+
   const triggerDispatch = function*() {
-    yield filledSupplies = dailySupplies;
+    yield awaitSuppliesFilled();
   }
 
   // fetch an item from backend
@@ -110,7 +117,7 @@ const supplies = (function(){
         getItemForSupply(lvl);
       }
       const thisTriggerDispatch = triggerDispatch();
-      thisTriggerDispatch.next().then((res) => {
+      thisTriggerDispatch.next().value.then((res) => {
         console.log(res);
         dispatchReady(true);
       });
