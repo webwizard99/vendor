@@ -13,7 +13,7 @@ class Suppliers extends React.Component {
     super(props);
 
     this.state = {
-      suppliersInitialized = false
+      suppliersInitialized: false
     }
 
     this.getSuppliers = this.getSuppliers.bind(this);
