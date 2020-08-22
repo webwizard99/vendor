@@ -47,6 +47,7 @@ const main = (function() {
 
       suppliers.initializeSuppliers(maxSuppliers)
         .then(resSuppliers => {
+          console.log(resSuppliers);
           dispatchSuppliers(resSuppliers);
         });
       console.log(suppliers.getSuppliers());
