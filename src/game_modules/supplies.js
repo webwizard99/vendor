@@ -110,7 +110,8 @@ const supplies = (function(){
         getItemForSupply(lvl);
       }
       const thisTriggerDispatch = triggerDispatch();
-      thisTriggerDispatch.next().value.then(() => {
+      thisTriggerDispatch.next().then((res) => {
+        console.log(res);
         dispatchReady(true);
       });
       
