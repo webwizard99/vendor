@@ -4,11 +4,23 @@ import storeInventory from './storeInventory';
 import suppliers from './suppliers';
 import supplies from './supplies';
 
+// redux imports
+import { store } from 'redux';
+import { SET_SUPPLIERS } from '../actions/types';
+
 const main = (function() {
   
   const testPotionCount = 5;
   const maxSuppliers = 3;
   let currentMaxLevel = 1;
+
+  const dispatchSuppliers = function(newSuppliers) {
+    const payload = {
+      type: SET_SUPPLIERS,
+      payload: newSuppliers
+    }
+    store.dispatch(payload);
+  }
 
   const createTestPotions = function() {
     for (let x = 0; x < testPotionCount; x++) {
@@ -33,7 +45,10 @@ const main = (function() {
 
       createTestPotions();
 
-      suppliers.initializeSuppliers(maxSuppliers);
+      suppliers.initializeSuppliers(maxSuppliers)
+        .then(resSuppliers => {
+          dispatchSuppliers(resSuppliers);
+        });
       console.log(suppliers.getSuppliers());
 
       supplies.fillSupplies(currentMaxLevel);

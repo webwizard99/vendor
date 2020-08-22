@@ -41,10 +41,9 @@ const suppliers = (function(){
               let thisSupplier = new Supplier(supplierPayload);
               suppliers.push(thisSupplier);
             }
+            return suppliers;
           }
         });
-      
-      console.log(suppliers);
     },
     getSuppliers: function() {
       return suppliers;
