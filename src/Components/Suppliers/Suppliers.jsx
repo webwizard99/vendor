@@ -25,6 +25,7 @@ class Suppliers extends React.Component {
       console.log('supply ready in Suppliers.jsx')
     }
     if (Array.isArray(this.props.suppliers && this.props.supplyReady)) {
+      console.log(this.state.suppliersInitialized);
       if (!this.state.suppliersInitialized) {
         console.log('reached logic to run takeSupplierTurn');
         gameSupplier.takeSupplierTurn();
