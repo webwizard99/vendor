@@ -101,10 +101,13 @@ const suppliers = (function(){
               }
 
               // remove item from supply
-              const thisSupply = supplies.depleteSupply(remSupply);
+              let thisSupply = supplies.depleteSupply(remSupply);
               console.log(thisSupply);
+              if (Array.isArray(thisSupply)) {
+                thisSupply = thisSupply[0];
+              }
               // put item in supplier's inventory
-              suppliers[supplierIndex].inventory.push(thisSupply[0]);
+              suppliers[supplierIndex].inventory.push(thisSupply);
 
               // mark item taken;
               taken = true;
