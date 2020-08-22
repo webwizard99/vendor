@@ -1,0 +1,15 @@
+.Supplier {
+  height: 6rem;
+  width: 10rem;
+  background: rgb(220, 225, 215);
+  font-family: "Roboto Slab", serif;
+  margin: 0px 1rem 0px 1rem;
+}
+
+.SupplierName {
+  height: 1.2rem;
+  padding: .2rem;
+  margin-bottom: .5rem;
+  background: rgb(120, 115, 125);
+  color: white;
+}

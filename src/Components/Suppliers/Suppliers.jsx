@@ -1,14 +1,48 @@
 import React from 'react';
 import './Suppliers.css';
+import Supplier from '../Supplier/Supplier';
+
+// redux imports
+import { connect } from 'react-redux';
+import { fetchSuppliers } from '../../actions';
 
 class Suppliers extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.getSuppliers = this.getSuppliers.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchSuppliers();
+  }
+
+  getSuppliers() {
+    const currentSuppliers = this.props.suppliers;
+    return currentSuppliers.map(supplier => {
+      return <Supplier supplierName={supplier.name} />
+    });
+  }
+  
   render() {
     return (
       <div className="Suppliers">
-        Suppliers
+        {this.getSuppliers()}
       </div>
     )
   }
 }
 
-export default Suppliers;
+const mapStateToProps = state => {
+  return {
+    suppliers: state.suppliers.suppliers
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchSuppliers: () => dispatch(fetchSuppliers())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Suppliers);
