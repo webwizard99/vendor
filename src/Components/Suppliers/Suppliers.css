@@ -2,6 +2,10 @@
   height: 26%;
   width: 100%;
   background: rgb(100, 120, 100);
+}
+
+.suppliersContainer {
   display: flex;
   align-items: center;
+  margin: auto;
 }
