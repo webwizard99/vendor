@@ -16,7 +16,7 @@ class Suppliers extends React.Component {
 
   componentDidMount() {
     console.log('in Suppliers component lifecycle method');
-    this.props.fetchSuppliers();
+    // this.props.fetchSuppliers();
   }
 
   getSuppliers() {
@@ -24,7 +24,6 @@ class Suppliers extends React.Component {
     
     let currentSuppliers = this.props.suppliers;
     console.log(currentSuppliers);
-    console.log(currentSuppliers.length);
     console.log(Array.isArray(currentSuppliers));
     
     if (Array.isArray(currentSuppliers)) {
