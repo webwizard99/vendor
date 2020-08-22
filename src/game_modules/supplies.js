@@ -18,7 +18,7 @@ const supplies = (function(){
     store.dispatch(payload);
   }
 
-  const fetchItemArrForSupply = async function(lvl) {
+  const fetchItemArrForSupply = async function(lvl, num) {
     if (!lvl) return;
 
     // produce array of type strings and choose one at random
@@ -82,10 +82,12 @@ const supplies = (function(){
 
         // create item and add to total inventory in Items module
         let itemId = Items.createItem(payload);
-        console.log(itemId);
         // push item id into supplies
         supplies.push(itemId);
-        console.log(supplies);
+
+        if (num === dailySupplies) {
+          dispatchReady(true);
+        }
 
         return true;
       }).catch(err => console.log(err));
@@ -97,9 +99,9 @@ const supplies = (function(){
     },
     fillSupplies: function(lvl) {
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        getItemForSupply(lvl);
+        getItemForSupply(lvl, supplyNum);
       }
-      dispatchReady(true);
+      
     },
     depleteSupply: function(id) {
       let supplyIndex = supplies.findIndex(thisSupply => thisSupply.id === id);
