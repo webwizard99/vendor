@@ -1,3 +1,6 @@
+import { store } from '../index';
+import { SET_SUPPLIERS } from '../actions/types';
+
 const suppliers = (function(){
 
   let suppliers = [];
@@ -6,6 +9,14 @@ const suppliers = (function(){
     const { name, offerings } = payload;
     this.name = name;
     this.offerings = offerings;
+  }
+
+  const dispatchSuppliers = function(newSuppliers) {
+    const payload = {
+      type: SET_SUPPLIERS,
+      payload: newSuppliers
+    }
+    store.dispatch(payload);
   }
 
   const fetchSuppliers = async function() {
@@ -41,6 +52,8 @@ const suppliers = (function(){
               let thisSupplier = new Supplier(supplierPayload);
               suppliers.push(thisSupplier);
             }
+            console.log(suppliers);
+            dispatchSuppliers(suppliers);
             return suppliers;
           }
         });
