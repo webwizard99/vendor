@@ -107,6 +107,7 @@ const supplies = (function(){
       
     },
     depleteSupply: function(id) {
+      console.log(supplies);
       let supplyIndex = supplies.findIndex(thisSupply => thisSupply.id === id);
       console.log(`id: ${id}, supplyIndex: ${supplyIndex}`);
       if (supplyIndex >= 0) {
