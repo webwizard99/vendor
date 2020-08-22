@@ -17,9 +17,11 @@ class Supplier extends React.Component {
     if (!this.props.initialized) {
       return ''
     }
-    const thisInventory = this.props.supplier.inventory.map(id => {
+    let thisInventory = [];
+    this.props.supplier.inventory.forEach(id => {
       console.log(`mapping id(${id}) to items module`);
-      return Items.getItem(id);
+      let inventoryItem = Items.getItem(id);
+      thisInventory.push(inventoryItem);
     });
 
     console.log(thisInventory);
