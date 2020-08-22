@@ -44,6 +44,7 @@ const suppliers = (function(){
   const takeSupplies = function() {
     let remainingSupplies = supplies.getSupplies();
     let supplyTypes = [];
+    const initialSupplyCount = remainingSupplies.length;
     remainingSupplies.forEach(remainingSupply => {
       const supplyItem = items.getItem(remainingSupply);
       supplyTypes.push(supplyItem.type);
@@ -51,7 +52,7 @@ const suppliers = (function(){
     console.log(supplyTypes);
     let currentSupplier = 0;
     const supplierCount = suppliers.length;
-    while (remainingSupplies.length > 0) {
+    for (let i = 0; i < initialSupplyCount; i++) {
       let preferredOffering = 0;
       let preferredMarkup = 0;
       suppliers[currentSupplier].offerings.forEach((offering, offN) => {
