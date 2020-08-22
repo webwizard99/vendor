@@ -8,6 +8,8 @@ import { SET_SUPPLY_READY } from '../actions/types';
 const supplies = (function(){
   let supplies = [];
 
+  let filledSupplies = 0;
+
   const dailySupplies = 10;
 
   const dispatchReady = function(value) {
@@ -16,6 +18,10 @@ const supplies = (function(){
       value: value
     }
     store.dispatch(payload);
+  }
+
+  const triggerDispatch = function*() {
+    yield filledSupplies = dailySupplies;
   }
 
   // fetch an item from backend
@@ -88,9 +94,7 @@ const supplies = (function(){
         // push item id into supplies
         supplies.push(itemId);
 
-        if (num === dailySupplies - 1) {
-          dispatchReady(true);
-        }
+        filledSupplies++;
 
         return true;
       }).catch(err => console.log(err));
@@ -104,12 +108,15 @@ const supplies = (function(){
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
         getItemForSupply(lvl, supplyNum);
       }
+      const thisTriggerDispatch = triggerDispatch();
+      thisTriggerDispatch.next().value.then(() => {
+        dispatchReady(true);
+      });
       
     },
     depleteSupply: function(id) {
       console.log(supplies);
       let supplyIndex = supplies.indexOf(id);
-      console.log(`id: ${id}, supplyIndex: ${supplyIndex}`);
       if (supplyIndex >= 0) {
         let chosenSupply = supplies.splice(supplyIndex, 1);
         console.log(chosenSupply);
