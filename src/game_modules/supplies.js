@@ -18,7 +18,7 @@ const supplies = (function(){
     store.dispatch(payload);
   }
 
-  const fetchItemArrForSupply = async function(lvl, num) {
+  const fetchItemArrForSupply = async function(lvl) {
     if (!lvl) return;
 
     // produce array of type strings and choose one at random
@@ -49,7 +49,7 @@ const supplies = (function(){
     return possibleItems;
   }
 
-  const getItemForSupply = function(lvl) {
+  const getItemForSupply = function(lvl, num) {
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
