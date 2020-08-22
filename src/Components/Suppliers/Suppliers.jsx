@@ -15,6 +15,7 @@ class Suppliers extends React.Component {
   }
 
   componentDidMount() {
+    console.log('in Suppliers component lifecycle method');
     this.props.fetchSuppliers();
   }
 
