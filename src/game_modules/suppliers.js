@@ -21,10 +21,15 @@ const suppliers = (function(){
       return initSuppliers;
   }
 
+  const getSuppliers = function*() {
+    yield fetchSuppliers();
+  }
+
   return {
     initializeSuppliers: async function(maxSuppliers) {
-      fetchSuppliers()
+      getSuppliers.next().value
         .then(initSuppliers => {
+          console.log(initSuppliers);
           if (initSuppliers) {
             let drainSuppliers = initSuppliers;
             while (suppliers.length < maxSuppliers && drainSuppliers.length > 0) {
