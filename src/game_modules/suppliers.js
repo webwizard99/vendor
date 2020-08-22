@@ -68,6 +68,7 @@ const suppliers = (function(){
     let supplyTypes = [];
     remainingSupplies.forEach(remainingSupply => {
       const supplyItem = items.getItem(remainingSupply);
+      supplyTypes.push(supplyItem.type);
     });
     let currentSupplier = 0;
     const supplierCount = suppliers.length;
