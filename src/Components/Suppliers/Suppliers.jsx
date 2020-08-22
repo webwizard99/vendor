@@ -21,7 +21,7 @@ class Suppliers extends React.Component {
   }
 
   componentDidUpdate() {
-    if (Array.isArray(currentSuppliers)) {
+    if (Array.isArray(this.props.suppliers)) {
       if (!this.state.suppliersInitialized) {
         gameSupplier.takeSupplierTurn();
         this.setState({
