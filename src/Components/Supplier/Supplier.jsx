@@ -14,6 +14,7 @@ class Supplier extends React.Component {
   }
   getSuppllierInventory() {
     console.log(this.props.supplier.inventory);
+    console.log(this.props.initialized);
     if (!this.props.initialized) {
       return ''
     }
