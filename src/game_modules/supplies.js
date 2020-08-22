@@ -20,18 +20,7 @@ const supplies = (function(){
     }
     store.dispatch(payload);
   }
-
-  const awaitSuppliesFilled = function() {
-    while (filledSupplies !== dailySupplies) {
-
-    }
-    return true
-  }
-
-  const triggerDispatch = function*() {
-    yield awaitSuppliesFilled();
-  }
-
+  
   // fetch an item from backend
   const fetchItemArrForSupply = async function(lvl) {
     if (!lvl) return;
@@ -67,6 +56,9 @@ const supplies = (function(){
   // take an item that was fetched from backend and create it
   // with item constructors and put it into state
   const getItemForSupply = function(lvl) {
+    if (filledSupplies >= dailySupplies) {
+      return;
+    }
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
@@ -103,7 +95,10 @@ const supplies = (function(){
         supplies.push(itemId);
 
         filledSupplies++;
-
+        if (filledSupplies === dailySupplies) {
+          dispatchReady(true);
+        }
+        getItemForSupply(lvl);
         return true;
       }).catch(err => console.log(err));
   }
@@ -113,15 +108,7 @@ const supplies = (function(){
       return supplies;
     },
     fillSupplies: function(lvl) {
-      for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        getItemForSupply(lvl);
-      }
-      const thisTriggerDispatch = triggerDispatch();
-      thisTriggerDispatch.next().value.then((res) => {
-        console.log(res);
-        dispatchReady(true);
-      });
-      
+      getItemForSupply(lvl); 
     },
     depleteSupply: function(id) {
       console.log(supplies);
