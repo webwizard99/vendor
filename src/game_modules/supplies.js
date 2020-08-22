@@ -59,7 +59,7 @@ const supplies = (function(){
 
   // take an item that was fetched from backend and create it
   // with item constructors and put it into state
-  const getItemForSupply = function(lvl, num) {
+  const getItemForSupply = function(lvl) {
     let newItem;
     fetchItemArrForSupply(lvl)
       .then(itemsOfLevel => {
@@ -107,7 +107,7 @@ const supplies = (function(){
     },
     fillSupplies: function(lvl) {
       for (let supplyNum = 0; supplyNum < dailySupplies; supplyNum++) {
-        getItemForSupply(lvl, supplyNum);
+        getItemForSupply(lvl);
       }
       const thisTriggerDispatch = triggerDispatch();
       thisTriggerDispatch.next().value.then(() => {
