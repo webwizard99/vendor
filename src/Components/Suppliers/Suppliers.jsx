@@ -22,7 +22,7 @@ class Suppliers extends React.Component {
   getSuppliers() {
     console.log(this.props.suppliers);
     const currentSuppliers = this.props.suppliers;
-    if (!currentSuppliers) return '';
+    if (currentSuppliers === null) return '';
     return currentSuppliers.map(supplier => {
       return <Supplier supplierName={supplier.name} />
     });
