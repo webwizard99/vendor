@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 class Days extends React.Component {
   
   constructor(props) {
+    this.timer;
     super(props);
     this.handleNextDay = this.handleNextDay.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
