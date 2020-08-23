@@ -39,7 +39,7 @@ const suppliers = (function(){
     let { id, price } = payload;
 
     const itemIndex = this.inventory.indexOf(id);
-    if (!itemIndex) {
+    if (!itemIndex && itemIndex !== 0) {
       return false;
     }
 
@@ -180,6 +180,7 @@ const suppliers = (function(){
       const { id, itemId, price} = payload;
       
       const thisSupplier = suppliers.find(refSupplier => refSupplier.id === id);
+      console.log(thisSupplier);
       if (!thisSupplier) {
         return false;
       }

@@ -24,6 +24,7 @@ class Supplier extends React.Component {
   handlePurchase(payload) {
     console.log('in handlePurchase');
     console.dir(payload);
+    console.log(`gold: ${this.props.storeGold}`);
     const { ids, price } = payload;
 
     if (price > this.props.storeGold) {
