@@ -55,7 +55,7 @@ class Supplier extends React.Component {
       return (
         <div className="SupplierInventoryItem itemBackground" key={item.id}>
           <span className="SupplierInventoryItemName">{item.name}</span>
-          <span className="ItemCount"> X{item.count}</span>
+          <span className="ItemCount"> ({item.count})</span>
           <div className="SupplierItemsValueGroup">  
             <span className="CoinSymbol">&#x2689; </span>
             <span className="InventoryItemValue">{composedValue}</span>
