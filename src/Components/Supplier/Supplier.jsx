@@ -22,6 +22,8 @@ class Supplier extends React.Component {
   }
 
   handlePurchase(payload) {
+    console.log('in handlePurchase');
+    console.dir(payload);
     const { ids, price } = payload;
 
     if (price > this.props.storeGold) {
@@ -40,8 +42,12 @@ class Supplier extends React.Component {
       return;
     }
 
+    console.log('item sold by supplier');
+
     gameStore.chargeGold(price);
     gameStoreInventory.addItem(sellId);
+
+    console.log('item bought by vendor');
     
     // update state
     gameStore.updateGold();
