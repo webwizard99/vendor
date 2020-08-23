@@ -25,15 +25,36 @@ class Supplier extends React.Component {
       thisInventory.push(inventoryItem);
     });
 
-    console.log(thisInventory);
-    return thisInventory.map(item => {
+    let inventoryGroups = {};
+    let valueGroups = {}
+
+    thisInventory.forEach(item => {
+      if (!inventoryGroups[item.name]) {
+        inventoryGroups[item.name] = 1;
+        valueGroups[item.name] = item.value;
+      } else {
+        inventoryGroups[item.name] += 1;
+      }
+    });
+
+    let composedItems = []
+
+    for (const [key, value] of Object.entries(inventoryGroups)) {
+      let item = { name: key, count: value, value: valueGroups[key] };
+      composedItems.push(item);
+    }
+
+    console.log(composedItems);
+    return composedItems.map(item => {
       const offerings = this.props.supplier.offerings;
       const typeIndex = offerings.findIndex(offering => offering.type === item.type);
       console.log(typeIndex);
+
       return (
-        <div className="InventoryItem" key={item.id}>
-          <span className="InventoryItemName">{item.name}</span>
-          <div className="ItemsValueGroup">
+        <div className="SupplierInventoryItem itemBackground" key={item.id}>
+          <span className="SupplierInventoryItemName">{item.name}</span>
+          <div className="SupplierItemsValueGroup">
+            <span className="ItemCount">(${item.count})</span>
             <span className="CoinSymbol">&#x2689; </span>
             <span className="InventoryItemValue">{item.value}</span>
           </div>

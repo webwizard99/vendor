@@ -23,7 +23,7 @@ class StoreInventory extends React.Component {
       return (
         <div>{this.props.inventory.map(item => {
           return (
-            <div className="InventoryItem" key={item.id}>
+            <div className="InventoryItem itemBackground" key={item.id}>
               <span className="InventoryItemName">{item.name}</span>
               <div className="ItemValueGroup">
                 <span className="CoinSymbol">&#x2689; </span>
