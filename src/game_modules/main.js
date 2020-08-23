@@ -35,11 +35,14 @@ const main = (function() {
       gameStore.setGold(startingGold);
 
       createTestPotions();
-
-      supplies.fillSupplies(currentMaxLevel);
-      console.log(supplies.getSupplies());
+      supplies.setSupplyLevel(currentMaxLevel);
+      supplies.fillSupplyPool();
       suppliers.initializeSuppliers(maxSuppliers);
 
+    },
+
+    getGameLevel: function() {
+      return currentMaxLevel;
     }
 
   }

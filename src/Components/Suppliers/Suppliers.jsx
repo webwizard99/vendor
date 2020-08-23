@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // game imports
 import gameSupplier from '../../game_modules/suppliers';
+import gameSupplies from '../../game_modules/supplies';
 
 class Suppliers extends React.Component {
   constructor(props) {
@@ -21,6 +22,11 @@ class Suppliers extends React.Component {
   }
 
   componentDidUpdate() {
+    if (Array.isArray(this.props.suppliers) && this.props.supplySpawned) {
+      if (!this.props.supplyReady) {
+        gameSupplies.fillSupplies();
+      }
+    }
     if (Array.isArray(this.props.suppliers) && this.props.supplyReady) {
       if (!this.state.suppliersInitialized) {
         gameSupplier.takeSupplierTurn();
@@ -62,7 +68,8 @@ class Suppliers extends React.Component {
 const mapStateToProps = state => {
   return {
     suppliers: state.suppliers.suppliers,
-    supplyReady: state.supplies.ready
+    supplyReady: state.supplies.ready,
+    supplySpawned: state.supplies.spawned
   }
 }
 

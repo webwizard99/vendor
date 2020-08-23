@@ -1,7 +1,8 @@
-import { SET_SUPPLY_READY } from '../actions/types';
+import { SET_SUPPLY_READY, SET_SUPPLY_SPAWNED } from '../actions/types';
 
 const initialState = {
-  ready: false
+  ready: false,
+  spawned: false
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ready: action.value
+      }
+    case SET_SUPPLY_SPAWNED:
+      return {
+        ...state,
+        spawned: action.value
       }
     default:
       return state;

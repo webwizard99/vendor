@@ -3,13 +3,17 @@ import Items from './items';
 
 // redux imports
 import { store } from '../index';
-import { SET_SUPPLY_READY } from '../actions/types';
+import { SET_SUPPLY_READY, SET_SUPPLY_SPAWNED } from '../actions/types';
 
 const supplies = (function(){
   let supplies = [];
 
-  let filledSupplies = 0;
-  // console.log(filledSupplies);
+  let suppliesPool = {};
+  let supplyLevel = 1;
+
+  const itemTypesArr = Object.values(ItemTypes);
+  const itemTypeCount = itemTypesArr.length;
+  let itemSpawnCount = 0;
 
   const dailySupplies = 10;
 
@@ -21,14 +25,34 @@ const supplies = (function(){
     store.dispatch(payload);
   }
 
+  const dispatchSpawned = function(value) {
+    const payload = {
+      type: SET_SUPPLY_SPAWNED,
+      value: value
+    }
+  }
+
+  // fill supply pool
+  const fetchSupplyPool = function() {
+    // produce array of type strings and choose one at random
+    itemSpawnCount = 0;
+    itemTypesArr.forEach(typeItem => {
+      if (suppliesPool[typeItem] == null) {
+        suppliesPool[typeItem] = [];
+      }
+      suppliesPool[typeItem].length = 0;
+    });
+
+    getItemForSupplyPool();
+    return true;
+  }
+
   // fetch an item from backend
-  const fetchItemArrForSupply = async function(lvl) {
+  const fetchItemArrForSupplyPool = async function() {
+    let lvl = supplyLevel;
     if (!lvl) return;
 
-    // produce array of type strings and choose one at random
-    let itemTypes = Object.values(ItemTypes);
-    let typeIndex = Math.floor(Math.random() * itemTypes.length);
-    let typeToFetch = itemTypes[typeIndex];
+    let typeToFetch = itemTypesArr[itemSpawnCount];
 
     if (typeToFetch !== 'armor') {
       typeToFetch += 's';
@@ -55,60 +79,79 @@ const supplies = (function(){
 
   // take an item that was fetched from backend and create it
   // with item constructors and put it into state
-  const getItemForSupply = function(lvl) {
-    if (filledSupplies >= dailySupplies) {
+  const getItemForSupplyPool = function() {
+    if (itemSpawnCount >= itemTypeCount) {
       return;
     }
     let newItem;
-    fetchItemArrForSupply(lvl)
+    fetchItemArrForSupplyPool()
       .then(itemsOfLevel => {
-        if (Array.isArray(itemsOfLevel)) {
-          let randomChoice = Math.floor(Math.random() * itemsOfLevel.length);
-          newItem = itemsOfLevel[randomChoice];
+        newItems = itemsOfLevel;
+      
+        // initialize field on pool if need be
+        if (suppliesPool[itemTypesArr[itemSpawnCount]] === null) {
+          suppliesPool[itemTypesArr[itemSpawnCount]] = [];
         }
-
-        // compose payload for Item constructor
-        let itemPayload = {};
-        itemPayload.level = newItem.level;
-        switch(newItem.item.type) {
-          case ItemTypes.potion:
-            itemPayload.type = newItem.type;
-            break;
-          case ItemTypes.weapon:
-            itemPayload.damage = newItem.damage;
-            break;
-          case ItemTypes.armor:
-            itemPayload.armor = newItem.armor;
-            break;
-          default:
-            break;
-        }
-        let payload = {};
-        payload.itemPayload = itemPayload;
-        payload.type = newItem.item.type;
-        payload.name = newItem.item.name;
-        payload.value = newItem.item.value;
-
-        // create item and add to total inventory in Items module
-        let itemId = Items.createItem(payload);
         // push item id into supplies
-        supplies.push(itemId);
+        suppliesPool[itemTypesArr[itemSpawnCount]].push(newItems);
 
-        filledSupplies++;
-        if (filledSupplies === dailySupplies) {
-          dispatchReady(true);
+        itemSpawnCount++;
+        if (itemSpawnCount === itemTypeCount) {
+          dispatchSpawned(true);
         }
-        getItemForSupply(lvl);
+        getItemForSupplyPool();
         return true;
       }).catch(err => console.log(err));
+  }
+
+  const spawnSupply = function() {
+    // produce array of type strings and choose one at random
+    let typeIndex = Math.floor(Math.random() * itemTypesArr.length);
+    let typeToSpawn = itemTypesArr[typeIndex];
+    const newSupplyArr = suppliesPool[typeToSpawn];
+    let randomChoice = Math.floor(Math.random() * newSupplyArr.length);
+    newItem = newSupplyArr[randomChoice];
+
+    // compose payload for Item constructor
+    let itemPayload = {};
+    itemPayload.level = newItem.level;
+    switch(newItem.item.type) {
+      case ItemTypes.potion:
+        itemPayload.type = newItem.type;
+        break;
+      case ItemTypes.weapon:
+        itemPayload.damage = newItem.damage;
+        break;
+      case ItemTypes.armor:
+        itemPayload.armor = newItem.armor;
+        break;
+      default:
+        break;
+    }
+    let payload = {};
+    payload.itemPayload = itemPayload;
+    payload.type = newItem.item.type;
+    payload.name = newItem.item.name;
+    payload.value = newItem.item.value;
+
+    // create item and add to total inventory in Items module
+    let itemId = Items.createItem(payload);
+
+
   }
   
   return {
     getSupplies: function() {
       return supplies;
     },
-    fillSupplies: function(lvl) {
-      getItemForSupply(lvl); 
+    fillSupplies: function() {
+      for (let i = 0; i < dailySupplies; i++) {
+        spawnSupply();
+      }
+      dispatchReady(true);
+    },
+    fillSupplyPool: function() {
+      fetchSupplyPool();
     },
     depleteSupply: function(id) {
       let supplyIndex = supplies.indexOf(id);
@@ -116,6 +159,9 @@ const supplies = (function(){
         let chosenSupply = supplies.splice(supplyIndex, 1);
         return chosenSupply;
       }
+    },
+    setSupplyLevel: function(lvl) {
+      supplyLevel = lvl;
     }
   }
 }());
