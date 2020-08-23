@@ -10,6 +10,8 @@ const suppliers = (function(){
 
   let suppliers = [];
 
+  const startingGold = 1000;
+
   const Supplier = function(payload) {
     const { name, offerings } = payload;
     this.name = name;
@@ -66,9 +68,11 @@ const suppliers = (function(){
     // copy supplies to local array
     const remainingSupplies = JSON.parse(JSON.stringify(supplies.getSupplies()));
     let supplyTypes = [];
+    let supplyValues = [];
     remainingSupplies.forEach(remainingSupply => {
       const supplyItem = items.getItem(remainingSupply);
       supplyTypes.push(supplyItem.type);
+      supplyValues.push(supplyItem.value);
     });
     let currentSupplier = 0;
     const supplierCount = suppliers.length;
@@ -94,7 +98,7 @@ const suppliers = (function(){
         for (let fave of favorites) {
           // if type of supplier's offering equals type of this supply
           if (fave.type === supplyTypes[remNum]) {
-            if (!taken) {
+            if (!taken && suppliers[supplierIndex].gold >= supplyValues[remNum]) {
               // if supplier inventory not initialized, set to empty array
               if (suppliers[supplierIndex].inventory === null) {
                 suppliers[supplierIndex].inventory = [];
@@ -105,6 +109,9 @@ const suppliers = (function(){
               if (Array.isArray(thisSupply)) {
                 thisSupply = thisSupply[0];
               }
+
+              suppliers[supplierIndex].gold -= supplyValues[remNum];
+
               // put item in supplier's inventory
               suppliers[supplierIndex].inventory.push(thisSupply);
 
@@ -134,6 +141,7 @@ const suppliers = (function(){
               newSupplier = newSupplier[0];
               const supplierPayload = { name: newSupplier.name, offerings: newSupplier.offerings };
               let thisSupplier = new Supplier(supplierPayload);
+              thisSupplier.gold = startingGold;
               suppliers.push(thisSupplier);
             }
             suppliers.forEach(supplier => supplier.rankFavorites());

@@ -12,6 +12,8 @@
   background: rgb(120, 115, 125);
   color: white;
   padding-left: .5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .SupplierInventory {
@@ -38,4 +40,8 @@
 
 .SupplierItemsValueGroup {
   margin-left: .8rem
+}
+
+.SupplierValueGroup {
+  margin-right: .5rem
 }

@@ -11,7 +11,13 @@ class Supplier extends React.Component {
     super(props);
 
     this.getSuppllierInventory = this.getSuppllierInventory.bind(this);
+    this.handlePurchase = this.handlePurchase.bind(this);
   }
+
+  handlePurchase() {
+
+  }
+
   getSuppllierInventory() {
     if (!this.props.initialized) {
       return ''
@@ -25,21 +31,24 @@ class Supplier extends React.Component {
     let inventoryGroups = {};
     let valueGroups = {}
     let typeGroups = {}
+    let idGroups = {}
 
     thisInventory.forEach(item => {
       if (!inventoryGroups[item.name]) {
         inventoryGroups[item.name] = 1;
         valueGroups[item.name] = item.value;
         typeGroups[item.name] = item.type;
+        idGroups[item.name] = [item.id]
       } else {
         inventoryGroups[item.name] += 1;
+        idGroups[item.name].push(item.id);
       }
     });
 
     let composedItems = []
 
     for (const [key, value] of Object.entries(inventoryGroups)) {
-      let item = { name: key, count: value, type: typeGroups[key], value: valueGroups[key] };
+      let item = { name: key, count: value, type: typeGroups[key], value: valueGroups[key], ids: idGroups[key] };
       composedItems.push(item);
     }
 
@@ -65,11 +74,16 @@ class Supplier extends React.Component {
       )
     })
   }
+
   render() {
     return (
       <div className="Supplier">
         <div className="SupplierName">
           {this.props.supplier.name}
+          <div className="SupplierValueGroup">  
+            <span className="CoinSymbol">&#x2689; </span>
+            <span className="InventoryItemValue">{this.props.supplier.gold}</span>
+          </div>
         </div>
         <div className="supplierInventory">
           {this.getSuppllierInventory()}
