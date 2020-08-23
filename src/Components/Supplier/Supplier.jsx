@@ -14,24 +14,24 @@ class Supplier extends React.Component {
   }
   getSuppllierInventory() {
     console.log(this.props.supplier.inventory);
-    console.log(this.props.initialized);
     if (!this.props.initialized) {
       return ''
     }
     let thisInventory = [];
     this.props.supplier.inventory.forEach(id => {
-      console.log(`mapping id(${id}) to items module`);
       let inventoryItem = Items.getItem(id);
       thisInventory.push(inventoryItem);
     });
 
     let inventoryGroups = {};
     let valueGroups = {}
+    let typeGroups = {}
 
     thisInventory.forEach(item => {
       if (!inventoryGroups[item.name]) {
         inventoryGroups[item.name] = 1;
         valueGroups[item.name] = item.value;
+        typeGroups[item.name] = item.type;
       } else {
         inventoryGroups[item.name] += 1;
       }
@@ -40,7 +40,7 @@ class Supplier extends React.Component {
     let composedItems = []
 
     for (const [key, value] of Object.entries(inventoryGroups)) {
-      let item = { name: key, count: value, value: valueGroups[key] };
+      let item = { name: key, count: value, , type: typeGroups[key], value: valueGroups[key] };
       composedItems.push(item);
     }
 
@@ -48,15 +48,19 @@ class Supplier extends React.Component {
     return composedItems.map(item => {
       const offerings = this.props.supplier.offerings;
       const typeIndex = offerings.findIndex(offering => offering.type === item.type);
-      console.log(typeIndex);
+      
+      let composedValue = item.value;
+      if (typeIndex !== -1) {
+        composedValue = composedValue *= offerings[typeIndex].markup;
+      }
 
       return (
         <div className="SupplierInventoryItem itemBackground" key={item.id}>
           <span className="SupplierInventoryItemName">{item.name}</span>
-          <div className="SupplierItemsValueGroup">
-            <span className="ItemCount">(${item.count})</span>
+          <span className="ItemCount"> X{item.count}</span>
+          <div className="SupplierItemsValueGroup">  
             <span className="CoinSymbol">&#x2689; </span>
-            <span className="InventoryItemValue">{item.value}</span>
+            <span className="InventoryItemValue">{composedValue}</span>
           </div>
         </div>
       )
