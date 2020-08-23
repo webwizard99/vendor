@@ -7,7 +7,8 @@ const initialState = {
   gold: 0,
   refreshing: false,
   refreshed: false,
-  inventory: []
+  inventory: [],
+  inventoryCount: 0
 }
 
 export default function(state = initialState, action) {
@@ -24,9 +25,14 @@ export default function(state = initialState, action) {
       }
     case SET_STORE_INVENTORY:
       const newInventory = action.inventory;
+      let newCount = state.inventoryCount;
+      if (Array.isArray(newInventory)) {
+        newCount = newInventory.length;
+      }
       return {
         ...state,
-        inventory: newInventory
+        inventory: newInventory,
+        count: newCount
       }
     default:
       return state;

@@ -58,7 +58,8 @@ class StoreInventory extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    inventory: state.storeState.inventory
+    inventory: state.storeState.inventory,
+    inventoryCount: state.storeState.inventoryCount
   }
 }
 
