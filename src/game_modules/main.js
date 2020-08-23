@@ -9,16 +9,8 @@ import supplies from './supplies';
 
 const main = (function() {
   
-  const testPotionCount = 5;
   const maxSuppliers = 3;
   let currentMaxLevel = 1;
-
-  const createTestPotions = function() {
-    for (let x = 0; x < testPotionCount; x++) {
-      storeInventory.addTestPotion();
-    }
-    
-  }
 
   return {
     init: function(payload) {
@@ -34,7 +26,6 @@ const main = (function() {
       const startingGold = gameStore.getStartingGold();
       gameStore.setGold(startingGold);
 
-      createTestPotions();
       supplies.setSupplyLevel(currentMaxLevel);
       supplies.fillSupplyPool();
       suppliers.initializeSuppliers(maxSuppliers);

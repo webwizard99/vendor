@@ -10,6 +10,8 @@ const suppliers = (function(){
 
   let suppliers = [];
 
+  let currentId = 0;
+
   const startingGold = 1000;
 
   const Supplier = function(payload) {
@@ -17,6 +19,8 @@ const suppliers = (function(){
     this.name = name;
     this.offerings = offerings;
     this.inventory = [];
+    this.id = currentId;
+    currentId++;
   }
 
   Supplier.prototype.rankFavorites = function() {
@@ -29,6 +33,20 @@ const suppliers = (function(){
       return off1.markup - off2.markup;
     });
     this.rankedOfferings = bestOfferings;
+  }
+
+  Supplier.prototype.sellItem = function(payload) {
+    let { id, price } = payload;
+
+    const itemIndex = this.inventory.indexOf(id);
+    if (!itemIndex) {
+      return false;
+    }
+
+    this.inventory.splice(itemIndex, 1);
+    this.gold += price;
+
+    return true;
   }
 
   const dispatchSuppliers = function(newSuppliers) {
@@ -157,6 +175,24 @@ const suppliers = (function(){
       takeSupplies();
       dispatchSuppliers(suppliers);
       dispatchSupplyReady(false);
+    },
+    sellItem(payload) {
+      const { id, itemId, price} = payload;
+      
+      const thisSupplier = suppliers.find(refSupplier => refSupplier.id === id);
+      if (!thisSupplier) {
+        return false;
+      }
+      const sellPayload = {
+        id: itemId,
+        price: price
+      }
+
+      const resSale = thisSupplier.sellItem(sellPayload);
+      if (!resSale) {
+        return false;
+      }
+      return true;
     }
   }
 }());

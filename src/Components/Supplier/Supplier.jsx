@@ -1,10 +1,17 @@
 import React from 'react';
 import './Supplier.css';
 
-import Items from '../../game_modules/items';
+import SupplierBuyButton from '../SupplierBuyButton/SupplierBuyButton';
+
+// game module imports
+import gameItems from '../../game_modules/items';
+import gameSuppliers from '../../game_modules/suppliers'
+import gameStore from '../../game_modules/store';
+import gameStoreInventory from '../../game_modules/storeInventory';
 
 // redux imports
 import { connect } from 'react-redux';
+
 
 class Supplier extends React.Component {
   constructor(props) {
@@ -14,7 +21,28 @@ class Supplier extends React.Component {
     this.handlePurchase = this.handlePurchase.bind(this);
   }
 
-  handlePurchase() {
+  handlePurchase(payload) {
+    const { ids, price } = payload;
+
+    if (price > this.props.storeGold) {
+      return;
+    }
+
+    const sellId = ids[0];
+
+    const payload = {
+      id: this.props.supplier.id,
+      itemId: sellId,
+      price: price
+    }
+    let sellRes = gameSuppliers.sellItem(payload);
+    if (!sellRes) {
+      return;
+    }
+
+    gameStore.chargeGold(price);
+    gameStoreInventory.addItem(sellId);
+
 
   }
 
@@ -24,7 +52,7 @@ class Supplier extends React.Component {
     }
     let thisInventory = [];
     this.props.supplier.inventory.forEach(id => {
-      let inventoryItem = Items.getItem(id);
+      let inventoryItem = gameItems.getItem(id);
       thisInventory.push(inventoryItem);
     });
 
@@ -69,6 +97,9 @@ class Supplier extends React.Component {
           <div className="SupplierItemsValueGroup">  
             <span className="CoinSymbol">&#x2689; </span>
             <span className="InventoryItemValue">{composedValue}</span>
+            <div className="BuyButtonContainer" onClick={() => this.handlePurchase({ ids: item.ids, price: composedValue })}>
+              <SupplierBuyButton />
+            </div>
           </div>
         </div>
       )
@@ -95,7 +126,8 @@ class Supplier extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    supplyReady: state.supplies.ready
+    supplyReady: state.supplies.ready,
+    storeGold: state.store.gold
   }
 }
 

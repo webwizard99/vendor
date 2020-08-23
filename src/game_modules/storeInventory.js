@@ -4,25 +4,12 @@ import Items from './items';
 const storeInventory = (function(){
   let inventory = [];
 
-  let currentIdIndex = 0;
-
-  const addItem = function(newItem) {
-    newItem.id = currentIdIndex;
-    currentIdIndex++;
-    inventory.push(newItem);
-  }
-
-  
   return {
-    addPotion: function(name, value, payload) {
-      const itemTypes = Items.getItemTypes();
-      const newPotion = Items.createItem(itemTypes.potion, name, value, payload);
-      addItem(newPotion);
-    },
-
-    addTestPotion: function() {
-      const testPotion = Items.createTestPotion();
-      addItem(testPotion);
+    addItem: function(id) {
+      if (id === null || id === undefined) {
+        return false;
+      }
+      inventory.push(id);
     },
 
     getStoreInventory: function() {

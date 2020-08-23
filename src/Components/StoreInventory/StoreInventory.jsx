@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { SET_STORE_INVENTORY } from '../../actions/types';
 
 import storeInventory from '../../game_modules/storeInventory';
+import storeItems from '../../game_modules/items';
 
 class StoreInventory extends React.Component {
   constructor(props) {
@@ -20,8 +21,13 @@ class StoreInventory extends React.Component {
 
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
+      let composedInventory = [];
+      this.props.inventory.forEach(itemId => {
+        let thisItem = storeItems.getItem(itemId);
+        composedInventory.push(itemId);
+      });
       return (
-        <div>{this.props.inventory.map(item => {
+        <div>{composedInventory.map(item => {
           return (
             <div className="InventoryItem itemBackground" key={item.id}>
               <span className="InventoryItemName">{item.name}</span>
