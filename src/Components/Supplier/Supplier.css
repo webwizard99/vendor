@@ -28,7 +28,7 @@
   align-items: center;
   cursor: pointer;
   font-family: "Roboto Slab", serif;
-  font-size: 1rem;
+  font-size: .9rem;
   color: rgb(20, 30, 20);
   padding-left: .5rem;
 }
@@ -38,5 +38,5 @@
 }
 
 .SupplierInventoryValueGroup {
-  margin-left: .8rem
+  margin-left: .6rem
 }

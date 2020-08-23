@@ -40,7 +40,7 @@ class Supplier extends React.Component {
     let composedItems = []
 
     for (const [key, value] of Object.entries(inventoryGroups)) {
-      let item = { name: key, count: value, , type: typeGroups[key], value: valueGroups[key] };
+      let item = { name: key, count: value, type: typeGroups[key], value: valueGroups[key] };
       composedItems.push(item);
     }
 
