@@ -83,7 +83,7 @@ const supplies = (function(){
     if (itemSpawnCount >= itemTypeCount) {
       return;
     }
-    let newItem;
+    let newItems;
     fetchItemArrForSupplyPool()
       .then(itemsOfLevel => {
         newItems = itemsOfLevel;
@@ -110,7 +110,7 @@ const supplies = (function(){
     let typeToSpawn = itemTypesArr[typeIndex];
     const newSupplyArr = suppliesPool[typeToSpawn];
     let randomChoice = Math.floor(Math.random() * newSupplyArr.length);
-    newItem = newSupplyArr[randomChoice];
+    let newItem = newSupplyArr[randomChoice];
 
     // compose payload for Item constructor
     let itemPayload = {};
