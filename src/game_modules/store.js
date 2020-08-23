@@ -5,6 +5,13 @@ const store = (function(){
   let gold = startingGold;
   
   return {
+    chargeGold: function(amount) {
+      if (gold < amount) {
+        console.log('attempted to charge more gold than vendor owns')
+        return false;
+      }
+      gold -= amount;
+    },
     getName: function() {
       return name;
     },
