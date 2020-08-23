@@ -1,6 +1,3 @@
-import Items from './items';
-
-
 const storeInventory = (function(){
   let inventory = [];
 

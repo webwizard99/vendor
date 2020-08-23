@@ -3,3 +3,7 @@
   width: 100vw;
   overflow: hidden;
 }
+
+p, div, span , h1, h2, h3, h4, h5, h6, select, option {
+  user-select: none;
+}
