@@ -12,3 +12,7 @@
   height: 110%;
   overflow-x: scroll;
 }
+
+.spacer {
+  height: 100%;
+}

@@ -48,6 +48,7 @@ class Suppliers extends React.Component {
       return (
         <div className="suppliersContainer">
           {suppliersDisplay}
+          <div className="spacer"></div>
         </div>
       );
     } else {
