@@ -127,7 +127,7 @@ class Supplier extends React.Component {
 const mapStateToProps = state => {
   return {
     supplyReady: state.supplies.ready,
-    storeGold: state.store.gold
+    storeGold: state.storeState.gold
   }
 }
 
