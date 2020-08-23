@@ -30,12 +30,12 @@ class Supplier extends React.Component {
 
     const sellId = ids[0];
 
-    const payload = {
+    const sellPayload = {
       id: this.props.supplier.id,
       itemId: sellId,
       price: price
     }
-    let sellRes = gameSuppliers.sellItem(payload);
+    let sellRes = gameSuppliers.sellItem(sellPayload);
     if (!sellRes) {
       return;
     }
