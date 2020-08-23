@@ -26,7 +26,10 @@ export default function(state = initialState, action) {
     case SET_STORE_INVENTORY:
       const newInventory = action.inventory;
       let newCount = state.inventoryCount;
+      console.log(newInventory);
+      console.log(Array.isArray(newInventory));
       if (Array.isArray(newInventory)) {
+        console.log(newInventory.length);
         newCount = newInventory.length;
       }
       return {
