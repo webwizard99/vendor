@@ -50,6 +50,7 @@ class Supplier extends React.Component {
       let composedValue = item.value;
       if (typeIndex !== -1) {
         composedValue = composedValue * (1 + (offerings[typeIndex].markup / 1000));
+        composedValue = Math.floor(composedValue);
       }
 
       return (
