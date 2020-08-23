@@ -51,7 +51,7 @@ class Supplier extends React.Component {
       
       let composedValue = item.value;
       if (typeIndex !== -1) {
-        composedValue = composedValue *= offerings[typeIndex].markup;
+        composedValue = composedValue * (1 + (offerings[typeIndex].markup / 1000));
       }
 
       return (

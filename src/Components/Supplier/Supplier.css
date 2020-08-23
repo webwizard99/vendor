@@ -34,9 +34,9 @@
 }
 
 .SupplierInventoryItemName {
-  width: 60%;
+  width: 50%;
 }
 
-.SupplierInventoryValueGroup {
+.SupplierItemsValueGroup {
   margin-left: .6rem
 }
