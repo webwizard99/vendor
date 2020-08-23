@@ -2,7 +2,7 @@
 import { store } from '../index';
 import { SET_STORE_GOLD } from '../actions/types';
 
-const store = (function(){
+const gameStore = (function(){
   let name = '';
 
   const startingGold = 1000;
@@ -49,4 +49,4 @@ const store = (function(){
   }
 }());
 
-export default store;
+export default gameStore;
