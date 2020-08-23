@@ -11,6 +11,7 @@
   margin: auto;
   height: 110%;
   overflow-x: scroll;
+  scroll-padding-right: 1rem;
 }
 
 .spacer {

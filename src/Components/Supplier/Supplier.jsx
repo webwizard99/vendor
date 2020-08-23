@@ -102,10 +102,10 @@ class Supplier extends React.Component {
           <div className="SupplierItemsValueGroup">  
             <span className="CoinSymbol">&#x2689; </span>
             <span className="InventoryItemValue">{composedValue}</span>
-            <div className="BuyButtonContainer" onClick={() => this.handlePurchase({ ids: item.ids, price: composedValue })}>
+          </div>
+          <div className="BuyButtonContainer" onClick={() => this.handlePurchase({ ids: item.ids, price: composedValue })}>
               <SupplierBuyButton />
             </div>
-          </div>
         </div>
       )
     })
