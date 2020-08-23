@@ -176,7 +176,7 @@ const suppliers = (function(){
       dispatchSuppliers(suppliers);
       dispatchSupplyReady(false);
     },
-    sellItem(payload) {
+    sellItem: function (payload) {
       const { id, itemId, price} = payload;
       
       const thisSupplier = suppliers.find(refSupplier => refSupplier.id === id);
@@ -193,6 +193,9 @@ const suppliers = (function(){
         return false;
       }
       return true;
+    },
+    updateSuppliers: function() {
+      dispatchSuppliers(suppliers);
     }
   }
 }());

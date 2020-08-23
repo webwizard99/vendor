@@ -42,7 +42,7 @@ class StoreInventory extends React.Component {
       )     
     } else {
       return (
-        <div>No inventory</div>
+        <div></div>
       )
     }
   }

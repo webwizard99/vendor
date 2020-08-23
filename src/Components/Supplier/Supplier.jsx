@@ -42,7 +42,11 @@ class Supplier extends React.Component {
 
     gameStore.chargeGold(price);
     gameStoreInventory.addItem(sellId);
-
+    
+    // update state
+    gameStore.updateGold();
+    gameStoreInventory.updateStoreInventory();
+    gameSuppliers.updateSuppliers();
 
   }
 
