@@ -86,6 +86,20 @@ class Supplier extends React.Component {
       composedItems.push(item);
     }
 
+    composedItems.sort((item1, item2) => {
+      const nameA = item1.name.toUpperCase();
+      const nameB = item2.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+
     return composedItems.map(item => {
       const offerings = this.props.supplier.offerings;
       const typeIndex = offerings.findIndex(offering => offering.type === item.type);
