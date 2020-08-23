@@ -17,7 +17,6 @@ const storeInventory = (function(){
       if (id === null || id === undefined) {
         return false;
       }
-      console.log(`storeInventory.. addItem: ${id}`)
       inventory.push(id);
     },
 

@@ -180,7 +180,6 @@ const suppliers = (function(){
       const { id, itemId, price} = payload;
       
       const thisSupplier = suppliers.find(refSupplier => refSupplier.id === id);
-      console.log(thisSupplier);
       if (!thisSupplier) {
         return false;
       }

@@ -21,9 +21,7 @@ class StoreInventory extends React.Component {
 
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
-      console.log(`inventoryCount: ${this.props.inventoryCount}`);
       let composedInventory = [];
-      console.log(this.props.inventory);
       this.props.inventory.forEach(itemId => {
         let thisItem = storeItems.getItem(itemId);
         composedInventory.push(thisItem);

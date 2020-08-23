@@ -22,16 +22,14 @@ class Supplier extends React.Component {
   }
 
   handlePurchase(payload) {
-    console.log('in handlePurchase');
-    console.dir(payload);
     const { ids, price } = payload;
 
     if (price > this.props.storeGold) {
       return;
     }
 
+    // sell first item of object
     const sellId = ids[0];
-
     const sellPayload = {
       id: this.props.supplier.id,
       itemId: sellId,
@@ -42,14 +40,10 @@ class Supplier extends React.Component {
       return;
     }
 
-    console.log('item sold by supplier');
-
+    // transact sale for vendor
     gameStore.chargeGold(price);
     gameStoreInventory.addItem(sellId);
 
-    console.log('item bought by vendor');
-    console.log(gameStoreInventory.getStoreInventory());
-    
     // update state
     gameStore.updateGold();
     gameStoreInventory.updateStoreInventory();
@@ -61,17 +55,18 @@ class Supplier extends React.Component {
     if (!this.props.initialized) {
       return ''
     }
+    // get details on items from ids
     let thisInventory = [];
     this.props.supplier.inventory.forEach(id => {
       let inventoryItem = gameItems.getItem(id);
       thisInventory.push(inventoryItem);
     });
 
+    // organize all items by item name
     let inventoryGroups = {};
     let valueGroups = {}
     let typeGroups = {}
     let idGroups = {}
-
     thisInventory.forEach(item => {
       if (!inventoryGroups[item.name]) {
         inventoryGroups[item.name] = 1;
@@ -84,8 +79,8 @@ class Supplier extends React.Component {
       }
     });
 
+    // create array of composed items
     let composedItems = []
-
     for (const [key, value] of Object.entries(inventoryGroups)) {
       let item = { name: key, count: value, type: typeGroups[key], value: valueGroups[key], ids: idGroups[key] };
       composedItems.push(item);
@@ -103,8 +98,7 @@ class Supplier extends React.Component {
 
       return (
         <div className="SupplierInventoryItem itemBackground" key={item.id}>
-          <span className="SupplierInventoryItemName">{item.name}</span>
-          <span className="ItemCount"> ({item.count})</span>
+          <span className="SupplierInventoryItemName">{item.name} ({item.count})</span>
           <div className="SupplierItemsValueGroup">  
             <span className="CoinSymbol">&#x2689; </span>
             <span className="InventoryItemValue">{composedValue}</span>
