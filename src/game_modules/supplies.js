@@ -30,6 +30,7 @@ const supplies = (function(){
       type: SET_SUPPLY_SPAWNED,
       value: value
     }
+    store.dispatch(payload);
   }
 
   // fill supply pool
@@ -112,6 +113,10 @@ const supplies = (function(){
     let randomChoice = Math.floor(Math.random() * newSupplyArr.length);
     let newItem = newSupplyArr[randomChoice];
 
+    if (Array.isArray(newItem)) {
+      newItem = newItem[0];
+    }
+
     // compose payload for Item constructor
     let itemPayload = {};
     itemPayload.level = newItem.level;
@@ -136,7 +141,7 @@ const supplies = (function(){
 
     // create item and add to total inventory in Items module
     let itemId = Items.createItem(payload);
-
+    supplies.push(itemId);
 
   }
   
