@@ -24,7 +24,7 @@ class StoreInventory extends React.Component {
       let composedInventory = [];
       this.props.inventory.forEach(itemId => {
         let thisItem = storeItems.getItem(itemId);
-        composedInventory.push(itemId);
+        composedInventory.push(thisItem);
       });
       return (
         <div>{composedInventory.map(item => {

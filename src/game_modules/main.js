@@ -1,11 +1,7 @@
 import days from './days';
 import gameStore from './store';
-import storeInventory from './storeInventory';
 import suppliers from './suppliers';
 import supplies from './supplies';
-
-// redux imports
-
 
 const main = (function() {
   
