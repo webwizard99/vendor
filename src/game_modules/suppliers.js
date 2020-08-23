@@ -102,7 +102,6 @@ const suppliers = (function(){
 
               // remove item from supply
               let thisSupply = supplies.depleteSupply(remSupply);
-              console.log(thisSupply);
               if (Array.isArray(thisSupply)) {
                 thisSupply = thisSupply[0];
               }

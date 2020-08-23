@@ -13,7 +13,6 @@ class Supplier extends React.Component {
     this.getSuppllierInventory = this.getSuppllierInventory.bind(this);
   }
   getSuppllierInventory() {
-    console.log(this.props.supplier.inventory);
     if (!this.props.initialized) {
       return ''
     }
@@ -44,7 +43,6 @@ class Supplier extends React.Component {
       composedItems.push(item);
     }
 
-    console.log(composedItems);
     return composedItems.map(item => {
       const offerings = this.props.supplier.offerings;
       const typeIndex = offerings.findIndex(offering => offering.type === item.type);
