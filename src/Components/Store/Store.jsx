@@ -38,7 +38,7 @@ class Store extends React.Component {
     const itemTypesArr = Object.values(ItemTypes);
     return (
       <select className="StoreItemTypeFilter" 
-        defaultValue="all"
+        defaultValue={this.props.storeFilter}
         onChange={this.handleFilter}>
         <option value="all">all</option>
         {itemTypesArr.map(itemType => {
@@ -80,7 +80,8 @@ const mapStateToProps = state => {
   return {
     storeName: state.storeState.name,
     gold: state.storeState.gold,
-    filterActive: state.storeState.filterActive
+    filterActive: state.storeState.filterActive,
+    storeFilter: state.storeState.filter
   }
 }
 
