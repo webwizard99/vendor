@@ -35,9 +35,11 @@ class Store extends React.Component {
 
   handleFilter(e) {
     let currentType = e.target.value;
+    console.log(currentType);
     this.setState({
       filterValue: currentType
     });
+    
   }
 
   getFilter() {
@@ -50,7 +52,7 @@ class Store extends React.Component {
         <option value="all">all</option>
         {itemTypesArr.map(itemType => {
           return (
-            <option value={itemType}></option>
+            <option value={itemType}>{itemType}</option>
           )
         })}
       </select>
