@@ -18,7 +18,7 @@
   text-transform: uppercase;
   font-size: 1.2rem;
   padding-left: 1rem;
-  width: 80%;
+  width: 50%;
 }
 
 .CoinSymbol {
@@ -30,4 +30,13 @@
   padding-left: 1rem;
   font-size: 1.2rem;
   width: 15%;
+}
+
+.FilterGroup {
+  margin-left: auto;
+  transition: all 40ms 60ms ease-out;
+}
+
+.StoreItemTypeFilter {
+  width: 3rem;
 }

@@ -138,6 +138,7 @@ const supplies = (function(){
     payload.type = newItem.item.type;
     payload.name = newItem.item.name;
     payload.value = newItem.item.value;
+    payload.prototypeId = newItem.item.id;
 
     // create item and add to total inventory in Items module
     let itemId = Items.createItem(payload);

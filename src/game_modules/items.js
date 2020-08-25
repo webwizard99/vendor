@@ -9,10 +9,11 @@ const items = (function(){
   let lastIndex = 0;
   
   const Item = function(payload) {
-    const { type, name, value } = payload;
+    const { type, name, value, prototypeId } = payload;
     this.type = type;
     this.name = name;
     this.value = value;
+    this.prototypeId = prototypeId;
     this.id = lastIndex;
     lastIndex++;
   }

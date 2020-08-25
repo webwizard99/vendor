@@ -40,7 +40,6 @@ class Suppliers extends React.Component {
   getSuppliers() {
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
-      console.log(currentSuppliers);
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
         return (<Supplier supplier={renderSupplier} initialized={this.state.suppliersInitialized}/>);
       });

@@ -3,6 +3,7 @@ import './Store.css';
 
 // import gameStore from '../../Utilities/store';
 
+import ItemTypes from '../../Utilities/itemTypes';
 import StoreInventory from '../StoreInventory/StoreInventory';
 
 import { SET_STORE_GOLD } from '../../actions/types';
@@ -13,7 +14,14 @@ class Store extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      filterActive: false,
+      filterValue: 'all'
+    }
+
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.getFilter = this.getFilter.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   // ~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*
@@ -22,13 +30,39 @@ class Store extends React.Component {
   
   componentDidMount() {
     this.props.fetchGold();
-  }  
+  }
+
+  handleFilter(e) {
+    let currentType = e.target.value;
+    this.setState({
+      filterValue: currentType
+    });
+  }
+
+  getFilter() {
+    if (!this.state.filterActive) return '';
+    return (
+      <select className="StoreItemTypeFilter" 
+        defaultValue="all"
+        onChange={this.handleFilter}>
+        <option value="all">all</option>
+        {ItemTypes.map(itemType => {
+          return (
+            <option value={itemType}></option>
+          )
+        })}
+      </select>
+    )
+  }
   
   render() {
     return (
       <div className="Store">
         <div className="StoreMenuBar">
           <h2 className="StoreName">{this.props.storeName}</h2>
+          <div className="FilterGroup">
+            {this.getFilter()}
+          </div>
           <span className="Inspect" role="img" aria-label="inspect">&#128269; </span>
           <div className="GoldDisplay">
             <span className="CoinSymbol" role="img" aria-label="coin">&#x2689; </span>
