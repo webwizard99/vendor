@@ -6,18 +6,13 @@ import './Store.css';
 import ItemTypes from '../../Utilities/itemTypes';
 import StoreInventory from '../StoreInventory/StoreInventory';
 
-import { SET_STORE_GOLD } from '../../actions/types';
+import { SET_STORE_GOLD, SET_STORE_FILTER, SET_STORE_FILTER_ACTIVE } from '../../actions/types';
 import { fetchGold } from '../../actions';
 import { connect } from 'react-redux';
 
 class Store extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      filterActive: false,
-      filterValue: 'all'
-    }
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -35,15 +30,11 @@ class Store extends React.Component {
 
   handleFilter(e) {
     let currentType = e.target.value;
-    console.log(currentType);
-    this.setState({
-      filterValue: currentType
-    });
-    
+    this.props.setStoreFilter(currentType);
   }
 
   getFilter() {
-    if (!this.state.filterActive) return '';
+    if (!this.props.filterActive) return '';
     const itemTypesArr = Object.values(ItemTypes);
     return (
       <select className="StoreItemTypeFilter" 
@@ -60,10 +51,8 @@ class Store extends React.Component {
   }
 
   toggleFilter() {
-    const newValue = !this.state.filterActive;
-    this.setState({
-      filterActive: newValue
-    });
+    const newValue = !this.props.filterActive;
+    this.props.setStoreFilterActive(newValue);
   }
   
   render() {
@@ -90,15 +79,17 @@ class Store extends React.Component {
 const mapStateToProps = state => {
   return {
     storeName: state.storeState.name,
-    gold: state.storeState.gold
-
+    gold: state.storeState.gold,
+    filterActive: state.storeState.filterActive
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setStoreGold: (newGold) => dispatch({ type: SET_STORE_GOLD, amount: newGold }),
-    fetchGold: () => dispatch(fetchGold())
+    fetchGold: () => dispatch(fetchGold()),
+    setStoreFilter: (filter) => dispatch({ type: SET_STORE_FILTER, filter: filter }),
+    setStoreFilterActive: (value) => dispatch({ type: SET_STORE_FILTER_ACTIVE, value: value })
   }
 }
 

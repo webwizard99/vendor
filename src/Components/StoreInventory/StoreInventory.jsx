@@ -26,8 +26,14 @@ class StoreInventory extends React.Component {
         let thisItem = storeItems.getItem(item.itemId);
         composedInventory.push({ ...thisItem, markup: item.markup });
       });
+      let filteredInventory;
+      if (!this.props.filterActive || this.props.filter === 'all') {
+        filteredInventory = composedInventory;
+      } else {
+        filteredInventory = composedInventory.filter(item => item.type === this.props.filter);
+      }
       return (
-        <div>{composedInventory.map(item => {
+        <div>{filteredInventory.map(item => {
           const composedPrice = Math.floor(item.value * (1 + (item.markup / 1000)));
           return (
             <div className="InventoryItem itemBackground" key={item.id}>
@@ -60,7 +66,9 @@ class StoreInventory extends React.Component {
 const mapStateToProps = state => {
   return {
     inventory: state.storeState.inventory,
-    inventoryCount: state.storeState.inventoryCount
+    inventoryCount: state.storeState.inventoryCount,
+    filterActive: state.storeState.filterActive,
+    storeFilter: state.storeState.filter
   }
 }
 
