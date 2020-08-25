@@ -42,12 +42,13 @@ class Store extends React.Component {
 
   getFilter() {
     if (!this.state.filterActive) return '';
+    const itemTypesArr = Object.valuess(ItemTypes);
     return (
       <select className="StoreItemTypeFilter" 
         defaultValue="all"
         onChange={this.handleFilter}>
         <option value="all">all</option>
-        {ItemTypes.map(itemType => {
+        {itemTypesArr.map(itemType => {
           return (
             <option value={itemType}></option>
           )

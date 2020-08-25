@@ -21,6 +21,10 @@
   width: 50%;
 }
 
+.Inspect {
+  cursor: pointer;
+}
+
 .CoinSymbol {
   color: gold;
   font-weight: 800;
