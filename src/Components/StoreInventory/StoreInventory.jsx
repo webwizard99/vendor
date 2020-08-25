@@ -27,10 +27,10 @@ class StoreInventory extends React.Component {
         composedInventory.push({ ...thisItem, markup: item.markup });
       });
       let filteredInventory;
-      if (!this.props.filterActive || this.props.filter === 'all') {
+      if (!this.props.filterActive || this.props.storeFilter === 'all') {
         filteredInventory = composedInventory;
       } else {
-        filteredInventory = composedInventory.filter(item => item.type === this.props.filter);
+        filteredInventory = composedInventory.filter(item => item.type === this.props.storeFilter);
       }
       return (
         <div>{filteredInventory.map(item => {
