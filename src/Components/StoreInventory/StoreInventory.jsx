@@ -22,18 +22,19 @@ class StoreInventory extends React.Component {
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
       let composedInventory = [];
-      this.props.inventory.forEach(itemId => {
-        let thisItem = storeItems.getItem(itemId);
-        composedInventory.push(thisItem);
+      this.props.inventory.forEach(item => {
+        let thisItem = storeItems.getItem(item.itemId);
+        composedInventory.push({ ...thisItem, markup: item.markup });
       });
       return (
         <div>{composedInventory.map(item => {
+          const composedPrice = Math.floor(item.value * (1 + (item.markup / 1000)));
           return (
             <div className="InventoryItem itemBackground" key={item.id}>
               <span className="InventoryItemName">{item.name}</span>
               <div className="ItemValueGroup">
                 <span className="CoinSymbol">&#x2689; </span>
-                <span className="InventoryItemValue">{item.value}</span>
+                <span className="InventoryItemValue">{composedPrice}</span>
               </div>
               
             </div>

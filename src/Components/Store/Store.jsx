@@ -75,7 +75,7 @@ class Store extends React.Component {
           <span className="Inspect" role="img" aria-label="inspect" onClick={this.toggleFilter}>&#128269; </span>
           <div className="GoldDisplay">
             <span className="CoinSymbol" role="img" aria-label="coin">&#x2689; </span>
-            {this.props.gold}
+            <span className="StoreGold">{this.props.gold}</span>
           </div>
         </div>
         <StoreInventory />

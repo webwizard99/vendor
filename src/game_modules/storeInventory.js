@@ -17,6 +17,9 @@ const storeInventory = (function(){
       if (id === null || id === undefined) {
         return false;
       }
+      const newStoreItem = { itemId: id,
+        markup: 150
+      }
       inventory.push(id);
     },
 
