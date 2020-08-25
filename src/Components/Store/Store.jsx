@@ -20,6 +20,7 @@ class Store extends React.Component {
     }
 
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
   }
@@ -54,6 +55,13 @@ class Store extends React.Component {
       </select>
     )
   }
+
+  toggleFilter() {
+    const newValue = !this.state.filterActive;
+    this.setState({
+      filterActive: newValue
+    });
+  }
   
   render() {
     return (
@@ -63,7 +71,7 @@ class Store extends React.Component {
           <div className="FilterGroup">
             {this.getFilter()}
           </div>
-          <span className="Inspect" role="img" aria-label="inspect">&#128269; </span>
+          <span className="Inspect" role="img" aria-label="inspect" onClick={this.toggleFilter}>&#128269; </span>
           <div className="GoldDisplay">
             <span className="CoinSymbol" role="img" aria-label="coin">&#x2689; </span>
             {this.props.gold}
