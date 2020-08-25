@@ -20,7 +20,7 @@ const storeInventory = (function(){
       const newStoreItem = { itemId: id,
         markup: 150
       }
-      inventory.push(id);
+      inventory.push(newStoreItem);
     },
 
     getStoreInventory: function() {
