@@ -18,6 +18,9 @@ class Store extends React.Component {
     this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.getIncrementButtons = this.getIncrementButtons.bind(this);
+    this.handleIncrease = this.handleIncrease.bind(this);
+    this.handleDecrease = this.handleDecrease.bind(this);
   }
 
   // ~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*~~*~~*~*
@@ -31,6 +34,28 @@ class Store extends React.Component {
   handleFilter(e) {
     let currentType = e.target.value;
     this.props.setStoreFilter(currentType);
+  }
+
+  handleIncrease() {
+    console.log('handle increase');
+  }
+
+  handleDecrease() {
+    console.log('handle decrease');
+  }
+
+  getIncrementButtons() {
+    if (!this.props.filterActive) return '';
+    return (
+      <div className="incrementButtons">
+        <div className="increaseAll incrementButton button">
+          +
+        </div>
+        <div className="decreaseAll incrementButton button">
+          -
+        </div>
+      </div>
+    )
   }
 
   getFilter() {
@@ -61,6 +86,7 @@ class Store extends React.Component {
         <div className="StoreMenuBar">
           <h2 className="StoreName">{this.props.storeName}</h2>
           <div className="FilterGroup">
+            {this.getIncrementButtons()}
             {this.getFilter()}
           </div>
           <span className="Inspect" role="img" aria-label="inspect" onClick={this.toggleFilter}>&#128269; </span>
