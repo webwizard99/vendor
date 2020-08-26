@@ -45,6 +45,7 @@
 
 .FilterGroup {
   margin-left: auto;
+  display: flex;
   margin-right: 1rem;
   transition: all 40ms 60ms ease-out;
 }
@@ -56,3 +57,16 @@
 .StoreItemTypeFilter option {
   color: rgb(30, 35, 30);
 }
+
+.incrementButtons {
+  width: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.incrementButton {
+  width: 1rem;
+  border-radius: 3px;
+}
+
