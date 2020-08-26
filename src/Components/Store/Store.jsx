@@ -49,10 +49,10 @@ class Store extends React.Component {
     return (
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button">
-          -
+          <span className="incrementIcon">-</span>
         </div>
         <div className="increaseAll incrementButton button">
-          +
+          <span className="incrementIcon">+</span>
         </div>
       </div>
     )
