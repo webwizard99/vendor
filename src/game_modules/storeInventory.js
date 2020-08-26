@@ -2,6 +2,9 @@
 import { store } from '../index';
 import { SET_STORE_INVENTORY } from '../actions/types';
 
+// game module imports
+import gameItems from './items';
+
 const storeInventory = (function(){
   let inventory = [];
 
@@ -12,6 +15,21 @@ const storeInventory = (function(){
     }
     store.dispatch(payload);
   }
+
+  const composeInventory = function() {
+    let composedInventory = [];
+      inventory.forEach(item => {
+        let thisItem = gameItems.getItem(item.itemId);
+        composedInventory.push({ ...thisItem, markup: item.markup });
+      });
+      return composedInventory;
+  }
+
+  const filterInventory = function(filter) {
+    let filteredInventory = composeInventory().filter(item => item.type === filter);
+    return filteredInventory;
+  }
+
   return {
     addItem: function(id) {
       if (id === null || id === undefined) {
@@ -29,6 +47,19 @@ const storeInventory = (function(){
 
     updateStoreInventory: function() {
       dispatchStoreInventory();
+    },
+
+    getComposedInventory: function() {
+      return composeInventory();
+    },
+
+    getFilteredInventory: function(newFilter) {
+      if (!newFilter || newFilter.toLowerCase() === 'all') {
+        return composeInventory();
+      }
+      else {
+        return filterInventory(newFilter);
+      }
     }
   }
 }());

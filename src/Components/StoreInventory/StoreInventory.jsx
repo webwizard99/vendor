@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SET_STORE_INVENTORY } from '../../actions/types';
 
 import storeInventory from '../../game_modules/storeInventory';
-import storeItems from '../../game_modules/items';
+// import storeItems from '../../game_modules/items';
 
 class StoreInventory extends React.Component {
   constructor(props) {
@@ -21,16 +21,11 @@ class StoreInventory extends React.Component {
 
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
-      let composedInventory = [];
-      this.props.inventory.forEach(item => {
-        let thisItem = storeItems.getItem(item.itemId);
-        composedInventory.push({ ...thisItem, markup: item.markup });
-      });
       let filteredInventory;
       if (!this.props.filterActive || this.props.storeFilter === 'all') {
-        filteredInventory = composedInventory;
+        filteredInventory = storeInventory.getComposedInventory();
       } else {
-        filteredInventory = composedInventory.filter(item => item.type === this.props.storeFilter);
+        filteredInventory = storeInventory.getFilteredInventory(this.props.storeFilter);
       }
       return (
         <div>{filteredInventory.map(item => {
