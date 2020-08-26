@@ -48,11 +48,11 @@ class Store extends React.Component {
     if (!this.props.filterActive) return '';
     return (
       <div className="incrementButtons">
-        <div className="increaseAll incrementButton button">
-          +
-        </div>
         <div className="decreaseAll incrementButton button">
           -
+        </div>
+        <div className="increaseAll incrementButton button">
+          +
         </div>
       </div>
     )
