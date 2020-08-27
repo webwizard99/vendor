@@ -6,6 +6,7 @@ const items = (function(){
   const potionTypes = PotionTypes;
 
   let allItems = [];
+  let itemTypeIndex = {};
   let lastIndex = 0;
   
   const Item = function(payload) {
@@ -15,6 +16,7 @@ const items = (function(){
     this.value = value;
     this.prototypeId = prototypeId;
     this.id = lastIndex;
+    itemTypeIndex[lastIndex] = type;
     lastIndex++;
   }
 
@@ -104,6 +106,14 @@ const items = (function(){
         return thisItem;
       } else {
         console.log('attempted to retrieve invalid item.')
+      }
+    },
+
+    getItemType(id) {
+      if (itemTypeIndex[id] !== null) {
+        return itemTypeIndex[id];
+      } else {
+        return false;
       }
     },
 

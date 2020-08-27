@@ -1,14 +1,21 @@
 import React from 'react';
 import './Store.css';
 
-// import gameStore from '../../Utilities/store';
+// import game modules
+// import gameStore from '../../game_modules/store';
+import gameInventory from '../../game_modules/storeInventory';
 
+
+// import components
 import ItemTypes from '../../Utilities/itemTypes';
 import StoreInventory from '../StoreInventory/StoreInventory';
 
+
+// redux imports
 import { SET_STORE_GOLD, SET_STORE_FILTER, SET_STORE_FILTER_ACTIVE } from '../../actions/types';
 import { fetchGold } from '../../actions';
 import { connect } from 'react-redux';
+
 
 class Store extends React.Component {
   constructor(props) {
@@ -38,10 +45,22 @@ class Store extends React.Component {
 
   handleIncrease() {
     console.log('handle increase');
+    const payload = {
+      filter: this.props.storeFilter,
+      markup: 50
+    }
+    gameInventory.markupFilteredStoreItems(payload);
+    gameInventory.updateStoreInventory();
   }
 
   handleDecrease() {
     console.log('handle decrease');
+    const payload = {
+      filter: this.props.storeFilter,
+      markup: -50
+    }
+    gameInventory.markupFilteredStoreItems(payload);
+    gameInventory.updateStoreInventory();
   }
 
   getIncrementButtons() {

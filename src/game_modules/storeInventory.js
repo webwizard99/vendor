@@ -8,6 +8,8 @@ import gameItems from './items';
 const storeInventory = (function(){
   let inventory = [];
 
+  const maxMarkup = 2500;
+
   const dispatchStoreInventory = function() {
     const payload = {
       type: SET_STORE_INVENTORY,
@@ -28,6 +30,27 @@ const storeInventory = (function(){
   const filterInventory = function(filter) {
     let filteredInventory = composeInventory().filter(item => item.type === filter);
     return filteredInventory;
+  }
+
+  const filterStoreItems = function(filter) {
+    let filteredIds = inventory.filter(item => {
+      return storeInventory.getItemType(item.id) === filter
+    });
+    return filteredIds;
+  }
+
+  const markupFilteredItems = function(filter, newMarkup) {
+    inventory.forEach(inventoryItem => {
+      if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.id) === filter) {
+        inventoryItem.markup += newMarkup;
+        if (inventoryItem.markup > maxMarkup) {
+          inventoryItem.markup = maxMarkup;
+        }
+        if (inventoryItem.markup < 0) {
+          inventoryItem.markup = 0;
+        }
+      }
+    });
   }
 
   return {
@@ -60,6 +83,15 @@ const storeInventory = (function(){
       else {
         return filterInventory(newFilter);
       }
+    },
+    
+    getFilteredStoreItems: function(newFilter) {
+      return filterStoreItems(newFilter);
+    },
+
+    markupFilteredStoreItems: function(payload) {
+      let { filter:newFilter, amount:markupAmount } = payload;
+      markupFilteredItems(newFilter, markupAmount);
     }
   }
 }());
