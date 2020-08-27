@@ -63,7 +63,8 @@ const mapStateToProps = state => {
     inventory: state.storeState.inventory,
     inventoryCount: state.storeState.inventoryCount,
     filterActive: state.storeState.filterActive,
-    storeFilter: state.storeState.filter
+    storeFilter: state.storeState.filter,
+    storeNeedsUpdate: state.storeState.needsUpdate
   }
 }
 

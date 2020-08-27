@@ -12,7 +12,10 @@ import StoreInventory from '../StoreInventory/StoreInventory';
 
 
 // redux imports
-import { SET_STORE_GOLD, SET_STORE_FILTER, SET_STORE_FILTER_ACTIVE } from '../../actions/types';
+import { SET_STORE_GOLD,
+  SET_STORE_FILTER, 
+  SET_STORE_FILTER_ACTIVE,
+  SET_STORE_UPDATE_STATUS } from '../../actions/types';
 import { fetchGold } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -22,6 +25,7 @@ class Store extends React.Component {
     super(props);
 
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
@@ -38,6 +42,12 @@ class Store extends React.Component {
     this.props.fetchGold();
   }
 
+  componentDidUpdate() {
+    if (this.props.storeNeedsUpdate) {
+      this.props.setStoreUpdateStatus(false);
+    }
+  }
+
   handleFilter(e) {
     let currentType = e.target.value;
     this.props.setStoreFilter(currentType);
@@ -51,6 +61,7 @@ class Store extends React.Component {
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
+    this.props.setStoreUpdateStatus(true);
   }
 
   handleDecrease() {
@@ -61,6 +72,7 @@ class Store extends React.Component {
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
+    this.props.setStoreUpdateStatus(true);
   }
 
   getIncrementButtons() {
@@ -126,7 +138,8 @@ const mapStateToProps = state => {
     storeName: state.storeState.name,
     gold: state.storeState.gold,
     filterActive: state.storeState.filterActive,
-    storeFilter: state.storeState.filter
+    storeFilter: state.storeState.filter,
+    storeNeedsUpdate: state.storeState.needsUpdate
   }
 }
 
@@ -135,7 +148,8 @@ const mapDispatchToProps = dispatch => {
     setStoreGold: (newGold) => dispatch({ type: SET_STORE_GOLD, amount: newGold }),
     fetchGold: () => dispatch(fetchGold()),
     setStoreFilter: (filter) => dispatch({ type: SET_STORE_FILTER, filter: filter }),
-    setStoreFilterActive: (value) => dispatch({ type: SET_STORE_FILTER_ACTIVE, value: value })
+    setStoreFilterActive: (value) => dispatch({ type: SET_STORE_FILTER_ACTIVE, value: value }),
+    setStoreUpdateStatus: (value) => dispatch({ type: SET_STORE_UPDATE_STATUS, value: value })
   }
 }
 

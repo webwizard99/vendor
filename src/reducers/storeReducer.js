@@ -2,15 +2,15 @@ import { SET_STORE_NAME,
   SET_STORE_GOLD,
   SET_STORE_INVENTORY,
   SET_STORE_FILTER,
-  SET_STORE_FILTER_ACTIVE } from '../actions/types';
+  SET_STORE_FILTER_ACTIVE,
+  SET_STORE_UPDATE_STATUS } from '../actions/types';
 
 const initialState = {
   name: '',
   gold: 0,
   filterActive: false,
   filter: 'all',
-  refreshing: false,
-  refreshed: false,
+  needsUpdate: false,
   inventory: [],
   inventoryCount: 0
 }
@@ -47,6 +47,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filter: action.filter
+      }
+    case SET_STORE_UPDATE_STATUS:
+      return {
+        ...state,
+        needsUpdate: action.value
       }
     default:
       return state;

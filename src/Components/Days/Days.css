@@ -15,4 +15,8 @@
 .nextDay {
   margin-right: 1rem;
   border-radius: 2px;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  width: 2.5rem;
+  border-radius: 3px;
 }
