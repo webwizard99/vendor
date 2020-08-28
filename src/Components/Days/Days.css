@@ -3,6 +3,7 @@
   font-family: "Roboto Slab", serif;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   line-height: 4%;
 }
 
@@ -13,12 +14,9 @@
 
 .nextDay {
   margin-right: 1rem;
-  margin-left: auto;
   border-radius: 2px;
   height: 1.2rem;
   line-height: 1.2rem;
   min-width: 2.5rem;
-  flex-basis: 2.5rem;
-  flex-grow: 1;
   border-radius: 3px;
 }
