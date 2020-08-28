@@ -90,7 +90,9 @@ const storeInventory = (function(){
     },
 
     markupFilteredStoreItems: function(payload) {
-      let { filter:newFilter, amount:markupAmount } = payload;
+      console.log('in markupFilteredStoreItems');
+      console.log(payload);
+      let { filter:newFilter, markupt:markupAmount } = payload;
       markupFilteredItems(newFilter, markupAmount);
     }
   }
