@@ -38,18 +38,14 @@ const storeInventory = (function(){
 
   const filterStoreItems = function(filter) {
     let filteredIds = inventory.filter(item => {
-      return storeInventory.getItemType(item.id) === filter
+      return storeInventory.getItemType(item.itemId) === filter
     });
     return filteredIds;
   }
 
   const markupFilteredItems = function(filter, newMarkup) {
     inventory.forEach(inventoryItem => {
-      console.log(inventoryItem);
-      console.log(gameItems.getItem(inventoryItem.itemId));
-      console.log(gameItems.getItemType(inventoryItem.itemId));
       if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.itemId) === filter) {
-        console.log('marking up');
         inventoryItem.markup += newMarkup;
         if (inventoryItem.markup > maxMarkup) {
           inventoryItem.markup = maxMarkup;
@@ -98,10 +94,7 @@ const storeInventory = (function(){
     },
 
     markupFilteredStoreItems: function(payload) {
-      console.log('in markupFilteredStoreItems');
-      console.log(gameItems.getItemTypeIndex());
       let { filter:newFilter, markup:markupAmount } = payload;
-      console.log(`filter: ${newFilter}, markup: ${markupAmount}`);
       markupFilteredItems(newFilter, markupAmount);
     }
   }

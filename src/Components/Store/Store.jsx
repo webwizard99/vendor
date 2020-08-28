@@ -47,7 +47,6 @@ class Store extends React.Component {
   }
 
   handleIncrease() {
-    console.log('handle increase');
     const payload = {
       filter: this.props.storeFilter,
       markup: 50
@@ -58,7 +57,6 @@ class Store extends React.Component {
   }
 
   handleDecrease() {
-    console.log('handle decrease');
     const payload = {
       filter: this.props.storeFilter,
       markup: -50
