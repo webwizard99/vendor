@@ -6,6 +6,10 @@ import { SET_STORE_INVENTORY } from '../actions/types';
 import gameItems from './items';
 
 const storeInventory = (function(){
+  // {
+  //   itemId: Number,
+  //   markup: number
+  // }
   let inventory = [];
 
   const maxMarkup = 2500;
@@ -42,9 +46,10 @@ const storeInventory = (function(){
   const markupFilteredItems = function(filter, newMarkup) {
     inventory.forEach(inventoryItem => {
       console.log(inventoryItem);
-      console.log(gameItems.getItem(inventoryItem.id));
-      console.log(gameItems.getItemType(inventoryItem.id));
-      if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.id) === filter) {
+      console.log(gameItems.getItem(inventoryItem.itemId));
+      console.log(gameItems.getItemType(inventoryItem.itemId));
+      if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.itemId) === filter) {
+        console.log('marking up');
         inventoryItem.markup += newMarkup;
         if (inventoryItem.markup > maxMarkup) {
           inventoryItem.markup = maxMarkup;

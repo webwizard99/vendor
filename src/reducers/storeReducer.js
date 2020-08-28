@@ -49,9 +49,10 @@ export default function(state = initialState, action) {
         filter: action.filter
       }
     case SET_STORE_UPDATE_STATUS:
+      const newStatus = !state.needsUpdate;
       return {
         ...state,
-        needsUpdate: action.value
+        needsUpdate: newStatus
       }
     default:
       return state;

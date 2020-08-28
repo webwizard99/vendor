@@ -25,7 +25,6 @@ class Store extends React.Component {
     super(props);
 
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
@@ -42,12 +41,6 @@ class Store extends React.Component {
     this.props.fetchGold();
   }
 
-  componentDidUpdate() {
-    if (this.props.storeNeedsUpdate) {
-      this.props.setStoreUpdateStatus(false);
-    }
-  }
-
   handleFilter(e) {
     let currentType = e.target.value;
     this.props.setStoreFilter(currentType);
@@ -61,7 +54,7 @@ class Store extends React.Component {
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
-    this.props.setStoreUpdateStatus(true);
+    this.props.toggleStoreUpdateStatus();
   }
 
   handleDecrease() {
@@ -72,7 +65,7 @@ class Store extends React.Component {
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
-    this.props.setStoreUpdateStatus(true);
+    this.props.toggleStoreUpdateStatus();
   }
 
   getIncrementButtons() {
@@ -151,7 +144,7 @@ const mapDispatchToProps = dispatch => {
     fetchGold: () => dispatch(fetchGold()),
     setStoreFilter: (filter) => dispatch({ type: SET_STORE_FILTER, filter: filter }),
     setStoreFilterActive: (value) => dispatch({ type: SET_STORE_FILTER_ACTIVE, value: value }),
-    setStoreUpdateStatus: (value) => dispatch({ type: SET_STORE_UPDATE_STATUS, value: value })
+    toggleStoreUpdateStatus: () => dispatch({ type: SET_STORE_UPDATE_STATUS })
   }
 }
 
