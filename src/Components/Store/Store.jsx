@@ -79,10 +79,12 @@ class Store extends React.Component {
     if (!this.props.filterActive) return '';
     return (
       <div className="incrementButtons">
-        <div className="decreaseAll incrementButton button">
+        <div className="decreaseAll incrementButton button"
+          onClick={this.handleDecrease}>
           <span className="incrementIcon">-</span>
         </div>
-        <div className="increaseAll incrementButton button">
+        <div className="increaseAll incrementButton button"
+          onClick={this.handleIncrease}>
           <span className="incrementIcon">+</span>
         </div>
       </div>
