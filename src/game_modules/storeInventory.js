@@ -41,7 +41,7 @@ const storeInventory = (function(){
 
   const markupFilteredItems = function(filter, newMarkup) {
     inventory.forEach(inventoryItem => {
-      console.log(gameItems.getItem(inventoryItem).type);
+      console.log(gameItems.getItem(inventoryItem));
       console.log(gameItems.getItemType(inventoryItem.id));
       if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.id) === filter) {
         inventoryItem.markup += newMarkup;
