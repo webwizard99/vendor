@@ -41,7 +41,8 @@ const storeInventory = (function(){
 
   const markupFilteredItems = function(filter, newMarkup) {
     inventory.forEach(inventoryItem => {
-      console.log(gameItems.getItem(inventoryItem));
+      console.log(inventoryItem);
+      console.log(gameItems.getItem(inventoryItem.id));
       console.log(gameItems.getItemType(inventoryItem.id));
       if (filter.toLowerCase() === 'all' || gameItems.getItemType(inventoryItem.id) === filter) {
         inventoryItem.markup += newMarkup;
@@ -93,6 +94,7 @@ const storeInventory = (function(){
 
     markupFilteredStoreItems: function(payload) {
       console.log('in markupFilteredStoreItems');
+      console.log(gameItems.getItemTypeIndex());
       let { filter:newFilter, markup:markupAmount } = payload;
       console.log(`filter: ${newFilter}, markup: ${markupAmount}`);
       markupFilteredItems(newFilter, markupAmount);

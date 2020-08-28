@@ -117,6 +117,10 @@ const items = (function(){
       }
     },
 
+    getItemTypeIndex() {
+      return itemTypeIndex;
+    },
+
     createTestPotion: function(lvl) {
       const newItem = new Item({ type: itemTypes.potion, name: 'Healing Potion', value: 60});
       newItem[itemTypes.potion] = new Potion({ type: potionTypes.healing, level: lvl});
