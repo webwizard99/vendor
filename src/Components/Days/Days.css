@@ -3,20 +3,19 @@
   font-family: "Roboto Slab", serif;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   line-height: 4%;
 }
 
 .DayTitle {
-  text-align: center;
+  width: 4rem;
   margin-left: 1rem;
 }
 
 .nextDay {
   margin-right: 1rem;
-  border-radius: 2px;
+  margin-left: auto;
   height: 1.2rem;
   line-height: 1.2rem;
-  min-width: 2.5rem;
-  border-radius: 3px;
+  width: 6rem;
+  border-radius: 6px;
 }
