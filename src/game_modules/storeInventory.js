@@ -12,7 +12,7 @@ const storeInventory = (function(){
   // }
   let inventory = [];
 
-  const maxMarkup = 2500;
+  const maxMarkup = 4000;
 
   const dispatchStoreInventory = function() {
     const payload = {
