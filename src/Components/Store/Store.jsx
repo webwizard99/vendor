@@ -75,7 +75,7 @@ class Store extends React.Component {
     return (
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button"
-          onPointerDown={this.handlePress}>
+          onMouseDown={this.handlePress}>
           <span className="incrementIcon">-</span>
         </div>
         <div className="increaseAll incrementButton button"
