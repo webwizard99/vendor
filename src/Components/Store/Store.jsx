@@ -24,6 +24,19 @@ class Store extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      markup: 50
+    }
+    this.timer = undefined;
+    this.delay = 100;
+    this.markupIntensity = 50;
+    this.valence = 1;
+    this.increaseMarkup = this.increaseMarkup.bind(this);
+    this.repeat = this.repeat.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.markupOut = this.markupOut.bind(this);
+
     this.componentDidMount = this.componentDidMount.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
@@ -46,10 +59,51 @@ class Store extends React.Component {
     this.props.setStoreFilter(currentType);
   }
 
+  increaseMarkup() {
+    this.setState({ 
+      markup: this.state.markup + this.markupIntensity
+    });
+  }
+
+  onMouseDown(e) {
+    const refBtn = e.target;
+    if (refBtn.classList.contains("decreaseAll")) {
+      this.valence = -1;
+    }
+    if (refBtn.classList.contains("increaseAll")) {
+      this.valence = 1;
+    }
+    this.repeat();
+  }
+
+  repeat() {
+    this.increaseMarkup();
+    if (this.valence === -1) {
+      this.handleDecrease();
+    }
+    if (this.valence === 1) {
+      this.handleIncrease();
+    }
+    this.timer = setTimeout(this.repeat, this.delay);
+    this.markupIntensity += 20;
+  }
+
+  onMouseUp() {
+    clearTimeout(this.timer);
+    this.markupIntensity = 50;
+    this.markupOut();
+  }
+
+  markupOut() {
+    this.setState({
+      markup: 50
+    });
+  }
+
   handleIncrease() {
     const payload = {
       filter: this.props.storeFilter,
-      markup: 50
+      markup: this.state.markup
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
@@ -66,20 +120,16 @@ class Store extends React.Component {
     this.props.toggleStoreUpdateStatus();
   }
 
-  handlePress(e) {
-    console.dir(e);
-  }
-
   getIncrementButtons() {
     if (!this.props.filterActive) return '';
     return (
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button"
-          onMouseDown={this.handlePress}>
+          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
           <span className="incrementIcon">-</span>
         </div>
         <div className="increaseAll incrementButton button"
-          onClick={this.handleIncrease}>
+          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
           <span className="incrementIcon">+</span>
         </div>
       </div>
