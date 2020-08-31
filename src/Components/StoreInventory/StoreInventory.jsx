@@ -34,12 +34,14 @@ class StoreInventory extends React.Component {
     this.props.setInventory(newInventory);
   }
 
-  handleOneIncrement({id, posNeg }) {
-    const payload = {
+  handleOneIncrement(payload) {
+    const { id, posNeg } = payload;
+    console.log(`id: ${id}, posNeg: ${posNeg}`);
+    const itemPayload = {
       id: id,
       markup: (this.state.markup * posNeg)
     }
-    gameInventory.markupStoreItem(payload);
+    gameInventory.markupStoreItem(itemPayload);
   }
 
   getIncrementOneButtons(id) {
