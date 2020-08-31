@@ -68,10 +68,12 @@ class Store extends React.Component {
   onMouseDown(e) {
     const refBtn = e.target;
     console.log(refBtn);
-    if (refBtn.classList.contains("decreaseAll")) {
+    if (refBtn.classList.contains("decreaseAll") ||
+      refBtn.classList.contains("minus")) {
       this.valence = -1;
     }
-    if (refBtn.classList.contains("increaseAll")) {
+    if (refBtn.classList.contains("increaseAll" ||
+      refBtn.classList.contains("plus"))) {
       this.valence = 1;
     }
     this.repeat();
@@ -128,11 +130,11 @@ class Store extends React.Component {
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button"
           onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
-          <span className="incrementIcon">-</span>
+          <span className="incrementIcon minus">-</span>
         </div>
         <div className="increaseAll incrementButton button"
           onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
-          <span className="incrementIcon">+</span>
+          <span className="incrementIcon plus">+</span>
         </div>
       </div>
     )
