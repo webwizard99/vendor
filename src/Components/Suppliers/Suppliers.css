@@ -14,6 +14,7 @@
   scroll-padding-right: 1rem;
   position: relative;
   bottom: 25vh;
+  z-index: 4;
 }
 
 .spacer {
@@ -29,14 +30,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 5;
 }
 
 .SupplierIcon {
   pointer-events: all;
   cursor: pointer;
   font-size: 3rem;
-  width: 1.5rem;
+  width: 2rem;
   height: 80%;
+  margin: 1rem;
 }
 
 .SuppliersControlLayer:hover {
