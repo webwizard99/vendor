@@ -14,13 +14,21 @@ class Suppliers extends React.Component {
     super(props);
 
     this.state = {
-      suppliersInitialized: false
+      suppliersInitialized: false,
+      overflow: false
     }
 
     this.getSuppliers = this.getSuppliers.bind(this);
+    this.getSuppliersControlLayer = this.getSuppliersControlLayer.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.checkForOverflow = this.checkForOverflow.bind(this);
     this.handleScrollLeft = this.handleScrollLeft.bind(this);
     this.handleScrollRight = this.handleScrollRight.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkForOverflow();
   }
 
   handleScrollLeft() {
@@ -35,6 +43,13 @@ class Suppliers extends React.Component {
     if (suppliersContainer) {
       console.log(suppliersContainer);
     }
+  }
+
+  checkForOverflow() {
+    const { scrollWidth, clientWidth } = this.container;
+    const hasOverflow = scrollWidth > clientWidth;
+    console.log(`scrollwidth: ${scrollWidth}, clientWidth: ${clientWidth}`);
+    this.setState({ overflow: hasOverflow });
   }
 
   componentDidUpdate() {
@@ -71,16 +86,25 @@ class Suppliers extends React.Component {
     }
     
   }
+
+  getSuppliersControlLayer() {
+    if (this.state.overflow) {
+      return (
+        <div className="SuppliersControlLayer">
+        <div className="SupplierIcon">&lt</div>
+        <div className="SupplierIcon">&gt</div>
+      </div>
+      )
+    } else {
+      return ''
+    }
+  }
   
   render() {
     return (
       <div className="Suppliers">
-        <div className="SuppliersControlLayer">
-          <div className="SupplierIcon">&lt</div>
-          <div className="SupplierIcon">&gt</div>
-        </div>
         {this.getSuppliers()}
-        
+        {this.getSuppliersControlLayer()}
       </div>
     )
   }
