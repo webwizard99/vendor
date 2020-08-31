@@ -57,6 +57,11 @@ const storeInventory = (function(){
     });
   }
 
+  const markupById = function(id, newMarkup) {
+    const targetItem = inventory.find(item => item.itemId === id);
+    targetItem.markup += newMarkup;
+  }
+
   return {
     addItem: function(id) {
       if (id === null || id === undefined) {
@@ -96,6 +101,11 @@ const storeInventory = (function(){
     markupFilteredStoreItems: function(payload) {
       let { filter:newFilter, markup:markupAmount } = payload;
       markupFilteredItems(newFilter, markupAmount);
+    },
+    
+    markupStoreItem: function(payload) {
+      let { id, markup:markupAmount} = payload;
+      markupById(id, markupAmount);
     }
   }
 }());

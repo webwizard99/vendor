@@ -4,16 +4,30 @@ import './StoreInventory.css';
 import { connect } from 'react-redux';
 import { SET_STORE_INVENTORY } from '../../actions/types';
 
-import storeInventory from '../../game_modules/storeInventory';
+import gameInventory from '../../game_modules/storeInventory';
 // import storeItems from '../../game_modules/items';
 
 class StoreInventory extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      markup: 50,
+      id: null
+    }
+    // this.timer = undefined;
+    // this.delay = 200;
+    // this.markupIntensity = 10;
+    this.valence = 1;
+    // this.increaseMarkup = this.increaseMarkup.bind(this);
+    // this.repeat = this.repeat.bind(this);
+    // this.onMouseDown = this.onMouseDown.bind(this);
+    // this.onMouseUp = this.onMouseUp.bind(this);
     
+    this.handleOneIncrement = this.handleOneIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
     this.getIncrementOneButtons = this.getIncrementOneButtons.bind(this);
-    // this.incrementById = this.incrementById.bind(this);
+    this.incrementById = this.incrementById.bind(this);
   }
 
   componentDidMount() {
@@ -21,15 +35,23 @@ class StoreInventory extends React.Component {
     this.props.setInventory(newInventory);
   }
 
+  handleOneIncrement({id, posNeg }) {
+    const payload = {
+      id: id,
+      markup: (this.state.markup * posNeg)
+    }
+    gameInventory.markupStoreItem(payload);
+  }
+
   getIncrementOneButtons(id) {
     return (
       <div className="incrementButtons incrementOneSet">
         <div className="decreaseOne incrementButton button"
-        >
+          onClick={() => this.handleOneIncrement({ id: id, posNeg: -1 })}>
           <span className="incrementIcon minusOne">-</span>
         </div>
         <div className="increaseOne incrementButton button"
-        >
+          onClick={() => this.handleOneIncrement({ id: id, posNeg: 1 })}>
           <span className="incrementIcon plusOne">+</span>
         </div>
       </div>
@@ -40,9 +62,9 @@ class StoreInventory extends React.Component {
     if (this.props.inventory && this.props.inventory.length > 0) {
       let filteredInventory;
       if (!this.props.filterActive || this.props.storeFilter === 'all') {
-        filteredInventory = storeInventory.getComposedInventory();
+        filteredInventory = gameInventory.getComposedInventory();
       } else {
-        filteredInventory = storeInventory.getFilteredInventory(this.props.storeFilter);
+        filteredInventory = gameInventory.getFilteredInventory(this.props.storeFilter);
       }
       return (
         <div>{filteredInventory.map(item => {
