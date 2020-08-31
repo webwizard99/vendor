@@ -50,6 +50,7 @@ class StoreInventory extends React.Component {
     }
     if (payload.prototypeId !== null) {
       prototypeId = payload.prototypeId;
+      console.log(prototypeId);
     }
     const refBtnClasses = e.target.classList;
     if (refBtnClasses.contains("decreaseOne") ||
