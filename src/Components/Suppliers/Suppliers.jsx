@@ -15,20 +15,16 @@ class Suppliers extends React.Component {
 
     this.state = {
       suppliersInitialized: false,
+      overflowChecked: false,
       overflow: false
     }
 
     this.getSuppliers = this.getSuppliers.bind(this);
     this.getSuppliersControlLayer = this.getSuppliersControlLayer.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.checkForOverflow = this.checkForOverflow.bind(this);
     this.handleScrollLeft = this.handleScrollLeft.bind(this);
     this.handleScrollRight = this.handleScrollRight.bind(this);
-  }
-
-  componentDidMount() {
-    this.checkForOverflow();
   }
 
   handleScrollLeft() {
@@ -50,7 +46,9 @@ class Suppliers extends React.Component {
     console.dir(this.container);
     const hasOverflow = scrollWidth > clientWidth;
     console.log(`scrollwidth: ${scrollWidth}, clientWidth: ${clientWidth}`);
-    this.setState({ overflow: hasOverflow });
+    this.setState({ overflow: hasOverflow,
+      overflowChecked: true
+    });
   }
 
   componentDidUpdate() {
@@ -66,6 +64,9 @@ class Suppliers extends React.Component {
           suppliersInitialized: true
         })
       }
+    }
+    if (this.state.suppliersInitialized && !this.state.overflowChecked) {
+      this.checkForOverflow();
     }
   }
 
