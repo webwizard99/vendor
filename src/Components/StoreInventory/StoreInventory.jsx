@@ -53,6 +53,7 @@ class StoreInventory extends React.Component {
       console.log(prototypeId);
     }
     const refBtnClasses = e.target.classList;
+    console.log(`e: ${e}, id: ${id}`);
     if (refBtnClasses.contains("decreaseOne") ||
       refBtnClasses.contains("minusOne")) {
         this.valence = -1;
