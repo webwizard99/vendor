@@ -19,6 +19,24 @@ class Suppliers extends React.Component {
 
     this.getSuppliers = this.getSuppliers.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.handleScrollLeft = this.handleScrollLeft.bind(this);
+    this.handleScrollRight = this.handleScrollRight.bind(this);
+  }
+
+  handleScrollLeft() {
+    const suppliersContainer = document.querySelector('suppliersContainer');
+    if (suppliersContainer) {
+      console.log(suppliersContainer);
+    }
+
+  }
+
+  handleScrollRight() {
+    const suppliersContainer = document.querySelector('suppliersContainer');
+    if (suppliersContainer) {
+      console.log(suppliersContainer);
+    }
+
   }
 
   componentDidUpdate() {
@@ -59,7 +77,12 @@ class Suppliers extends React.Component {
   render() {
     return (
       <div className="Suppliers">
+        <div className="SuppliersControlLayer">
+          <div className="SupplierIcon">&lt</div>
+          <div className="SupplierIcon">&gt</div>
+        </div>
         {this.getSuppliers()}
+        
       </div>
     )
   }
