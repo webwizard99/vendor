@@ -28,8 +28,8 @@ class Store extends React.Component {
       markup: 50
     }
     this.timer = undefined;
-    this.delay = 100;
-    this.markupIntensity = 50;
+    this.delay = 200;
+    this.markupIntensity = 10;
     this.valence = 1;
     this.increaseMarkup = this.increaseMarkup.bind(this);
     this.repeat = this.repeat.bind(this);
@@ -86,7 +86,7 @@ class Store extends React.Component {
       this.handleIncrease();
     }
     this.timer = setTimeout(this.repeat, this.delay);
-    this.markupIntensity += 20;
+    this.markupIntensity += 5;
   }
 
   onMouseUp() {
@@ -104,7 +104,7 @@ class Store extends React.Component {
   handleIncrease() {
     const payload = {
       filter: this.props.storeFilter,
-      markup: this.state.markup
+      markup: (this.state.markup * this.valence)
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
@@ -114,7 +114,7 @@ class Store extends React.Component {
   handleDecrease() {
     const payload = {
       filter: this.props.storeFilter,
-      markup: -50
+      markup: (this.state.markup * this.valence)
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
