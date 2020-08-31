@@ -12,11 +12,28 @@ class StoreInventory extends React.Component {
     super(props);
     
     this.getInventoryItems = this.getInventoryItems.bind(this);
+    this.getIncrementOneButtons = this.getIncrementOneButtons.bind(this);
+    // this.incrementById = this.incrementById.bind(this);
   }
 
   componentDidMount() {
     const newInventory = JSON.parse(JSON.stringify(storeInventory.getStoreInventory()));
     this.props.setInventory(newInventory);
+  }
+
+  getIncrementOneButtons(id) {
+    return (
+      <div className="incrementButtons incrementOneSet">
+        <div className="decreaseOne incrementButton button"
+        >
+          <span className="incrementIcon minusOne">-</span>
+        </div>
+        <div className="increaseOne incrementButton button"
+        >
+          <span className="incrementIcon plusOne">+</span>
+        </div>
+      </div>
+    )
   }
 
   getInventoryItems() {
@@ -33,6 +50,7 @@ class StoreInventory extends React.Component {
           return (
             <div className="InventoryItem itemBackground" key={item.id}>
               <span className="InventoryItemName">{item.name}</span>
+              {this.getIncrementOneButtons(item.id)}
               <div className="ItemValueGroup">
                 <span className="CoinSymbol">&#x2689; </span>
                 <span className="InventoryItemValue">{composedPrice}</span>
