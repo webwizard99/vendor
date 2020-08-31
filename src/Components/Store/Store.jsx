@@ -65,9 +65,9 @@ class Store extends React.Component {
     });
   }
 
+  // Proccess mousedown event to start incremental markup
   onMouseDown(e) {
     const refBtn = e.target;
-    console.log(refBtn);
     if (refBtn.classList.contains("decreaseAll") ||
       refBtn.classList.contains("minus")) {
       this.valence = -1;
