@@ -65,6 +65,7 @@ class Store extends React.Component {
     });
   }
 
+  // magic to prompt update
   onMouseDown(e) {
     const refBtn = e.target;
     if (refBtn.classList.contains("decreaseAll")) {
