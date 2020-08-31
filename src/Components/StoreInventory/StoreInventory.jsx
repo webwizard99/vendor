@@ -2,7 +2,7 @@ import React from 'react';
 import './StoreInventory.css';
 
 import { connect } from 'react-redux';
-import { SET_STORE_INVENTORY } from '../../actions/types';
+import { SET_STORE_INVENTORY, SET_STORE_UPDATE_STATUS } from '../../actions/types';
 
 import gameInventory from '../../game_modules/storeInventory';
 // import storeItems from '../../game_modules/items';
@@ -42,6 +42,7 @@ class StoreInventory extends React.Component {
       markup: (this.state.markup * posNeg)
     }
     gameInventory.markupStoreItem(itemPayload);
+    this.props.toggleStoreUpdateStatus();
   }
 
   getIncrementOneButtons(id) {
@@ -110,7 +111,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setInventory: (newInventory) => dispatch({ type: SET_STORE_INVENTORY, inventory: newInventory })
+    setInventory: (newInventory) => dispatch({ type: SET_STORE_INVENTORY, inventory: newInventory }),
+    toggleStoreUpdateStatus: () => dispatch({ type: SET_STORE_UPDATE_STATUS })
   }
 }
 
