@@ -47,7 +47,7 @@ class Suppliers extends React.Component {
 
   checkForOverflow() {
     const { scrollWidth, clientWidth } = this.container;
-    console.log(this.container);
+    console.dir(this.container);
     const hasOverflow = scrollWidth > clientWidth;
     console.log(`scrollwidth: ${scrollWidth}, clientWidth: ${clientWidth}`);
     this.setState({ overflow: hasOverflow });
