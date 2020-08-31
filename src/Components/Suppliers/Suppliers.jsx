@@ -18,7 +18,6 @@ class Suppliers extends React.Component {
     }
 
     this.getSuppliers = this.getSuppliers.bind(this);
-    this.getSuppliersControlLayer = this.getSuppliersControlLayer.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
   }
 
