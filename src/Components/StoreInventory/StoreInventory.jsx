@@ -76,7 +76,7 @@ class StoreInventory extends React.Component {
     clearTimeout(this.timer);
     this.markupIntensity = 50;
     this.valence = 1;
-    this.markupOut;
+    this.markupOut();
   }
 
   markupOut() {
