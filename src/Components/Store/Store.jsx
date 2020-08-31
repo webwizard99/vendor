@@ -67,6 +67,7 @@ class Store extends React.Component {
 
   onMouseDown(e) {
     const refBtn = e.target;
+    console.log(refBtn);
     if (refBtn.classList.contains("decreaseAll")) {
       this.valence = -1;
     }
@@ -91,6 +92,7 @@ class Store extends React.Component {
   onMouseUp() {
     clearTimeout(this.timer);
     this.markupIntensity = 50;
+    this.valence = 1;
     this.markupOut();
   }
 
@@ -103,7 +105,7 @@ class Store extends React.Component {
   handleIncrease() {
     const payload = {
       filter: this.props.storeFilter,
-      markup: (this.state.markup * this.valence)
+      markup: this.state.markup
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
@@ -113,7 +115,7 @@ class Store extends React.Component {
   handleDecrease() {
     const payload = {
       filter: this.props.storeFilter,
-      markup: (this.state.markup * this.valence)
+      markup: (this.state.markup * -1)
     }
     gameInventory.markupFilteredStoreItems(payload);
     gameInventory.updateStoreInventory();
