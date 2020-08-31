@@ -15,14 +15,15 @@ class StoreInventory extends React.Component {
       markup: 50,
       id: null
     }
-    // this.timer = undefined;
-    // this.delay = 200;
-    // this.markupIntensity = 10;
+    this.timer = undefined;
+    this.delay = 200;
+    this.markupIntensity = 10;
     this.valence = 1;
-    // this.increaseMarkup = this.increaseMarkup.bind(this);
-    // this.repeat = this.repeat.bind(this);
-    // this.onMouseDown = this.onMouseDown.bind(this);
-    // this.onMouseUp = this.onMouseUp.bind(this);
+    this.increaseMarkup = this.increaseMarkup.bind(this);
+    this.repeat = this.repeat.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.markupOut = this.markupOut.bind(this);
     
     this.handleOneIncrement = this.handleOneIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
@@ -34,9 +35,60 @@ class StoreInventory extends React.Component {
     this.props.setInventory(newInventory);
   }
 
-  handleOneIncrement(payload) {
-    const { id, posNeg } = payload;
-    console.log(`id: ${id}, posNeg: ${posNeg}`);
+  increaseMarkup() {
+    this.setState({
+      markup: this.state.markup + this.markupIntensity
+    });
+  }
+
+  onMouseDown(payload) {
+    const { e } = payload;
+    let id = null, prototypeId = null;
+    if (payload.id !== null) {
+      id = payload.id;
+      this.setState({ id: id });
+    }
+    if (payload.prototypeId !== null) {
+      prototypeId = payload.prototypeId;
+    }
+    const refBtnClasses = e.target.classList;
+    if (refBtnClasses.contains("decreaseOne") ||
+      refBtnClasses.contains("minusOne")) {
+        this.valence = -1;
+    }
+    if (refBtnClasses.contains("increaseOne") ||
+      refBtnClasses.contains("plusOne")) {
+        this.valence = 1;
+    }
+    this.repeat();
+  }
+
+  repeat() {
+    this.increaseMarkup();
+    if (this.state.id !== null) {
+      this.handleOneIncrement();
+    }
+    this.timer = setTimeout(this.repeat, this.delay);
+    this.markupIntensity += 5;
+  }
+
+  onMouseUp() {
+    clearTimeout(this.timer);
+    this.markupIntensity = 50;
+    this.valence = 1;
+    this.markupOut;
+  }
+
+  markupOut() {
+    this.setState({
+      markup: 50,
+      id: null
+    });
+  }
+
+  handleOneIncrement() {
+    const id = this.state.id;
+    const posNeg = this.valence;
     const itemPayload = {
       id: id,
       markup: (this.state.markup * posNeg)
@@ -49,11 +101,13 @@ class StoreInventory extends React.Component {
     return (
       <div className="incrementButtons incrementOneSet">
         <div className="decreaseOne incrementButton button"
-          onClick={() => this.handleOneIncrement({ id: id, posNeg: -1 })}>
+          onMouseDown={(e) => this.handleMouseDown({ id: id, e: e })}
+          onMouseUp={this.onMouseUp}>
           <span className="incrementIcon minusOne">-</span>
         </div>
         <div className="increaseOne incrementButton button"
-          onClick={() => this.handleOneIncrement({ id: id, posNeg: 1 })}>
+          onMouseDown={(e) => this.handleOneIncrement({ id: id, e: e })}
+          onMouseUp={this.onMouseUp}>
           <span className="incrementIcon plusOne">+</span>
         </div>
       </div>
