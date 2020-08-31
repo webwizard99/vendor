@@ -31,7 +31,7 @@ class StoreInventory extends React.Component {
   }
 
   componentDidMount() {
-    const newInventory = JSON.parse(JSON.stringify(storeInventory.getStoreInventory()));
+    const newInventory = JSON.parse(JSON.stringify(gameInventory.getStoreInventory()));
     this.props.setInventory(newInventory);
   }
 
