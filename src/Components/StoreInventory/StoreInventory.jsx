@@ -27,7 +27,6 @@ class StoreInventory extends React.Component {
     this.handleOneIncrement = this.handleOneIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
     this.getIncrementOneButtons = this.getIncrementOneButtons.bind(this);
-    this.incrementById = this.incrementById.bind(this);
   }
 
   componentDidMount() {
