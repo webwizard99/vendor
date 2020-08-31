@@ -14,41 +14,12 @@ class Suppliers extends React.Component {
     super(props);
 
     this.state = {
-      suppliersInitialized: false,
-      overflowChecked: false,
-      overflow: false
+      suppliersInitialized: false
     }
 
     this.getSuppliers = this.getSuppliers.bind(this);
     this.getSuppliersControlLayer = this.getSuppliersControlLayer.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.checkForOverflow = this.checkForOverflow.bind(this);
-    this.handleScrollLeft = this.handleScrollLeft.bind(this);
-    this.handleScrollRight = this.handleScrollRight.bind(this);
-  }
-
-  handleScrollLeft() {
-    const suppliersContainer = document.querySelector('suppliersContainer');
-    if (suppliersContainer) {
-      console.log(suppliersContainer);
-    }
-  }
-
-  handleScrollRight() {
-    const suppliersContainer = document.querySelector('suppliersContainer');
-    if (suppliersContainer) {
-      console.log(suppliersContainer);
-    }
-  }
-
-  checkForOverflow() {
-    const { scrollWidth, clientWidth } = this.container;
-    console.dir(this.container);
-    const hasOverflow = scrollWidth > clientWidth;
-    console.log(`scrollwidth: ${scrollWidth}, clientWidth: ${clientWidth}`);
-    this.setState({ overflow: hasOverflow,
-      overflowChecked: true
-    });
   }
 
   componentDidUpdate() {
@@ -64,9 +35,6 @@ class Suppliers extends React.Component {
           suppliersInitialized: true
         })
       }
-    }
-    if (this.state.suppliersInitialized && !this.state.overflowChecked) {
-      this.checkForOverflow();
     }
   }
 
@@ -90,19 +58,6 @@ class Suppliers extends React.Component {
       return 'no suppliers to render';
     }
     
-  }
-
-  getSuppliersControlLayer() {
-    if (this.state.overflow) {
-      return (
-        <div className="SuppliersControlLayer">
-        <div className="SupplierIcon">&lt</div>
-        <div className="SupplierIcon">&gt</div>
-      </div>
-      )
-    } else {
-      return ''
-    }
   }
   
   render() {
