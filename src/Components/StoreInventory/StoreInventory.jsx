@@ -12,8 +12,7 @@ class StoreInventory extends React.Component {
     super(props);
 
     this.state = {
-      markup: 50,
-      id: null
+      markup: 50
     }
     this.timer = undefined;
     this.delay = 200;
@@ -46,7 +45,6 @@ class StoreInventory extends React.Component {
     let id = null, prototypeId = null;
     if (payload.id !== null) {
       id = payload.id;
-      this.setState({ id: id });
     }
     if (payload.prototypeId !== null) {
       prototypeId = payload.prototypeId;
@@ -62,15 +60,24 @@ class StoreInventory extends React.Component {
       refBtnClasses.contains("plusOne")) {
         this.valence = 1;
     }
-    this.repeat();
+    const repeatPayload = {
+      id: id,
+      prototypeId: prototypeId
+    }
+    this.repeat(repeatPayload);
   }
 
-  repeat() {
-    this.increaseMarkup();
-    if (this.state.id !== null) {
-      this.handleOneIncrement();
+  repeat(payload) {
+    let { id, prototypeId } = payload;
+    const repeatPayload = {
+      id: id,
+      prototypeId: prototypeId
     }
-    this.timer = setTimeout(this.repeat, this.delay);
+    this.increaseMarkup();
+    if (id !== null) {
+      this.handleOneIncrement(id);
+    }
+    this.timer = setTimeout(() => this.repeat(repeatPayload), this.delay);
     this.markupIntensity += 5;
   }
 
@@ -83,13 +90,11 @@ class StoreInventory extends React.Component {
 
   markupOut() {
     this.setState({
-      markup: 50,
-      id: null
+      markup: 50
     });
   }
 
-  handleOneIncrement() {
-    const id = this.state.id;
+  handleOneIncrement(id) {
     const posNeg = this.valence;
     const itemPayload = {
       id: id,
