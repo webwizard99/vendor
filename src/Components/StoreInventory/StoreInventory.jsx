@@ -102,12 +102,12 @@ class StoreInventory extends React.Component {
     return (
       <div className="incrementButtons incrementOneSet">
         <div className="decreaseOne incrementButton button"
-          onMouseDown={(e) => this.handleMouseDown({ id: id, e: e })}
+          onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
           onMouseUp={this.onMouseUp}>
           <span className="incrementIcon minusOne">-</span>
         </div>
         <div className="increaseOne incrementButton button"
-          onMouseDown={(e) => this.handleOneIncrement({ id: id, e: e })}
+          onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
           onMouseUp={this.onMouseUp}>
           <span className="incrementIcon plusOne">+</span>
         </div>
