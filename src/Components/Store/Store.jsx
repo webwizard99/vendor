@@ -66,12 +66,16 @@ class Store extends React.Component {
     this.props.toggleStoreUpdateStatus();
   }
 
+  handlePress(e) {
+    console.dir(e);
+  }
+
   getIncrementButtons() {
     if (!this.props.filterActive) return '';
     return (
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button"
-          onClick={this.handleDecrease}>
+          onPointerDown={this.handlePress}>
           <span className="incrementIcon">-</span>
         </div>
         <div className="increaseAll incrementButton button"
