@@ -28,7 +28,6 @@ class Suppliers extends React.Component {
     if (suppliersContainer) {
       console.log(suppliersContainer);
     }
-
   }
 
   handleScrollRight() {
@@ -36,7 +35,6 @@ class Suppliers extends React.Component {
     if (suppliersContainer) {
       console.log(suppliersContainer);
     }
-
   }
 
   componentDidUpdate() {

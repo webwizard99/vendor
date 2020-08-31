@@ -39,6 +39,6 @@
   height: 80%;
 }
 
-.SuppliersControlLayer:hover > div {
+.SuppliersControlLayer:hover {
   visibility: visible;
 }
