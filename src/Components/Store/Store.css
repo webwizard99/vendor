@@ -39,8 +39,10 @@
 }
 
 .StoreGold {
-  width: 4rem;
-  text-align: right;
+  width: 5rem;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem;
 }
 
 .FilterGroup {

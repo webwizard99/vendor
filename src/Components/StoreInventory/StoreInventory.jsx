@@ -52,8 +52,7 @@ class StoreInventory extends React.Component {
               <span className="InventoryItemName">{item.name}</span>
               {this.getIncrementOneButtons(item.id)}
               <div className="ItemValueGroup">
-                <span className="CoinSymbol">&#x2689; </span>
-                <span className="InventoryItemValue">{composedPrice}</span>
+                <span className="InventoryItemValue"><span className="CoinSymbol">&#x2689; </span>{composedPrice}</span>
               </div>
               
             </div>

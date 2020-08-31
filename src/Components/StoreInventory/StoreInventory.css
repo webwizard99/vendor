@@ -36,12 +36,17 @@
 }
 
 .InventoryItemName {
-  width: 80%;
+  width: 12rem;
 }
+
 .InventoryValueGroup {
   margin-left: 2rem;
+  width: 5rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .incrementOneSet {
-  margin-left: 2rem;
+  margin-left: auto;
 }
