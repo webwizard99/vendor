@@ -77,7 +77,10 @@ class Suppliers extends React.Component {
       });
 
       return (
-        <div className="suppliersContainer">
+        <div className="suppliersContainer"
+          ref={node => {
+            this.container = node;
+          }}>
           {suppliersDisplay}
           <div className="spacer"></div>
         </div>
@@ -103,10 +106,7 @@ class Suppliers extends React.Component {
   
   render() {
     return (
-      <div className="Suppliers"
-        ref={node => {
-          this.container = node;
-        }}>
+      <div className="Suppliers">
         {this.getSuppliers()}
         {this.getSuppliersControlLayer()}
       </div>
