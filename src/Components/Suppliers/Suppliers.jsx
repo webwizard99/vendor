@@ -63,7 +63,6 @@ class Suppliers extends React.Component {
     return (
       <div className="Suppliers">
         {this.getSuppliers()}
-        {this.getSuppliersControlLayer()}
       </div>
     )
   }
