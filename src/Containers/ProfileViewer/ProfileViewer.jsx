@@ -5,6 +5,9 @@ import './ProfileViewer.css';
 import { connect } from 'react-redux';
 import { SET_PROFILE_ACTIVE } from '../../actions/types';
 
+// utitlity imports
+import userPutRequests from '../../Utilities/userPutRequests';
+
 class ProfileViewer extends React.Component {
   constructor(props) {
     super(props);
@@ -19,13 +22,25 @@ class ProfileViewer extends React.Component {
     }
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
     console.log('handleSubmit');
+    userPutRequests('user', data);
     this.props.setProfileActive(false);
   }
   
   render() {
-    console.log(this.props.auth);
+    let newNickname = '';
+    let newImportNickname = false;
+    let newId = null;
+
+    if (this.props.auth) {
+      newNickname = this.props.auth.nickname;
+      newImportNickname = this.props.auth.import_nickname;
+      newId = this.props.auth.id;
+    }
+
     return (
       <div className="ProfileViewer">
         <div className="ProfileForm">
@@ -37,12 +52,13 @@ class ProfileViewer extends React.Component {
               <div className="input-group">
                 <label className="item-label" htmlFor="nickname">Nickname</label>
                 <input type="text" name="nickname" id="nickname" className="input-text" placeholder="nickname"
-                  maxLength="40" defaultValue={''}></input>
+                  maxLength="40" defaultValue={newNickname}></input>
               </div>
               <div className="input-group">
-                <input type="checkbox" name="import_nickname" id="import_nickname" class="input-checkbox"></input>
+                <input type="checkbox" name="import_nickname" id="import_nickname" class="input-checkbox" defaultChecked={newImportNickname}></input>
                 <label className="item-label" htmlFor="import_nickname">Import nickname as store name by default</label>
               </div>
+              <input type="hidden" name="id" value={newId} />
               <input type="submit" value="Update Profile" className="button profile-submit"></input>
           </form>
         </div>
