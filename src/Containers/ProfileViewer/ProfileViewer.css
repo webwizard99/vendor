@@ -3,4 +3,37 @@
   width: 100%;
   position: relative;
   bottom: 94vh;
+  background: rgb(240, 245, 250);
+  display: flex;
+}
+
+.ProfileForm {
+  width: 40%;
+  height: 12rem;
+}
+
+.input-group {
+  padding: 1rem;
+  margin: 1rem;
+  width: 80%;
+  height: 2rem;
+}
+
+.input-group input, .input-group select {
+  color: black;
+}
+
+.item-label {
+  width: 3rem;
+  margin-right: 1rem;
+}
+
+.CloseButton {
+  height: 4rem;
+  width: 4rem;
+  margin: 2rem;
+  font-size: 3rem;
+  line-height: 4rem;
+  text-align: center;
+  font-weight: 800;
 }
