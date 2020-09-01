@@ -139,7 +139,6 @@ class StoreInventory extends React.Component {
   }
 
   getIncrementAllButtons(prototypeId) {
-    console.log(prototypeId);
     return (
       <div className="incrementButtons incrementAllSet">
         <div className="decreaseProto incrementButtonWide button"
