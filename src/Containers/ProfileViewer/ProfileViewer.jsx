@@ -4,6 +4,7 @@ import './ProfileViewer.css';
 // redux imports
 import { connect } from 'react-redux';
 import { SET_PROFILE_ACTIVE } from '../../actions/types';
+import { fetchUser } from '../../actions'
 
 // utitlity imports
 import userPutRequests from '../../Utilities/userPutRequests';
@@ -14,6 +15,7 @@ class ProfileViewer extends React.Component {
 
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   handleClose() {
@@ -22,12 +24,20 @@ class ProfileViewer extends React.Component {
     }
   }
 
+  *updateUser(data) {
+    yield userPutRequests.makeRequest('user', data);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
-    console.log('handleSubmit');
-    userPutRequests.makeRequest('user', data);
-    this.props.setProfileActive(false);
+    let updateUser = this.updateUser(data);
+    updateUser.next().value.then(() => {
+      this.props.fetchUser();
+      this.props.setProfileActive(false);
+    })
+    
+    
   }
   
   render() {
@@ -80,7 +90,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setProfileActive: (value) => dispatch({ type: SET_PROFILE_ACTIVE, value: value })
+    setProfileActive: (value) => dispatch({ type: SET_PROFILE_ACTIVE, value: value }),
+    fetchUser: () => dispatch(fetchUser())
   }
 }
 
