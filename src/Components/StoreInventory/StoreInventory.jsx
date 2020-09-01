@@ -126,12 +126,16 @@ class StoreInventory extends React.Component {
       <div className="incrementButtons incrementOneSet">
         <div className="decreaseOne incrementButton button"
           onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
-          onMouseUp={this.onMouseUp}>
+          onMouseUp={this.onMouseUp}
+          onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
+          onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon minusOne">-</span>
         </div>
         <div className="increaseOne incrementButton button"
           onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
-          onMouseUp={this.onMouseUp}>
+          onMouseUp={this.onMouseUp}
+          onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
+          onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon plusOne">+</span>
         </div>
       </div>
@@ -143,12 +147,16 @@ class StoreInventory extends React.Component {
       <div className="incrementButtons incrementAllSet">
         <div className="decreaseProto incrementButtonWide button"
           onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onMouseUp={this.onMouseUp}>
+          onMouseUp={this.onMouseUp}
+          onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+          onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon minusProto">--</span>
         </div>
         <div className="increaseProto incrementButtonWide button"
           onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onMouseUp={this.onMouseUp}>
+          onMouseUp={this.onMouseUp}
+          onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+          onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon plusProto">++</span>
         </div>
       </div>

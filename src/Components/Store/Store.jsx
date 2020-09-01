@@ -129,11 +129,13 @@ class Store extends React.Component {
     return (
       <div className="incrementButtons">
         <div className="decreaseAll incrementButton button"
-          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
+          onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon minus">-</span>
         </div>
         <div className="increaseAll incrementButton button"
-          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
+          onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
           <span className="incrementIcon plus">+</span>
         </div>
       </div>

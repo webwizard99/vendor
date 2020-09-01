@@ -19,3 +19,11 @@
   height: 100%;
   min-width: 1px;
 }
+
+
+/* tablet styles */
+@media only screen and ( max-width: 1024px) {
+  .suppliersContainer {
+    height: 100%;
+  }
+}
