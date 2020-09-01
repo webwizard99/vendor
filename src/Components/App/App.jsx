@@ -21,6 +21,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log(window.orientation);
+    console.log(window);
     this.props.fetchUser();
   }
 
