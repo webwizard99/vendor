@@ -28,7 +28,7 @@ class MenuBar extends React.Component {
       case false:
         return '';
       default:
-        return <li key="profile" onClick={this.handleProfileActive}><a href="#">Profile</a></li>
+        return <li key="profile" class="profileLink" onClick={this.handleProfileActive}>Profile</li>
     }
   }
 

@@ -29,8 +29,12 @@
   justify-content: right;
 }
 
-.LoginContainer a {
+.LoginContainer a, .profileLink {
   color: white;
   margin-left: 1.5rem;
   text-decoration: none;
+}
+
+.profileLink {
+  cursor: pointer;
 }
