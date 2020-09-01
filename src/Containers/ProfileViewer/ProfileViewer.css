@@ -30,6 +30,7 @@
 }
 
 .CloseButton {
+  cursor: pointer;
   height: 6rem;
   width: 6rem;
   margin: 2rem;
