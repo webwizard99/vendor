@@ -5,6 +5,7 @@ import storeReducer from './storeReducer';
 import authReducer from './authReducer';
 import suppliersReducer from './suppliersReducer';
 import suppliesReducer from './suppliesReducer';
+import profileReducer from './profileReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   gameState: gameStateReducer,
   storeState: storeReducer,
   suppliers: suppliersReducer,
-  supplies: suppliesReducer
+  supplies: suppliesReducer,
+  profile: profileReducer
 });

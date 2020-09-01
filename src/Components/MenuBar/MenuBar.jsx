@@ -1,13 +1,35 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './MenuBar.css';
+
+// redux imports
+import { connect } from 'react-redux';
+import { SET_PROFILE_ACTIVE } from '../../actions/types';
 
 class MenuBar extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleProfileActive = this.handleProfileActive.bind(this);
+    this.renderProfileLink = this.renderProfileLink.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.renderEditorLink = this.renderEditorLink.bind(this);
+  }
+
+  handleProfileActive() {
+    if (!this.props.profileActive) {
+      this.props.setProfileActive(true);
+    }
+  }
+
+  renderProfileLink() {
+    switch(this.props.auth) {
+      case null:
+        return '';
+      case false:
+        return '';
+      default:
+        return <li key="profile" onClick={this.handleProfileActive}><a href="#">Profile</a></li>
+    }
   }
 
   renderLogin() {
@@ -50,6 +72,7 @@ class MenuBar extends React.Component {
       <div className="MenuBar">
         <span className="MenuTitle"><a href="/">VENDOR</a></span>
         <ul className="LoginContainer">
+          {this.renderProfileLink()}
           {this.renderEditorLink()}
           {this.renderLogin()}
         </ul>
@@ -60,8 +83,15 @@ class MenuBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    profileActive: state.profile.active
   }
 }
 
-export default connect(mapStateToProps)(MenuBar);
+const mapDispatchToProps = dispatch => {
+  return {
+    setProfileActive: (value) => dispatch({ type: SET_PROFILE_ACTIVE, value: value })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

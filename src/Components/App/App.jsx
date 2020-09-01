@@ -4,6 +4,7 @@ import './App.css';
 
 import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
+import ProfileViewer from '../../Containers/ProfileViewer/ProfileViewer';
 
 import MenuBar from '../../Components/MenuBar/MenuBar';
 
@@ -15,6 +16,7 @@ class App extends React.Component {
     super(props);
 
     this.getMainView = this.getMainView.bind(this);
+    this.getProfileViewer = this.getProfileViewer.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
@@ -35,11 +37,21 @@ class App extends React.Component {
     }
   }
 
+  getProfileViewer() {
+    const profileStatus = this.props.profileActive;
+    if (profileStatus) {
+      return (
+        <ProfileViewer />
+      )
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <MenuBar />
         {this.getMainView()}
+        {this.getProfileViewer()}
       </div>
     )
   }
@@ -47,7 +59,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    started: state.gameState.started
+    started: state.gameState.started,
+    profileActive: state.profile.active
   }
 }
 
