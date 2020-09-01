@@ -64,7 +64,7 @@ class ProfileViewer extends React.Component {
                   maxLength="40" defaultValue={newNickname}></input>
               </div>
               <div className="input-group">
-                <input type="checkbox" name="import_nickname" id="import_nickname" class="input-checkbox" defaultChecked={newImportNickname}></input>
+                <input type="checkbox" name="import_nickname" id="import_nickname" class="input-checkbox" defaultChecked={newImportNickname} value={true}></input>
                 <label className="item-label" htmlFor="import_nickname">Import nickname as store name by default</label>
               </div>
               <input type="hidden" name="id" value={newId} />
