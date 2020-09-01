@@ -119,6 +119,7 @@ class StoreInventory extends React.Component {
       markup: (this.state.markup * posNeg)
     }
     gameInventory.markupPrototypes(itemsPayload);
+    this.props.toggleStoreUpdateStatus();
   }
 
   getIncrementOneButtons(id) {

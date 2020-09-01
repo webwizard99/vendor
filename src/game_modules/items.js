@@ -42,13 +42,13 @@ const items = (function(){
   
   return {
     createItem: function(payload) {
-      let { type, name, value, itemPayload } = payload;
+      let { type, name, value, itemPayload, prototypeId } = payload;
       if (!itemTypes[type]) {
         console.log('invalid item type passed to items.createItem()');
         return;
       }
       
-      const newPayload = { type: type , name: name , value: value }
+      const newPayload = { type: type , name: name , value: value, prototypeId: prototypeId }
       const newItem = new Item(newPayload);
       
       switch (newItem.type) {

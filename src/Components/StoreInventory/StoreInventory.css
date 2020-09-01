@@ -47,6 +47,10 @@
   justify-content: flex-end;
 }
 
+.incrementAllSet {
+  margin-left: .5rem;
+}
+
 .incrementOneSet {
   margin-left: auto;
 }
