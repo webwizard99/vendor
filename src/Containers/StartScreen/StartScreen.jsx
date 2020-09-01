@@ -45,6 +45,7 @@ class StartScreen extends React.Component {
 
   render() {
     if (this.props.auth && !this.props.edited) {
+      this.setState({ edited: true });
       let defaultName = '';
       let import_nickname = '';
       import_nickname = this.props.auth.import_nickname;
@@ -52,7 +53,7 @@ class StartScreen extends React.Component {
         defaultName = this.props.auth.nickname;
         this.props.setStoreName(defaultName);
       }
-      this.setState({ edited: true });
+      
     }
     return (
       <div className="StartScreen">
