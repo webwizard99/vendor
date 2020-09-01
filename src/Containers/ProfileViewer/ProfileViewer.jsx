@@ -26,7 +26,7 @@ class ProfileViewer extends React.Component {
     e.preventDefault();
     const data = new FormData(e.target);
     console.log('handleSubmit');
-    userPutRequests('user', data);
+    userPutRequests.makeRequest('user', data);
     this.props.setProfileActive(false);
   }
   
