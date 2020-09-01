@@ -7,6 +7,7 @@ const items = (function(){
 
   let allItems = [];
   let itemTypeIndex = {};
+  let itemPrototypeIndex = {};
   let lastIndex = 0;
   
   const Item = function(payload) {
@@ -17,6 +18,7 @@ const items = (function(){
     this.prototypeId = prototypeId;
     this.id = lastIndex;
     itemTypeIndex[lastIndex] = type;
+    itemPrototypeIndex[lastIndex] = prototypeId;
     lastIndex++;
   }
 
@@ -112,6 +114,14 @@ const items = (function(){
     getItemType(id) {
       if (itemTypeIndex[id] !== null) {
         return itemTypeIndex[id];
+      } else {
+        return false;
+      }
+    },
+
+    getItemPrototypeId(id) {
+      if (itemPrototypeIndex[id] !== null) {
+        return itemPrototypeIndex[id];
       } else {
         return false;
       }

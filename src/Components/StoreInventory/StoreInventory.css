@@ -50,3 +50,11 @@
 .incrementOneSet {
   margin-left: auto;
 }
+
+.incrementButtonWide {
+  width: 1.3rem;
+  border-radius: .5rem;
+  line-height: 1rem;
+  height: 1rem;
+  text-align: center;
+}

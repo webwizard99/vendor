@@ -62,6 +62,20 @@ const storeInventory = (function(){
     targetItem.markup += newMarkup;
   }
 
+  const markupByPrototype = function(prototypeId, newMarkup) {
+    inventory.forEach(inventoryItem => {
+      if (gameItems.getItemPrototypeId(inventoryItem.itemId) === prototypeId) {
+        inventoryItem.markup += newMarkup;
+      }
+      if (inventoryItem.markup > maxMarkup) {
+        inventoryItem.markup = maxMarkup;
+      }
+      if (inventoryItem.markup < 0) {
+        inventoryItem.markup = 0;
+      }
+    })
+  }
+
   return {
     addItem: function(id) {
       if (id === null || id === undefined) {
@@ -106,6 +120,11 @@ const storeInventory = (function(){
     markupStoreItem: function(payload) {
       let { id, markup:markupAmount} = payload;
       markupById(id, markupAmount);
+    },
+
+    markupPrototypes: function(payload) {
+      let { prototypeId, markup: markupAmount } = payload;
+      markupByPrototype(prototypeId, markupAmount);
     }
   }
 }());

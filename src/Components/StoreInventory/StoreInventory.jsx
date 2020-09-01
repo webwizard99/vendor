@@ -25,6 +25,7 @@ class StoreInventory extends React.Component {
     this.markupOut = this.markupOut.bind(this);
     
     this.handleOneIncrement = this.handleOneIncrement.bind(this);
+    this.handlePrototypeIncrement = this.handlePrototypeIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
     this.getIncrementOneButtons = this.getIncrementOneButtons.bind(this);
     this.getIncrementAllButtons = this.getIncrementAllButtons.bind(this);
@@ -53,11 +54,15 @@ class StoreInventory extends React.Component {
     }
     const refBtnClasses = e.target.classList;
     if (refBtnClasses.contains("decreaseOne") ||
-      refBtnClasses.contains("minusOne")) {
+      refBtnClasses.contains("minusOne") ||
+      refBtnClasses.contains("decreaseProto") ||
+      refBtnClasses.contains("minusProto")) {
         this.valence = -1;
     }
     if (refBtnClasses.contains("increaseOne") ||
-      refBtnClasses.contains("plusOne")) {
+      refBtnClasses.contains("plusOne") ||
+      refBtnClasses.contains("increaseProto") ||
+      refBtnClasses.contains("plusProto")) {
         this.valence = 1;
     }
     const repeatPayload = {
@@ -76,6 +81,9 @@ class StoreInventory extends React.Component {
     this.increaseMarkup();
     if (id !== null) {
       this.handleOneIncrement(id);
+    }
+    if (prototypeId !== null) {
+      this.handlePrototypeIncrement(prototypeId);
     }
     this.timer = setTimeout(() => this.repeat(repeatPayload), this.delay);
     this.markupIntensity += 5;
@@ -104,6 +112,15 @@ class StoreInventory extends React.Component {
     this.props.toggleStoreUpdateStatus();
   }
 
+  handlePrototypeIncrement(prototypeId) {
+    const posNeg = this.valence;
+    const itemsPayload = {
+      prototypeId: prototypeId,
+      markup: (this.state.markup * posNeg)
+    }
+    gameInventory.markupPrototypes(itemsPayload);
+  }
+
   getIncrementOneButtons(id) {
     return (
       <div className="incrementButtons incrementOneSet">
@@ -125,10 +142,14 @@ class StoreInventory extends React.Component {
     console.log(prototypeId);
     return (
       <div className="incrementButtons incrementAllSet">
-        <div className="decreaseProto incrementButton button">
+        <div className="decreaseProto incrementButtonWide button"
+          onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+          onMouseUp={this.onMouseUp}>
           <span className="incrementIcon minusProto">--</span>
         </div>
-        <div className="increaseProto incremementButton button">
+        <div className="increaseProto incrementButtonWide button"
+          onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+          onMouseUp={this.onMouseUp}>
           <span className="incrementIcon plusProto">++</span>
         </div>
       </div>
