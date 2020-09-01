@@ -27,6 +27,7 @@ class StoreInventory extends React.Component {
     this.handleOneIncrement = this.handleOneIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
     this.getIncrementOneButtons = this.getIncrementOneButtons.bind(this);
+    this.getIncrementAllButtons = this.getIncrementAllButtons.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +52,6 @@ class StoreInventory extends React.Component {
       console.log(prototypeId);
     }
     const refBtnClasses = e.target.classList;
-    console.log(`e: ${e}, id: ${id}`);
     if (refBtnClasses.contains("decreaseOne") ||
       refBtnClasses.contains("minusOne")) {
         this.valence = -1;
@@ -121,6 +121,20 @@ class StoreInventory extends React.Component {
     )
   }
 
+  getIncrementAllButtons(prototypeId) {
+    console.log(prototypeId);
+    return (
+      <div className="incrementButtons incrementAllSet">
+        <div className="decreaseProto incrementButton button">
+          <span className="incrementIcon minusProto">--</span>
+        </div>
+        <div className="increaseProto incremementButton button">
+          <span className="incrementIcon plusProto">++</span>
+        </div>
+      </div>
+    )
+  }
+
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
       let filteredInventory;
@@ -136,6 +150,7 @@ class StoreInventory extends React.Component {
             <div className="InventoryItem itemBackground" key={item.id}>
               <span className="InventoryItemName">{item.name}</span>
               {this.getIncrementOneButtons(item.id)}
+              {this.getIncrementAllButtons(item.prototypeId)}
               <div className="ItemValueGroup">
                 <span className="InventoryItemValue"><span className="CoinSymbol">&#x2689; </span>{composedPrice}</span>
               </div>
