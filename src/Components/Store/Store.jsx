@@ -93,7 +93,7 @@ class Store extends React.Component {
 
   onMouseUp() {
     clearTimeout(this.timer);
-    this.markupIntensity = 50;
+    this.markupIntensity = 10;
     this.valence = 1;
     this.markupOut();
   }

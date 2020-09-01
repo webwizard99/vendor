@@ -80,10 +80,10 @@ class StoreInventory extends React.Component {
       prototypeId: prototypeId
     }
     this.increaseMarkup();
-    if (id !== null) {
+    if (id !== undefined) {
       this.handleOneIncrement(id);
     }
-    if (prototypeId !== null) {
+    if (prototypeId !== undefined) {
       this.handlePrototypeIncrement(prototypeId);
     }
     this.timer = setTimeout(() => this.repeat(repeatPayload), this.delay);
@@ -92,7 +92,7 @@ class StoreInventory extends React.Component {
 
   onMouseUp() {
     clearTimeout(this.timer);
-    this.markupIntensity = 50;
+    this.markupIntensity = 10;
     this.valence = 1;
     this.markupOut();
   }
