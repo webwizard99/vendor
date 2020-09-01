@@ -35,15 +35,14 @@ class ProfileViewer extends React.Component {
     updateUser.next().value.then(() => {
       this.props.fetchUser();
       this.props.setProfileActive(false);
-    })
-    
-    
+    });
   }
   
   render() {
     let newNickname = '';
     let newImportNickname = false;
     let newId = null;
+    console.log(this.props.auth);
 
     if (this.props.auth) {
       newNickname = this.props.auth.nickname;
