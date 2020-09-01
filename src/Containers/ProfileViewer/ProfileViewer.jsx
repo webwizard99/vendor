@@ -25,6 +25,7 @@ class ProfileViewer extends React.Component {
   }
   
   render() {
+    console.log(this.props.auth);
     return (
       <div className="ProfileViewer">
         <div className="ProfileForm">
@@ -56,7 +57,8 @@ class ProfileViewer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    profileActive: state.profile.active
+    profileActive: state.profile.active,
+    auth: state.auth
   }
 }
 
