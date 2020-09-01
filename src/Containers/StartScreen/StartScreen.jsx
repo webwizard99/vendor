@@ -33,6 +33,14 @@ class StartScreen extends React.Component {
   }
 
   render() {
+    let defaultName = '';
+    let import_nickname = '';
+    if (this.props.auth) {
+      import_nickname = this.props.auth.import_nickname;
+      if (import_nickname) {
+        defaultName = this.props.auth.nickname;
+      }
+    }
     return (
       <div className="StartScreen">
         <Title />
@@ -40,6 +48,7 @@ class StartScreen extends React.Component {
           <div className="nameInputGroup">
             <label htmlFor="name" className="NameLabel">Name: </label>
             <input id="name" 
+              defaultValue={defaultName}
               value={this.props.name}
               type="text"
               onChange={(val) => this.props.setStoreName(val.target.value)}
@@ -60,7 +69,8 @@ class StartScreen extends React.Component {
 const mapStateToProps = state => {
   return {
     started: state.gameState.started,
-    name: state.storeState.name
+    name: state.storeState.name,
+    auth: state.auth
   }
 }
 
