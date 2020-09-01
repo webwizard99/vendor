@@ -48,6 +48,7 @@ class StoreInventory extends React.Component {
     if (payload.id !== null) {
       id = payload.id;
     }
+    console.log(id);
     if (payload.prototypeId !== null) {
       prototypeId = payload.prototypeId;
       console.log(prototypeId);
@@ -113,6 +114,7 @@ class StoreInventory extends React.Component {
   }
 
   handlePrototypeIncrement(prototypeId) {
+    console.log('handlePrototypeIncrement');
     const posNeg = this.valence;
     const itemsPayload = {
       prototypeId: prototypeId,
