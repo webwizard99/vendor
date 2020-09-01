@@ -13,21 +13,16 @@ class StartScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      edited: false
+    }
+
     this.handleStart = this.handleStart.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
-    let defaultName = '';
-    let import_nickname = '';
-    if (this.props.auth) {
-      import_nickname = this.props.auth.import_nickname;
-      if (import_nickname) {
-        defaultName = this.props.auth.nickname;
-        this.props.setStoreName(defaultName);
-      }
-    }
+    
   }
   
   handleStart() {
@@ -43,9 +38,22 @@ class StartScreen extends React.Component {
     if (e.charCode === 13) {
       this.handleStart();
     }
+    if (!this.props.edited) {
+      this.setState({ edited: true });
+    }
   }
 
   render() {
+    if (this.props.auth && !this.props.edited) {
+      let defaultName = '';
+      let import_nickname = '';
+      import_nickname = this.props.auth.import_nickname;
+      if (import_nickname) {
+        defaultName = this.props.auth.nickname;
+        this.props.setStoreName(defaultName);
+      }
+      this.setState({ edited: true });
+    }
     return (
       <div className="StartScreen">
         <Title />
