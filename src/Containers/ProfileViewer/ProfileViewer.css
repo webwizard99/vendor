@@ -5,6 +5,7 @@
   bottom: 94vh;
   background: rgb(240, 245, 250);
   display: flex;
+  justify-content: space-between;
 }
 
 .ProfileForm {
@@ -29,11 +30,13 @@
 }
 
 .CloseButton {
-  height: 4rem;
-  width: 4rem;
+  height: 6rem;
+  width: 6rem;
   margin: 2rem;
-  font-size: 3rem;
-  line-height: 4rem;
+  font-size: 4rem;
+  line-height: 6rem;
   text-align: center;
   font-weight: 800;
+  font-family: "Roboto Slab", serif;
+  color: rgba(30, 35, 30, 60);
 }
