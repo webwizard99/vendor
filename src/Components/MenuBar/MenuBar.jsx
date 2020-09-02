@@ -5,6 +5,9 @@ import './MenuBar.css';
 import { connect } from 'react-redux';
 import { SET_PROFILE_ACTIVE } from '../../actions/types';
 
+// utility imports
+import screenInfo from '../../Utilities/screenInfo';
+
 class MenuBar extends React.Component {
   constructor(props) {
     super(props);
@@ -28,22 +31,21 @@ class MenuBar extends React.Component {
       case false:
         return '';
       default:
-        return <li key="profile" class="profileLink" onClick={this.handleProfileActive}>Profile</li>
+        return <li key="profile" class="profileLink" onClick={this.handleProfileActive}>profile</li>
     }
   }
 
   renderLogin() {
-    
     switch(this.props.auth) {
       case null:
         return;
       case false:
         return (
-          <li key="login"><a href="/auth/facebook">Login with Facebook</a></li>
+          <li key="login"><a href="/auth/facebook">login with Facebook</a></li>
         );
       default:
         return (
-          <li key="login"><a href="/api/logout">Logout</a></li>
+          <li key="login"><a href="/api/logout">logout</a></li>
         );
     }
   }
@@ -56,7 +58,7 @@ class MenuBar extends React.Component {
         return false;
       default:
         const userType = this.props.auth.type;
-        if (userType === 'owner') {
+        if (userType === 'owner' && screenInfo.getIsPc()) {
           return (
             <li key="editorLink"><a className="EditorLink" href="/editor">editor</a></li>
           )

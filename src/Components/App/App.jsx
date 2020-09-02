@@ -2,10 +2,15 @@ import React from 'react';
 import './reset.css';
 import './App.css';
 
+// game module imports
 import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
 import ProfileViewer from '../../Containers/ProfileViewer/ProfileViewer';
 
+// utility imports
+import screenInfo from '../../Utilities/screenInfo';
+
+// component imports
 import MenuBar from '../../Components/MenuBar/MenuBar';
 
 import { connect } from 'react-redux';
@@ -21,9 +26,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(window.orientation);
-    console.log(window);
     this.props.fetchUser();
+    screenInfo.init();
   }
 
   getMainView() {
@@ -50,7 +54,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App"
+        ref={ref => {
+          this.container = ref;
+        }}>
         <MenuBar />
         {this.getMainView()}
         {this.getProfileViewer()}
