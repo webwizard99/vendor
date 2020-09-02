@@ -10,7 +10,7 @@ const screenInfo = (function(){
   let width = 0;
 
   const dispatchFullscreen = function() {
-    payload = {
+    const payload = {
       type: SET_IS_FULLSCREEN,
       value: isFullscreen
     }
@@ -18,7 +18,7 @@ const screenInfo = (function(){
   }
 
   const dispatchIsPc = function() {
-    payload = {
+    const payload = {
       type: SET_IS_PC,
       value: isPc
     }
@@ -26,7 +26,7 @@ const screenInfo = (function(){
   }
 
   const dispatchIsMobile = function() {
-    payload = {
+    const payload = {
       type: SET_IS_MOBILE,
       value: isMobile
     }
