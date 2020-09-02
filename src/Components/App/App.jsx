@@ -6,6 +6,7 @@ import './App.css';
 import GameScreen from '../../Containers/GameScreen/GameScreen';
 import StartScreen from '../../Containers/StartScreen/StartScreen';
 import ProfileViewer from '../../Containers/ProfileViewer/ProfileViewer';
+import MobileGameScreen from '../../Containers/MobileGameScreen/MobileGameScreen';
 
 // utility imports
 import screenInfo from '../../Utilities/screenInfo';
@@ -37,9 +38,15 @@ class App extends React.Component {
         <StartScreen />
       )
     } else {
-      return (
-        <GameScreen />
-      )
+      if (this.props.isMobile) {
+        return (
+          <MobileGameScreen />
+        )
+      } else {
+        return (
+          <GameScreen />
+        )
+      }
     }
   }
 
@@ -69,7 +76,8 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     started: state.gameState.started,
-    profileActive: state.profile.active
+    profileActive: state.profile.active,
+    isMobile: state.app.isMobile
   }
 }
 

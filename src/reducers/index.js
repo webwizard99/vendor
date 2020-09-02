@@ -6,6 +6,7 @@ import authReducer from './authReducer';
 import suppliersReducer from './suppliersReducer';
 import suppliesReducer from './suppliesReducer';
 import profileReducer from './profileReducer';
+import appStateReducer from './appStateReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   storeState: storeReducer,
   suppliers: suppliersReducer,
   supplies: suppliesReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  app: appStateReducer
 });
