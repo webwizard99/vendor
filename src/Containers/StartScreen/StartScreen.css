@@ -49,3 +49,25 @@
 .StartButton:hover {
   background: rgb(100, 220, 120);
 }
+
+/* mobile styles  */
+@media only screen and (max-width: 650px) {
+  .NameInput {
+    width: 100%;
+    height: 50vh;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nameInputGroup {
+    width: 100%;
+  }
+
+  #name {
+    font-size: 1.2rem;
+  }
+
+  .StartButton {
+    font-size: 2.5rem;
+  }
+}

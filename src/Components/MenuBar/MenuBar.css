@@ -11,7 +11,7 @@
 }
 
 .MenuTitle {
-  width: 80%;
+  width: 6rem;
   padding-left: 1rem;
 }
 
@@ -25,6 +25,8 @@
 }
 
 .LoginContainer {
+  margin-left: auto;
+  margin-right: 1rem;
   display: flex;
   justify-content: right;
 }
@@ -37,4 +39,12 @@
 
 .profileLink {
   cursor: pointer;
+}
+
+
+/* Mobile styles */
+@media only screen and (max-width: 650px) {
+  .MenuBar {
+    height: 10vh;
+  }
 }
