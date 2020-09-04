@@ -50,6 +50,25 @@
   background: rgb(100, 220, 120);
 }
 
+/* tablet styles */
+@media only screen and (max-width: 1056px) {
+  .NameInput {
+    width: 60%;
+  }
+
+  .NameLabel {
+    font-size: 1.6rem;
+  }
+
+  #name {
+    font-size: 1.6rem;
+  }
+
+  .StartButton {
+    font-size: 2rem;
+  }
+}
+
 /* mobile styles  */
 @media only screen and (max-width: 650px) {
   .NameInput {
