@@ -55,12 +55,20 @@
   .NameInput {
     width: 60%;
     justify-content: center;
+    height: 12rem;
+    flex-wrap: wrap;
+  }
+
+  .nameInputGroup {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .NameLabel {
     font-size: 1.6rem;
     line-height: 2.5rem;
-    margin-right: 1rem;
+    padding-right: 1rem;
   }
 
   #name {
@@ -70,6 +78,7 @@
 
   .StartButton {
     font-size: 2rem;
+    margin-right: none;
   }
 }
 
