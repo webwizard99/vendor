@@ -52,3 +52,22 @@
   padding: .5rem;
   border-radius: 12px;
 }
+
+/* tablet styles */
+@media only screen and (max-width: 1056px) {
+  .ProfileForm {
+    width: 70%;
+  }
+
+  .item-label {
+    font-size: 1.4rem;
+  }
+
+  .input-text {
+    font-size: 1.4rem;
+  }
+
+  .profile-submit {
+    font-size: 2rem;
+  }
+}
