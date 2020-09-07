@@ -57,6 +57,7 @@
 @media only screen and (max-width: 1056px) {
   .ProfileViewer {
     height: 90vh;
+    bottom: 90vh;
   }
   .ProfileForm {
     width: 70%;
@@ -71,7 +72,7 @@
   }
 
   .profile-submit {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
