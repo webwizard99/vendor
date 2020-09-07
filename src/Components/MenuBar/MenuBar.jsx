@@ -13,7 +13,7 @@ class MenuBar extends React.Component {
     super(props);
 
     this.state = {
-      mobileOpen = false
+      mobileOpen: false
     }
 
     this.handleProfileActive = this.handleProfileActive.bind(this);
