@@ -41,6 +41,18 @@
   cursor: pointer;
 }
 
+.hamburgerContainer {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.hamburgerLine {
+  width: 35px;
+  height: 5px;
+  color: white;
+  margin: 6px 0;
+}
+
 
 /* Mobile styles */
 @media only screen and (max-width: 650px) {
@@ -52,6 +64,10 @@
 /* Tablet styles */
 @media only screen and (max-width: 1056px) {
   .MenuBar {
+    height: 10vh;
+  }
 
+  .LoginContainer a, .profileLink {
+    font-size: 1.8rem;
   }
 }

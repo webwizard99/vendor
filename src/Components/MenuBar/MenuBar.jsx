@@ -12,7 +12,12 @@ class MenuBar extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      mobileOpen = false
+    }
+
     this.handleProfileActive = this.handleProfileActive.bind(this);
+    this.getLoginContainer = this.getLoginContainer.bind(this);
     this.renderProfileLink = this.renderProfileLink.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.renderEditorLink = this.renderEditorLink.bind(this);
@@ -68,16 +73,32 @@ class MenuBar extends React.Component {
     }
 
   }
+
+  getLoginContainer() {
+    if (this.props.isMobile) {
+      return (
+        <div className="hamburgerContainer">
+          <div className="hamburgerLine"></div>
+          <div className="hamburgerLine"></div>
+          <div className="hamburgerLine"></div>
+        </div>
+      )
+    }
+    return (
+
+      <ul className="LoginContainer">
+        {this.renderProfileLink()}
+        {this.renderEditorLink()}
+        {this.renderLogin()}
+      </ul>
+    )
+  }
   
   render() {
     return (
       <div className="MenuBar">
         <span className="MenuTitle"><a href="/">VENDOR</a></span>
-        <ul className="LoginContainer">
-          {this.renderProfileLink()}
-          {this.renderEditorLink()}
-          {this.renderLogin()}
-        </ul>
+        {this.getLoginContainer()}
       </div>
     );
   }
@@ -86,7 +107,8 @@ class MenuBar extends React.Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    profileActive: state.profile.active
+    profileActive: state.profile.active,
+    isMobile: state.app.isMobile
   }
 }
 

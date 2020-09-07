@@ -12,6 +12,7 @@
   height: 110%;
   overflow-x: scroll;
   scroll-padding-right: 1rem;
+  scroll-snap-type: x;
   z-index: 4;
 }
 
