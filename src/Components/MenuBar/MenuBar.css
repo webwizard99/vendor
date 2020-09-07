@@ -55,6 +55,11 @@
 
 .mobileMenu {
   flex-direction: column;
+  background: rgb(80, 100, 80);
+  position: relative;
+  top: 10vh;
+  margin: 0;
+  padding: 1rem;
 }
 
 

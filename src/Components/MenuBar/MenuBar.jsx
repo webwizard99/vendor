@@ -102,7 +102,7 @@ class MenuBar extends React.Component {
   getMobileMenu() {
     if (this.props.isMobile && this.state.mobileOpen) {
       return (
-        <ul className="LoginContainer">
+        <ul className="LoginContainer mobileMenu">
           {this.renderProfileLink()}
           {this.renderEditorLink()}
           {this.renderLogin()}
