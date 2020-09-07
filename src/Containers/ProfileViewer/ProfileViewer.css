@@ -71,3 +71,23 @@
     font-size: 2rem;
   }
 }
+
+@media only screen and (max-width: 650px) {
+  .ProfileViewer {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .CloseButton {
+    align-self: flex-end;
+  }
+
+  .item-label {
+    padding-bottom: .2rem;
+  }
+
+  #nickname {
+    width: 100%;
+  }
+}
