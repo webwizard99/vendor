@@ -48,3 +48,10 @@
     height: 10vh;
   }
 }
+
+/* Tablet styles */
+@media only screen and (max-width: 1056px) {
+  .MenuBar {
+
+  }
+}

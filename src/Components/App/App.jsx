@@ -21,6 +21,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.getMenuBar = this.getMenuBar.bind(this)
     this.getMainView = this.getMainView.bind(this);
     this.getProfileViewer = this.getProfileViewer.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -59,13 +60,22 @@ class App extends React.Component {
     }
   }
 
+  getMenuBar() {
+    if (this.props.started && this.props.isMobile) {
+      return '';
+    }
+    return (
+      <MenuBar />
+    )
+  }
+
   render() {
     return (
       <div className="App"
         ref={ref => {
           this.container = ref;
         }}>
-        <MenuBar />
+        
         {this.getMainView()}
         {this.getProfileViewer()}
       </div>

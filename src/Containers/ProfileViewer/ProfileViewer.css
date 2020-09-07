@@ -55,6 +55,9 @@
 
 /* tablet styles */
 @media only screen and (max-width: 1056px) {
+  .ProfileViewer {
+    height: 90vh;
+  }
   .ProfileForm {
     width: 70%;
   }
