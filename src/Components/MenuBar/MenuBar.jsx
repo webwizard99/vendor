@@ -21,12 +21,17 @@ class MenuBar extends React.Component {
     this.renderProfileLink = this.renderProfileLink.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.renderEditorLink = this.renderEditorLink.bind(this);
+    this.handleMobileOpen = this.handleMobileOpen.bind(this);
   }
 
   handleProfileActive() {
     if (!this.props.profileActive) {
       this.props.setProfileActive(true);
     }
+  }
+
+  handleMobileOpen() {
+    this.setState({ mobileOpen: !this.state.mobileOpen});
   }
 
   renderProfileLink() {
@@ -77,7 +82,8 @@ class MenuBar extends React.Component {
   getLoginContainer() {
     if (this.props.isMobile) {
       return (
-        <div className="hamburgerContainer">
+        <div className="hamburgerContainer"
+          onClick={this.handleMobileOpen}>
           <div className="hamburgerLine"></div>
           <div className="hamburgerLine"></div>
           <div className="hamburgerLine"></div>
@@ -85,13 +91,24 @@ class MenuBar extends React.Component {
       )
     }
     return (
-
-      <ul className="LoginContainer">
+      <ul className="LoginContainer mobile-menu">
         {this.renderProfileLink()}
         {this.renderEditorLink()}
         {this.renderLogin()}
       </ul>
     )
+  }
+
+  getMobileMenu() {
+    if (this.props.isMobile && this.state.mobileOpen) {
+      return (
+        <ul className="LoginContainer">
+          {this.renderProfileLink()}
+          {this.renderEditorLink()}
+          {this.renderLogin()}
+        </ul>
+      )
+    }
   }
   
   render() {
@@ -99,6 +116,7 @@ class MenuBar extends React.Component {
       <div className="MenuBar">
         <span className="MenuTitle"><a href="/">VENDOR</a></span>
         {this.getLoginContainer()}
+        {this.getMobileMenu()}
       </div>
     );
   }

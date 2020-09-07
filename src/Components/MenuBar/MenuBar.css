@@ -49,8 +49,12 @@
 .hamburgerLine {
   width: 35px;
   height: 5px;
-  color: white;
+  background: white;
   margin: 6px 0;
+}
+
+.mobileMenu {
+  flex-direction: column;
 }
 
 
