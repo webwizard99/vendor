@@ -75,7 +75,7 @@ class App extends React.Component {
         ref={ref => {
           this.container = ref;
         }}>
-        
+        {this.getMenuBar()}
         {this.getMainView()}
         {this.getProfileViewer()}
       </div>
