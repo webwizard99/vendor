@@ -16,3 +16,4 @@ export const SET_PROFILE_ACTIVE ="SET_PROFILE_ACTIVE";
 export const SET_IS_FULLSCREEN = "SET_IS_FULLSCREEN";
 export const SET_IS_PC = "SET_IS_PC";
 export const SET_IS_MOBILE = "SET_IS_MOBILE";
+export const SET_MOBILE_SCREEN = "SET_MOBILE_SCREEN";

@@ -1,0 +1,9 @@
+.MobileMenu {
+  height: 8vh;
+  width: 100%;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  background: rgb(200, 205, 200);
+  border-bottom: 1px solid rgb(30, 35, 30);
+  color: rgb(30, 35, 30);
+}

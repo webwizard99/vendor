@@ -7,6 +7,7 @@ import suppliersReducer from './suppliersReducer';
 import suppliesReducer from './suppliesReducer';
 import profileReducer from './profileReducer';
 import appStateReducer from './appStateReducer';
+import mobileMenuReducer from './mobileMenuReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   suppliers: suppliersReducer,
   supplies: suppliesReducer,
   profile: profileReducer,
-  app: appStateReducer
+  app: appStateReducer,
+  mobileMenu: mobileMenuReducer
 });
