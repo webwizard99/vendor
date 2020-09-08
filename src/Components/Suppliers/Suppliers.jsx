@@ -22,6 +22,7 @@ class Suppliers extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props.suppliers);
     if (Array.isArray(this.props.suppliers) && this.props.supplySpawned) {
       if (!this.props.supplyReady) {
         gameSupplies.fillSupplies();
