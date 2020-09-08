@@ -4,6 +4,7 @@ import Supplier from '../Supplier/Supplier';
 
 // redux imports
 import { connect } from 'react-redux';
+import { SET_SUPPLIERS_INITIALIZED } from '../../actions/types';
 
 // game imports
 import gameSupplier from '../../game_modules/suppliers';
@@ -12,10 +13,6 @@ import gameSupplies from '../../game_modules/supplies';
 class Suppliers extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      suppliersInitialized: false
-    }
 
     this.getSuppliers = this.getSuppliers.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
@@ -31,11 +28,9 @@ class Suppliers extends React.Component {
       }
     }
     if (Array.isArray(this.props.suppliers) && this.props.supplyReady) {
-      if (!this.state.suppliersInitialized) {
+      if (!this.props.suppliersInitialized) {
         gameSupplier.takeSupplierTurn();
-        this.setState({
-          suppliersInitialized: true
-        })
+        this.props.setSuppliersInitialized(true);
       }
     }
   }
@@ -93,8 +88,15 @@ const mapStateToProps = state => {
     suppliers: state.suppliers.suppliers,
     supplyReady: state.supplies.ready,
     supplySpawned: state.supplies.spawned,
-    isMobile: state.app.isMobile
+    isMobile: state.app.isMobile,
+    suppliersInitialized: state.suppliers.initialized
   }
 }
 
-export default connect(mapStateToProps)(Suppliers);
+const mapDispatchToProps = dispatch => {
+  return {
+    setSuppliersInitialized: (value) => dispatch({ type: SET_SUPPLIERS_INITIALIZED, value: value })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Suppliers);

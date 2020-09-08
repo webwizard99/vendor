@@ -1,8 +1,9 @@
-import { SET_SUPPLIERS } from '../actions/types';
+import { SET_SUPPLIERS, SET_SUPPLIERS_INITIALIZED } from '../actions/types';
 
 const initialState = {
   suppliers: null,
-  count: 0
+  count: 0,
+  initialized: false
 }
 
 export default function(state = initialState, action) {
@@ -16,6 +17,11 @@ export default function(state = initialState, action) {
           ...state,
           suppliers: action.payload,
           count: number
+        }
+      case SET_SUPPLIERS_INITIALIZED:
+        return {
+          ...state,
+          initialized: action.value
         }
     default:
       return state;
