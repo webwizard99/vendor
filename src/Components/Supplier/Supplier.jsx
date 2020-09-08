@@ -126,8 +126,12 @@ class Supplier extends React.Component {
   }
 
   render() {
+    let supplierClass = "Supplier";
+    if (this.props.isMobile) {
+      supplierClass += " mobileSupplier";
+    }
     return (
-      <div className="Supplier">
+      <div className={supplierClass}>
         <div className="SupplierName">
           {this.props.supplier.name}
           <div className="SupplierValueGroup">  
@@ -146,7 +150,8 @@ class Supplier extends React.Component {
 const mapStateToProps = state => {
   return {
     supplyReady: state.supplies.ready,
-    storeGold: state.storeState.gold
+    storeGold: state.storeState.gold,
+    isMobile: state.app.isMobile
   }
 }
 

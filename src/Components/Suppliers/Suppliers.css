@@ -24,3 +24,7 @@
 .suppliersTabletAdjust {
   height: 100%;
 }
+
+.mobileSuppliers {
+  height: 82vh;
+}
