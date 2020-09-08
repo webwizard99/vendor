@@ -2,6 +2,7 @@ import React from 'react';
 import './MobileGameScreen.css';
 
 import Store from '../../Components/Store/Store';
+import MobileStoreHeadbar from '../../Components/MobileStoreHeadbar/MobileStoreHeadbar';
 import Suppliers from '../../Components/Suppliers/Suppliers';
 import MobileMenu from '../../Components/MobileMenu/MobileMenu';
 
@@ -26,7 +27,13 @@ class MobileGameScreen extends React.Component {
       case allScreens.store:
         return <Store />;
       case allScreens.suppliers:
-        return <Suppliers />;
+        return (
+          <div>
+            <MobileStoreHeadbar />
+            <Suppliers />
+          </div>
+        
+        );
       default:
         return 'Nothing to display';
     }

@@ -1,0 +1,9 @@
+.MobileStoreHeadbar {
+  height: 8vh;
+  width: 100%;
+  background: rgb(120, 115, 125);
+  font-family: "Roboto Slab", serif;
+  color: white;
+  display: flex;
+  align-items: center;
+}

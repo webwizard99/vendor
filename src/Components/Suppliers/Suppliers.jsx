@@ -21,7 +21,6 @@ class Suppliers extends React.Component {
   }
 
   updateSuppliers() {
-    console.log(this.props.suppliers);
     if (Array.isArray(this.props.suppliers) && this.props.supplySpawned) {
       if (!this.props.supplyReady) {
         gameSupplies.fillSupplies();
@@ -51,7 +50,7 @@ class Suppliers extends React.Component {
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
-        return (<Supplier supplier={renderSupplier} initialized={this.state.suppliersInitialized}/>);
+        return (<Supplier supplier={renderSupplier} initialized={this.props.suppliersInitialized}/>);
       });
 
       return (
