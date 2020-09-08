@@ -24,7 +24,7 @@ class MobileGameScreen extends React.Component {
   render() {
     return (
       <div className="MobileGameScreen">
-        {getCurrentScreen()}
+        {this.getCurrentScreen()}
       </div>
     )
   }

@@ -1,4 +1,4 @@
-const mobileScreen = (function(){
+const mobileScreens = (function(){
   let currentScreen = '';
   let currentIndex = 0;
   const screens = ['store', 'suppliers'];
@@ -30,3 +30,5 @@ const mobileScreen = (function(){
     }
   }
 }());
+
+export default mobileScreens;
