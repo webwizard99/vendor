@@ -9,3 +9,17 @@
   /* font-family: "Roboto Slab", serif;
   text-align: center; */
 }
+
+
+/* mobile styles */
+@media only screen and (max-width: 650px) {
+  .SupplierBuyButton {
+    height: 1rem;
+    width: 2.1rem;
+    border-radius: 5px;
+  }
+
+  .supplierBuyButtonIcon {
+    font-size: 1rem;
+  }
+}
