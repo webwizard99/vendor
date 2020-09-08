@@ -83,11 +83,19 @@ class MenuBar extends React.Component {
   getLoginContainer() {
     if (this.props.isMobile) {
       let hamburgerClass = "hamburgerContainer";
+      let mobileOffsetStyle = {};
       if (this.state.mobileOpen) {
         hamburgerClass += " toggledHamburger";
+        let menuOffsets = 1;
+        if (this.props.auth) {
+          menuOffsets += 1;
+        }
+        mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets)}rem + ${(menuOffsets + 1) * 0.8}rem`;
+
       }
       return (
         <div className={hamburgerClass}
+          style={mobileOffsetStyle}
           onClick={this.handleMobileOpen}>
           <div className="hamburgerLine"></div>
           <div className="hamburgerLine"></div>
