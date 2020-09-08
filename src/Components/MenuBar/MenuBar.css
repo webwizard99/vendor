@@ -57,9 +57,18 @@
   flex-direction: column;
   background: rgb(80, 100, 80);
   position: relative;
-  top: 10vh;
+  top: 11vh;
   margin: 0;
-  padding: 1rem;
+  padding: 1.5vh;
+}
+
+.mobileMenu > li {
+  margin: .8rem 0;
+}
+
+.toggledHamburger {
+  position: relative;
+  left: 8.5rem;
 }
 
 

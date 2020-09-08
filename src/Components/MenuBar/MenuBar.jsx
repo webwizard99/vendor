@@ -28,6 +28,7 @@ class MenuBar extends React.Component {
     if (!this.props.profileActive) {
       this.props.setProfileActive(true);
     }
+    this.handleMobileOpen();
   }
 
   handleMobileOpen() {
@@ -81,8 +82,12 @@ class MenuBar extends React.Component {
 
   getLoginContainer() {
     if (this.props.isMobile) {
+      let hamburgerClass = "hamburgerContainer";
+      if (this.state.mobileOpen) {
+        hamburgerClass += " toggledHamburger";
+      }
       return (
-        <div className="hamburgerContainer"
+        <div className={hamburgerClass}
           onClick={this.handleMobileOpen}>
           <div className="hamburgerLine"></div>
           <div className="hamburgerLine"></div>
