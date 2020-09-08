@@ -2,7 +2,7 @@ import React from 'react';
 import './MobileGameScreen.css';
 
 import Store from '../../Components/Store/Store';
-// import MobileMenu from '../../Components/MobileMenu/MobileMenu';
+import MobileMenu from '../../Components/MobileMenu/MobileMenu';
 
 // redux imports
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ class MobileGameScreen extends React.Component {
   render() {
     return (
       <div className="MobileGameScreen">
-        {/* <MobileMenu /> */}
+        <MobileMenu />
         {this.getCurrentScreen()}
       </div>
     )
