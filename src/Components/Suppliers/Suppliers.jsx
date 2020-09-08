@@ -38,6 +38,10 @@ class Suppliers extends React.Component {
   }
 
   getSuppliers() {
+    let styleAdjust = {};
+    if (this.props.isMobile) {
+      styleAdjust.flexDirection = 'column';
+    }
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
@@ -46,6 +50,7 @@ class Suppliers extends React.Component {
 
       return (
         <div className="suppliersContainer"
+          style={styleAdjust}
           ref={node => {
             this.container = node;
           }}>
