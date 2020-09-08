@@ -3,7 +3,19 @@
   width: 100%;
   text-transform: capitalize;
   font-size: 1.4rem;
-  background: rgb(200, 205, 200);
+  background: rgb(60, 70, 60);
   border-bottom: 1px solid rgb(30, 35, 30);
-  color: rgb(30, 35, 30);
+  color: rgb(240, 245, 240);
+}
+
+.screenArrow {
+  font-weight: 900;
+}
+
+.previousScreen {
+  margin-left: 1rem;
+}
+
+.nextScreen {
+  margin-right: 1rem;
 }
