@@ -26,7 +26,7 @@
 }
 
 .mobileSuppliers {
-  height: 76vh;
+  height: 78vh;
   overflow-y: scroll;
   scroll-snap-type: y;
   scroll-padding-bottom: 1rem;

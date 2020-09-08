@@ -45,7 +45,8 @@ class Suppliers extends React.Component {
   getSuppliers() {
     let styleAdjust = {};
     if (this.props.isMobile) {
-      styleAdjust.flexDirection = 'column';
+      styleAdjust.flexDirection = 'column'
+      styleAdjust.height = '100%';
     }
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
