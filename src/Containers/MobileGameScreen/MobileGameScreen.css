@@ -1,0 +1,13 @@
+.MobileGameScreen {
+  height: 90vh;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
