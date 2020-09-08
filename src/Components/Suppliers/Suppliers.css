@@ -26,8 +26,16 @@
 }
 
 .mobileSuppliers {
-  height: 78vh;
+  height: 78vh; 
+}
+
+.nonPcContainer {
+  height: 100%;
+}
+
+.mobileContainer {
+  flex-direction: column;
   overflow-y: scroll;
-  scroll-snap-type: y;
+  scroll-snap-type: x;
   scroll-padding-bottom: 1rem;
 }

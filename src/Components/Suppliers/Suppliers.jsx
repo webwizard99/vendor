@@ -43,10 +43,12 @@ class Suppliers extends React.Component {
   }
 
   getSuppliers() {
-    let styleAdjust = {};
+    let supplierContainerClass = "suppliersContainer";
+    if (!this.props.isPc) {
+      supplierContainerClass += " nonPcContainer";
+    }
     if (this.props.isMobile) {
-      styleAdjust.flexDirection = 'column'
-      styleAdjust.height = '100%';
+      supplierContainerClass = " mobileContainer";
     }
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
@@ -55,8 +57,7 @@ class Suppliers extends React.Component {
       });
 
       return (
-        <div className="suppliersContainer"
-          style={styleAdjust}
+        <div className={supplierContainerClass}
           ref={node => {
             this.container = node;
           }}>
@@ -88,6 +89,7 @@ const mapStateToProps = state => {
     suppliers: state.suppliers.suppliers,
     supplyReady: state.supplies.ready,
     supplySpawned: state.supplies.spawned,
+    isPc: state.app.isPc,
     isMobile: state.app.isMobile,
     suppliersInitialized: state.suppliers.initialized
   }
