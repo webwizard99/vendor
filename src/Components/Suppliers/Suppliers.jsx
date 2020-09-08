@@ -44,13 +44,15 @@ class Suppliers extends React.Component {
 
   getSuppliers() {
     let supplierContainerClass = "suppliersContainer";
+    let spacerClass = "spacer";
     if (!this.props.isPc) {
       supplierContainerClass += " nonPcContainer";
     }
     if (this.props.isMobile) {
       supplierContainerClass += " mobileContainer";
+      spacerClass += " mobileSpacer";
     }
-    let currentSuppliers = this.props.suppliers;    
+    let currentSuppliers = this.props.suppliers;
     if (Array.isArray(currentSuppliers)) {
       const suppliersDisplay = currentSuppliers.map(renderSupplier => {
         return (<Supplier supplier={renderSupplier} initialized={this.props.suppliersInitialized}/>);
@@ -62,7 +64,7 @@ class Suppliers extends React.Component {
             this.container = node;
           }}>
           {suppliersDisplay}
-          <div className="spacer"></div>
+          <div className={spacerClass}></div>
         </div>
       );
     } else {

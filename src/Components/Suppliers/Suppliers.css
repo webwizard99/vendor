@@ -39,3 +39,8 @@
   scroll-snap-type: x;
   scroll-padding-bottom: 1rem;
 }
+
+.mobileSpacer {
+  min-height: 1px;
+  margin-top: 1rem;
+}
