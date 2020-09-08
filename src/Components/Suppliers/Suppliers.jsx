@@ -19,9 +19,11 @@ class Suppliers extends React.Component {
 
     this.getSuppliers = this.getSuppliers.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.updateSuppliers = this.updateSuppliers.bind(this);
   }
 
-  componentDidUpdate() {
+  updateSuppliers() {
     console.log(this.props.suppliers);
     if (Array.isArray(this.props.suppliers) && this.props.supplySpawned) {
       if (!this.props.supplyReady) {
@@ -36,6 +38,14 @@ class Suppliers extends React.Component {
         })
       }
     }
+  }
+
+  componentDidMount() {
+    this.updateSuppliers();
+  }
+
+  componentDidUpdate() {
+    this.updateSuppliers();
   }
 
   getSuppliers() {
