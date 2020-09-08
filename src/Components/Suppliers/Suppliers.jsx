@@ -9,6 +9,7 @@ import { SET_SUPPLIERS_INITIALIZED } from '../../actions/types';
 // game imports
 import gameSupplier from '../../game_modules/suppliers';
 import gameSupplies from '../../game_modules/supplies';
+// import suppliers from '../../game_modules/suppliers';
 
 class Suppliers extends React.Component {
   constructor(props) {
@@ -77,6 +78,9 @@ class Suppliers extends React.Component {
     let suppliersClass = "Suppliers";
     if (this.props.isMobile) {
       suppliersClass += " mobileSuppliers";
+    }
+    if (!this.props.isPc && !this.props.isMobile) {
+      suppliersClass += " tabletAdjust";
     }
     return (
       <div className={suppliersClass}>
