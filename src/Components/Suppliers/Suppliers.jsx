@@ -48,7 +48,7 @@ class Suppliers extends React.Component {
       supplierContainerClass += " nonPcContainer";
     }
     if (this.props.isMobile) {
-      supplierContainerClass = " mobileContainer";
+      supplierContainerClass += " mobileContainer";
     }
     let currentSuppliers = this.props.suppliers;    
     if (Array.isArray(currentSuppliers)) {
