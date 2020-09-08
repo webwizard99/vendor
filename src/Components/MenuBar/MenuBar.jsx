@@ -114,7 +114,7 @@ class MenuBar extends React.Component {
         if (this.props.auth) {
           menuOffsets += 1;
         }
-        mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets)}rem + ${(menuOffsets + 1) * 0.8}rem`;
+        mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets * .9)}rem + ${(menuOffsets + 1) * 0.4}rem`;
       return (
         <ul className="LoginContainer mobileMenu"
           style={mobileOffsetStyle}>
