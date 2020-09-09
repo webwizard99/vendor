@@ -91,6 +91,10 @@
     padding-bottom: .2rem;
   }
 
+  .input-group, .profile-submit {
+    margin: 1rem 0;
+  }
+
   #nickname {
     width: 100%;
   }

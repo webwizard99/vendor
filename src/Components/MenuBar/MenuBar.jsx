@@ -32,6 +32,9 @@ class MenuBar extends React.Component {
   }
 
   handleMobileOpen() {
+    if (this.props.profileActive && !this.state.mobileOpen) {
+      return;
+    }
     this.setState({ mobileOpen: !this.state.mobileOpen});
   }
 
