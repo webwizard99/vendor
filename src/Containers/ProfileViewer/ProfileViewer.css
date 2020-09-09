@@ -87,12 +87,21 @@
     align-self: flex-end;
   }
 
+  .input-fields-area {
+    display: flex;
+    flex-direction: column;
+  }
+
   .item-label {
     padding-bottom: .2rem;
   }
 
   .input-group, .profile-submit {
     margin: 1rem 0;
+  }
+
+  .profile-submit {
+    align-self: center;
   }
 
   #nickname {
