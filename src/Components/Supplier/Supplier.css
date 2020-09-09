@@ -64,10 +64,24 @@
 @media only screen and (max-width: 1056px) {
   .Supplier {
     height: 8rem;
+    min-width: 22rem;
   }
 
   .SupplierName {
     height: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .SupplierInventoryItem {
+    height: 1.4rem;
+  }
+
+  .SupplierInventoryItemName {
+    font-size: 1.2rem;
+    width: 54%;
+  }
+
+  .SupplierItemsValueGroup {
     font-size: 1.2rem;
   }
 }

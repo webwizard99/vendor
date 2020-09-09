@@ -11,6 +11,19 @@
 }
 
 
+/* tablet styles */
+@media only screen and (max-width: 1056px) {
+  .SupplierBuyButton {
+    height: 1.1rem;
+    width: 2.4rem;
+    border-radius: 5px;
+  }
+
+  .supplierBuyButtonIcon {
+    font-size: 1rem;
+  }
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .SupplierBuyButton {
@@ -23,3 +36,4 @@
     font-size: 1rem;
   }
 }
+
