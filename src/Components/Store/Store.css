@@ -82,3 +82,21 @@
   bottom: 1px;
 }
 
+/* tablet styles */
+@media only screen and (max-width: 1056px) {
+  .StoreMenuBar {
+    height: 10%;
+  }
+
+  .Inspect {
+    font-size: 1.2rem;
+  }
+
+  .GoldDisplay {
+    font-size: 1.6rem;
+  }
+
+  .GoldDisplay .CoinSymbol {
+    margin-right: .5rem;
+  }
+}
