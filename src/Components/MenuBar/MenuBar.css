@@ -102,4 +102,9 @@
   .LoginContainer a, .profileLink {
     font-size: 1.8rem;
   }
+
+  .MenuTitle a {
+    font-size: 2.8rem;
+    line-height: 3rem;
+  }
 }
