@@ -13,6 +13,7 @@
 
 .screenArrow {
   font-weight: 900;
+  width: 2rem;
 }
 
 .previousScreen {
@@ -21,4 +22,17 @@
 
 .nextScreen {
   margin-right: 1rem;
+}
+
+.mobileTitle {
+  width: 8rem;
+  text-align: center;
+}
+
+.MobileDropdown {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  top: 7vh;
+  margin-left: calc(-100vw - calc(calc(100vw - 14rem) / 2));
 }

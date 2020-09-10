@@ -30,10 +30,11 @@ class MobileMenu extends React.Component {
         <span className="previousScreen screenArrow"
           onClick={this.handlePrevious}
         >&#8592;</span>
-        {this.props.mobileScreen}
+        <span className="mobileTitle">{this.props.mobileScreen}</span>
         <span className="nextScreen screenArrow"
           onClick={this.handleNext}
         >&#8594;</span>
+        <div className="MobileDropdown">Store</div>
       </div>
     )
   }

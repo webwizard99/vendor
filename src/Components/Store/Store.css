@@ -82,6 +82,17 @@
   bottom: 1px;
 }
 
+.MobileStoreHeadbar .StoreGold {
+  margin-left: auto;
+}
+
+.MobileDropdown {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-left: -128vw;
+}
+
 /* tablet styles */
 @media only screen and (max-width: 1056px) {
   .StoreMenuBar {
