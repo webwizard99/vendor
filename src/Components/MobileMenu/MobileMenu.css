@@ -34,5 +34,5 @@
   position: relative;
   text-align: center;
   top: 7vh;
-  margin-left: calc(-100vw - calc(calc(100vw - 14rem) / 2));
+  margin-left: calc(-100vw - calc(calc(100vw - 12rem) / 2));
 }
