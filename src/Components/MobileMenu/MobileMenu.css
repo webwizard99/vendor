@@ -4,7 +4,6 @@
   text-transform: capitalize;
   font-size: 1.4rem;
   background: rgb(60, 70, 60);
-  border-bottom: 1px solid rgb(30, 35, 30);
   color: rgb(240, 245, 240);
   display: flex;
   align-items: center;
@@ -28,10 +27,13 @@
 .mobileTitle {
   width: 8rem;
   text-align: center;
+  margin: auto 0;
 }
 
 .MobileDropdown {
   width: 100%;
+  background: rgb(60, 70, 60);
+  color: rgb(240, 245, 240);
   position: relative;
   text-align: center;
   top: 7vh;

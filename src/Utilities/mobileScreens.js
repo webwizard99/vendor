@@ -12,6 +12,14 @@ const mobileScreens = (function(){
     suppliers: 'suppliers'
   }
 
+  let screenMap = {};
+
+  const mapScreens = function() {
+    screens.reduce((screen, screenN) => {
+      screenMap[screen] = screenN;
+    });
+  }
+
   const dispatchMobileScreen = function() {
     const payload = {
       type: SET_MOBILE_SCREEN,
@@ -24,6 +32,7 @@ const mobileScreens = (function(){
     init: function() {
       currentScreen = screens[0];
       currentIndex = 0;
+      mapScreens();
     },
 
     getCurrentScreen: function() {
@@ -48,6 +57,10 @@ const mobileScreens = (function(){
 
     getAllScreens: function() {
       return allScreens;
+    },
+
+    setScreen: function(newScreen) {
+
     },
 
     updateScreen: function() {
