@@ -34,6 +34,8 @@ class MobileMenu extends React.Component {
   }
 
   handleDropdown() {
+    console.log('handleDropdown');
+    console.log(this.props.mobileDropdown);
     this.props.setMobileDropdown(!this.props.mobileDropdown)
   }
 
