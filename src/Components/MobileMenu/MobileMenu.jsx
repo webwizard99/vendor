@@ -41,7 +41,7 @@ class MobileMenu extends React.Component {
   }
 
   getMobileDropdown() {
-    const allScreens = mobileScreens.getAllScreens();
+    const allScreens = mobileScreens.getScreens();
     if (this.props.mobileDropdown) {
       return (
         <div className="MobileDropdown">

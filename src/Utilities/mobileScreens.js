@@ -55,6 +55,10 @@ const mobileScreens = (function(){
       currentScreen = screens[currentIndex];
     },
 
+    getScreens: function() {
+      return screens;
+    },
+
     getAllScreens: function() {
       return allScreens;
     },
