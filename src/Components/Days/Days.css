@@ -19,3 +19,23 @@
   width: 6rem;
   border-radius: 6px;
 }
+
+/* mobile styles */
+@media only screen and (max-width: 650px) {
+  .Days {
+    height: 2rem;
+    margin: .5rem 0px;
+    line-height: 2rem;
+  }
+
+  .DayTitle {
+    text-align: left;
+  }
+
+  .nextDay {
+    height: 1.4rem;
+    width: 8rem;
+  }
+
+  
+}

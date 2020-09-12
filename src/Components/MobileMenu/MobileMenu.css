@@ -32,10 +32,15 @@
 
 .MobileDropdown {
   width: 100%;
-  background: rgb(60, 70, 60);
+  background: rgb(80, 100, 80);
   color: rgb(240, 245, 240);
   position: relative;
   text-align: center;
-  top: 7vh;
+  top: calc(4vh + 3rem);
   margin-left: calc(-100vw - calc(calc(100vw - 14rem) / 2));
+}
+
+.mobileDropdownOption {
+  height: 1.6rem;
+  padding: .2rem 0px;
 }
