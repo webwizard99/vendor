@@ -1,6 +1,9 @@
 import React from 'react';
 import './MobileMenu.css';
 
+// component imports
+import Days from '../Days/Days';
+
 // redux imports
 import { connect } from 'react-redux';
 import { SET_MOBILE_DROPDOWN } from '../../actions/types';
@@ -34,16 +37,22 @@ class MobileMenu extends React.Component {
   }
 
   handleDropdown() {
-    console.log('handleDropdown');
-    console.log(this.props.mobileDropdown);
     this.props.setMobileDropdown(!this.props.mobileDropdown)
   }
 
   getMobileDropdown() {
+    const allScreens = mobileScreens.getAllScreens();
     if (this.props.mobileDropdown) {
       return (
-        <div className="MobileDropdown">Store</div>
-      )
+        <div className="MobileDropdown">
+          <Days />
+          {allScreens.map(screen => {
+            return (
+              <div className="mobileDropdownOption">{screen}</div>
+            )
+      })}
+      </div>)
+      
     } else {
       return false;
     }
