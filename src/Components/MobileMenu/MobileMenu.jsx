@@ -43,7 +43,7 @@ class MobileMenu extends React.Component {
         <div className="MobileDropdown">Store</div>
       )
     } else {
-      return '';
+      return false;
     }
   }
   

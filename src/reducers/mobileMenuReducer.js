@@ -15,7 +15,7 @@ export default function(state = intitialState, action) {
     case SET_MOBILE_DROPDOWN:
       return {
         ...state,
-        screen: action.value
+        dropDown: action.value
       }
     default:
       return state;
