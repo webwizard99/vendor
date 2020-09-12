@@ -2,7 +2,7 @@ import { SET_MOBILE_SCREEN, SET_MOBILE_DROPDOWN } from '../actions/types';
 
 const intitialState = {
   screen: 'store',
-  dropDown: false
+  dropdown: false
 }
 
 export default function(state = intitialState, action) {
@@ -15,7 +15,7 @@ export default function(state = intitialState, action) {
     case SET_MOBILE_DROPDOWN:
       return {
         ...state,
-        dropDown: action.value
+        dropdown: action.value
       }
     default:
       return state;
