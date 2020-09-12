@@ -15,7 +15,7 @@ const mobileScreens = (function(){
   let screenMap = {};
 
   const mapScreens = function() {
-    screens.reduce((screen, screenN) => {
+    screens.forEach((screen, screenN) => {
       screenMap[screen] = screenN;
     });
   }
