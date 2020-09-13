@@ -29,6 +29,7 @@ class Store extends React.Component {
     }
     this.timer = undefined;
     this.delay = 200;
+    this.mobileMultiplier = 2;
     this.markupIntensity = 10;
     this.valence = 1;
     this.increaseMarkup = this.increaseMarkup.bind(this);
@@ -37,6 +38,7 @@ class Store extends React.Component {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.markupOut = this.markupOut.bind(this);
 
+    this.getMobileDetail = this.getMobileDetail.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.getFilter = this.getFilter.bind(this);
@@ -163,6 +165,17 @@ class Store extends React.Component {
     const newValue = !this.props.filterActive;
     this.props.setStoreFilterActive(newValue);
   }
+
+  getMobileDetail() {
+    if (!this.props.isMobile) {
+      return '';
+    }
+    return (
+      <div className="MobileDetailContainer">
+
+      </div>
+    )
+  }
   
   render() {
     return (
@@ -170,8 +183,8 @@ class Store extends React.Component {
         <div className="StoreMenuBar">
           <h2 className="StoreName">{this.props.storeName}</h2>
           <div className="FilterGroup">
-            {this.getIncrementButtons()}
-            {this.getFilter()}
+            {this.props.isMobile ? '' : this.getIncrementButtons()}
+            {this.props.isMobile ? '' : this.getFilter()}
           </div>
           <span className="Inspect" role="img" aria-label="inspect" onClick={this.toggleFilter}>&#128269; </span>
           <div className="GoldDisplay">
@@ -179,7 +192,7 @@ class Store extends React.Component {
           </div>
         </div>
         <StoreInventory />
-        
+        {this.getMobileDetail()}
       </div>
     )
   }
@@ -191,7 +204,8 @@ const mapStateToProps = state => {
     gold: state.storeState.gold,
     filterActive: state.storeState.filterActive,
     storeFilter: state.storeState.filter,
-    storeNeedsUpdate: state.storeState.needsUpdate
+    storeNeedsUpdate: state.storeState.needsUpdate,
+    isMobile: state.app.isMobile
   }
 }
 

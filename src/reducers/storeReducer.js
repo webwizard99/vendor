@@ -12,7 +12,9 @@ const initialState = {
   filter: 'all',
   needsUpdate: false,
   inventory: [],
-  inventoryCount: 0
+  inventoryCount: 0,
+  mobileDetail: null,
+  mobileItemDetail: null
 }
 
 export default function(state = initialState, action) {

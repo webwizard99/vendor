@@ -86,11 +86,9 @@
   margin-left: auto;
 }
 
-.MobileDropdown {
+.MobileDetailContainer {
   width: 100%;
-  position: relative;
-  text-align: center;
-  margin-left: -128vw;
+  
 }
 
 /* tablet styles */
