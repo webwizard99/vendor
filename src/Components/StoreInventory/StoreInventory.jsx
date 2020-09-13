@@ -169,7 +169,7 @@ class StoreInventory extends React.Component {
 
   handleMobileFocus(item) {
     console.log('handleMobileFocus');
-    console.log(this.props.mobileDetail);
+    console.log(this.props.mobileItemDetail);
     if (this.props.mobileItemDetail && this.props.mobilItemeDetail.id === item.id) {
       this.props.setMobileDetail(false);
       this.props.setMobileItemDetail(null);
