@@ -36,6 +36,7 @@
   color: rgb(240, 245, 240);
   position: relative;
   text-align: center;
+  z-index: 7;
   top: calc(4vh + 3.5rem);
   margin-left: calc(-100vw - calc(calc(100vw - 14rem) / 2));
 }
