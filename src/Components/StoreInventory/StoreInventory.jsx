@@ -192,10 +192,10 @@ class StoreInventory extends React.Component {
           return (
             <div className="InventoryItem itemBackground" 
               key={item.id}
-              onTouchStart={() => handleMobileFocus(item)}>
+              onTouchStart={() => this.handleMobileFocus(item)}>
               <span className="InventoryItemName">{item.name}</span>
-              {this.getIncrementOneButtons(item.id)}
-              {this.getIncrementAllButtons(item.prototypeId)}
+              {this.props.isMobile ? '' : this.getIncrementOneButtons(item.id)}
+              {this.props.isMobile ? '' : this.getIncrementAllButtons(item.prototypeId)}
               <div className="ItemValueGroup">
                 <span className="InventoryItemValue"><span className="CoinSymbol">&#x2689; </span>{composedPrice}</span>
               </div>
@@ -227,6 +227,7 @@ const mapStateToProps = state => {
     filterActive: state.storeState.filterActive,
     storeFilter: state.storeState.filter,
     storeNeedsUpdate: state.storeState.needsUpdate,
+    isMobile: state.app.isMobile,
     mobileDetail: state.storeState.mobileDetail
   }
 }
