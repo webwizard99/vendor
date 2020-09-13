@@ -170,11 +170,12 @@ class StoreInventory extends React.Component {
   handleMobileFocus(item) {
     console.log('handleMobileFocus');
     console.log(this.props.mobileDetail);
-    if (this.props.mobileDetail === item.id) {
-      this.props.mobileDetail = null;
+    if (this.props.mobileItemDetail && this.props.mobilItemeDetail.id === item.id) {
+      this.props.setMobileDetail(false);
+      this.props.setMobileItemDetail(null);
       window.inventory = undefined;
     } else {
-      this.props.setStoreMobileDetail(item.id);
+      this.props.setStoreMobileDetail(true);
       this.props.setStoreMobileDetailItem(item);
       window.inventory = this;
     }
@@ -230,7 +231,8 @@ const mapStateToProps = state => {
     storeFilter: state.storeState.filter,
     storeNeedsUpdate: state.storeState.needsUpdate,
     isMobile: state.app.isMobile,
-    mobileDetail: state.storeState.mobileDetail
+    mobileDetail: state.storeState.mobileDetail,
+    mobileItemDetail: state.storeState.mobileItemDetail
   }
 }
 
