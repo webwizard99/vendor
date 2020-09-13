@@ -110,7 +110,7 @@ class MenuBar extends React.Component {
         if (this.props.auth) {
           menuOffsets += 1;
         }
-        mobileOffsetStyle.height = `calc(2rem + ${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
+        mobileOffsetStyle.height = `calc(${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
         
       return (
         <div className="mobileMenuContainer"
