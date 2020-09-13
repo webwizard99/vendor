@@ -30,11 +30,17 @@ class MobileMenu extends React.Component {
   handlePrevious() {
     mobileScreens.previousScreen();
     mobileScreens.updateScreen();
+    if (this.props.mobileDropdown) {
+      this.props.setMobileDropdown(false);
+    }
   }
 
   handleNext() {
     mobileScreens.nextScreen();
     mobileScreens.updateScreen();
+    if (this.props.mobileDropdown) {
+      this.props.setMobileDropdown(false);
+    }
   }
 
   handleDropdown() {
@@ -55,7 +61,7 @@ class MobileMenu extends React.Component {
           {allScreens.map(screen => {
             return (
               <div className="mobileDropdownOption"
-                onClick={(newScreen) => this.handleScreenChange(newScreen)}>{screen}</div>
+                onClick={() => this.handleScreenChange(screen)}>{screen}</div>
             )
       })}
       </div>)
