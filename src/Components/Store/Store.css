@@ -95,6 +95,11 @@
 
 .mobileDetailActive {
   height: 30%;
+  transition: all 40ms 60ms ease-out;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 /* mobile styles */
@@ -109,7 +114,21 @@
     min-height: 10%;
   }
 
+  .incrementButtons {
+    width: 4rem;
+  }
 
+  .incrementButton {
+    height: 1.5rem;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .StoreItemTypeFilter {
+    width: 8rem;
+    font-size: 1.2rem;
+  }
 }
 
 /* tablet styles */
