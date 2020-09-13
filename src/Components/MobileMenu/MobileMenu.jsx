@@ -19,6 +19,7 @@ class MobileMenu extends React.Component {
     this.handlePrevious = this.handlePrevious.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.handleDropdown = this.handleDropdown.bind(this);
+    this.handleScreenChange = this.handleScreenChange.bind(this);
     this.getMobileDropdown = this.getMobileDropdown.bind(this);
   }
 
@@ -40,6 +41,11 @@ class MobileMenu extends React.Component {
     this.props.setMobileDropdown(!this.props.mobileDropdown)
   }
 
+  handleScreenChange(newScreen) {
+    mobileScreens.setScreen(newScreen);
+    mobileScreens.updateScreen();
+  }
+
   getMobileDropdown() {
     const allScreens = mobileScreens.getScreens();
     if (this.props.mobileDropdown) {
@@ -48,7 +54,8 @@ class MobileMenu extends React.Component {
           <Days />
           {allScreens.map(screen => {
             return (
-              <div className="mobileDropdownOption">{screen}</div>
+              <div className="mobileDropdownOption"
+                onClick={(newScreen) => this.handleScreenChange(newScreen)}>{screen}</div>
             )
       })}
       </div>)

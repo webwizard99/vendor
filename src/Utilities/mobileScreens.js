@@ -64,7 +64,14 @@ const mobileScreens = (function(){
     },
 
     setScreen: function(newScreen) {
-
+      const screenIndex = screenMap[newScreen];
+      if (screenIndex === null) {
+        return false;
+      } else {
+        currentIndex = screenIndex;
+        currentScreen = screens[screenIndex];
+        return true;
+      }
     },
 
     updateScreen: function() {

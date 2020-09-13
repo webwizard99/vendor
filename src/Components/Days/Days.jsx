@@ -6,6 +6,7 @@ import days from '../../game_modules/days';
 
 // import redux modules
 import { fetchDay } from '../../actions';
+import { SET_MOBILE_DROPDOWN } from '../../actions/types';
 import { connect } from 'react-redux'
 
 class Days extends React.Component {
@@ -25,6 +26,9 @@ class Days extends React.Component {
     const currentDay = this.props.day;
     // set day in game
     days.setDay(currentDay + 1);
+    if (this.props.mobileDropdown) {
+      this.props.setMobileDropdown(false);
+    }
     // set day in redux state;
     this.props.fetchDay();
   }
@@ -42,13 +46,15 @@ class Days extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    day: state.days.day
+    day: state.days.day,
+    mobileDropdown: state.mobileMenu.dropdown
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDay: () => dispatch(fetchDay())
+    fetchDay: () => dispatch(fetchDay()),
+    setMobileDropdown: (value) => dispatch({ type: SET_MOBILE_DROPDOWN, value: value })
   }
 }
 
