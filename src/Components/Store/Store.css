@@ -96,6 +96,7 @@
 
 .mobileDetailActive {
   height: 30%;
+  padding: 1rem 0px;
   transition: all 40ms 60ms ease-out;
   display: flex;
   flex-wrap: wrap;
