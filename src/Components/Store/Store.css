@@ -103,6 +103,10 @@
   justify-content: center;
 }
 
+.itemDetailName {
+  flex-basis: 100%;
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .Store {

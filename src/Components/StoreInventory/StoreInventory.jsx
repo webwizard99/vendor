@@ -2,7 +2,10 @@ import React from 'react';
 import './StoreInventory.css';
 
 import { connect } from 'react-redux';
-import { SET_STORE_INVENTORY, SET_STORE_UPDATE_STATUS } from '../../actions/types';
+import { SET_STORE_INVENTORY,
+  SET_STORE_UPDATE_STATUS,
+  SET_STORE_MOBILE_DETAIL,
+  SET_STORE_MOBILE_DETAIL_ITEM } from '../../actions/types';
 
 import gameInventory from '../../game_modules/storeInventory';
 // import storeItems from '../../game_modules/items';
@@ -24,6 +27,7 @@ class StoreInventory extends React.Component {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.markupOut = this.markupOut.bind(this);
     
+    this.handleMobileFocus = this.handleMobileFocus.bind(this);
     this.handleOneIncrement = this.handleOneIncrement.bind(this);
     this.handlePrototypeIncrement = this.handlePrototypeIncrement.bind(this);
     this.getInventoryItems = this.getInventoryItems.bind(this);
@@ -163,6 +167,17 @@ class StoreInventory extends React.Component {
     )
   }
 
+  handleMobileFocus(item) {
+    if (this.props.mobileDetail === item.id) {
+      this.props.mobileDetail = null;
+      window.inventory = undefined;
+    } else {
+      this.props.setStoreMobileDetail(item.id);
+      this.props.setStoreMobileDetailItem(item);
+      window.inventory = this;
+    }
+  }
+
   getInventoryItems() {
     if (this.props.inventory && this.props.inventory.length > 0) {
       let filteredInventory;
@@ -175,7 +190,9 @@ class StoreInventory extends React.Component {
         <div>{filteredInventory.map(item => {
           const composedPrice = Math.floor(item.value * (1 + (item.markup / 1000)));
           return (
-            <div className="InventoryItem itemBackground" key={item.id}>
+            <div className="InventoryItem itemBackground" 
+              key={item.id}
+              onTouchStart={() => handleMobileFocus(item)}>
               <span className="InventoryItemName">{item.name}</span>
               {this.getIncrementOneButtons(item.id)}
               {this.getIncrementAllButtons(item.prototypeId)}
@@ -209,14 +226,17 @@ const mapStateToProps = state => {
     inventoryCount: state.storeState.inventoryCount,
     filterActive: state.storeState.filterActive,
     storeFilter: state.storeState.filter,
-    storeNeedsUpdate: state.storeState.needsUpdate
+    storeNeedsUpdate: state.storeState.needsUpdate,
+    mobileDetail: state.storeState.mobileDetail
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setInventory: (newInventory) => dispatch({ type: SET_STORE_INVENTORY, inventory: newInventory }),
-    toggleStoreUpdateStatus: () => dispatch({ type: SET_STORE_UPDATE_STATUS })
+    toggleStoreUpdateStatus: () => dispatch({ type: SET_STORE_UPDATE_STATUS }),
+    setStoreMobileDetail: (detail) => dispatch({ type: SET_STORE_MOBILE_DETAIL, detail: detail }),
+    setStoreMobileDetailItem: (itemDetail) => dispatch({ type: SET_STORE_MOBILE_DETAIL_ITEM, itemDetail: itemDetail })
   }
 }
 

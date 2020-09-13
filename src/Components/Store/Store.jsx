@@ -178,9 +178,15 @@ class Store extends React.Component {
         </div>
       )
     }
+    if (this.props.mobileDetail === null) {
+      return '';
+    }
+    const inventoryComponent = window.inventory;
     return (
       <div className="MobileDetailContainer">
-
+        <div className="itemDetailName">{this.props.mobileItemDetail.name}</div>
+        {inventoryComponent.getIncrementOneButtons(this.props.mobileDetail)}
+        {inventoryComponent.getIncrementAllButtons(this.props.mobileItemDetail.prototypeId)}
       </div>
     )
   }
@@ -213,7 +219,9 @@ const mapStateToProps = state => {
     filterActive: state.storeState.filterActive,
     storeFilter: state.storeState.filter,
     storeNeedsUpdate: state.storeState.needsUpdate,
-    isMobile: state.app.isMobile
+    isMobile: state.app.isMobile,
+    mobileDetail: state.storeState.mobileDetail,
+    mobileItemDetail: state.storeState.mobileItemDetail
   }
 }
 
