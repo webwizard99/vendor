@@ -60,7 +60,7 @@
   margin-left: -100vw;
   top: calc(5vh + 45vh);
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .mobileMenu {

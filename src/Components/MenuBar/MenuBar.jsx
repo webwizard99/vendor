@@ -105,17 +105,18 @@ class MenuBar extends React.Component {
 
   getMobileMenu() {
     if (this.props.isMobile && this.state.mobileOpen) {
-      // let mobileOffsetStyle = {};
-      // let menuOffsets = 1;
-      //   if (this.props.auth) {
-      //     menuOffsets += 1;
-      //   }
-      //   mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets * .9)}rem + ${(menuOffsets * 2) * 0.4}rem - 1px`;
-      //   style={mobileOffsetStyle}
+      let mobileOffsetStyle = {};
+      let menuOffsets = 1;
+        if (this.props.auth) {
+          menuOffsets += 1;
+        }
+        mobileOffsetStyle.height = `calc(2rem + ${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
+        
       return (
         <div className="mobileMenuContainer"
           onClick={this.handleMobileOpen}>
           <ul className="LoginContainer mobileMenu"
+            style={mobileOffsetStyle}
             >
             {this.renderProfileLink()}
             {this.renderEditorLink()}
