@@ -50,6 +50,7 @@ class MobileMenu extends React.Component {
   handleScreenChange(newScreen) {
     mobileScreens.setScreen(newScreen);
     mobileScreens.updateScreen();
+    this.props.setMobileDropdown(false);
   }
 
   getMobileDropdown() {
