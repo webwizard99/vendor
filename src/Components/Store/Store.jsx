@@ -178,17 +178,19 @@ class Store extends React.Component {
         </div>
       )
     }
-    if (this.props.mobileDetail === null) {
-      return '';
+    if (this.props.mobileDetail !== null) {
+      const inventoryComponent = window.inventory;
+      return (
+        <div className="MobileDetailContainer mobileDetailActive">
+          <div className="itemDetailName">{this.props.mobileItemDetail.name}</div>
+          {inventoryComponent.getIncrementOneButtons(this.props.mobileDetail)}
+          {inventoryComponent.getIncrementAllButtons(this.props.mobileItemDetail.prototypeId)}
+        </div>
+      )
     }
-    const inventoryComponent = window.inventory;
     return (
-      <div className="MobileDetailContainer mobileDetailActive">
-        <div className="itemDetailName">{this.props.mobileItemDetail.name}</div>
-        {inventoryComponent.getIncrementOneButtons(this.props.mobileDetail)}
-        {inventoryComponent.getIncrementAllButtons(this.props.mobileItemDetail.prototypeId)}
-      </div>
-    )
+      <div className="MobileDetailContainer"></div>
+    );
   }
   
   render() {
