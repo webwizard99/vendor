@@ -85,15 +85,8 @@ class MenuBar extends React.Component {
 
   getLoginContainer() {
     if (this.props.isMobile) {
-      let hamburgerClass = "hamburgerContainer";
-      
-      if (this.state.mobileOpen) {
-        hamburgerClass += " toggledHamburger";
-        
-
-      }
       return (
-        <div className={hamburgerClass}
+        <div className="hamburgerContainer"
           onClick={this.handleMobileOpen}>
           <div className="hamburgerLine"></div>
           <div className="hamburgerLine"></div>
@@ -102,7 +95,7 @@ class MenuBar extends React.Component {
       )
     }
     return (
-      <ul className="LoginContainer mobile-menu">
+      <ul className="LoginContainer">
         {this.renderProfileLink()}
         {this.renderEditorLink()}
         {this.renderLogin()}
@@ -112,19 +105,24 @@ class MenuBar extends React.Component {
 
   getMobileMenu() {
     if (this.props.isMobile && this.state.mobileOpen) {
-      let mobileOffsetStyle = {};
-      let menuOffsets = 1;
-        if (this.props.auth) {
-          menuOffsets += 1;
-        }
-        mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets * .9)}rem + ${(menuOffsets * 2) * 0.4}rem - 1px`;
+      // let mobileOffsetStyle = {};
+      // let menuOffsets = 1;
+      //   if (this.props.auth) {
+      //     menuOffsets += 1;
+      //   }
+      //   mobileOffsetStyle.top = `calc(5vh + 1rem + ${(menuOffsets * .9)}rem + ${(menuOffsets * 2) * 0.4}rem - 1px`;
+      //   style={mobileOffsetStyle}
       return (
-        <ul className="LoginContainer mobileMenu"
-          style={mobileOffsetStyle}>
-          {this.renderProfileLink()}
-          {this.renderEditorLink()}
-          {this.renderLogin()}
-        </ul>
+        <div className="mobileMenuContainer"
+          onClick={this.handleMobileOpen}>
+          <ul className="LoginContainer mobileMenu"
+            >
+            {this.renderProfileLink()}
+            {this.renderEditorLink()}
+            {this.renderLogin()}
+          </ul>
+        </div>
+        
       )
     }
   }

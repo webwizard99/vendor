@@ -53,6 +53,16 @@
   margin: 6px 0;
 }
 
+.mobileMenuContainer {
+  height: 90vh;
+  width: 100vw;
+  position: relative;
+  margin-left: -100vw;
+  top: calc(5vh + 45vh);
+  display: flex;
+  justify-content: end;
+}
+
 .mobileMenu {
   flex-direction: column;
   background: rgb(80, 100, 80);
@@ -66,11 +76,6 @@
 .mobileMenu > li {
   margin: .8rem 0;
   width: 6rem;
-}
-
-.toggledHamburger {
-  position: relative;
-  left: 8rem;
 }
 
 
