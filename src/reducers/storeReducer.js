@@ -63,6 +63,11 @@ export default function(state = initialState, action) {
         ...state,
         mobileDetail: action.detail
       }
+    case SET_STORE_MOBILE_DETAIL_ITEM:
+      return {
+        ...state,
+        mobileItemDetail: action.itemDetail
+      }
     default:
       return state;
   }
