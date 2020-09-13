@@ -170,6 +170,14 @@ class Store extends React.Component {
     if (!this.props.isMobile) {
       return '';
     }
+    if (this.props.filterActive) {
+      return (
+        <div className="MobileDetailContainer mobileDetailActive">
+          {this.getIncrementButtons()}
+          {this.getFilter()}
+        </div>
+      )
+    }
     return (
       <div className="MobileDetailContainer">
 

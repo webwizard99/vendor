@@ -88,7 +88,28 @@
 
 .MobileDetailContainer {
   width: 100%;
-  
+  background: rgb(220, 225, 215);
+  height: 0.1%;
+  transition: all 40ms 60ms ease-out;
+}
+
+.mobileDetailActive {
+  height: 30%;
+}
+
+/* mobile styles */
+@media only screen and (max-width: 650px) {
+  .Store {
+    height: 82vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .StoreMenuBar {
+    min-height: 10%;
+  }
+
+
 }
 
 /* tablet styles */

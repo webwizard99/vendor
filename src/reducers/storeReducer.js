@@ -3,7 +3,9 @@ import { SET_STORE_NAME,
   SET_STORE_INVENTORY,
   SET_STORE_FILTER,
   SET_STORE_FILTER_ACTIVE,
-  SET_STORE_UPDATE_STATUS } from '../actions/types';
+  SET_STORE_UPDATE_STATUS,
+  SET_STORE_MOBILE_DETAIL,
+  SET_STORE_MOBILE_DETAIL_ITEM } from '../actions/types';
 
 const initialState = {
   name: '',
@@ -55,6 +57,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         needsUpdate: newStatus
+      }
+    case SET_STORE_MOBILE_DETAIL:
+      return {
+        ...state,
+        mobileDetail: action.detail
       }
     default:
       return state;
