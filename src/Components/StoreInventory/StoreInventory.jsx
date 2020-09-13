@@ -174,9 +174,10 @@ class StoreInventory extends React.Component {
       mobileItem = this.props.mobileItemDetail;
     }
     console.log(mobileItem);
+    console.log(item);
     if (this.props.mobileItemDetail && mobileItem.id === item.id) {
       this.props.setMobileDetail(false);
-      this.props.setMobileItemDetail(null);
+      // this.props.setMobileItemDetail(null);
       window.inventory = undefined;
     } else {
       this.props.setStoreMobileDetail(true);
