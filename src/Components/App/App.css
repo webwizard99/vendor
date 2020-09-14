@@ -27,19 +27,3 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   border: 1px solid rgb(30, 40, 30);
   background: rgb(140, 170, 140);
 }
-
-.nonPcAdapt {
-  position: static;
-}
-
-@media screen and (min-width: 320px) and (max-width: 1400px) and (orientation: landscape) {
-  .nonPcAdapt {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    overflow-x: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-}

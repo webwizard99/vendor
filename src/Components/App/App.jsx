@@ -60,12 +60,8 @@ class App extends React.Component {
   }  
 
   render() {
-    let appClass = "App";
-    if (!this.props.isPc) {
-      appClass += " nonPcAdapt";
-    }
     return (
-      <div className={appClass}
+      <div className="App"
         ref={ref => {
           this.container = ref;
         }}>
