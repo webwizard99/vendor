@@ -55,7 +55,7 @@ class MenuBar extends React.Component {
         return;
       case false:
         return (
-          <li key="login"><a href="/auth/facebook">login with Facebook</a></li>
+          <li key="login"><a href="/auth/facebook" className="facebookLogo">f</a></li>
         );
       default:
         return (

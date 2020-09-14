@@ -37,6 +37,11 @@
   text-decoration: none;
 }
 
+.facebookLogo {
+  background: rgb(60, 60, 240);
+  border-radius: 1rem;
+}
+
 .profileLink {
   cursor: pointer;
 }
