@@ -89,7 +89,11 @@ class Store extends React.Component {
     if (this.valence === 1) {
       this.handleIncrease();
     }
-    this.timer = setTimeout(this.repeat, this.delay);
+    let totalDelay = this.delay * this.mobileMultiplier;
+    if (this.mobileMultiplier > 1) {
+      this.mobileMultiplier = 1;
+    }
+    this.timer = setTimeout(this.repeat, totalDelay);
     this.markupIntensity += 5;
   }
 
@@ -97,6 +101,7 @@ class Store extends React.Component {
     clearTimeout(this.timer);
     this.markupIntensity = 10;
     this.valence = 1;
+    this.mobileMultiplier = 2;
     this.markupOut();
   }
 

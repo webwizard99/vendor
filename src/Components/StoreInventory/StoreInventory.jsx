@@ -18,6 +18,7 @@ class StoreInventory extends React.Component {
       markup: 50
     }
     this.timer = undefined;
+    this.mobileMultiplier = 2;
     this.delay = 200;
     this.markupIntensity = 10;
     this.valence = 1;
@@ -88,7 +89,11 @@ class StoreInventory extends React.Component {
     if (prototypeId !== undefined) {
       this.handlePrototypeIncrement(prototypeId);
     }
-    this.timer = setTimeout(() => this.repeat(repeatPayload), this.delay);
+    let totaldelay = this.delay * this.mobileMultiplier;
+    if (this.mobileMultiplier > 1) {
+      this.mobileMultiplier = 1;
+    }
+    this.timer = setTimeout(() => this.repeat(repeatPayload), totaldelay);
     this.markupIntensity += 5;
   }
 
@@ -96,6 +101,7 @@ class StoreInventory extends React.Component {
     clearTimeout(this.timer);
     this.markupIntensity = 10;
     this.valence = 1;
+    this.mobileMultiplier = 2;
     this.markupOut();
   }
 
