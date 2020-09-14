@@ -38,7 +38,7 @@ class App extends React.Component {
         <StartScreen />
       )
     } else {
-      if (this.props.isMobile) {
+      if (!this.props.isPc) {
         return (
           <MobileGameScreen />
         )
@@ -60,8 +60,12 @@ class App extends React.Component {
   }  
 
   render() {
+    let appClass = "App";
+    if (!this.props.isPc) {
+      appClass += " nonPcAdapt";
+    }
     return (
-      <div className="App"
+      <div className={appClass}
         ref={ref => {
           this.container = ref;
         }}>
@@ -77,7 +81,8 @@ const mapStateToProps = state => {
   return {
     started: state.gameState.started,
     profileActive: state.profile.active,
-    isMobile: state.app.isMobile
+    isMobile: state.app.isMobile,
+    isPc: state.app.isPc
   }
 }
 
