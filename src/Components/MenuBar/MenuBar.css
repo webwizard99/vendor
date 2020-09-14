@@ -37,10 +37,10 @@
   text-decoration: none;
 }
 
-a.facebookLogo {
+.facebookLogo {
   background: rgb(60, 60, 240);
   font-family: 'Lato', sans-serif;
-  height: 1.2rem;
+  max-height: 1.2rem;
   width: 1.2rem;
   font-size: 1.2rem;
   border-radius: 1rem;
@@ -113,7 +113,7 @@ a.facebookLogo {
   }
 
   .facebookLogo {
-    height: 1.8rem;
+    max-height: 1.8rem;
     width: 1.8rem;
     border-radius: 1.8rem;
   }
@@ -143,7 +143,7 @@ a.facebookLogo {
   }
 
   .facebookLogo {
-    height: 1.8rem;
+    max-height: 1.8rem;
     width: 1.8rem;
     border-radius: 1.5rem;
   }
