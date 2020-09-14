@@ -65,10 +65,7 @@
 }
 
 .hamburgerLine {
-  width: 35px;
-  height: 5px;
   background: white;
-  margin: 6px 0;
 }
 
 .mobileMenuContainer {
@@ -154,6 +151,12 @@
   .MenuTitle a {
     font-size: 2.4rem;
     line-height: 2.6rem;
+  }
+
+  .hamburgerLine {
+    width: 35px;
+    height: 5px;
+    margin: 6px 0;
   }
 
   .facebookLogo {
