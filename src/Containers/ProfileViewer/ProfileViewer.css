@@ -54,7 +54,7 @@
 }
 
 /* tablet styles */
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 1200px) {
   .ProfileViewer {
     height: 90vh;
     bottom: 90vh;
@@ -68,7 +68,12 @@
   }
 
   .ProfileForm {
-    width: 70%;
+    width: 80%;
+  }
+
+  .input-fields-area {
+    display: flex;
+    flex-direction: column;
   }
 
   .item-label {
@@ -85,11 +90,6 @@
 }
 
 @media only screen and (max-width: 650px) {
-
-  .input-fields-area {
-    display: flex;
-    flex-direction: column;
-  }
 
   .item-label {
     padding-bottom: .2rem;
