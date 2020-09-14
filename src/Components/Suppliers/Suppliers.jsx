@@ -48,8 +48,6 @@ class Suppliers extends React.Component {
     let spacerClass = "spacer";
     if (!this.props.isPc) {
       supplierContainerClass += " nonPcContainer";
-    }
-    if (this.props.isMobile) {
       supplierContainerClass += " mobileContainer";
       spacerClass += " mobileSpacer";
     }
