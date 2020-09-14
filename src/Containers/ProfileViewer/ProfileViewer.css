@@ -5,14 +5,16 @@
   bottom: 94vh;
   background: rgb(240, 245, 250);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
   font-family: "Roboto Slab", serif;
 }
 
 .ProfileForm {
-  width: 40%;
+  width: 50%;
   height: 12rem;
   margin-top: 2rem;
+  align-self: center;
 }
 
 .input-group {
@@ -33,6 +35,7 @@
 
 .CloseButton {
   cursor: pointer;
+  align-self: flex-end;
   height: 6rem;
   width: 6rem;
   margin: 2rem;
