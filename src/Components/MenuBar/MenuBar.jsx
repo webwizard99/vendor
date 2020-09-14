@@ -110,8 +110,9 @@ class MenuBar extends React.Component {
         if (this.props.auth) {
           menuOffsets += 1;
         }
+        console.log('mobile offsets');
         // set style by default for tablet
-        mobileOffsetStyle.height = `calc(${(menuOffsets * 2.4)})rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
+        mobileOffsetStyle.height = `calc(${(menuOffsets * 2.4)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
         if (this.props.isMobile) {
           mobileOffsetStyle.height = `calc(${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
         } 
