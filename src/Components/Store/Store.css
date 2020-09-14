@@ -113,8 +113,14 @@
 
 /* tablet styles */
 @media only screen and (max-width: 1200px) {
+  .Store {
+    height: 82vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   .StoreMenuBar {
-    height: 10%;
+    min-height: 10%;
   }
 
   .Inspect {
@@ -132,15 +138,6 @@
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {
-  .Store {
-    height: 82vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .StoreMenuBar {
-    min-height: 10%;
-  }
 
   .incrementButtons {
     width: 4rem;
