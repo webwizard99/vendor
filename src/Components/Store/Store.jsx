@@ -89,7 +89,10 @@ class Store extends React.Component {
     if (this.valence === 1) {
       this.handleIncrease();
     }
-    let totalDelay = this.delay * this.mobileMultiplier;
+    let totalDelay = this.delay;
+    if (!this.props.pc) {
+      totalDelay *= this.mobileMultiplier;
+    } 
     if (this.mobileMultiplier > 1) {
       this.mobileMultiplier = 1;
     }
@@ -176,7 +179,7 @@ class Store extends React.Component {
   }
 
   getMobileDetail() {
-    if (!this.props.isMobile) {
+    if (this.props.isPc) {
       return '';
     }
     if (this.props.filterActive && !this.props.mobileDetail) {
@@ -208,8 +211,8 @@ class Store extends React.Component {
         <div className="StoreMenuBar">
           <h2 className="StoreName">{this.props.storeName}</h2>
           <div className="FilterGroup">
-            {this.props.isMobile ? '' : this.getIncrementButtons()}
-            {this.props.isMobile ? '' : this.getFilter()}
+            {this.props.isPc ? this.getIncrementButtons() : ''}
+            {this.props.isPc ? this.getFilter() : ''}
           </div>
           <span className="Inspect" role="img" aria-label="inspect" onClick={this.toggleFilter}>&#128269; </span>
           <div className="GoldDisplay">
@@ -231,6 +234,7 @@ const mapStateToProps = state => {
     storeFilter: state.storeState.filter,
     storeNeedsUpdate: state.storeState.needsUpdate,
     isMobile: state.app.isMobile,
+    isPc: state.app.isPc,
     mobileDetail: state.storeState.mobileDetail,
     mobileItemDetail: state.storeState.mobileItemDetail
   }

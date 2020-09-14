@@ -209,8 +209,8 @@ class StoreInventory extends React.Component {
               key={item.id}
               onTouchStart={() => this.handleMobileFocus(item)}>
               <span className="InventoryItemName">{item.name}</span>
-              {this.props.isMobile ? '' : this.getIncrementOneButtons(item.id)}
-              {this.props.isMobile ? '' : this.getIncrementAllButtons(item.prototypeId)}
+              {this.props.isPc ? this.getIncrementOneButtons(item.id) : ''}
+              {this.props.isPc ? this.getIncrementAllButtons(item.prototypeId) : ''}
               <div className="ItemValueGroup">
                 <span className="InventoryItemValue"><span className="CoinSymbol">&#x2689; </span>{composedPrice}</span>
               </div>
@@ -243,6 +243,7 @@ const mapStateToProps = state => {
     storeFilter: state.storeState.filter,
     storeNeedsUpdate: state.storeState.needsUpdate,
     isMobile: state.app.isMobile,
+    isPc: state.app.isPc,
     mobileDetail: state.storeState.mobileDetail,
     mobileItemDetail: state.storeState.mobileItemDetail
   }
