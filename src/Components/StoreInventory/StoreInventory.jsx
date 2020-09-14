@@ -194,8 +194,12 @@ class StoreInventory extends React.Component {
       return (
         <div>{filteredInventory.map(item => {
           const composedPrice = Math.floor(item.value * (1 + (item.markup / 1000)));
+          let itemClass = "InventoryItem itemBackground";
+          if (this.props.mobileDetail && item.id === this.props.mobileItemDetail.id) {
+            itemClass += " activeMobileItem";
+          }
           return (
-            <div className="InventoryItem itemBackground" 
+            <div className={itemClass} 
               key={item.id}
               onTouchStart={() => this.handleMobileFocus(item)}>
               <span className="InventoryItemName">{item.name}</span>

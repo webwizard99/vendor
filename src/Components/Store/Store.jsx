@@ -163,6 +163,10 @@ class Store extends React.Component {
 
   toggleFilter() {
     const newValue = !this.props.filterActive;
+    if (newValue && this.props.mobileDetail) {
+      const inventoryComponent = window.inventory;
+      inventoryComponent.handleMobileFocus(this.props.mobileItemDetail);
+    }
     this.props.setStoreFilterActive(newValue);
   }
 
