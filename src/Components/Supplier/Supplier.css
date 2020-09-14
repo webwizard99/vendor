@@ -63,26 +63,27 @@
 /* tablet styles */
 @media only screen and (max-width: 1200px) {
   .Supplier {
-    height: 8rem;
-    min-width: 22rem;
+    min-height: 20rem;
+    min-width: 34rem;
+    margin: 2rem 0px;
   }
 
   .SupplierName {
-    height: 1.4rem;
-    font-size: 1.2rem;
+    height: 2.4rem;
+    font-size: 2rem;
   }
 
   .SupplierInventoryItem {
-    height: 1.4rem;
+    height: 2.4rem;
   }
 
   .SupplierInventoryItemName {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     width: 54%;
   }
 
   .SupplierItemsValueGroup {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
 }
 

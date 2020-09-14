@@ -14,13 +14,13 @@
 /* tablet styles */
 @media only screen and (max-width: 1200px) {
   .SupplierBuyButton {
-    height: 1.1rem;
-    width: 2.4rem;
-    border-radius: 5px;
+    height: 1.6rem;
+    width: 3.8rem;
+    border-radius: 8px;
   }
 
   .supplierBuyButtonIcon {
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 }
 
