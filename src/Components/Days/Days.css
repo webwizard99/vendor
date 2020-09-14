@@ -21,7 +21,7 @@
 }
 
 /* tablet styles */
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 1200px) {
   .Days {
     height: 3rem;
     margin: 1rem 0px;

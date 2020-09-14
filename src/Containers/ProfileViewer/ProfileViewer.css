@@ -54,11 +54,19 @@
 }
 
 /* tablet styles */
-@media only screen and (max-width: 1056px) {
+@media only screen and (max-width: 1650px) {
   .ProfileViewer {
     height: 90vh;
     bottom: 90vh;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
   }
+  
+  .CloseButton {
+    align-self: flex-end;
+  }
+
   .ProfileForm {
     width: 70%;
   }
@@ -77,15 +85,6 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .ProfileViewer {
-    flex-direction: column-reverse;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .CloseButton {
-    align-self: flex-end;
-  }
 
   .input-fields-area {
     display: flex;

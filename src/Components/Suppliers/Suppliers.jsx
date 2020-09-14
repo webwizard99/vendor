@@ -76,7 +76,7 @@ class Suppliers extends React.Component {
   
   render() {
     let suppliersClass = "Suppliers";
-    if (this.props.isMobile) {
+    if (!this.props.isPc) {
       suppliersClass += " mobileSuppliers";
     }
     if (!this.props.isPc && !this.props.isMobile) {

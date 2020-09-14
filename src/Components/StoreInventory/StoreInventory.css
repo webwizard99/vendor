@@ -71,6 +71,17 @@
   text-align: center;
 }
 
+/* tablet styles */
+@media only screen and (max-width: 1200px) {
+  .StoreInventory {
+    height: 90%;
+  }
+  .InventoryItem {
+    height: 2.2rem;
+    font-size: 1.4;
+  }
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .InventoryItemName {
@@ -90,13 +101,3 @@
   }
 }
 
-/* tablet styles */
-@media only screen and (max-width: 1056px) {
-  .StoreInventory {
-    height: 90%;
-  }
-  .InventoryItem {
-    height: 2.2rem;
-    font-size: 1.4;
-  }
-}
