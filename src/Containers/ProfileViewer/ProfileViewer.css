@@ -76,23 +76,50 @@
     flex-direction: column;
   }
 
+  .input-group {
+    height: 6rem;
+  }
+
   .item-label {
-    font-size: 1.4rem;
+    font-size: 2.4rem;
+  }
+
+  #nickname {
+    width: 100%;
   }
 
   .input-text {
-    font-size: 1.4rem;
+    font-size: 2.4rem;
+    margin: 1rem 0px;
+  }
+
+  .input-checkbox {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
   }
 
   .profile-submit {
-    font-size: 1.8rem;
+    font-size: 2.8rem;
   }
 }
 
 @media only screen and (max-width: 650px) {
+  .ProfileForm {
+    margin-top: 0px;
+  }
 
   .item-label {
     padding-bottom: .2rem;
+    font-size: 1.4rem;
+  }
+
+  .input-group {
+    height: 4rem;
+  }
+
+  .input-text {
+    font-size: 1.4rem;
   }
 
   .input-group, .profile-submit {
@@ -101,9 +128,12 @@
 
   .profile-submit {
     align-self: center;
+    font-size: 1.8rem;
   }
 
-  #nickname {
-    width: 100%;
+  .input-checkbox {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: .5rem;
   }
 }
