@@ -113,7 +113,7 @@ class MenuBar extends React.Component {
         console.log(this.props.isMobile);
         if (this.props.isMobile) {
           mobileOffsetStyle.height = `calc(${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
-        } else {
+        } else if (this.props.isMobile === false) {
           mobileOffsetStyle.height = `calc(${(menuOffsets * 2.4)})rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
         }
         
