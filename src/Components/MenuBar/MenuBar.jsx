@@ -84,7 +84,7 @@ class MenuBar extends React.Component {
   }
 
   getLoginContainer() {
-    if (this.props.isMobile) {
+    if (!this.props.isPc) {
       return (
         <div className="hamburgerContainer"
           onClick={this.handleMobileOpen}>
@@ -104,13 +104,16 @@ class MenuBar extends React.Component {
   }
 
   getMobileMenu() {
-    if (this.props.isMobile && this.state.mobileOpen) {
+    if (!this.props.isPc && this.state.mobileOpen) {
       let mobileOffsetStyle = {};
       let menuOffsets = 1;
         if (this.props.auth) {
           menuOffsets += 1;
         }
-        mobileOffsetStyle.height = `calc(${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
+        if (!this.props.isPc) {
+          mobileOffsetStyle.height = `calc(${(menuOffsets * 1.8)}rem + ${(menuOffsets * 2) * 0.8}rem - 1px`;
+        }
+        
         
       return (
         <div className="mobileMenuContainer"
@@ -143,7 +146,8 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     profileActive: state.profile.active,
-    isMobile: state.app.isMobile
+    isMobile: state.app.isMobile,
+    isPc: state.app.isPc
   }
 }
 
