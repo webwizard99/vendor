@@ -39,6 +39,9 @@
 
 .facebookLogo {
   background: rgb(60, 60, 240);
+  font-family: 'Lato', sans-serif;
+  height: 1.2rem;
+  width: 1.2rem;
   border-radius: 1rem;
 }
 
@@ -103,6 +106,12 @@
     font-size: 2.4rem;
     line-height: 2.6rem;
   }
+
+  .facebookLogo {
+    height: 2.4rem;
+    width: 2.4rem;
+    border-radius: 1.5rem;
+  }
 }
 
 /* Tablet styles */
@@ -118,5 +127,11 @@
   .MenuTitle a {
     font-size: 2.8rem;
     line-height: 3rem;
+  }
+
+  .facebookLogo {
+    height: 2.6rem;
+    width: 2.6rem;
+    border-radius: 1.8rem;
   }
 }
