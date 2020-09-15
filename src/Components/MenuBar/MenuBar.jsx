@@ -146,12 +146,12 @@ class MenuBar extends React.Component {
   getFullScreenControls() {
     if (!this.props.isFullscreen) {
       return <li key="goFullscreen" 
-        className="Fullscreen"
+        className="Fullscreen screenLink"
         onClick={this.handleFullscreen}>[  ]</li>
     } else {
       return <li key="exitFullscren"
-        className="ExitFullScreenGroup"
-        onClick={this.handleFullscreen}><p className="exitLine">&#x2143; L</p><p className="exitLine">&#x2142; &#9495;</p></li>
+        className="ExitFullScreen screenLink"
+        onClick={this.handleFullscreen}>&#9580;</li>
     }
   }
   
