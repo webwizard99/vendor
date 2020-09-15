@@ -136,20 +136,34 @@ class Store extends React.Component {
 
   getIncrementButtons() {
     if (!this.props.filterActive) return '';
-    return (
-      <div className="incrementButtons">
-        <div className="decreaseAll incrementButton button"
-          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
-          onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon minus">-</span>
+    if (this.props.isPc) {
+      return (
+        <div className="incrementButtons">
+          <div className="decreaseAll incrementButton button"
+            onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon minus">-</span>
+          </div>
+          <div className="increaseAll incrementButton button"
+            onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon plus">+</span>
+          </div>
         </div>
-        <div className="increaseAll incrementButton button"
-          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
-          onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon plus">+</span>
+      )
+    } else {
+      return (
+        <div className="incrementButtons">
+          <div className="decreaseAll incrementButton button"
+            onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon minus">-</span>
+          </div>
+          <div className="increaseAll incrementButton button"
+            onTouchStart={this.onMouseDown} onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon plus">+</span>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    
   }
 
   getFilter() {

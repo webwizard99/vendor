@@ -132,45 +132,73 @@ class StoreInventory extends React.Component {
   }
 
   getIncrementOneButtons(id) {
-    return (
-      <div className="incrementButtons incrementOneSet">
-        <div className="decreaseOne incrementButton button"
-          onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
-          onMouseUp={this.onMouseUp}
-          onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
-          onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon minusOne">-</span>
+    if (this.props.isPc) {
+      return (
+        <div className="incrementButtons incrementOneSet">
+          <div className="decreaseOne incrementButton button"
+            onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
+            onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon minusOne">-</span>
+          </div>
+          <div className="increaseOne incrementButton button"
+            onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
+            onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon plusOne">+</span>
+          </div>
         </div>
-        <div className="increaseOne incrementButton button"
-          onMouseDown={(e) => this.onMouseDown({ id: id, e: e })}
-          onMouseUp={this.onMouseUp}
-          onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
-          onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon plusOne">+</span>
+      )
+    } else {
+      return (
+        <div className="incrementButtons incrementOneSet">
+          <div className="decreaseOne incrementButton button"
+            onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
+            onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon minusOne">-</span>
+          </div>
+          <div className="increaseOne incrementButton button"
+            onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
+            onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon plusOne">+</span>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    
   }
 
   getIncrementAllButtons(prototypeId) {
-    return (
-      <div className="incrementButtons incrementAllSet">
-        <div className="decreaseProto incrementButtonWide button"
-          onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onMouseUp={this.onMouseUp}
-          onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon minusProto">--</span>
+    if (this.props.isPc) {
+      return (
+        <div className="incrementButtons incrementAllSet">
+          <div className="decreaseProto incrementButtonWide button"
+            onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+            onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon minusProto">--</span>
+          </div>
+          <div className="increaseProto incrementButtonWide button"
+            onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+            onMouseUp={this.onMouseUp}>
+            <span className="incrementIcon plusProto">++</span>
+          </div>
         </div>
-        <div className="increaseProto incrementButtonWide button"
-          onMouseDown={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onMouseUp={this.onMouseUp}
-          onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
-          onTouchEnd={this.onMouseUp}>
-          <span className="incrementIcon plusProto">++</span>
+      )
+    } else {
+      return (
+        <div className="incrementButtons incrementAllSet">
+          <div className="decreaseProto incrementButtonWide button"
+            onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+            onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon minusProto">--</span>
+          </div>
+          <div className="increaseProto incrementButtonWide button"
+            onTouchStart={(e) => this.onMouseDown({ prototypeId: prototypeId, e: e })}
+            onTouchEnd={this.onMouseUp}>
+            <span className="incrementIcon plusProto">++</span>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    
   }
 
   handleMobileFocus(item) {
