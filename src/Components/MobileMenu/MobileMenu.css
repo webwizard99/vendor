@@ -66,7 +66,7 @@
   }
 
   .MobileDropdown {
-    margin-left: calc(-100vw - calc(calc(100vw - 24rem) /2));
+    margin-left: calc(-100vw - calc(calc(100vw - 26rem) /2));
     /* 1/2 mobile menu height + 1/2 days height + (((dropdown option height + (dropdown option padding * 2)) * number of dropdown options) / 2) */
     top: calc(4vh + 2.5rem + calc(calc(calc(2.8rem + calc(1.2rem * 2)) * 2)) / 2);
   }
