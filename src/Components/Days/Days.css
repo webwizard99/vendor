@@ -53,6 +53,8 @@
 
   .DayTitle {
     text-align: left;
+    font-size: 1.4rem;
+    width: 10rem;
   }
 
   .nextDay {
