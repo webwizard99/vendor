@@ -106,7 +106,7 @@
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .InventoryItem {
-    height: 1.4rem;
+    height: 2rem;
     font-size: 1.2rem;
   }
   

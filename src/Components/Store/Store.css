@@ -106,7 +106,6 @@
 
 .itemDetailName {
   flex-basis: 100%;
-  font-size: 1.6rem;
   text-align: center;
 }
 
@@ -186,6 +185,15 @@
 
   .GoldDisplay {
     font-size: 1.4rem;
+  }
+
+  .StoreMenuBar .CoinSymbol {
+    margin-right: .2rem;
+  }
+
+  /* adjust */
+  .itemDetailName {
+    font-size: 1.6rem;
   }
 
   .incrementButton {
