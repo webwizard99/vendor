@@ -93,6 +93,15 @@
   margin: .8rem 0;
 }
 
+.ExitFullscreenGroup {
+  
+}
+
+.exitLine {
+  height: 40%;
+  font-size: .5rem;
+}
+
 /* Tablet styles */
 @media only screen and (max-width: 1200px) {
   .MenuBar {

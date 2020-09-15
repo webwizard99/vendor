@@ -21,6 +21,8 @@ class MenuBar extends React.Component {
     this.renderProfileLink = this.renderProfileLink.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.renderEditorLink = this.renderEditorLink.bind(this);
+    this.handleFullscreen = this.handleFullscreen.bind(this);
+    this.getFullScreenControls = this.getFullScreenControls.bind(this);
     this.handleMobileOpen = this.handleMobileOpen.bind(this);
   }
 
@@ -106,7 +108,7 @@ class MenuBar extends React.Component {
   getMobileMenu() {
     if (!this.props.isPc && this.state.mobileOpen) {
       let mobileOffsetStyle = {};
-      let menuOffsets = 1;
+      let menuOffsets = 2;
         if (this.props.auth) {
           menuOffsets += 1;
         }
@@ -123,13 +125,33 @@ class MenuBar extends React.Component {
           <ul className="LoginContainer mobileMenu"
             style={mobileOffsetStyle}
             >
+            {this.getFullScreenControls()}
             {this.renderProfileLink()}
-            {this.renderEditorLink()}
             {this.renderLogin()}
           </ul>
         </div>
         
       )
+    }
+  }
+
+  handleFullscreen() {
+    if (!this.props.isFullscreen) {
+      screenInfo.goFullScreen();
+    } else {
+      screenInfo.leaveFullScreen();
+    }
+  }
+
+  getFullScreenControls() {
+    if (!this.props.isFullscreen) {
+      return <li key="goFullscreen" 
+        className="Fullscreen"
+        onClick={handleFullscreen}>[  ]</li>
+    } else {
+      return <li key="exitFullscren"
+        className="ExitFullScreenGroup"
+        onClick={handleFullscreen}><p className="exitLine">&#x2143; L</p><p className="exitLine">&#x2142; &#9495;</p></li>
     }
   }
   
@@ -149,7 +171,8 @@ const mapStateToProps = state => {
     auth: state.auth,
     profileActive: state.profile.active,
     isMobile: state.app.isMobile,
-    isPc: state.app.isPc
+    isPc: state.app.isPc,
+    isFullscreen: state.app.isFullscreen
   }
 }
 

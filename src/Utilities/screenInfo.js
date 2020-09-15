@@ -40,10 +40,32 @@ const screenInfo = (function(){
     
   }
 
-  const setFullScreen = function(ele) {
-    isFullscreen = true;
-    document.fullscreen = true;
-    document.fullscreenElement = ele;
+  const setFullScreen = function() {
+    
+    let App = document.querySelector('.App');
+    if (App.requestFullscreen) {
+      App.requestFullscreen();
+      isFullscreen = true;
+    }
+    if (App.msRequestFullscreen) {
+      App.msRequestFullscreen();
+      isFullscreen = true;
+    }
+    if (App.mozRequestFullscreen) {
+      App.mozRequestFullscreen();
+      isFullscreen = true;
+    }
+    if (App.webkitRequestFullscreen) {
+      App.webkitRequestFullscreen();
+      isFullscreen = true;
+    }
+    // document.fullscreen = true;
+    // document.fullscreenElement = App;
+  }
+
+  const exitFullScreen = function() {
+    isFullscreen = false;
+    document.exitFullscreen();
   }
 
   const setScreenInfo = function() {
@@ -70,8 +92,12 @@ const screenInfo = (function(){
     getIsMobile: function() {
       return isMobile;
     },
-    setElementFullScreen: function(element) {
-      setFullScreen(element);
+    goFullScreen: function() {
+      setFullScreen();
+      dispatchFullscreen();
+    },
+    leaveFullScreen: function() {
+      exitFullScreen();
       dispatchFullscreen();
     }
   }
