@@ -126,6 +126,10 @@
     font-size: 2rem;
   }
 
+  .StoreName {
+    font-size: 2rem;
+  }
+
   .Inspect {
     font-size: 2rem;
   }
@@ -134,13 +138,14 @@
     font-size: 2rem;
   }
 
+  .GoldDisplay .CoinSymbol {
+    margin-right: .5rem;
+  }
+
   .StoreMenuBar .CoinSymbol {
     margin-right: .8rem;
   }
 
-  .GoldDisplay .CoinSymbol {
-    margin-right: .5rem;
-  }
 
   .incrementButtons {
     width: 8rem;

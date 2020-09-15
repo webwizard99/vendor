@@ -64,7 +64,7 @@
 @media only screen and (max-width: 1200px) {
   .Supplier {
     min-height: 20rem;
-    min-width: 34rem;
+    min-width: 90%;
     margin: 2rem 0px;
   }
 
