@@ -76,6 +76,7 @@
   .StoreInventory {
     height: 90%;
   }
+
   .InventoryItem {
     height: 2.8rem;
     font-size: 1.6rem;
@@ -104,6 +105,11 @@
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {
+  .InventoryItem {
+    height: 1.4rem;
+    font-size: 1.2rem;
+  }
+  
   .InventoryItemName {
     width: 20rem;
   }

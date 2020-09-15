@@ -167,6 +167,9 @@
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {
+  .StoreMenuBar {
+    font-size: 1.4rem;
+  }
 
   .incrementButtons {
     width: 4rem;
@@ -175,6 +178,14 @@
   .StoreItemTypeFilter {
     width: 8rem;
     font-size: 1.2rem;
+  }
+
+  .Inspect {
+    font-size: 1.4rem;
+  }
+
+  .GoldDisplay {
+    font-size: 1.4rem;
   }
 
   .incrementButton {
