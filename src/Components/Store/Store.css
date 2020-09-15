@@ -134,13 +134,9 @@
   .GoldDisplay .CoinSymbol {
     margin-right: .5rem;
   }
-}
-
-/* mobile styles */
-@media only screen and (max-width: 650px) {
 
   .incrementButtons {
-    width: 4rem;
+    width: 6rem;
   }
 
   .incrementButton {
@@ -150,6 +146,18 @@
     font-size: 1.5rem;
     border-radius: 1rem;
   }
+
+  .itemDetailName {
+    font-size: 2.4rem;
+  }
+}
+
+/* mobile styles */
+@media only screen and (max-width: 650px) {
+
+  .incrementButtons {
+    width: 4rem;
+  }  
 
   .StoreItemTypeFilter {
     width: 8rem;
