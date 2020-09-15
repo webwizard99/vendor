@@ -85,12 +85,17 @@
   .SupplierItemsValueGroup {
     font-size: 1.6rem;
   }
+
+  .SupplierItemsValueGroup .CoinSymbol {
+    margin-right: .6rem;
+  }
 }
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .Supplier {
-    height: 10rem;
+    min-height: 14rem;
+    min-width: 90%;
   }
 
   .SupplierName {
