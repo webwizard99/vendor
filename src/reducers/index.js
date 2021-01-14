@@ -8,6 +8,7 @@ import suppliesReducer from './suppliesReducer';
 import profileReducer from './profileReducer';
 import appStateReducer from './appStateReducer';
 import mobileMenuReducer from './mobileMenuReducer';
+import adventurersReducer from './adventurersReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   supplies: suppliesReducer,
   profile: profileReducer,
   app: appStateReducer,
-  mobileMenu: mobileMenuReducer
+  mobileMenu: mobileMenuReducer,
+  adventurers: adventurersReducer
 });

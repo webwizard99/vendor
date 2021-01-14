@@ -1,11 +1,17 @@
+// constants
+import gameConstants from './gameConstants';
+
+// game module imports
 import days from './days';
-import gameStore from './store';
 import suppliers from './suppliers';
 import supplies from './supplies';
+import adventurers from './adventurers';
+
+// redux imports
+import gameStore from './store';
 
 const main = (function() {
   
-  const maxSuppliers = 3;
   let currentMaxLevel = 1;
 
   return {
@@ -24,7 +30,9 @@ const main = (function() {
 
       supplies.setSupplyLevel(currentMaxLevel);
       supplies.fillSupplyPool();
-      suppliers.initializeSuppliers(maxSuppliers);
+      suppliers.initializeSuppliers(gameConstants.maxSuppliers);
+
+      const adventurersT = adventurers.initializeAdventurers(gameConstants.startingAdventurers);
 
     },
 

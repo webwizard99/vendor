@@ -2,6 +2,9 @@
 import supplies from './supplies';
 import items from './items';
 
+// utility imports
+import fetcher from '../Utilities/fetcher';
+
 // redux imports
 import { store } from '../index';
 import { SET_SUPPLIERS, SET_SUPPLY_READY } from '../actions/types';
@@ -66,15 +69,15 @@ const suppliers = (function(){
   }
 
   const fetchSuppliers = async function() {
-    let initSuppliers;
-      try {
-        initSuppliers = await fetch('/suppliers');
-      } catch (err) {
-        console.log(err);
-      }
-      if (initSuppliers) {
-        initSuppliers = initSuppliers.json();
-      }
+    let initSuppliers = fetcher.fetchRoute('suppliers');
+      // try {
+      //   initSuppliers = await fetch('/suppliers');
+      // } catch (err) {
+      //   console.log(err);
+      // }
+      // if (initSuppliers) {
+      //   initSuppliers = initSuppliers.json();
+      // }
       return initSuppliers;
   }
 
