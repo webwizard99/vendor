@@ -1,6 +1,6 @@
 const fetcher = (function(){
   return {
-    fetchRoute: function(routeName) {
+    fetchRoute: async function(routeName) {
       let response;
       try {
         response = await fetch(`/${routeName}`);
