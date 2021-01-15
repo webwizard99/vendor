@@ -32,8 +32,7 @@ const main = (function() {
       supplies.fillSupplyPool();
       suppliers.initializeSuppliers(gameConstants.maxSuppliers);
 
-      const adventurersT = adventurers.initializeAdventurers(gameConstants.startingAdventurers);
-      console.log(adventurersT);
+      adventurers.initializeAdventurers(gameConstants.startingAdventurers);
     },
 
     getGameLevel: function() {
