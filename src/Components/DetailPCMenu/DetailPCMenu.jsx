@@ -52,7 +52,7 @@ class DetailPCMenu extends React.Component {
   }
 
   getPCDropdown() {
-    const allMenus = pcMenus;
+    const allMenus = Object.values(pcMenus);
     if (!this.props.pcDropdown) {
       return false;
     }
