@@ -19,10 +19,15 @@
   text-align: right;
 }
 
+.PCMenuTitle, .screenArrowPC {
+  cursor: pointer;
+}
+
 .PCMenuTitle {
   width: 8rem;
   text-align: center;
   margin: auto 0;
+
 }
 
 .screenArrowPC {
@@ -40,7 +45,7 @@
   /* 1/2 mobile menu height + 1/2 days height + (((dropdown option height + (dropdown option padding * 2)) * number of dropdown options) / 2) */
   top: calc(1rem + calc(calc(calc(1.2rem + calc(.5rem * 2)) * 1)) / 2);
   /* detail width - (total width of menubar elements / 2) */
-  margin-left: calc(-34vw - calc(calc(34vw - 16rem) /2));
+  margin-left: calc(-34vw - calc(calc(34vw - 14rem) /2));
 }
 
 .PCDropdownOption {
