@@ -73,12 +73,12 @@ class DetailPCMenu extends React.Component {
   render() {
     return (
       <div className="PCDetailMenu">
-        <span className="previousMenu screenArrow"
+        <span className="previousMenu screenArrowPC"
           onClick={this.handlePrevious}
         >&#8592;</span>
         <span className="PCMenuTitle"
           onClick={this.handleDropdown}>{this.props.pcDetailMenu}</span>
-        <span className="nextMenu screenArrow"
+        <span className="nextMenu screenArrowPC"
           onClick={this.handleNext}
         >&#8594;</span>
         {this.getPCDropdown()}
