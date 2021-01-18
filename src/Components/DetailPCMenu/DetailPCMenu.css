@@ -19,7 +19,7 @@
   text-align: right;
 }
 
-.PCMenuTitle, .screenArrowPC {
+.PCMenuTitle, .screenArrowPC, .PCDropdownOption {
   cursor: pointer;
 }
 
@@ -51,4 +51,8 @@
 .PCDropdownOption {
   height: 1.2rem;
   padding: .5rem 0px;
+}
+
+.PCDropdownOption:hover {
+  background: rgb(110, 130, 110);
 }
