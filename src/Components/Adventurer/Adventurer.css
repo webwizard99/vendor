@@ -13,6 +13,7 @@
   text-transform: capitalize;
   line-height: 2.4rem;
   align-self: center;
+  font-family: 'Niconne', cursive;
 }
 
 .adventurerDetails {
@@ -23,12 +24,12 @@
 }
 
 .adventurerClass {
-  min-width: 4rem;
+  min-width: 5rem;
   margin-right: 1rem;
 }
 
 .adventurerName {
-  min-width: 6rem;
+  min-width: 11rem;
   margin-right: 1rem;
 }
 
