@@ -41,3 +41,5 @@ class Adventurer extends React.Component {
     )
   }
 }
+
+export default Adventurer;
