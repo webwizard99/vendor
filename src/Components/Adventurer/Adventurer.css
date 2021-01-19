@@ -40,15 +40,15 @@
 }
 
 .thief {
-  color: rgb(80, 120, 160)
+  color: rgb(120, 180, 200)
 }
 
 .bard {
-  color: rgb(160, 80, 120);
+  color: rgb(200, 120, 180);
 }
 
 .soldier {
-  color: rgb(120, 120, 120)
+  color: rgb(180, 180, 180)
 }
 
 .adventurerStatGroup, .adventurerStatGroupWide {

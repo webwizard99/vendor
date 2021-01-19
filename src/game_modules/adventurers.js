@@ -37,6 +37,7 @@ const adventurers = (function(){
       this.level = 1;
       this.experience = 0;
       this.hp = 7 + constitution;
+      this.maxHp = this.hp;
       this.inventory = [];
       this.equipment = { weapon: null, armor: null };
       this.id = currentId;
