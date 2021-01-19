@@ -2,29 +2,45 @@
   width: 100%;
   height: 3rem;
   display: flex;
-  padding: 0.5rem 0px;
+  padding: 0.5rem 1rem;
 }
 
 .adventurerClassIcon {
   font-size: 2rem;
-  width: 1rem;
+  min-width: 1rem;
   margin-right: .5rem;
+  text-transform: capitalize;
+  line-height: 2rem;
 }
 
 .adventurerDetails {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+}
+
+.AdventurerClass {
+  min-width: 4rem;
+  margin-right: 1rem;
 }
 
 .adventurerName {
-  width: 4rem;
+  min-width: 6rem;
+  margin-right: 1rem;
+}
+
+.adventurerStatGroup, .adventurerStatGroupWide {
+  display: flex;
+  margin-right: 1rem;
 }
 
 .adventurerStatGroup {
-  display: flex;
-  width: 6rem;
-  margin-right: 1rem;
+  width: 5rem;
+}
+
+.adventurerStatGroupWide {
+  width: 7rem;
 }
 
 .adventurerStatLabel {

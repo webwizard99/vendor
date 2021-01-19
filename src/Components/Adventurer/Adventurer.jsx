@@ -16,6 +16,22 @@ class Adventurer extends React.Component {
           <p className="adventurerName">{adventurer.name}</p>
           <p className="adventurerClass">{adventurerClass.name}</p>
           <div className="adventurerStatGroup">
+            <p className="adventurerStatLabel">lvl</p>
+            <p className="adventurerStat">{adventurer.level}</p>
+          </div>
+          <div className="adventurerStatGroup">
+            <p className="adventurerStatLabel">gold</p>
+            <p className="adventurerStat">{adventurer.gold}</p>
+          </div>
+          <div className="adventurerStatGroupWide">
+            <p className="adventurerStatLabel">exp</p>
+            <p className="adventurerStat">{adventurer.experience}</p>
+          </div>
+          <div className="adventurerStatGroup">
+            <p className="adventurerStatLabel">hp</p>
+            <p className="adventurerStat">{adventurer.hp}</p>
+          </div>
+          <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">str</p>
             <p className="adventurerStat">{adventurer.strength}</p>
           </div>
