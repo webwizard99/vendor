@@ -7,9 +7,7 @@
 
 .StoreMenuBar {
   height: 2.5rem;
-  background: rgb(120, 115, 125);
   font-family: "Roboto Slab", serif;
-  color: white;
   display: flex;
   align-items: center;
 }

@@ -1,0 +1,29 @@
+.adventurerDisplay {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  padding: 0.5rem 0px;
+}
+
+.adventuerClassIcon {
+  font-size: 2rem;
+  width: 1rem;
+}
+
+.adventurerDetails {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.adventurerName {
+  width: 4rem;
+}
+
+.adventurerStatGroup {
+  width: 4rem;
+}
+
+.adventurerStatLabel {
+  width: 1.5rem;
+}

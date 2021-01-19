@@ -222,7 +222,7 @@ class Store extends React.Component {
   render() {
     return (
       <div className="Store">
-        <div className="StoreMenuBar">
+        <div className="StoreMenuBar darkgrey">
           <h2 className="StoreName">{this.props.storeName}</h2>
           <div className="FilterGroup">
             {this.props.isPc ? this.getIncrementButtons() : ''}

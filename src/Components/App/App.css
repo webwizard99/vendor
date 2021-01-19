@@ -27,3 +27,12 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   border: 1px solid rgb(30, 40, 30);
   background: rgb(140, 170, 140);
 }
+
+.light {
+  background: rgb(220, 225, 215);
+}
+
+.darkgrey {
+  background: rgb(120, 115, 125);
+  color: white;
+}
