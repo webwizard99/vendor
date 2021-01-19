@@ -8,12 +8,14 @@
 
 .adventurerClassIcon {
   font-size: 2.4rem;
+  font-weight: 600;
   min-width: 2rem;
-  margin-right: .5rem;
+  margin-right: 1rem;
   text-transform: capitalize;
   line-height: 2.4rem;
   align-self: center;
   font-family: 'Niconne', cursive;
+  text-shadow: 1px 1px 3px rgb(30, 40, 30);
 }
 
 .adventurerDetails {

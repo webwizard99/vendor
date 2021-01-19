@@ -32,9 +32,18 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   background: rgb(220, 225, 215);
 }
 
+.green, .green-depth {
+  color: white;
+}
+
 .green {
   background: rgb(110, 140, 110);
-  color: rgb(245, 250, 245);
+}
+
+.green-depth {
+  background: rgb(110,140,110);
+  background: linear-gradient(180deg, rgba(110,140,110,1) 0%, rgba(93,118,93,1) 35%, rgba(81,103,81,1) 100%);
+
 }
 
 .darkgrey {

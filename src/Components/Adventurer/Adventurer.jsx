@@ -10,7 +10,7 @@ class Adventurer extends React.Component {
     console.log(adventurerClass);
     const classIcon = adventurerClass.name.charAt(0);
     return (
-      <div className="adventurerDisplay green">
+      <div className="adventurerDisplay green-depth">
         <div className="adventurerClassIcon">{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>
