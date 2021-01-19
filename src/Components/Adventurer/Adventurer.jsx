@@ -13,8 +13,10 @@ class Adventurer extends React.Component {
       bard: 'bard',
       soldier: 'soldier'
     }
-    let adventurerClassIconColor;
+    let adventurerClassColor, adventurerClassIconColor;
     adventurerClassIconColor = "adventurerClassIcon"
+    adventurerClassColor = "adventurerClass";
+    adventurerClassColor += ` ${classColors[adventurerClass.name]}`
     adventurerClassIconColor += ` ${classColors[adventurerClass.name]}`
     const classIcon = adventurerClass.name.charAt(0);
     return (
@@ -22,7 +24,7 @@ class Adventurer extends React.Component {
         <div className={adventurerClassIconColor}>{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>
-          <p className="adventurerClass">{adventurerClass.name}</p>
+          <p className={adventurerClassColor}>{adventurerClass.name}</p>
           <div className="adventurerStatGroupWide">
             <p className="adventurerStatLabel">exp</p>
             <p className="adventurerStat">{adventurer.experience}</p>
