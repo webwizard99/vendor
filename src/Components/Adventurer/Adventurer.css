@@ -1,16 +1,18 @@
 .adventurerDisplay {
   width: 100%;
-  height: 3rem;
+  height: 4rem;
   display: flex;
   padding: 0.5rem 1rem;
+  font-family: "Roboto Slab", serif;
 }
 
 .adventurerClassIcon {
-  font-size: 2rem;
-  min-width: 1rem;
+  font-size: 2.4rem;
+  min-width: 2rem;
   margin-right: .5rem;
   text-transform: capitalize;
-  line-height: 2rem;
+  line-height: 2.4rem;
+  align-self: center;
 }
 
 .adventurerDetails {
@@ -20,7 +22,7 @@
   flex-wrap: wrap;
 }
 
-.AdventurerClass {
+.adventurerClass {
   min-width: 4rem;
   margin-right: 1rem;
 }
@@ -44,6 +46,8 @@
 }
 
 .adventurerStatLabel {
-  width: 1.5rem;
+  min-width: 2rem;
   margin-right: .5rem;
+  font-weight: 600rem;
+  color: rgb(230, 245, 230);
 }

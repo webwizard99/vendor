@@ -32,6 +32,11 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   background: rgb(220, 225, 215);
 }
 
+.green {
+  background: rgb(110, 140, 110);
+  color: rgb(245, 250, 245);
+}
+
 .darkgrey {
   background: rgb(120, 115, 125);
   color: white;

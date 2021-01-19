@@ -10,11 +10,15 @@ class Adventurer extends React.Component {
     console.log(adventurerClass);
     const classIcon = adventurerClass.name.charAt(0);
     return (
-      <div className="adventurerDisplay light">
+      <div className="adventurerDisplay green">
         <div className="adventurerClassIcon">{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>
           <p className="adventurerClass">{adventurerClass.name}</p>
+          <div className="adventurerStatGroupWide">
+            <p className="adventurerStatLabel">exp</p>
+            <p className="adventurerStat">{adventurer.experience}</p>
+          </div>
           <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">lvl</p>
             <p className="adventurerStat">{adventurer.level}</p>
@@ -22,10 +26,6 @@ class Adventurer extends React.Component {
           <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">gold</p>
             <p className="adventurerStat">{adventurer.gold}</p>
-          </div>
-          <div className="adventurerStatGroupWide">
-            <p className="adventurerStatLabel">exp</p>
-            <p className="adventurerStat">{adventurer.experience}</p>
           </div>
           <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">hp</p>
