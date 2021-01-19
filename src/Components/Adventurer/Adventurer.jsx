@@ -2,9 +2,6 @@ import React from 'react';
 import './Adventurer.css';
 
 class Adventurer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     if (!this.props.adventurer) return '';
