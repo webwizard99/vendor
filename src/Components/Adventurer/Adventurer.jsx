@@ -6,7 +6,7 @@ class Adventurer extends React.Component {
   render() {
     if (!this.props.adventurer) return '';
     const adventurer = this.props.adventurer;
-    const adventurerClass = adventurer.adventurer_class;
+    const adventurerClass = adventurer.adventurerClass;
     console.log(adventurerClass);
     const classIcon = adventurerClass.name.charAt(0);
     return (
