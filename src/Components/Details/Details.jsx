@@ -14,10 +14,6 @@ class Details extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      initialized: false
-    }
-
     this.componentDidMount = this.componentDidMount.bind(this);
     this.loadFormTable = this.loadFormTable.bind(this);
     this.getDetail = this.getDetail.bind(this);
@@ -27,7 +23,6 @@ class Details extends React.Component {
 
   componentDidMount() {
     this.loadFormTable();
-    this.setState({ initialized: true });
   }
 
   loadFormTable() {
@@ -42,7 +37,8 @@ class Details extends React.Component {
   }
 
   getDetail() {
-    if (!this.state.initialized) return ''
+    console.log('getDetail');
+    console.log(this.props.pcDetailMenu);
     if (!this.props.pcDetailMenu) {
       return (<div className="BlankForm">no details to display</div>);
     }
