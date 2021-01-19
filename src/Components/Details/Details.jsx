@@ -14,7 +14,7 @@ class Details extends React.Component {
   constructor(props) {
     super(props);
 
-    state = {
+    this.state = {
       initialized: false
     }
 
