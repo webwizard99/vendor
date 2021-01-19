@@ -5,9 +5,10 @@
   padding: 0.5rem 0px;
 }
 
-.adventuerClassIcon {
+.adventurerClassIcon {
   font-size: 2rem;
   width: 1rem;
+  margin-right: .5rem;
 }
 
 .adventurerDetails {
@@ -21,9 +22,12 @@
 }
 
 .adventurerStatGroup {
-  width: 4rem;
+  display: flex;
+  width: 6rem;
+  margin-right: 1rem;
 }
 
 .adventurerStatLabel {
   width: 1.5rem;
+  margin-right: .5rem;
 }

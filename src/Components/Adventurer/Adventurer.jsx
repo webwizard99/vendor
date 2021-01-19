@@ -6,13 +6,13 @@ class Adventurer extends React.Component {
   render() {
     if (!this.props.adventurer) return '';
     const adventurer = this.props.adventurer;
-    const classIcon = adventurer.name.charAt(0);
+    const classIcon = adventurer.adventurer_class.name.charAt(0);
     return (
       <div className="adventurerDisplay light">
         <div className="adventurerClassIcon">{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>
-          <p className="adventurerClass">{adventurer.class}</p>
+          <p className="adventurerClass">{adventurer.adventurer_class.name}</p>
           <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">str</p>
             <p className="adventurerStat">{adventurer.strength}</p>
