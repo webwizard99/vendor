@@ -5,6 +5,7 @@ import Store from '../../Components/Store/Store';
 import MobileStoreHeadbar from '../../Components/MobileStoreHeadbar/MobileStoreHeadbar';
 import Suppliers from '../../Components/Suppliers/Suppliers';
 import MobileMenu from '../../Components/MobileMenu/MobileMenu';
+import Adventurers from '../../Components/Adventurers/Adventurers';
 
 // redux imports
 import { connect } from 'react-redux';
@@ -17,26 +18,65 @@ class MobileGameScreen extends React.Component {
     super(props);
 
     this.state = {
-      currentScreen: 'store'
+      currentScreen: 'store',
+      initialized: false
     }
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.loadFormTable = this.loadFormTable.bind(this);
+  }
+
+  formTable = {};
+
+  componentDidMount() {
+    this.loadFormTable();
+    this.setState({ initialized: true });
+  }
+
+  loadFormTable() {
+    const allScreens = mobileScreens.getAllScreens();
+    const forms = Object.values(allScreens);
+    let tempTable = {};
+    for (let form of forms) {
+      tempTable[form] = null;
+    }
+    this.formTable = tempTable;
+    this.formTable['blank'] = (<div className="BlankForm">detail type unknown</div>);
+    this.formTable[allScreens.store] = <Store />;
+    this.formTable[allScreens.suppliers] = (
+      <div>
+        <MobileStoreHeadbar />
+        <Suppliers />
+      </div>
+    );
+    this.formTable[allScreens.adventurers] = <Adventurers />
   }
 
   getCurrentScreen() {
-    const allScreens = mobileScreens.getAllScreens();
-    switch(this.props.mobileScreen) {
-      case allScreens.store:
-        return <Store />;
-      case allScreens.suppliers:
-        return (
-          <div>
-            <MobileStoreHeadbar />
-            <Suppliers />
-          </div>
-        
-        );
-      default:
-        return 'Nothing to display';
+    if (!this.state.initialized) return '';
+    if (!this.props.mobileScreen) {
+      return (<div className="BlankForm">no details to display</div>)
     }
+
+    if (this.formTable[this.props.mobileScreen] === undefined) {
+      return this.formTable['blank'];
+    }
+    return this.formTable[this.props.mobileScreen];
+    // const allScreens = mobileScreens.getAllScreens();
+    // switch(this.props.mobileScreen) {
+    //   case allScreens.store:
+    //     return <Store />;
+    //   case allScreens.suppliers:
+    //     return (
+    //       <div>
+    //         <MobileStoreHeadbar />
+    //         <Suppliers />
+    //       </div>
+        
+    //     );
+    //   default:
+    //     return 'Nothing to display';
+    // }
   }
   
   render() {

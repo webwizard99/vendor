@@ -5,11 +5,12 @@ import { SET_MOBILE_SCREEN } from '../actions/types';
 const mobileScreens = (function(){
   let currentScreen = '';
   let currentIndex = 0;
-  const screens = ['store', 'suppliers'];
+  const screens = ['store', 'suppliers', 'adventurers'];
 
   const allScreens = {
     store: 'store',
-    suppliers: 'suppliers'
+    suppliers: 'suppliers',
+    adventurers: 'adventurers'
   }
 
   let screenMap = {};
