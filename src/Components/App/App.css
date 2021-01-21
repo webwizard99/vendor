@@ -43,7 +43,34 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 .green-depth {
   background: rgb(110,140,110);
   background: linear-gradient(180deg, rgba(110,140,110,1) 0%, rgba(93,118,93,1) 35%, rgba(81,103,81,1) 100%);
+}
 
+.primary-light {
+  background: rgb(245, 235, 180);
+}
+
+.primary {
+  background: rgb(190,180,60);
+}
+
+.primary-medium {
+  background: rgb(150, 145, 45);
+}
+
+.primary-dark {
+  background: rgb(100, 95, 30);
+}
+
+.secondary {
+  background: rgb(65, 70, 190);
+}
+
+.secondary-medium {
+  background: rgb(50, 55, 150);
+}
+
+.secondary-dark {
+  background: rgb(30, 35, 100);
 }
 
 .darkgrey {

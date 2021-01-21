@@ -57,7 +57,7 @@ class MobileMenu extends React.Component {
     const allScreens = mobileScreens.getScreens();
     if (this.props.mobileDropdown) {
       return (
-        <div className="MobileDropdown">
+        <div className="MobileDropdown primary-medium">
           <Days />
           {allScreens.map(screen => {
             return (
@@ -74,7 +74,7 @@ class MobileMenu extends React.Component {
   
   render() {
     return (
-      <div className="MobileMenu">
+      <div className="MobileMenu primary-dark">
         <span className="previousScreen screenArrow"
           onClick={this.handlePrevious}
         >&#8592;</span>

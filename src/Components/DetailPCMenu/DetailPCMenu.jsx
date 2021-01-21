@@ -72,7 +72,7 @@ class DetailPCMenu extends React.Component {
 
   render() {
     return (
-      <div className="PCDetailMenu">
+      <div className="PCDetailMenu primary-dark">
         <span className="previousMenu screenArrowPC"
           onClick={this.handlePrevious}
         >&#8592;</span>

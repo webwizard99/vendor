@@ -20,7 +20,7 @@ class Adventurer extends React.Component {
     adventurerClassIconColor += ` ${classColors[adventurerClass.name]}`
     const classIcon = adventurerClass.name.charAt(0);
     return (
-      <div className="adventurerDisplay green-depth">
+      <div className="adventurerDisplay primary">
         <div className={adventurerClassIconColor}>{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>

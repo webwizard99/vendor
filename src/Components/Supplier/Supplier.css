@@ -4,7 +4,6 @@
   flex-basis: 18rem;
   flex-shrink: unset;
   flex-grow: 1;
-  background: rgb(220, 225, 215);
   font-family: "Roboto Slab", serif;
   margin: 0px 1rem 0px 1rem;
 }
@@ -22,7 +21,6 @@
 .SupplierInventory {
   height: 8.8rem;
   width: 100%;
-  background: rgb(220, 225, 215);
 }
 
 .SupplierInventoryItem {

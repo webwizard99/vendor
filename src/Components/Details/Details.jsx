@@ -57,7 +57,7 @@ class Details extends React.Component {
   
   render() {
     return (
-      <div className="Details">
+      <div className="Details primary-dark">
         <DetailPCMenu />
         {this.getDetail()}
       </div>

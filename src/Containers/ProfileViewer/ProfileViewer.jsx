@@ -51,7 +51,7 @@ class ProfileViewer extends React.Component {
     }
 
     return (
-      <div className="ProfileViewer">
+      <div className="ProfileViewer primary-light">
         <div className="ProfileForm">
           <form action={'/profile'}
             className="input-fields-area"

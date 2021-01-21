@@ -157,7 +157,7 @@ class MenuBar extends React.Component {
   
   render() {
     return (
-      <div className="MenuBar">
+      <div className="MenuBar primary-medium">
         <span className="MenuTitle"><a href="/">VENDOR</a></span>
         {this.getLoginContainer()}
         {this.getMobileMenu()}

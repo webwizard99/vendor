@@ -73,7 +73,7 @@ class Suppliers extends React.Component {
   }
   
   render() {
-    let suppliersClass = "Suppliers";
+    let suppliersClass = "Suppliers primary-dark";
     if (!this.props.isPc) {
       suppliersClass += " mobileSuppliers";
     }

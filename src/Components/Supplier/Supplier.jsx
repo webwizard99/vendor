@@ -126,7 +126,7 @@ class Supplier extends React.Component {
   }
 
   render() {
-    let supplierClass = "Supplier";
+    let supplierClass = "Supplier primary-light";
     if (this.props.isMobile) {
       supplierClass += " mobileSupplier";
     }
@@ -139,7 +139,7 @@ class Supplier extends React.Component {
             <span className="InventoryItemValue">{this.props.supplier.gold}</span>
           </div>
         </div>
-        <div className="supplierInventory">
+        <div className="supplierInventory primary-light">
           {this.getSuppllierInventory()}
         </div>
       </div>

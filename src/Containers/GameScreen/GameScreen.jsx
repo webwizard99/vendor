@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 class GameScreen extends React.Component {
   render() {
     return (
-      <div className="GameScreen flex-container">
+      <div className="GameScreen flex-container primary-light">
         <div className="CommerceColumn">
           <Days />
           <Store />
