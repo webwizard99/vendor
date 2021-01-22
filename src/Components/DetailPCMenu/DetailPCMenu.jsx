@@ -57,10 +57,10 @@ class DetailPCMenu extends React.Component {
       return false;
     }
     return (
-      <div className="PCDropdown">
+      <div className="PCDropdown primary-medium">
         {allMenus.map(menu => {
           return (
-            <div className="PCDropdownOption"
+            <div className="PCDropdownOption primary-medium"
               onClick={() => this.handleMenuChange(menu)}>
                 {menu}
             </div>

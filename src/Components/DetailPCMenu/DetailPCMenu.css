@@ -36,7 +36,7 @@
 
 .PCDropdown {
   width: 100%;
-  background: rgb(80, 100, 80);
+  /* background: rgb(80, 100, 80); */
   color: rgb(240, 245, 240);
   position: relative;
   text-align: center;
@@ -53,5 +53,5 @@
 }
 
 .PCDropdownOption:hover {
-  background: rgb(110, 130, 110);
+  font-weight: 900;
 }
