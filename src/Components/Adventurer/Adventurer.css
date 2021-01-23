@@ -64,9 +64,13 @@
   width: 7rem;
 }
 
+.adventurerName, .adventurerStatLabel {
+  color: rgb(230, 245, 230);
+}
+
 .adventurerStatLabel {
   min-width: 2rem;
   margin-right: .5rem;
   font-weight: 600;
-  color: rgb(230, 245, 230);
+  
 }
