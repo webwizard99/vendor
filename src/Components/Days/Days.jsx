@@ -37,7 +37,7 @@ class Days extends React.Component {
     return (
       <div className="Days">
         <div className="DayTitle">Day: {this.props.day}</div>
-        <div className="nextDay button" onClick={this.handleNextDay}
+        <div className="nextDay button secondary-medium" onClick={this.handleNextDay}
         >Finish Day</div>
       </div>
     )
