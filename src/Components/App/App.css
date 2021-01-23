@@ -45,12 +45,16 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   background: linear-gradient(180deg, rgba(110,140,110,1) 0%, rgba(93,118,93,1) 35%, rgba(81,103,81,1) 100%);
 }
 
+.primary-surface {
+  background: rgb(250, 245, 210);
+}
+
 .primary-light {
-  background: rgb(245, 235, 180);
+  background: rgb(210,200,80);
 }
 
 .primary {
-  background: rgb(210,200,80);
+  background: rgb(50,45,30);
 }
 
 .primary-medium {

@@ -120,7 +120,7 @@ class MenuBar extends React.Component {
         
         
       return (
-        <div className="mobileMenuContainer"
+        <div className="mobileMenuContainer primary-light"
           onClick={this.handleMobileOpen}>
           <ul className="LoginContainer mobileMenu"
             style={mobileOffsetStyle}
@@ -157,7 +157,7 @@ class MenuBar extends React.Component {
   
   render() {
     return (
-      <div className="MenuBar primary-medium">
+      <div className="MenuBar primary-light">
         <span className="MenuTitle"><a href="/">VENDOR</a></span>
         {this.getLoginContainer()}
         {this.getMobileMenu()}

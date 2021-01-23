@@ -36,19 +36,19 @@
 }
 
 .adventurerStat {
-  color: rgb(60, 140, 90)
+  color: rgb(140, 240, 120)
 }
 
 .thief {
-  color: rgb(60, 90, 120)
+  color: rgb(120, 180, 200)
 }
 
 .bard {
-  color: rgb(120, 60, 90);
+  color: rgb(200, 120, 180);
 }
 
 .soldier {
-  color: rgb(90, 90, 90)
+  color: rgb(180, 180, 180)
 }
 
 .adventurerStatGroup, .adventurerStatGroupWide {
@@ -68,5 +68,5 @@
   min-width: 2rem;
   margin-right: .5rem;
   font-weight: 600;
-  color: rgb(60, 55, 40);
+  color: rgb(230, 245, 230);
 }

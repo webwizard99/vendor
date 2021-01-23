@@ -53,5 +53,5 @@
 }
 
 .PCDropdownOption:hover {
-  font-weight: 900;
+  background: rgb(50, 45, 30);
 }
