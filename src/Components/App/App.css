@@ -66,11 +66,11 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 }
 
 .primary-medium {
-  background: rgb(150, 145, 45);
+  background: rgb(110, 105, 35);
 }
 
 .primary-dark {
-  background: rgb(80, 75, 25);
+  background: rgb(60, 55, 18);
 }
 
 .secondary {

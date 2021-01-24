@@ -60,7 +60,7 @@ class DetailPCMenu extends React.Component {
       <div className="PCDropdown primary-dark">
         {allMenus.map(menu => {
           return (
-            <div className="PCDropdownOption primary-dark"
+            <div className="PCDropdownOption primary-medium"
               onClick={() => this.handleMenuChange(menu)}>
                 {menu}
             </div>
