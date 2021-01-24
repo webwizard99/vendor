@@ -90,9 +90,9 @@ class MenuBar extends React.Component {
       return (
         <div className="hamburgerContainer"
           onClick={this.handleMobileOpen}>
-          <div className="hamburgerLine"></div>
-          <div className="hamburgerLine"></div>
-          <div className="hamburgerLine"></div>
+          <div className="hamburgerLine primary"></div>
+          <div className="hamburgerLine primary"></div>
+          <div className="hamburgerLine primary"></div>
         </div>
       )
     }
@@ -120,9 +120,9 @@ class MenuBar extends React.Component {
         
         
       return (
-        <div className="mobileMenuContainer primary-light"
+        <div className="mobileMenuContainer primary"
           onClick={this.handleMobileOpen}>
-          <ul className="LoginContainer mobileMenu"
+          <ul className="LoginContainer mobileMenu primary-light"
             style={mobileOffsetStyle}
             >
             {this.getFullScreenControls()}
