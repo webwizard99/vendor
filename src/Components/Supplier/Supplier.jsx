@@ -126,7 +126,7 @@ class Supplier extends React.Component {
   }
 
   render() {
-    let supplierClass = "Supplier primary-surface";
+    let supplierClass = "Supplier primary";
     if (this.props.isMobile) {
       supplierClass += " mobileSupplier";
     }

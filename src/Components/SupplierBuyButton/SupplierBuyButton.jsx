@@ -4,7 +4,7 @@ import './SupplierBuyButton.css';
 class SupplierBuyButton extends React.Component {
   render() {
     return (
-      <div className="SupplierBuyButton button">
+      <div className="SupplierBuyButton button secondary">
         <div className="supplierBuyButtonIcon">
           buy
         </div>

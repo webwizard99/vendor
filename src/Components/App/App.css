@@ -18,7 +18,7 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   transition: all 40ms 60ms ease-out;
 }
 
-.button:hover {
+/* .button:hover {
   border: 1px solid rgb(100, 180, 100);
   background: rgb(200, 220, 200);
 }
@@ -26,7 +26,7 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 .button:active {
   border: 1px solid rgb(30, 40, 30);
   background: rgb(140, 170, 140);
-}
+} */
 
 .light {
   background: rgb(220, 225, 215);
@@ -50,11 +50,16 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 }
 
 .primary-light {
-  background: rgb(210,200,80);
+  background: rgb(225,215,160);
 }
 
 .primary {
   background: rgb(50,45,30);
+}
+
+.primary-saturated {
+  background: rgb(120, 40, 20);
+  color: rgb(250, 252, 250);
 }
 
 .primary-medium {
@@ -67,6 +72,14 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 
 .secondary {
   background: rgb(65, 70, 190);
+}
+
+.secondary:hover {
+  background: rgb(90, 100, 210);
+}
+
+.secondary:active {
+  background: rgb(30, 35, 100);
 }
 
 .secondary-medium {
