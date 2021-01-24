@@ -35,7 +35,7 @@ class Days extends React.Component {
 
   render() {
     return (
-      <div className="Days primary">
+      <div className="Days primary-saturated">
         <div className="DayTitle">Day: {this.props.day}</div>
         <div className="nextDay button secondary" onClick={this.handleNextDay}
         >Finish Day</div>
