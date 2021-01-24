@@ -57,10 +57,10 @@ class DetailPCMenu extends React.Component {
       return false;
     }
     return (
-      <div className="PCDropdown primary-medium">
+      <div className="PCDropdown primary-dark">
         {allMenus.map(menu => {
           return (
-            <div className="PCDropdownOption primary-medium"
+            <div className="PCDropdownOption primary-dark"
               onClick={() => this.handleMenuChange(menu)}>
                 {menu}
             </div>
@@ -72,7 +72,7 @@ class DetailPCMenu extends React.Component {
 
   render() {
     return (
-      <div className="PCDetailMenu primary-dark">
+      <div className="PCDetailMenu primary-saturated">
         <span className="previousMenu screenArrowPC"
           onClick={this.handlePrevious}
         >&#8592;</span>
