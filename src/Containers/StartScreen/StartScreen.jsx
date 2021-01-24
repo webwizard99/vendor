@@ -45,7 +45,7 @@ class StartScreen extends React.Component {
 
   render() {
     return (
-      <div className="StartScreen primary-light">
+      <div className="StartScreen surface">
         <Title />
         <div className="NameInput">
           <div className="nameInputGroup">

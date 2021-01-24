@@ -256,7 +256,7 @@ class StoreInventory extends React.Component {
   
   render() {
     return (
-      <div className="StoreInventory primary-light">
+      <div className="StoreInventory surface">
         {this.getInventoryItems()}
       </div>
     )
