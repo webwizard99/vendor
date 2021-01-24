@@ -155,7 +155,7 @@ class StoreInventory extends React.Component {
             onTouchEnd={this.onMouseUp}>
             <span className="incrementIcon minusOne">-</span>
           </div>
-          <div className="increaseOne incrementButton button"
+          <div className="increaseOne incrementButton button secondary"
             onTouchStart={(e) => this.onMouseDown({ id: id, e: e })}
             onTouchEnd={this.onMouseUp}>
             <span className="incrementIcon plusOne">+</span>

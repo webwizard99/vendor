@@ -42,8 +42,6 @@ class Details extends React.Component {
   }
 
   getDetail() {
-    console.log('getDetail');
-    console.log(this.props.pcDetailMenu);
     if (!this.state.initialized) return '';
     if (!this.props.pcDetailMenu) {
       return (<div className="BlankForm">no details to display</div>);

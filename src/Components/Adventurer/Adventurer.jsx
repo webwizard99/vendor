@@ -7,7 +7,6 @@ class Adventurer extends React.Component {
     if (!this.props.adventurer) return '';
     const adventurer = this.props.adventurer;
     const adventurerClass = adventurer.adventurerClass;
-    console.log(adventurerClass);
     const classColors = {
       thief: 'thief',
       bard: 'bard',

@@ -16,6 +16,7 @@ class Adventurers extends React.Component {
         {adventurers.map(adventurer => {
           return <Adventurer adventurer={adventurer} />
         })}
+        <div className="spacer-vertical"></div>
       </div>
     )
   }

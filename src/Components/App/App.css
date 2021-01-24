@@ -8,6 +8,11 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   user-select: none;
 }
 
+.spacer-vertical {
+  min-height: 1px;
+  margin-top: 3rem;
+}
+
 .button {
   background: rgb(110, 140, 110);
   color: white;
@@ -17,16 +22,6 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   text-align: center;
   transition: all 40ms 60ms ease-out;
 }
-
-/* .button:hover {
-  border: 1px solid rgb(100, 180, 100);
-  background: rgb(200, 220, 200);
-}
-
-.button:active {
-  border: 1px solid rgb(30, 40, 30);
-  background: rgb(140, 170, 140);
-} */
 
 .light {
   background: rgb(220, 225, 215);

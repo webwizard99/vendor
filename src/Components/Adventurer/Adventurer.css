@@ -71,6 +71,22 @@
 .adventurerStatLabel {
   min-width: 2rem;
   margin-right: .5rem;
-  font-weight: 600;
-  
+  font-weight: 600; 
+}
+
+
+/* mobile styles */
+@media only screen and (max-width: 650px) {
+  .adventurerDisplay {
+    height: 8rem;
+    width: calc(100% - 2rem);
+  }
+
+  .adventurerStatGroupWide {
+    width: 100%;
+  }
+
+  .adventurerClassIcon {
+    display: none;
+  }
 }
