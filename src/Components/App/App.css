@@ -54,12 +54,13 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   color: rgb(40, 35, 35);
 }
 
-.primary-light a {
+.primary-light a, .primary-light li {
   color: rgb(40, 35, 35);
 }
 
 .primary {
   background: rgb(50,45,30);
+  color: rgb(245, 240, 240);
 }
 
 .primary-saturated {
@@ -80,7 +81,7 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
 }
 
 .secondary:hover {
-  background: rgb(90, 100, 210);
+  background: rgb(80, 100, 230);
 }
 
 .secondary:active {
