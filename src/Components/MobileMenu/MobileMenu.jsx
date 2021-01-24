@@ -74,7 +74,7 @@ class MobileMenu extends React.Component {
   
   render() {
     return (
-      <div className="MobileMenu primary-dark">
+      <div className="MobileMenu primary-saturated">
         <span className="previousScreen screenArrow"
           onClick={this.handlePrevious}
         >&#8592;</span>

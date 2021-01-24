@@ -58,14 +58,16 @@ p, div, span , h1, h2, h3, h4, h5, h6, select, option {
   color: rgb(40, 35, 35);
 }
 
-.primary {
-  background: rgb(50,45,30);
+.primary, .primary-saturated, .primary-dark {
   color: rgb(245, 240, 240);
 }
 
+.primary {
+  background: rgb(50,45,30);
+}
+
 .primary-saturated {
-  background: rgb(70, 40, 20);
-  color: rgb(245, 240, 240);
+  background: rgb(90, 60, 35);
 }
 
 .primary-medium {

@@ -62,21 +62,6 @@ class MobileGameScreen extends React.Component {
       return this.formTable['blank'];
     }
     return this.formTable[this.props.mobileScreen];
-    // const allScreens = mobileScreens.getAllScreens();
-    // switch(this.props.mobileScreen) {
-    //   case allScreens.store:
-    //     return <Store />;
-    //   case allScreens.suppliers:
-    //     return (
-    //       <div>
-    //         <MobileStoreHeadbar />
-    //         <Suppliers />
-    //       </div>
-        
-    //     );
-    //   default:
-    //     return 'Nothing to display';
-    // }
   }
   
   render() {
