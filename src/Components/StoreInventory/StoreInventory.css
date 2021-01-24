@@ -16,30 +16,18 @@
 }
 
 .itemBackground {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f9f9f9+0,e0e0e0+100 */
-  background: #f9f9f9; /* Old browsers */
-  background: -moz-linear-gradient(top,  #f9f9f9 0%, #e0e0e0 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #f9f9f9 0%,#e0e0e0 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #f9f9f9 0%,#e0e0e0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
+  background: rgb(250,245,210);
+  background: linear-gradient(180deg, rgba(250,245,210,1) 0%, rgba(200,180,65,1) 91%, rgba(180,155,45,1) 100%);
 }
 
 .itemBackground:hover {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#faff9e+0,dddb89+100 */
-  background: #faff9e; /* Old browsers */
-  background: -moz-linear-gradient(top,  #faff9e 0%, #dddb89 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #faff9e 0%,#dddb89 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #faff9e 0%,#dddb89 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faff9e', endColorstr='#dddb89',GradientType=0 ); /* IE6-9 */
+  background: rgb(200,190,100);
+  background: linear-gradient(180deg, rgba(200,190,100,1) 0%, rgba(180,170,40,1) 80%, rgba(160,140,25,1) 100%);
 }
 
 .activeMobileItem {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#faff9e+0,dddb89+100 */
-  background: #faff9e; /* Old browsers */
-  background: -moz-linear-gradient(top,  #faff9e 0%, #dddb89 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #faff9e 0%,#dddb89 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #faff9e 0%,#dddb89 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faff9e', endColorstr='#dddb89',GradientType=0 ); /* IE6-9 */
+  background: rgb(200,190,100);
+  background: linear-gradient(180deg, rgba(200,190,100,1) 0%, rgba(180,170,40,1) 80%, rgba(160,140,25,1) 100%);
 }
 
 .InventoryItemName {
