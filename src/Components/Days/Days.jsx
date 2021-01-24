@@ -35,7 +35,7 @@ class Days extends React.Component {
 
   render() {
     return (
-      <div className="Days surface">
+      <div className="Days primary-surface">
         <div className="DayTitle">Day: {this.props.day}</div>
         <div className="nextDay button secondary-medium" onClick={this.handleNextDay}
         >Finish Day</div>
