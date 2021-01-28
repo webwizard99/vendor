@@ -6,6 +6,7 @@ import MobileStoreHeadbar from '../../Components/MobileStoreHeadbar/MobileStoreH
 import Suppliers from '../../Components/Suppliers/Suppliers';
 import MobileMenu from '../../Components/MobileMenu/MobileMenu';
 import Adventurers from '../../Components/Adventurers/Adventurers';
+import AdventurerDetail from '../../Components/AdventurerDetail/AdventurerDetail';
 
 // redux imports
 import { connect } from 'react-redux';
@@ -49,7 +50,8 @@ class MobileGameScreen extends React.Component {
         <Suppliers />
       </div>
     );
-    this.formTable[allScreens.adventurers] = <Adventurers />
+    this.formTable[allScreens.adventurers] = <Adventurers />;
+    this.formTable[allScreens.adventurer] = <AdventurerDetail />;
   }
 
   getCurrentScreen() {

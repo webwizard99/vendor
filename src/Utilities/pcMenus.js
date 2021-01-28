@@ -1,5 +1,6 @@
 const pcMenus = {
-  adventurers: 'adventurers'
+  adventurers: 'adventurers',
+  adventurer: 'adventurer'
 }
 
 export default pcMenus;

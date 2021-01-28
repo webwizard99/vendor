@@ -4,6 +4,7 @@ import './Details.css';
 // component imports
 import DetailPCMenu from '../DetailPCMenu/DetailPCMenu';
 import Adventurers from '../Adventurers/Adventurers';
+import AdventurerDetail from '../AdventurerDetail/AdventurerDetail';
 
 // redux imports
 import { connect } from 'react-redux';
@@ -39,6 +40,7 @@ class Details extends React.Component {
     this.formTable = tempTable;
     this.formTable['blank'] = (<div className="BlankForm">detail type unknown</div>);
     this.formTable[menuTypes.adventurers] = <Adventurers />;
+    this.formTable[menuTypes.adventurer] = <AdventurerDetail />;
   }
 
   getDetail() {
