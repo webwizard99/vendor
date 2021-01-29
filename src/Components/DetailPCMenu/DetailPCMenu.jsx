@@ -7,7 +7,7 @@ import { SET_PC_DETAIL, SET_PC_DROPDOWN } from '../../actions/types';
 
 // utility imports
 import pcDetailMenus from '../../Utilities/pcDetailMenus';
-import pcMenus from '../../Utilities/pcMenus';
+// import pcMenus from '../../Utilities/pcMenus';
 
 class DetailPCMenu extends React.Component {
   constructor(props) {

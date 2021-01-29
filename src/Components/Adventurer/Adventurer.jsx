@@ -44,7 +44,7 @@ class Adventurer extends React.Component {
     const classIcon = adventurerClass.name.charAt(0);
     return (
       <div className="adventurerDisplay primary"
-        onClick={}
+        onClick={this.handleZoom}
       >
         <div className={adventurerClassIconColor}>{classIcon}</div>
         <div className="adventurerDetails">

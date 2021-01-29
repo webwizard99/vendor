@@ -6,7 +6,7 @@ const mobileScreens = (function(){
   let currentScreen = '';
   let currentIndex = 0;
   const screens = ['store', 'suppliers', 'adventurers'];
-  const dependentScreens = ['adventurer'];
+  // const dependentScreens = ['adventurer'];
 
   const allScreens = {
     store: 'store',
