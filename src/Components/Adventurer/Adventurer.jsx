@@ -28,7 +28,6 @@ class Adventurer extends React.Component {
       const allScreens = mobileScreens.getAllScreens();
       this.props.setMobileScreen(allScreens.adventurer);
     } else {
-      const allMenus = pcMenus;
       this.props.setPCDetail(pcMenus.adventurer);
     }
   }
