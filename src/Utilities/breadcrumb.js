@@ -33,7 +33,7 @@ const breadcrumb = (function(){
     },
     addBreadcrumb: function(payload) {
       let { display, scrollPos } = payload;
-      const isMobile = screenInfo.isMobile();
+      const isMobile = screenInfo.getIsMobile();
       const newCrumb = new Breadcrumb({ displayPayload: display, scrollPos: scrollPos, isMobile: isMobile });
       breadcrumbs.push(newCrumb);
     }
