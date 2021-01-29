@@ -1,7 +1,31 @@
 import React from 'react';
 import './Adventurer.css';
 
+// redux imports
+import { connect } from 'react-redux';
+import { SET_DETAIL_ID } from '../../actions/types';
+
+// utility imports
+import breadcrumb from '../../Utilities/breadcrumb';
+import screenInfo from '../../Utilities/screenInfo';
+
 class Adventurer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleZoom = this.handleZoom.bind(this);
+  }
+
+  handleZoom() {
+    if (!this.props.adventurer) return;
+    this.props.setDetailId(this.props.adventurer.id);
+    const advDOM = document.querySelector('.adventurers');
+    console.log(advDOM);
+    breadcrumb.addBreadcrumb({ display: 'adventurer', screenPos: 0 });
+    if (screenInfo.getIsMobile()) {
+      //
+    }
+  }
 
   render() {
     if (!this.props.adventurer) return '';
@@ -19,7 +43,9 @@ class Adventurer extends React.Component {
     adventurerClassIconColor += ` ${classColors[adventurerClass.name]}`
     const classIcon = adventurerClass.name.charAt(0);
     return (
-      <div className="adventurerDisplay primary">
+      <div className="adventurerDisplay primary"
+        onClick={}
+      >
         <div className={adventurerClassIconColor}>{classIcon}</div>
         <div className="adventurerDetails">
           <p className="adventurerName">{adventurer.name}</p>
@@ -66,4 +92,10 @@ class Adventurer extends React.Component {
   }
 }
 
-export default Adventurer;
+const mapDispatchToProps = dispatch => {
+  return {
+    setDetailId: (id) => dispatch({ type: SET_DETAIL_ID, id: id })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Adventurer);

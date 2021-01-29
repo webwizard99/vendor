@@ -39,3 +39,5 @@ const breadcrumb = (function(){
     }
   }
 }());
+
+export default breadcrumb;
