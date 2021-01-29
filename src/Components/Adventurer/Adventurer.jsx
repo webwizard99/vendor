@@ -3,11 +3,13 @@ import './Adventurer.css';
 
 // redux imports
 import { connect } from 'react-redux';
-import { SET_DETAIL_ID } from '../../actions/types';
+import { SET_DETAIL_ID, SET_MOBILE_SCREEN, SET_PC_DETAIL } from '../../actions/types';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
 import screenInfo from '../../Utilities/screenInfo';
+import mobileScreens from '../../Utilities/mobileScreens';
+import pcMenus from '../../Utilities/pcMenus';
 
 class Adventurer extends React.Component {
   constructor(props) {
@@ -20,10 +22,14 @@ class Adventurer extends React.Component {
     if (!this.props.adventurer) return;
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
-    console.log(advDOM);
+    console.dir(advDOM);
     breadcrumb.addBreadcrumb({ display: 'adventurer', screenPos: 0 });
     if (screenInfo.getIsMobile()) {
-      //
+      const allScreens = mobileScreens.getAllScreens();
+      this.props.setMobileScreen(allScreens.adventurer);
+    } else {
+      const allMenus = pcMenus;
+      this.props.setPCDetail(pcMenus.adventurer);
     }
   }
 
@@ -94,7 +100,9 @@ class Adventurer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setDetailId: (id) => dispatch({ type: SET_DETAIL_ID, id: id })
+    setDetailId: (id) => dispatch({ type: SET_DETAIL_ID, id: id }),
+    setMobileScreen: (screen) => dispatch({ type: SET_MOBILE_SCREEN, screen: screen }),
+    setPCDetail: (detail) => dispatch({ type: SET_PC_DETAIL, detail: detail })
   }
 }
 

@@ -10,6 +10,7 @@ import appStateReducer from './appStateReducer';
 import mobileMenuReducer from './mobileMenuReducer';
 import adventurersReducer from './adventurersReducer';
 import pcDetailReducer from './pcDetailReducer';
+import detailReducer from './detailReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   app: appStateReducer,
   mobileMenu: mobileMenuReducer,
   adventurers: adventurersReducer,
-  pcMenu: pcDetailReducer
+  pcMenu: pcDetailReducer,
+  detail: detailReducer
 });
