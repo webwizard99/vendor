@@ -20,6 +20,7 @@ class Adventurer extends React.Component {
 
   handleZoom() {
     if (!this.props.adventurer) return;
+    console.log(this.props.adventurer);
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;
