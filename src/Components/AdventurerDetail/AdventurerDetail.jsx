@@ -19,7 +19,7 @@ class AdventurerDetail extends React.Component {
   }
   
   render() {
-    if (!this.props.detailId || !this.props.adventurers) return;
+    if (!this.props.detailId || !this.props.adventurers) return '';
     const allAdventurers = this.props.adventurers;
     const thisAdventurer = allAdventurers.find(adventurer => adventurer.id === this.props.detailId);
 
