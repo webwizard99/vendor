@@ -15,6 +15,26 @@
   margin-right: 2rem;
 }
 
+.primary-stats-bar {
+  display: flex;
+  width: 100%;
+  height: 3rem;
+}
+
+.primary-cascade {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.adventurerInventoryHeadline {
+  font-size: 1.2rem;
+}
+
+.adventurerInventoryDetails {
+  display: flex;
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .AdventurerDetail {
@@ -22,7 +42,7 @@
     padding-top: 1rem;
   }
 
-  .back-button {
+  .back-button, .adventurerInventoryHeadline, .primary-stats-bar, .adventurerInventoryDetails {
     padding-left: 1rem;
   }
 }
