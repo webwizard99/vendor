@@ -24,7 +24,7 @@ class Adventurer extends React.Component {
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;
-    breadcrumb.addBreadcrumb({ display: 'adventurer', screenPos: scrollY });
+    breadcrumb.addBreadcrumb({ display: 'adventurers', screenPos: scrollY });
     if (screenInfo.getIsMobile()) {
       const allScreens = mobileScreens.getAllScreens();
       this.props.setMobileScreen(allScreens.adventurer);

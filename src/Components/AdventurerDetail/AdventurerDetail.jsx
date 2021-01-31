@@ -15,7 +15,10 @@ class AdventurerDetail extends React.Component {
   }
 
   handleBack() {
-    breadcrumb.popBreadcrumb();
+    const handled = breadcrumb.popBreadcrumb();
+    if (!handled) {
+      console.log('breadcrumb failed!');
+    }
   }
   
   render() {
