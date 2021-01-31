@@ -1,0 +1,16 @@
+.AdventurerDetail {
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+}
+
+.title-bar {
+  display: flex;
+  font-size: 1.2rem;
+}
+
+.back-button {
+  cursor: pointer;
+  font-weight: 800;
+  margin-right: 2rem;
+}

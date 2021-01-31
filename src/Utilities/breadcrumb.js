@@ -17,7 +17,7 @@ const breadcrumb = (function(){
     this.scrollPos = scrollPos;
   }
 
-  Breadcrumb.dispatchDisplay = function() {
+  Breadcrumb.prototype.dispatchDisplay = function() {
     if (this.isMobile) {
       store.dispatch({ type: SET_MOBILE_SCREEN, screen: this.displayPayload });
     } else {
