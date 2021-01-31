@@ -19,6 +19,7 @@
   display: flex;
   width: 100%;
   height: 3rem;
+  margin-bottom: 1rem;
 }
 
 .primary-cascade {
@@ -27,12 +28,26 @@
   width: 100%;
 }
 
+.primary-cascade:first-child {
+  margin-bottom: .5rem;
+}
+
 .adventurerInventoryHeadline {
   font-size: 1.2rem;
 }
 
 .adventurerInventoryDetails {
   display: flex;
+}
+
+.AdventurerDetail .adventurerClassIcon {
+  display: block;
+}
+
+
+.adventurerDetailsView {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* mobile styles */
