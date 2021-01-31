@@ -72,6 +72,9 @@ class AdventurerDetail extends React.Component {
         </div>
         <div className="adventurerDetails">
           <div className="adventurerStatGroup">
+            <p className={adventurerClassColor}>{adventurerClass.name}</p>
+          </div>
+          <div className="adventurerStatGroup">
             <p className="adventurerStatLabel">gold</p>
             <p className="adventurerStat">{thisAdventurer.gold}</p>
           </div>
