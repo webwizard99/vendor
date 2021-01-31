@@ -68,7 +68,7 @@ class MobileGameScreen extends React.Component {
   
   render() {
     return (
-      <div className="MobileGameScreen">
+      <div className="MobileGameScreen primary-dark">
         <MobileMenu />
         {this.getCurrentScreen()}
       </div>

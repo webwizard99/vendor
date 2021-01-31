@@ -20,10 +20,10 @@ class Adventurer extends React.Component {
 
   handleZoom() {
     if (!this.props.adventurer) return;
-    console.log(this.props.adventurer);
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;
+    console.log(scrollY);
     breadcrumb.addBreadcrumb({ display: 'adventurers', screenPos: scrollY });
     if (screenInfo.getIsMobile()) {
       const allScreens = mobileScreens.getAllScreens();
