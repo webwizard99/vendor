@@ -14,6 +14,7 @@ export default function(state = initialState, action) {
       }
     case SET_ADVENTURER_UPDATE:
       let newUpdate = !state.update;
+      console.log(newUpdate);
       return {
         ...state,
         update: newUpdate
