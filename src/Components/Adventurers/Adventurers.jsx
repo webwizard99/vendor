@@ -23,7 +23,6 @@ class Adventurers extends React.Component {
   
   render() {
     if (!this.props.adventurers) return '';
-    const adventurers = this.props.adventurers;
     return (
       <div className="adventurers">
         {this.getAdventurers()}
