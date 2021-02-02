@@ -200,7 +200,7 @@ const adventurers = (function(){
     },
     takeAdventurerTurn: function() {
       doShopping();
-      dispatchAdventurers();
+      dispatchAdventurers(adventurers);
     }
   }
 }());
