@@ -147,9 +147,10 @@ const adventurers = (function(){
             }
           }
         }
-
+        console.log(willBuy, taken);
         if (willBuy && !taken) {
           const totalPrice = item.item.value * (1 + item.markup);
+          console.log(totalPrice);
           if (thisAdventurer.checkAccount(totalPrice)) {
             console.log('buying..');
             thisAdventurer.chargeAccount(totalPrice);
