@@ -3,6 +3,7 @@ import gameConstants from './gameConstants';
 
 // game imports
 import storeInventory from './storeInventory';
+import items from './items';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -65,7 +66,36 @@ const adventurers = (function(){
 
   const doShopping = function() {
     const inventory = storeInventory.getStoreInventory();
-    console.log(inventory);
+    let inventoryItems = [];
+    inventory.forEach(item => {
+      let composedItem = item;
+      composedItem.item = items.getItem(item.itemId);
+      inventoryItems.push(composedItem);
+    })
+    console.log(inventoryItems);
+    let adventurerTurn = 0;
+    const adventurerCount = adventurers.length;
+    // loop through each inventory item
+    inventoryItems.forEach(item => {
+      // create an order based on last adventurer to take an
+      // item and proceed suequentially to include all
+      // adventurers
+      let adventurerTries = [];
+      for (let i = 0; i < adventurerCount; i++) {
+        let thisIndex = adventurerTurn + i;
+        if (thisIndex >= adventurerCount) {
+          thisIndex -= adventurerCount;
+        }
+        adventurerTries.push(thisIndex);
+      }
+      // let taken = false;
+
+      // check with each adventurer if they want the item
+      // adventurerTries.forEach(adventurerIndex => {
+      //   let decisionFactor = '';
+
+      // })
+    })
   }
 
   return {
