@@ -149,7 +149,7 @@ const adventurers = (function(){
         }
         console.log(willBuy, taken);
         if (willBuy && !taken) {
-          const totalPrice = item.item.value * (1 + item.markup);
+          const totalPrice = item.item.value * (1 + (item.markup / 1000));
           console.log(totalPrice);
           if (thisAdventurer.checkAccount(totalPrice)) {
             console.log('buying..');
