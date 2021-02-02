@@ -3,7 +3,7 @@ import gameConstants from './gameConstants';
 
 // game imports
 import storeInventory from './storeInventory';
-import store from './store';
+import playerStore from './store';
 import items from './items';
 
 // utility imports
@@ -143,8 +143,8 @@ const adventurers = (function(){
           const totalPrice = item.item.value * (1 + item.markup);
           if (thisAdventurer.checkAccount(totalPrice)) {
             thisAdventurer.chargeAccount(totalPrice);
-            store.creditGold(totalPrice);
-            store.updateGold();
+            playerStore.creditGold(totalPrice);
+            playerStore.updateGold();
             storeInventory.removeItem(item.itemId);
             storeInventory.updateStoreInventory();
             thisAdventurer.inventory.push(item.item);
