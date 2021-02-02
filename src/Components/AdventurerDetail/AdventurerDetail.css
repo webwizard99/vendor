@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.title-bar, .primary-stats-bar, .adventurerDetailsView, .adventurerInventoryDetails {
+  margin-bottom: 1rem;
+}
+
 .title-bar {
   display: flex;
   font-size: 1.2rem;
@@ -19,7 +23,6 @@
   display: flex;
   width: 100%;
   height: 3rem;
-  margin-bottom: 1rem;
 }
 
 .primary-cascade {
@@ -28,12 +31,13 @@
   width: 100%;
 }
 
-.primary-cascade:first-child {
+.primary-cascade > div, .adventurerDetailsView > div, .adventurerInventoryDetails > div {
   margin-bottom: .5rem;
 }
 
 .adventurerInventoryHeadline {
   font-size: 1.2rem;
+  margin-bottom: .2rem;
 }
 
 .adventurerInventoryDetails {
@@ -48,6 +52,7 @@
 .adventurerDetailsView {
   display: flex;
   flex-wrap: wrap;
+  width: 18rem;
 }
 
 /* mobile styles */
