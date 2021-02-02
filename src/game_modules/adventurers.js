@@ -122,10 +122,12 @@ const adventurers = (function(){
         const desireWeight = thisAdventurer.townBehavior[decisionFactor];
         console.log(desireWeight);
         let totalFactor = (desireWeight / 1000) - (item.markup / 1000);
+        console.log(`totalFactor: ${totalFactor}`);
         if (totalFactor < 0) {
           totalFactor = 0;
         }
         let willBuy = Math.random() > totalFactor;
+        console.log(`willBuy: ${willBuy}`);
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
           if (item.item.type === itemTypes.weapon) {
@@ -142,6 +144,7 @@ const adventurers = (function(){
         if (willBuy && !taken) {
           const totalPrice = item.item.value * (1 + item.markup);
           if (thisAdventurer.checkAccount(totalPrice)) {
+            console.log('buying..');
             thisAdventurer.chargeAccount(totalPrice);
             playerStore.creditGold(totalPrice);
             playerStore.updateGold();
