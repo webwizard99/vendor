@@ -13,7 +13,7 @@ export default function(state = initialState, action) {
         adventurers: action.payload
       }
     case SET_ADVENTURER_UPDATE:
-      let newUpdate = update + 1;
+      let newUpdate = state.update + 1;
       if (newUpdate > 10) {
         newUpdate = 0;
       }
