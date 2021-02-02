@@ -10,8 +10,9 @@ import { connect } from 'react-redux';
 class Adventurers extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.update !== this.props.update) return true;
+    if (nextProps.adventurers !== this.props.adventurers) return true;
   }
-  
+
   render() {
     if (!this.props.adventurers) return '';
     const adventurers = this.props.adventurers;
