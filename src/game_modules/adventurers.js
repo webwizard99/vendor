@@ -100,6 +100,9 @@ const adventurers = (function(){
     },
     updateAdventurers: function() {
       dispatchAdventurers(adventurers);
+    },
+    takeAdventurerTurn: function() {
+      doShopping();
     }
   }
 }());
