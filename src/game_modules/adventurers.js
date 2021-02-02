@@ -2,6 +2,7 @@
 import gameConstants from './gameConstants';
 
 // game imports
+import storeInventory from './storeInventory';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -40,6 +41,7 @@ const adventurers = (function(){
       this.maxHp = this.hp;
       this.inventory = [];
       this.equipment = { weapon: null, armor: null };
+      this.informed = false;
       this.id = currentId;
       currentId++;
   }
@@ -59,6 +61,11 @@ const adventurers = (function(){
 
   const getAdventurers = function*() {
     yield fetchAdventurers();
+  }
+
+  const doShopping = function() {
+    const inventory = storeInventory.getStoreInventory();
+    console.log(inventory);
   }
 
   return {

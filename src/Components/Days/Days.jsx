@@ -3,6 +3,7 @@ import './Days.css';
 
 // import days controller from game code
 import days from '../../game_modules/days';
+import main from '../../game_modules/main';
 
 // import redux modules
 import { fetchDay } from '../../actions';
@@ -23,6 +24,7 @@ class Days extends React.Component {
   }
 
   handleNextDay() {
+    main.performTurn();
     const currentDay = this.props.day;
     // set day in game
     days.setDay(currentDay + 1);

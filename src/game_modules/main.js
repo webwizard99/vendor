@@ -37,6 +37,10 @@ const main = (function() {
 
     getGameLevel: function() {
       return currentMaxLevel;
+    },
+
+    performTurn: function() {
+      adventurers.takeAdventurerTurn();
     }
 
   }
