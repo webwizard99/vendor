@@ -126,16 +126,23 @@ const adventurers = (function(){
         if (totalFactor < 0) {
           totalFactor = 0;
         }
-        let willBuy = Math.random() > totalFactor;
+        let willBuy = totalFactor >= Math.random();
         console.log(`willBuy: ${willBuy}`);
+        console.log(thisAdventurer.equipment[item.item.type]);
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
           if (item.item.type === itemTypes.weapon) {
-            if (currentGear[itemTypes.weapon].damage >= item.item[itemTypes.weapon].damage) {
+            const currentDamage = currentGear[itemTypes.weapon].damage;
+            const itemDamage = currentGear[itemTypes.weapon].damage;
+            console.log(`currentDamage: ${currentDamage}, itemDamage: ${itemDamage}`);
+            if (currentDamage >= itemDamage) {
               willBuy = false;
             }
           } else if (item.item.type === itemTypes.armor) {
-            if (currentGear[itemTypes.armor].armor >= item.item[itemTypes.armor].armor) {
+            const currentArmor = currentGear[itemTypes.armor].armor;
+            const itemArmor = item.item[itemTypes.armor].armor;
+            console.log(`currentAmror: ${currentArmor}, itemArmor: ${itemArmor}`);
+            if (currentArmor >= itemArmor) {
               willBuy = false;
             }
           }
