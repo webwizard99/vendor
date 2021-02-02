@@ -8,12 +8,6 @@ import Adventurer from '../Adventurer/Adventurer';
 import { connect } from 'react-redux';
 
 class Adventurers extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps.update, this.props.update);
-    if (nextProps.update !== this.props.update) return true;
-    if (nextProps.adventurers !== this.props.adventurers) return true;
-  }
-
   render() {
     if (!this.props.adventurers) return '';
     const adventurers = this.props.adventurers;
