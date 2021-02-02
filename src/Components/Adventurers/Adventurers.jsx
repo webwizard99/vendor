@@ -8,14 +8,25 @@ import Adventurer from '../Adventurer/Adventurer';
 import { connect } from 'react-redux';
 
 class Adventurers extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getAdventurers = this.getAdventurers.bind(this);
+  }
+
+  getAdventurers() {
+    const adventurers = this.props.adventurers;
+    return adventurers.map(adventurer => {
+      return <Adventurer adventurer={adventurer} />
+    });
+  }
+  
   render() {
     if (!this.props.adventurers) return '';
     const adventurers = this.props.adventurers;
     return (
       <div className="adventurers">
-        {adventurers.map(adventurer => {
-          return <Adventurer adventurer={adventurer} />
-        })}
+        {this.getAdventurers()}
         <div className="spacer-vertical"></div>
       </div>
     )

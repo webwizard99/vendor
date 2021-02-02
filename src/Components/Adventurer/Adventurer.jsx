@@ -17,11 +17,7 @@ class Adventurer extends React.Component {
 
     this.handleZoom = this.handleZoom.bind(this);
   }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.adventurer.gold !== this.props.adventurer.gold) return true;
-  }
-
+  
   handleZoom() {
     if (!this.props.adventurer) return;
     this.props.setDetailId(this.props.adventurer.id);
