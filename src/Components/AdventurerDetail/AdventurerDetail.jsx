@@ -51,7 +51,7 @@ class AdventurerDetail extends React.Component {
     const classIcon = adventurerClass.name.charAt(0);
     
     return (
-      <div className="AdventurerDetail">
+      <div className="AdventurerDetail primary">
         <div className="title-bar">
           <div className="back-button"
             onClick={this.handleBack}>&#8592;</div>
