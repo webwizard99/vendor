@@ -3,10 +3,12 @@ import gameConstants from './gameConstants';
 
 // game imports
 import storeInventory from './storeInventory';
+import store from './store';
 import items from './items';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
+import itemTypes from '../Utilities/itemTypes';
 
 // redux imports
 import { store } from '../index';
@@ -45,6 +47,22 @@ const adventurers = (function(){
       this.informed = false;
       this.id = currentId;
       currentId++;
+  }
+
+  Adventurer.prototype.checkAccount = function(value) {
+    return this.gold >= value;
+  }
+
+  Adventurer.prototype.chargeAccount = function(value) {
+    this.gold -= value;
+  }
+
+  Adventurer.prototype.unequipItem = function(slot) {
+    this.equipment[slot] = null;
+  }
+
+  Adventurer.prototype.equipItem = function(item) {
+    this.equipment[item.type] = item;
   }
 
   const dispatchAdventurers = function(newAdventurers) {
@@ -88,13 +106,62 @@ const adventurers = (function(){
         }
         adventurerTries.push(thisIndex);
       }
-      // let taken = false;
+      let taken = false;
 
       // check with each adventurer if they want the item
-      // adventurerTries.forEach(adventurerIndex => {
-      //   let decisionFactor = '';
+      adventurerTries.forEach(adventurerIndex => {
+        let decisionFactor = '';
+        const thisAdventurer = adventurers[adventurerIndex];
 
-      // })
+        if (thisAdventurer.equipment[item.item.type] && item.item.type !== itemTypes.potion) {
+          decisionFactor += 'upgrade';
+        } else {
+          decisionFactor += 'buy';
+        }
+        decisionFactor += '_' + item.item.type;
+        const desireWeight = thisAdventurer.townBehavior[decisionFactor];
+        console.log(desireWeight);
+        let totalFactor = (desireWeight / 1000) - (item.markup / 1000);
+        if (totalFactor < 0) {
+          totalFactor = 0;
+        }
+        let willBuy = Math.random() > totalFactor;
+        if (thisAdventurer.equipment[item.item.type]) {
+          const currentGear = thisAdventurer.equipment[item.item.type];
+          if (item.item.type === itemTypes.weapon) {
+            if (currentGear[itemTypes.weapon].damage >= item.item[itemTypes.weapon].damage) {
+              willBuy = false;
+            }
+          } else if (item.item.type === itemTypes.armor) {
+            if (currentGear[itemTypes.armor].armor >= item.item[itemTypes.armor].armor) {
+              willBuy = false;
+            }
+          }
+        }
+
+        if (willBuy && !taken) {
+          const totalPrice = item.item.value * (1 + item.markup);
+          if (thisAdventurer.checkAccount(totalPrice)) {
+            thisAdventurer.chargeAccount(totalPrice);
+            store.creditGold(totalPrice);
+            store.updateGold();
+            storeInventory.removeItem(item.itemId);
+            storeInventory.updateStoreInventory();
+            thisAdventurer.inventory.push(item.item);
+            if (!item.item.type === itemTypes.potion) {
+              if (thisAdventurer.equipment[item.item.type]) {
+                thisAdventurer.unequipItem(item.item.type);
+              }
+              thisAdventurer.equipItem(item.item);
+            }
+            taken = true;
+            adventurerTurn = adventurerIndex + 1;
+            if (adventurerTurn > adventurerCount) {
+              adventurerTurn = 0;
+            }
+          }
+        }
+      })
     })
   }
 

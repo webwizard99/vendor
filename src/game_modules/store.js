@@ -24,22 +24,21 @@ const gameStore = (function(){
       }
       gold -= amount;
     },
+    creditGold: function(amount) {
+      gold += amount;
+    },
     getName: function() {
       return name;
     },
-
     setName: function(newName) {
       name = newName;
     },
-
     getStartingGold: function() {
       return startingGold;
     },
-
     getGold: function() {
       return gold;
     },
-
     setGold: function(newGold) {
       gold = newGold;
     },

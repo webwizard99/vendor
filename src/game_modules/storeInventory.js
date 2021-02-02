@@ -87,6 +87,13 @@ const storeInventory = (function(){
       inventory.push(newStoreItem);
     },
 
+    removeItem: function(id) {
+      const foundItem = inventory.find(item => item.itemId == id);
+      if (foundItem) {
+        inventory = inventory.filter(item => item.itemId !== id);
+      }
+    },
+
     getStoreInventory: function() {
       return inventory;
     },
