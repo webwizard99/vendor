@@ -88,7 +88,7 @@ const storeInventory = (function(){
     },
 
     removeItem: function(id) {
-      const foundItem = inventory.find(item => item.itemId == id);
+      const foundItem = inventory.find(item => item.itemId === id);
       if (foundItem) {
         inventory = inventory.filter(item => item.itemId !== id);
       }
