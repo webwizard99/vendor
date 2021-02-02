@@ -2,7 +2,7 @@ import { SET_ADVENTURERS, SET_ADVENTURER_UPDATE } from '../actions/types';
 
 const initialState = {
   adventurers: null,
-  update: false
+  update: 0
 }
 
 export default function(state = initialState, action) {
@@ -13,7 +13,10 @@ export default function(state = initialState, action) {
         adventurers: action.payload
       }
     case SET_ADVENTURER_UPDATE:
-      let newUpdate = !state.update;
+      let newUpdate = update + 1;
+      if (newUpdate > 10) {
+        newUpdate = 0;
+      }
       console.log(newUpdate);
       return {
         ...state,
