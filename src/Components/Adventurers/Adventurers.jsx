@@ -24,7 +24,8 @@ class Adventurers extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    adventurers: state.adventurers.adventurers
+    adventurers: state.adventurers.adventurers,
+    update: state.adventurers.update
   }
 }
 

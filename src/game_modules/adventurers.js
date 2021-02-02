@@ -12,7 +12,7 @@ import itemTypes from '../Utilities/itemTypes';
 
 // redux imports
 import { store } from '../index';
-import { SET_ADVENTURERS } from '../actions/types';
+import { SET_ADVENTURERS, SET_ADVENTURER_UPDATE } from '../actions/types';
 
 const adventurers = (function(){
   let adventurers = [];
@@ -73,6 +73,13 @@ const adventurers = (function(){
     store.dispatch(payload);
   }
 
+  const dispatchUpdate = function() {
+    const payload = {
+      type: SET_ADVENTURER_UPDATE
+    }
+    store.dispatch(payload);
+  }
+
   const fetchAdventurers = async function() {
     let initAdventurers = fetcher.fetchRoute('adventurers-full');
     return initAdventurers;
@@ -90,7 +97,6 @@ const adventurers = (function(){
       composedItem.item = items.getItem(item.itemId);
       inventoryItems.push(composedItem);
     })
-    console.log(inventoryItems);
     let adventurerTurn = 0;
     const adventurerCount = adventurers.length;
     // loop through each inventory item
@@ -120,39 +126,30 @@ const adventurers = (function(){
         }
         decisionFactor += '_' + item.item.type;
         const desireWeight = thisAdventurer.townBehavior[decisionFactor];
-        console.log(desireWeight);
         let totalFactor = (desireWeight / 1000) - (item.markup / 1000);
-        console.log(`totalFactor: ${totalFactor}`);
         if (totalFactor < 0) {
           totalFactor = 0;
         }
         let willBuy = totalFactor >= Math.random();
-        console.log(`willBuy: ${willBuy}`);
-        console.log(thisAdventurer.equipment[item.item.type]);
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
           if (item.item.type === itemTypes.weapon) {
             const currentDamage = currentGear[itemTypes.weapon].damage;
             const itemDamage = currentGear[itemTypes.weapon].damage;
-            console.log(`currentDamage: ${currentDamage}, itemDamage: ${itemDamage}`);
             if (currentDamage >= itemDamage) {
               willBuy = false;
             }
           } else if (item.item.type === itemTypes.armor) {
             const currentArmor = currentGear[itemTypes.armor].armor;
             const itemArmor = item.item[itemTypes.armor].armor;
-            console.log(`currentAmror: ${currentArmor}, itemArmor: ${itemArmor}`);
             if (currentArmor >= itemArmor) {
               willBuy = false;
             }
           }
         }
-        console.log(willBuy, taken);
         if (willBuy && !taken) {
           const totalPrice = item.item.value * (1 + (item.markup / 1000));
-          console.log(totalPrice);
           if (thisAdventurer.checkAccount(totalPrice)) {
-            console.log('buying..');
             thisAdventurer.chargeAccount(totalPrice);
             playerStore.creditGold(totalPrice);
             playerStore.updateGold();
@@ -212,6 +209,7 @@ const adventurers = (function(){
     takeAdventurerTurn: function() {
       doShopping();
       dispatchAdventurers(adventurers);
+      dispatchUpdate();
     }
   }
 }());
