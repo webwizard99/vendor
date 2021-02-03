@@ -75,6 +75,8 @@ const supplies = (function(){
       possibleItems = possibleItems.json();
     }
 
+    possibleItems = possibleItems.filter(item => item.rarity === 1000);
+
     return possibleItems;
   }
 
@@ -139,6 +141,7 @@ const supplies = (function(){
     payload.name = newItem.item.name;
     payload.value = newItem.item.value;
     payload.prototypeId = newItem.item.id;
+    payload.rarity = newItem.item.rarity;
 
     // create item and add to total inventory in Items module
     let itemId = Items.createItem(payload);

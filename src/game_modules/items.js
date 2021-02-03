@@ -11,11 +11,12 @@ const items = (function(){
   let lastIndex = 0;
   
   const Item = function(payload) {
-    const { type, name, value, prototypeId } = payload;
+    const { type, name, value, prototypeId, rarity } = payload;
     this.type = type;
     this.name = name;
     this.value = value;
     this.prototypeId = prototypeId;
+    this.rarity = rarity;
     this.id = lastIndex;
     itemTypeIndex[lastIndex] = type;
     itemPrototypeIndex[lastIndex] = prototypeId;
@@ -42,13 +43,13 @@ const items = (function(){
   
   return {
     createItem: function(payload) {
-      let { type, name, value, itemPayload, prototypeId } = payload;
+      let { type, name, value, itemPayload, prototypeId, rarity } = payload;
       if (!itemTypes[type]) {
         console.log('invalid item type passed to items.createItem()');
         return;
       }
       
-      const newPayload = { type: type , name: name , value: value, prototypeId: prototypeId }
+      const newPayload = { type: type , name: name , value: value, prototypeId: prototypeId, rarity: rarity }
       const newItem = new Item(newPayload);
       
       switch (newItem.type) {
