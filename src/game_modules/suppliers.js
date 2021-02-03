@@ -16,6 +16,7 @@ const suppliers = (function(){
   let currentId = 0;
 
   const startingGold = 1000;
+  const supplierIncome = 250;
 
   const Supplier = function(payload) {
     const { name, offerings } = payload;
@@ -50,6 +51,10 @@ const suppliers = (function(){
     this.gold += price;
 
     return true;
+  }
+
+  Supplier.prototype.takeIncome = function() {
+    this.gold += supplierIncome;
   }
 
   const dispatchSuppliers = function(newSuppliers) {
@@ -196,6 +201,12 @@ const suppliers = (function(){
         return false;
       }
       return true;
+    },
+    takeSupplierIncomeTurns: function() {
+      if (suppliers.length < 1) return;
+      suppliers.forEach(supplier => {
+        supplier.takeIncome();
+      })
     },
     updateSuppliers: function() {
       dispatchSuppliers(suppliers);

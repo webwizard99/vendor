@@ -52,6 +52,11 @@ const main = (function() {
 
     performTurn: function() {
       adventurers.takeAdventurerTurn();
+      // need logic for triggering supply pool fetch if
+      // max level has changed
+      supplies.fillSupplies();
+      suppliers.takeSupplierIncomeTurns();
+      suppliers.takeSupplierTurn();
       dispatchUpdate();
     }
 
