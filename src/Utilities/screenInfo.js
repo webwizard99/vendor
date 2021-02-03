@@ -6,7 +6,6 @@ const screenInfo = (function(){
   let isMobile = false;
   let isFullscreen = true;
 
-  let height = 0;
   let width = 0;
 
   const dispatchFullscreen = function() {
@@ -70,7 +69,6 @@ const screenInfo = (function(){
   const setScreenInfo = function() {
     const app = document.querySelector('.App');
     const docDimensions = app.getBoundingClientRect();
-    height = docDimensions.height;
     width = docDimensions.width;
 
     if (width < 768) {
