@@ -16,7 +16,7 @@ const suppliers = (function(){
   let currentId = 0;
 
   const startingGold = 1000;
-  const supplierIncome = 250;
+  const supplierIncome = 100;
 
   const Supplier = function(payload) {
     const { name, offerings } = payload;

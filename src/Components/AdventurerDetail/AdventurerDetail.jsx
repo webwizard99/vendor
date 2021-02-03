@@ -18,7 +18,11 @@ class AdventurerDetail extends React.Component {
     const adventurerInventory = adventurer.inventory;
     console.log(adventurerInventory);
     if (!adventurerInventory) return 'no inventory';
-    return 'inventory goes here!';
+    return adventurerInventory.map(item => {
+      return (
+        <div className="adventurerInventoryItem">{item.name}</div>
+      )
+    })
   }
 
   getCombatLog(adventurer) {
