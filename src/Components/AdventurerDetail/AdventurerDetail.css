@@ -38,11 +38,11 @@
 
 .adventurerInventoryHeadline {
   font-size: 1.2rem;
-  margin-bottom: .2rem;
+  margin-bottom: .5rem;
 }
 
 .adventurerInventoryDetails {
-  display: flex;
+  color: rgb(249, 245, 110);
 }
 
 .AdventurerDetail .adventurerClassIcon {
