@@ -44,6 +44,7 @@ const adventurers = (function(){
       this.maxHp = this.hp;
       this.inventory = [];
       this.equipment = { weapon: null, armor: null };
+      this.inDungeon = false;
       this.informed = false;
       this.id = currentId;
       currentId++;
@@ -82,6 +83,25 @@ const adventurers = (function(){
     yield fetchAdventurers();
   }
 
+  const doInn = function() {
+    const availableAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
+    availableAdventurers.forEach(townAdventurer => {
+      let totalFactor = townAdventurer.townBehavior.use_tavern / 1000;
+      if (townAdventurer.informed) {
+        totalFactor = 0;
+      }
+      const willDrink = totalFactor >= Math.random();
+
+      if (willDrink) {
+        const totalCost = 10 * townAdventurer.level;
+        if (townAdventurer.checkAccount(totalCost)) {
+          townAdventurer.chargeAccount(totalCost);
+          townAdventurer.informed === true;
+        }
+      }
+    })
+  }
+
   const doShopping = function() {
     const inventory = storeInventory.getStoreInventory();
     let inventoryItems = [];
@@ -89,9 +109,10 @@ const adventurers = (function(){
       let composedItem = item;
       composedItem.item = items.getItem(item.itemId);
       inventoryItems.push(composedItem);
-    })
+    });
+    const shoppingAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
     let adventurerTurn = 0;
-    const adventurerCount = adventurers.length;
+    const adventurerCount = shoppingAdventurers.length;
     // loop through each inventory item
     inventoryItems.forEach(item => {
       // create an order based on last adventurer to take an
@@ -110,7 +131,7 @@ const adventurers = (function(){
       // check with each adventurer if they want the item
       adventurerTries.forEach(adventurerIndex => {
         let decisionFactor = '';
-        const thisAdventurer = adventurers[adventurerIndex];
+        const thisAdventurer = shoppingAdventurers[adventurerIndex];
 
         if (thisAdventurer.equipment[item.item.type] && item.item.type !== itemTypes.potion) {
           decisionFactor += 'upgrade';
@@ -200,6 +221,7 @@ const adventurers = (function(){
       dispatchAdventurers(adventurers);
     },
     takeAdventurerTurn: function() {
+      doInn();
       doShopping();
       dispatchAdventurers(adventurers);
     }
