@@ -8,6 +8,7 @@ import AdventurerDetail from '../AdventurerDetail/AdventurerDetail';
 
 // redux imports
 import { connect } from 'react-redux';
+import { SET_DETAIL_UPDATE } from '../../actions/types';
 
 import menuTypes from '../../Utilities/pcMenus';
 
@@ -45,6 +46,10 @@ class Details extends React.Component {
 
   getDetail() {
     if (!this.state.initialized) return '';
+    if (this.props.detailUpdate) {
+      this.props.setDetailUpdate(false);
+      return '';
+    }
     if (!this.props.pcDetailMenu) {
       return (<div className="BlankForm">no details to display</div>);
     }
@@ -67,7 +72,14 @@ class Details extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    pcDetailMenu: state.pcMenu.detail
+    pcDetailMenu: state.pcMenu.detail,
+    detailUpdate: state.detail.update
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setDetailUpdate: (value) => dispatch({ type: SET_DETAIL_UPDATE, value: value })
   }
 }
 

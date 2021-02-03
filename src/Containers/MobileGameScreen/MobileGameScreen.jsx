@@ -10,6 +10,7 @@ import AdventurerDetail from '../../Components/AdventurerDetail/AdventurerDetail
 
 // redux imports
 import { connect } from 'react-redux';
+import { SET_DETAIL_UPDATE } from '../../actions/types';
 
 // utility imports
 import mobileScreens from '../../Utilities/mobileScreens';
@@ -56,6 +57,10 @@ class MobileGameScreen extends React.Component {
 
   getCurrentScreen() {
     if (!this.state.initialized) return '';
+    if (this.props.detailUpdate) {
+      this.props.setDetailUpdate(false);
+      return '';
+    }
     if (!this.props.mobileScreen) {
       return (<div className="BlankForm">no details to display</div>)
     }
@@ -78,8 +83,15 @@ class MobileGameScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    mobileScreen: state.mobileMenu.screen
+    mobileScreen: state.mobileMenu.screen,
+    detailUpdate: state.detail.update
   }
 }
 
-export default connect(mapStateToProps)(MobileGameScreen);
+const mapDispatchToProps = dispatch => {
+  return {
+    setDetailUpdate: (value) => dispatch({ type: SET_DETAIL_UPDATE, value: value })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileGameScreen);

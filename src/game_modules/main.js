@@ -6,13 +6,24 @@ import days from './days';
 import suppliers from './suppliers';
 import supplies from './supplies';
 import adventurers from './adventurers';
+import gameStore from './store';
 
 // redux imports
-import gameStore from './store';
+import { store } from '../index';
+import { SET_DETAIL_UPDATE } from '../actions/types';
+
 
 const main = (function() {
   
   let currentMaxLevel = 1;
+
+  const dispatchUpdate = function() {
+    const payload = {
+      type: SET_DETAIL_UPDATE,
+      value: true
+    }
+    store.dispatch(payload);
+  }
 
   return {
     init: function(payload) {
@@ -41,6 +52,7 @@ const main = (function() {
 
     performTurn: function() {
       adventurers.takeAdventurerTurn();
+      dispatchUpdate();
     }
 
   }

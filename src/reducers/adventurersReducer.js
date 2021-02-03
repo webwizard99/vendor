@@ -1,8 +1,7 @@
-import { SET_ADVENTURERS, SET_ADVENTURER_UPDATE } from '../actions/types';
+import { SET_ADVENTURERS } from '../actions/types';
 
 const initialState = {
-  adventurers: null,
-  update: false
+  adventurers: null
 }
 
 export default function(state = initialState, action) {
@@ -11,13 +10,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         adventurers: action.payload
-      }
-    case SET_ADVENTURER_UPDATE:
-      const newUpdate = !state.update;
-      console.log(newUpdate);
-      return {
-        ...state,
-        update: newUpdate
       }
     default:
       return state;

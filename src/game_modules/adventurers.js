@@ -12,7 +12,7 @@ import itemTypes from '../Utilities/itemTypes';
 
 // redux imports
 import { store } from '../index';
-import { SET_ADVENTURERS, SET_ADVENTURER_UPDATE } from '../actions/types';
+import { SET_ADVENTURERS } from '../actions/types';
 
 const adventurers = (function(){
   let adventurers = [];
@@ -69,13 +69,6 @@ const adventurers = (function(){
     const payload = {
       type: SET_ADVENTURERS,
       payload: newAdventurers
-    }
-    store.dispatch(payload);
-  }
-
-  const dispatchUpdate = function() {
-    const payload = {
-      type: SET_ADVENTURER_UPDATE
     }
     store.dispatch(payload);
   }
@@ -209,7 +202,6 @@ const adventurers = (function(){
     takeAdventurerTurn: function() {
       doShopping();
       dispatchAdventurers(adventurers);
-      dispatchUpdate();
     }
   }
 }());

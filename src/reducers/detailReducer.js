@@ -1,7 +1,8 @@
-import { SET_DETAIL_ID } from '../actions/types';
+import { SET_DETAIL_ID, SET_DETAIL_UPDATE } from '../actions/types';
 
 const initialState = {
-  id: null
+  id: null,
+  update: false
 }
 
 export default function(state = initialState, action) {
@@ -11,6 +12,12 @@ export default function(state = initialState, action) {
         ...state,
         id: action.id
       }
+    case SET_DETAIL_UPDATE: {
+      return {
+        ...state,
+        update: action.value
+      }
+    }
     default:
       return state;
   }
