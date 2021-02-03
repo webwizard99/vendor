@@ -75,8 +75,6 @@ const supplies = (function(){
       possibleItems = possibleItems.json();
     }
 
-    possibleItems = possibleItems.filter(item => item.rarity === 1000);
-
     return possibleItems;
   }
 
@@ -89,7 +87,7 @@ const supplies = (function(){
     let newItems;
     fetchItemArrForSupplyPool()
       .then(itemsOfLevel => {
-        newItems = itemsOfLevel;
+        newItems = itemsOfLevel.filter(item => item.rarity === 1000);
       
         // initialize field on pool if need be
         if (suppliesPool[itemTypesArr[itemSpawnCount]] === null) {
