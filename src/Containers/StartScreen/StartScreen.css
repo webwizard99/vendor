@@ -54,6 +54,7 @@
   .StartScreen {
     height: 90vh;
   }
+
   .NameInput {
     width: 60%;
     justify-content: center;
@@ -98,6 +99,14 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .nameInputGroup input {
+    width: 80%;
+  }
+
+  .nameInputGroup label {
+    width: 30%;
   }
   
   .NameLabel {
