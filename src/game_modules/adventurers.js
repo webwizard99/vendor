@@ -148,7 +148,7 @@ const adventurers = (function(){
           }
         }
         if (willBuy && !taken) {
-          const totalPrice = item.item.value * (1 + (item.markup / 1000));
+          const totalPrice = Math.floor(item.item.value * (1 + (item.markup / 1000)));
           if (thisAdventurer.checkAccount(totalPrice)) {
             thisAdventurer.chargeAccount(totalPrice);
             playerStore.creditGold(totalPrice);
