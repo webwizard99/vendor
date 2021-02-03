@@ -8,7 +8,6 @@ const screenInfo = (function(){
 
   let height = 0;
   let width = 0;
-  console.log(height, width);
 
   const dispatchFullscreen = function() {
     const payload = {

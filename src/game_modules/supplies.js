@@ -87,7 +87,6 @@ const supplies = (function(){
     let newItems;
     fetchItemArrForSupplyPool()
       .then(itemsOfLevel => {
-        console.log(itemsOfLevel);
         newItems = itemsOfLevel.filter(item => item.item.rarity === 1000);
       
         // initialize field on pool if need be
