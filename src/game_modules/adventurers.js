@@ -96,7 +96,7 @@ const adventurers = (function(){
         const totalCost = 10 * townAdventurer.level;
         if (townAdventurer.checkAccount(totalCost)) {
           townAdventurer.chargeAccount(totalCost);
-          townAdventurer.informed === true;
+          townAdventurer.informed = true;
         }
       }
     })
