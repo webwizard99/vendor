@@ -63,6 +63,15 @@
     padding-top: 1rem;
   }
 
+  .title-bar {
+    font-size: 1.4rem;
+  }
+
+  .back-button {
+    padding-right: 1rem;
+    margin-right: 1rem;
+  }
+
   .back-button, .adventurerInventoryHeadline, .primary-stats-bar, .adventurerDetailsView, .adventurerInventoryDetails, .adventurer-combat-log {
     padding-left: 1rem;
   }
