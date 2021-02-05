@@ -7,6 +7,7 @@ import suppliers from './suppliers';
 import supplies from './supplies';
 import adventurers from './adventurers';
 import gameStore from './store';
+import dungeon from './dungeon';
 
 // redux imports
 import { store } from '../index';
@@ -44,6 +45,7 @@ const main = (function() {
       suppliers.initializeSuppliers(gameConstants.maxSuppliers);
 
       adventurers.initializeAdventurers(gameConstants.startingAdventurers);
+      dungeon.initializeLevels();
     },
 
     getGameLevel: function() {

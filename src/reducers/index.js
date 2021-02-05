@@ -11,6 +11,7 @@ import mobileMenuReducer from './mobileMenuReducer';
 import adventurersReducer from './adventurersReducer';
 import pcDetailReducer from './pcDetailReducer';
 import detailReducer from './detailReducer';
+import dungeonReducer from './dungeonReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   mobileMenu: mobileMenuReducer,
   adventurers: adventurersReducer,
   pcMenu: pcDetailReducer,
-  detail: detailReducer
+  detail: detailReducer,
+  dungeon: dungeonReducer
 });

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_USER, SET_STORE_GOLD, SET_DAY, SET_SUPPLIERS, SET_STORE_NAME } from './types';
+import { FETCH_USER, 
+  SET_STORE_GOLD, 
+  SET_DAY, 
+  SET_SUPPLIERS, 
+  SET_STORE_NAME
+ } from './types';
 
 // game imports
 import gameStore from '../game_modules/store';
