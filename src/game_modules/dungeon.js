@@ -66,7 +66,9 @@ const dungeon = (function(){
           console.log(initLevels);
           if (!initLevels) return false;
           let newLevel = initLevels.shift();
-          newLevel = newLevel[0];
+          if (Array.isArray(newLevel)) {
+            newLevel = newLevel[0];
+          }
           const levelPayload = {
             number: newLevel.number,
             boss: newLevel.boss,
