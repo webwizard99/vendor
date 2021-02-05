@@ -63,6 +63,7 @@ const dungeon = (function(){
       const genGetLevels = getLevels();
       genGetLevels.next().value
         .then(initLevels => {
+          console.log(initLevels);
           if (!initLevels) return false;
           let newLevel = initLevels.shift();
           newLevel = newLevel[0];
