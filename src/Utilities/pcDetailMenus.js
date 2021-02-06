@@ -8,7 +8,7 @@ const pcDetailMenus = (function(){
   let currentMenu = '';
   let currentIndex = 0;
 
-  const menus = [pcMenus.adventurers];
+  const menus = [pcMenus.adventurers, pcMenus.dungeon];
 
   let menuMap = {};
 
