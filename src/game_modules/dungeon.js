@@ -42,7 +42,7 @@ const dungeon = (function(){
   const dispatchExploredLevel = function() {
     const payload = {
       type: SET_DUNGEON_LEVEL_EXPLORED,
-      payload: exploredLevel
+      level: exploredLevel
     }
     store.dispatch(payload);
   }
