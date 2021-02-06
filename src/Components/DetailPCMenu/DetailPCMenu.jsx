@@ -59,6 +59,8 @@ class DetailPCMenu extends React.Component {
     return (
       <div className="PCDropdown primary-dark">
         {allMenus.map(menu => {
+          console.log(menu);
+          console.log(this.props.dungeonLevelExplored);
           if (menu === allMenus.dungeon && this.props.dungeonLevelExplored === 0) {
             return null;
           }
