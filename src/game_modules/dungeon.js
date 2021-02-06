@@ -5,10 +5,12 @@ import fetcher from '../Utilities/fetcher';
 
 // redux imports
 import { store } from '../index';
-import { SET_DUNGEON_LEVELS } from '../actions/types';
+import { SET_DUNGEON_LEVELS, SET_DUNGEON_LEVEL_EXPLORED } from '../actions/types';
 
 const dungeon = (function(){
   let levels = [];
+
+  let exploredLevel = 0;
 
   const Level = function(payload) {
     const {
@@ -34,6 +36,14 @@ const dungeon = (function(){
       type: SET_DUNGEON_LEVELS,
       payload: levels
     };
+    store.dispatch(payload);
+  }
+
+  const dispatchExploredLevel = function() {
+    const payload = {
+      type: SET_DUNGEON_LEVEL_EXPLORED,
+      payload: exploredLevel
+    }
     store.dispatch(payload);
   }
 
@@ -83,10 +93,14 @@ const dungeon = (function(){
         });
       orderLevels();
       dispatchLevels();
+      dispatchExploredLevel();
       console.log(levels);
     },
     updateLevels: function() {
       dispatchLevels();
+    },
+    getExploredLevel: function() {
+      return exploredLevel;
     }
   }
 }());

@@ -1,7 +1,8 @@
-import { SET_DUNGEON_LEVELS } from '../actions/types';
+import { SET_DUNGEON_LEVELS, SET_DUNGEON_LEVEL_EXPLORED } from '../actions/types';
 
 const initialState = {
-  levels: null
+  levels: null,
+  exploredLevel: 0
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         levels: action.payload
+      }
+    case SET_DUNGEON_LEVEL_EXPLORED:
+      return {
+        ...state,
+        exploredLevel: action.level
       }
     default:
       return state;
