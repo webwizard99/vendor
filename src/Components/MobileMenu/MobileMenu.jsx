@@ -60,9 +60,6 @@ class MobileMenu extends React.Component {
         <div className="MobileDropdown primary-medium">
           <Days />
           {allScreens.map(screen => {
-            if (screen === allScreens.dungeon && this.props.dungeonLevelExplored === 0) {
-              return null;
-            }
             return (
               <div className="mobileDropdownOption"
                 onClick={() => this.handleScreenChange(screen)}>{screen}</div>

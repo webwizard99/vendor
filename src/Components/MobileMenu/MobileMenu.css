@@ -36,7 +36,7 @@
   text-align: center;
   z-index: 7;
   /* 1/2 mobile menu height + 1/2 days height + (((dropdown option height + (dropdown option padding * 2)) * number of dropdown options) / 2) */
-  top: calc(4vh + 1.5rem + calc(calc(calc(1.6rem + calc(.5rem * 2)) * 3)) / 2);
+  top: calc(4vh + 1.5rem + calc(calc(calc(1.6rem + calc(.5rem * 2)) * 4)) / 2);
   margin-left: calc(-100vw - calc(calc(100vw - 14rem) / 2));
 }
 
