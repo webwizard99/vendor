@@ -1,10 +1,14 @@
 import React from 'react';
 import './AdventurersPartial.css';
 
+// component imports
 import Adventurer from '../Adventurer/Adventurer';
 
 // redux imports
 import { connect } from 'react-redux';
+
+// utility imports
+import breadcrumb from '../../Utilities/breadcrumb';
 
 class AdventurersPartial extends React.Component {
   constructor(props) {
@@ -19,6 +23,12 @@ class AdventurersPartial extends React.Component {
     });
   }
 
+  handleBack() {
+    const handled = breadcrumb.popBreadcrumb();
+    if (!handled) {
+      console.log('breadcrumb failed!');
+    }
+  }
 
   render() {
     if (!this.props.adventurers || !this.props.partialAdventurers) return '';
@@ -30,6 +40,8 @@ class AdventurersPartial extends React.Component {
     
     return (
       <div className="adventurers">
+        <div className="back-button"
+            onClick={this.handleBack}>&#8592;</div>
         {this.getAdventurers(partialAdventurers)}
       </div>
     )

@@ -17,14 +17,21 @@ class Adventurer extends React.Component {
 
     this.handleZoom = this.handleZoom.bind(this);
   }
-  
+
   handleZoom() {
     if (!this.props.adventurer) return;
+    const adventurersPartial = this.props.adventurersPartial;
+    let breadcrumbName = 'adventurers';
+    if (adventurersPartial) {
+      if (adventurersPartial.find(this.props.adventurer.id)) {
+        breadcrumbName = 'adventurersPartial';
+      }
+    }
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;
     console.log(scrollY);
-    breadcrumb.addBreadcrumb({ display: 'adventurers', screenPos: scrollY });
+    breadcrumb.addBreadcrumb({ display: breadcrumbName, screenPos: scrollY });
     if (screenInfo.getIsMobile()) {
       const allScreens = mobileScreens.getAllScreens();
       this.props.setMobileScreen(allScreens.adventurer);
@@ -98,6 +105,12 @@ class Adventurer extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    adventurersPartial: state.adventurers.adventurersPartial
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     setDetailId: (id) => dispatch({ type: SET_DETAIL_ID, id: id }),
@@ -106,4 +119,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Adventurer);
+export default connect(mapStateToProps, mapDispatchToProps)(Adventurer);
