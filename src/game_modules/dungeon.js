@@ -41,26 +41,43 @@ const dungeon = (function(){
 
   Level.prototype.initialize = function() {
     console.log('level initialize');
-    const monstersToAdd = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
-    console.log(monstersToAdd);
-    if (!monstersToAdd) return false;
-    let monsterDrops = [];
-    monstersToAdd.forEach(addMonster => {
-      this.monsters.push(addMonster);
-      const addMonsterDrops = addMonster.drop_list.drops;
-      if (addMonsterDrops) {
-        addMonsterDrops.forEach(addDrop => {
-          const addId = addDrop.itemId;
-          if (!monsterDrops.find(item => item.itemId === addId)) {
-            // get item
-            monsterDrops.push({ itemId: addId, dropType: addDrop.drop_type});
-          }
-        })
-      }
-    });
-    const resolvedDrops = getDrops(monsterDrops);
-    this.monstersLoot.push(...resolvedDrops);
-
+    const tGetMonstersForLevel = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
+    //const monstersToAdd = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
+    tGetMonstersForLevel.next().value.then((monstersToAdd) => {
+      console.log(monstersToAdd);
+      if (!monstersToAdd) return false;
+      let monsterDrops = [];
+      monstersToAdd.forEach(addMonster => {
+        this.monsters.push(addMonster);
+        const addMonsterDrops = addMonster.drop_list.drops;
+        if (addMonsterDrops) {
+          addMonsterDrops.forEach(addDrop => {
+            const addId = addDrop.itemId;
+            if (!monsterDrops.find(item => item.itemId === addId)) {
+              // get item
+              monsterDrops.push({ itemId: addId, dropType: addDrop.drop_type});
+            }
+          })
+        }
+      });
+      const mGetDrops = getDrops(monsterDrops);
+      mGetDrops.next().value.then((resolvedDrops) => {
+        this.monstersLoot.push(...resolvedDrops);
+      });
+      let treasureDrops = [];
+      this.treasureDropList.drops.forEach(drop => {
+        const addId = drop.itemId;
+        if (!treasureDrops.find(item => item.itemId === addId)) {
+          treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
+        }
+      });
+      const tGetDrops = getDrops(treasureDrops);
+      tGetDrops.next().value.then((resolvedDrops) => {
+        this.treasures.push(...resolvedDrops);
+      });
+      console.log(this);
+    })
+    
   }
 
   const dispatchLevels = function() {
@@ -116,7 +133,7 @@ const dungeon = (function(){
     adventurers = adventurers.filter(adventurer => adventurer.adventurerId !== adventurerId);
   }
 
-  const getMonstersForLevel = function(minLevel, maxLevel) {
+  const getMonstersForLevel = function*(minLevel, maxLevel) {
     return fetchMonstersInRange(minLevel, maxLevel);
   }
 
@@ -136,7 +153,7 @@ const dungeon = (function(){
     return fetchedMonsters;
   }
 
-  const getDrops = function(listOfDrops) {
+  const getDrops = function*(listOfDrops) {
     return fetchDrops(listOfDrops);
   }
 
