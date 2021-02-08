@@ -240,6 +240,8 @@ const adventurers = (function(){
 
       if (willEnter) {
         dungeonAdventurer.inDungeon = true;
+        const combatLogMessage = `${dungeonAdventurer.name} entered the dungeon.`;
+        dungeonAdventurer.addCombatLog(combatLogMessage);
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }
     })
