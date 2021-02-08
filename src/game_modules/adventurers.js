@@ -73,6 +73,13 @@ const adventurers = (function(){
     this.combatLog.push(message);
   }
 
+  Adventurer.prototype.getCombatLog = function() {
+    if (! this.combatLog) {
+      this.combatLog = [];
+    }
+    return this.combatLog;
+  }
+
   const dispatchAdventurers = function(newAdventurers) {
     const payload = {
       type: SET_ADVENTURERS,
