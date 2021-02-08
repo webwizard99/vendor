@@ -187,7 +187,7 @@ const dungeon = (function(){
       }
       fetchedDrops.push(fetchedDrop)
     });
-    Promise.all(fetchedDrops)
+    Promise.all(...fetchedDrops)
       .then((resultDrops) => {
         console.log(resultDrops);
         return resultDrops;
