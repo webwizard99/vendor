@@ -62,8 +62,10 @@ const dungeon = (function(){
           })
         }
       });
+      console.log(monsterDrops);
       const mGetDrops = getDrops(monsterDrops);
       mGetDrops.next().value.then((resolvedDrops) => {
+        console.log(resolvedDrops);
         this.monstersLoot.push(...resolvedDrops);
       });
       let treasureDrops = [];
@@ -73,8 +75,10 @@ const dungeon = (function(){
           treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
         }
       });
+      console.log(treasureDrops);
       const tGetDrops = getDrops(treasureDrops);
       tGetDrops.next().value.then((resolvedDrops) => {
+        console.log(resolvedDrops);
         this.treasures.push(...resolvedDrops);
       });
       console.log(this);
