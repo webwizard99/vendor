@@ -6,6 +6,7 @@ import Adventurer from '../Adventurer/Adventurer';
 
 // redux imports
 import { connect } from 'react-redux';
+import { SET_PARTIAL_ADVENTURERS } from '../../actions/types';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
@@ -24,6 +25,7 @@ class AdventurersPartial extends React.Component {
   }
 
   handleBack() {
+    this.props.setPartialAdventurers(null);
     const handled = breadcrumb.popBreadcrumb();
     if (!handled) {
       console.log('breadcrumb failed!');
@@ -55,4 +57,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(AdventurersPartial);
+const mapDispatchToProps = dispatch => {
+  return {
+    setPartialAdventurers: (payload) => dispatch({ type: SET_PARTIAL_ADVENTURERS, payload: payload })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdventurersPartial);
