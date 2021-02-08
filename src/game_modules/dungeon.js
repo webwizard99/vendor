@@ -182,6 +182,10 @@ const dungeon = (function(){
       } catch (err) {
         console.log(err);
       }
+
+      if (fetchedDrop) {
+        fetchedDrop = fetchedDrop.json();
+      }
       fetchedDrops.push(fetchedDrop)
     });
     return fetchedDrops;
