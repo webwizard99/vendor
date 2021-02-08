@@ -20,11 +20,11 @@ class Adventurer extends React.Component {
 
   handleZoom() {
     if (!this.props.adventurer) return;
-    const adventurersPartial = this.props.adventurersPartial;
+    const partialAdventurers = this.props.partialAdventurers;
     let breadcrumbName = 'adventurers';
-    console.log(adventurersPartial);
-    if (adventurersPartial) {
-      if (adventurersPartial.find(this.props.adventurer.id)) {
+    console.log(partialAdventurers);
+    if (partialAdventurers) {
+      if (partialAdventurers.find(this.props.adventurer.id)) {
         breadcrumbName = 'adventurersPartial';
       }
     }
@@ -108,7 +108,7 @@ class Adventurer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    adventurersPartial: state.adventurers.adventurersPartial
+    partialAdventurers: state.adventurers.partialAdventurers
   }
 }
 
