@@ -5,6 +5,7 @@ import gameConstants from './gameConstants';
 import storeInventory from './storeInventory';
 import playerStore from './store';
 import items from './items';
+import dungeon from './dungeon';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -231,6 +232,19 @@ const adventurers = (function(){
     })
   }
 
+  const dungeonEntry = function() {
+    const dungeonGoingAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
+    dungeonGoingAdventurers.forEach(dungeonAdventurer => {
+      let totalFactor = (dungeonAdventurer.townBehavior.enter_dungeon / 1000)
+      let willEnter = totalFactor >= Math.random();
+
+      if (willEnter) {
+        dungeonAdventurer.inDungeon = true;
+        dungeon.receiveAdventurer(dungeonAdventurer.id);
+      }
+    })
+  }
+
   return {
     initializeAdventurers: async function(maxAdventurers) {
       const genGetAdventurers = getAdventurers();
@@ -267,6 +281,7 @@ const adventurers = (function(){
     takeAdventurerTurn: function() {
       doInn();
       doShopping();
+      dungeonEntry();
       dispatchAdventurers(adventurers);
     }
   }

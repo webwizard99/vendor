@@ -30,7 +30,17 @@ const dungeon = (function(){
     this.monstersMaxLevel = monstersMaxLevel;
     this.tileAssignments = tileAssignments;
     this.treasureDropList = treasureDropList;
+    this.treasures = [];
+    this.monsters = [];
+    this.monstersLoot = [];
     this.treasureListFetched = false;
+    this.monstersFetched = false;
+    this.monsterDropListItemsFetched = false;
+    this.intialized = false;
+  }
+
+  Level.prototype.initialize = function() {
+    console.log('level initialize');
   }
 
   const dispatchLevels = function() {
@@ -70,12 +80,19 @@ const dungeon = (function(){
     yield fetchLevels();
   }
 
-  const addAdventurer = function(adventuerId) {
-    adventurers.push({ adventuerId: adventuerId, level: 1})
+  const addAdventurer = function(adventurerId) {
+    adventurers.push({ adventurerId: adventurerId, level: 1});
+    if (exploredLevel < 1) {
+      const levelOne = levels.find(level => level.number === 1);
+      console.log(levelOne);
+      if (!levelOne) return false;
+      levelOne.initialize();
+    }
+    console.log('adventurer added to dungeon');
   }
 
-  const deleteAdventurer = function(adventuerId) {
-    adventurers = adventurers.filter(adventurer => adventurer.adventuerId !== adventuerId);
+  const deleteAdventurer = function(adventurerId) {
+    adventurers = adventurers.filter(adventurer => adventurer.adventurerId !== adventurerId);
   }
 
   return {
@@ -112,11 +129,11 @@ const dungeon = (function(){
     getExploredLevel: function() {
       return exploredLevel;
     },
-    receiveAdventurer: function(adventuerId) {
-      addAdventurer(adventuerId);
+    receiveAdventurer: function(adventurerId) {
+      addAdventurer(adventurerId);
     },
-    releaseAdventurer: function(adventuerId) {
-      deleteAdventurer(adventuerId);
+    releaseAdventurer: function(adventurerId) {
+      deleteAdventurer(adventurerId);
     }
   }
 }());

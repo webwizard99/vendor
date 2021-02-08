@@ -57,7 +57,7 @@
 }
 
 .adventurer-combat-log {
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-snap-type: y mandatory;
 }
 
