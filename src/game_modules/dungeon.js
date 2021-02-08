@@ -142,7 +142,7 @@ const dungeon = (function(){
 
   const fetchDrops = async function(listOfDrops) {
     let fetchedDrops = [];
-    listOfDrops.forEach(dropToFetch = async() => {
+    listOfDrops.forEach(async (dropToFetch)  => {
       const fetchUrl = `/${dropToFetch.dropType}-id?id=${dropToFetch.itemId}`;
       let fetchedDrop;
       try {
