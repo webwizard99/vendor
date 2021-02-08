@@ -16,7 +16,6 @@ class AdventurerDetail extends React.Component {
 
   getInventory(adventurer) {
     const adventurerInventory = adventurer.inventory;
-    console.log(adventurerInventory);
     if (!adventurerInventory) return 'no inventory';
     return adventurerInventory.map(item => {
       return (

@@ -18,6 +18,8 @@ const adventurers = (function(){
   let adventurers = [];
   let currentId = 0;
 
+  const maxInventory = 15;
+
   const Adventurer = function(payload) {
     const { name, 
       strength, 
@@ -64,6 +66,17 @@ const adventurers = (function(){
 
   Adventurer.prototype.equipItem = function(item) {
     this.equipment[item.type] = item;
+  }
+
+  Adventurer.prototype.getCurrentItemCount = function(protoId) {
+    if (this.inventory.length <= 0) return 0;
+    let protoCount = 0;
+    for (let item of this.inventory) {
+      if (item.prototypeId === protoId) {
+        protoCount++;
+      }
+    }
+    return protoCount;
   }
 
   Adventurer.prototype.addCombatLog = function(message) {
@@ -146,6 +159,7 @@ const adventurers = (function(){
 
       // check with each adventurer if they want the item
       adventurerTries.forEach(adventurerIndex => {
+        // determine if decision factor is buy or upgrade
         let decisionFactor = '';
         const thisAdventurer = shoppingAdventurers[adventurerIndex];
 
@@ -160,6 +174,15 @@ const adventurers = (function(){
         if (totalFactor < 0) {
           totalFactor = 0;
         }
+        // lessen desire to buy item if adventurer currently has some of it
+        const itemProto = item.item.prototypeId;
+        const currentHoldings = thisAdventurer.getCurrentItemCount(itemProto);
+        if (item.item.type === itemTypes.potion) {
+          totalFactor -= (currentHoldings * .10);
+        } else {
+          totalFactor -= (currentHoldings * .30);
+        }
+        // determine if adventurer will buy item
         let willBuy = totalFactor >= Math.random();
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
