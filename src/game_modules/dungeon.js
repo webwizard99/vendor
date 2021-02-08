@@ -66,7 +66,7 @@ const dungeon = (function(){
       const mGetDrops = getDrops(monsterDrops);
       mGetDrops.next().value.then((resolvedDrops) => {
         console.log(resolvedDrops);
-        this.monstersLoot.push(...resolvedDrops);
+        this.monstersLoot = resolvedDrops;
       });
       let treasureDrops = [];
       this.treasureDropList.drops.forEach(drop => {
@@ -79,7 +79,7 @@ const dungeon = (function(){
       const tGetDrops = getDrops(treasureDrops);
       tGetDrops.next().value.then((resolvedDrops) => {
         console.log(resolvedDrops);
-        this.treasures.push(...resolvedDrops);
+        this.treasures = resolvedDrops;
       });
       console.log(this);
     })
