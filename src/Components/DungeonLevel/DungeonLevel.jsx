@@ -45,7 +45,7 @@ class DungeonLevel extends React.Component {
     }
     return (
       <div className="levelDisplay primary">
-        <div className="levelNumber">{level.number}</div>
+        <div className="levelNumber">LEVEL {level.number}</div>
         <div className="adventurersNumberContainer">
           <div className="adventurersNumber"
             onClick={() => this.handleAdventurerList(levelAdventurers)}>
