@@ -41,6 +41,26 @@ const dungeon = (function(){
 
   Level.prototype.initialize = function() {
     console.log('level initialize');
+    const monstersToAdd = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
+    console.log(monstersToAdd);
+    if (!monstersToAdd) return false;
+    let monsterDrops = [];
+    monstersToAdd.forEach(addMonster => {
+      this.monsters.push(addMonster);
+      const addMonsterDrops = addMonster.drop_list.drops;
+      if (addMonsterDrops) {
+        addMonsterDrops.forEach(addDrop => {
+          const addId = addDrop.itemId;
+          if (!monsterDrops.find(item => item.itemId === addId)) {
+            // get item
+            monsterDrops.push({ itemId: addId, dropType: addDrop.drop_type});
+          }
+        })
+      }
+    });
+    const resolvedDrops = getDrops(monsterDrops);
+    this.monstersLoot.push(...resolvedDrops);
+    
   }
 
   const dispatchLevels = function() {
@@ -94,6 +114,45 @@ const dungeon = (function(){
 
   const deleteAdventurer = function(adventurerId) {
     adventurers = adventurers.filter(adventurer => adventurer.adventurerId !== adventurerId);
+  }
+
+  const getMonstersForLevel = function(minLevel, maxLevel) {
+    return fetchMonstersInRange(minLevel, maxLevel);
+  }
+
+  const fetchMonstersInRange = async function(minLevel, maxLevel) {
+    const fetchUrl = `/monsters-in-level-range?min-level=${minLevel}&max-level=${maxLevel}`;
+    let fetchedMonsters;
+    try {
+      fetchedMonsters = await fetch(fetchUrl);
+    } catch (err) {
+      console.log(err);
+    }
+
+    if (fetchedMonsters) {
+      fetchedMonsters = fetchedMonsters.json();
+    }
+
+    return fetchedMonsters;
+  }
+
+  const getDrops = function(listOfDrops) {
+    return fetchDrops(listOfDrops);
+  }
+
+  const fetchDrops = async function(listOfDrops) {
+    let fetchedDrops = [];
+    listOfDrops.forEach(dropToFetch => {
+      const fetchUrl = `/${dropToFetch.dropType}-id?id=${dropToFetch.itemId}`;
+      let fetchedDrop;
+      try {
+        fetchedDrop = await fetch(fetchUrl);
+      } catch (err) {
+        console.log(err);
+      }
+      fetchedDrops.push(fetchedDrop)
+    });
+    return fetchedDrops;
   }
 
   return {
