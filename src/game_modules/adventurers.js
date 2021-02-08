@@ -70,7 +70,7 @@ const adventurers = (function(){
     if (! this.combatLog) {
       this.combatLog = [];
     }
-    this.addCombatLog.push(message);
+    this.combatLog.push(message);
   }
 
   const dispatchAdventurers = function(newAdventurers) {
