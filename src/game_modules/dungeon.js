@@ -135,7 +135,6 @@ const dungeon = (function(){
     adventurers.push({ adventurerId: adventurerId, level: 1});
     if (exploredLevel < 1) {
       const levelOne = levels.find(level => level.number === 1);
-      console.log(levelOne);
       if (!levelOne) return false;
       levelOne.initialize();
       exploredLevel = 1;
@@ -188,7 +187,12 @@ const dungeon = (function(){
       }
       fetchedDrops.push(fetchedDrop)
     });
-    return fetchedDrops;
+    Promise.all(fetchedDrops)
+      .then((resultDrops) => {
+        console.log(resultDrops);
+        return resultDrops;
+      });
+    
   }
 
   return {
@@ -196,7 +200,6 @@ const dungeon = (function(){
       const genGetLevels = getLevels();
       genGetLevels.next().value
         .then(initLevels => {
-          console.log(initLevels);
           if (!initLevels) return false;
           while (initLevels.length > 0) {
             let newLevel = initLevels.shift();
