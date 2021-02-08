@@ -122,6 +122,7 @@ class AdventurerDetail extends React.Component {
         <div className="adventurerInventoryDetails">
           {this.getInventory(thisAdventurer)}
         </div>
+        <p className="adventurerInventoryHeadline">Combat Log</p>
         <div className="adventurer-combat-log">
           {this.getCombatLog(thisAdventurer)}
         </div>

@@ -56,6 +56,11 @@
   width: 18rem;
 }
 
+.adventurer-combat-log {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .AdventurerDetail {

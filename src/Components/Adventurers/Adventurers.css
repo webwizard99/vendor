@@ -1,5 +1,5 @@
 .adventurers {
   height: 100%;
   overflow-y: scroll;
-  scroll-snap-type: y;
+  scroll-snap-type: y mandatory;
 }

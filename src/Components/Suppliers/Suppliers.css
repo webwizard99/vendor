@@ -11,7 +11,7 @@
   height: 110%;
   overflow-x: scroll;
   scroll-padding-right: 1rem;
-  scroll-snap-type: x;
+  scroll-snap-type: x mandatory;
   z-index: 4;
 }
 
@@ -35,7 +35,7 @@
 .mobileContainer {
   flex-direction: column;
   overflow-y: scroll;
-  scroll-snap-type: x;
+  scroll-snap-type: x mandatory;
   scroll-padding-bottom: 1rem;
 }
 
