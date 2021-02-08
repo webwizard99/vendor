@@ -20,8 +20,11 @@ class DungeonLevel extends React.Component {
     return (
       <div className="levelDisplay primary">
         <div className="levelNumber">{level.number}</div>
-        <div className="adventurersNumber">
-          {levelAdventurers.length > 0 ? (levelAdventurers.length + 1) : ''}
+        <div className="adventurersNumberContainer">
+          <div className="adventurersNumber">
+            {levelAdventurers.length > 0 ? (levelAdventurers.length) : ''}
+          </div>
+          <div className="adventurersNumberLabel">adventurers</div>
         </div>
       </div>
     )
