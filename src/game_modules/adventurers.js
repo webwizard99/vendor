@@ -104,7 +104,7 @@ const adventurers = (function(){
         if (townAdventurer.checkAccount(totalCost)) {
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
-          const combatLogMessage = `${thisAdventurer.name} stayed at the inn. ${thisAdventurer.name} is now informed.`;
+          const combatLogMessage = `${townAdventurer.name} stayed at the inn. ${townAdventurer.name} is now informed.`;
           townAdventurer.addCombatLog(combatLogMessage);
         }
       }
