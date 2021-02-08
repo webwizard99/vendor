@@ -9,6 +9,7 @@ import { SET_DUNGEON_LEVELS, SET_DUNGEON_LEVEL_EXPLORED } from '../actions/types
 
 const dungeon = (function(){
   let levels = [];
+  let adventurers = [];
 
   let exploredLevel = 0;
 
@@ -29,6 +30,7 @@ const dungeon = (function(){
     this.monstersMaxLevel = monstersMaxLevel;
     this.tileAssignments = tileAssignments;
     this.treasureDropList = treasureDropList;
+    this.treasureListFetched = false;
   }
 
   const dispatchLevels = function() {
@@ -68,6 +70,14 @@ const dungeon = (function(){
     yield fetchLevels();
   }
 
+  const addAdventurer = function(adventuerId) {
+    adventurers.push({ adventuerId: adventuerId, level: 1})
+  }
+
+  const deleteAdventurer = function(adventuerId) {
+    adventurers = adventurers.filter(adventurer => adventurer.adventuerId !== adventuerId);
+  }
+
   return {
     initializeLevels: async function() {
       const genGetLevels = getLevels();
@@ -101,6 +111,12 @@ const dungeon = (function(){
     },
     getExploredLevel: function() {
       return exploredLevel;
+    },
+    receiveAdventurer: function(adventuerId) {
+      addAdventurer(adventuerId);
+    },
+    releaseAdventurer: function(adventuerId) {
+      deleteAdventurer(adventuerId);
     }
   }
 }());

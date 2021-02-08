@@ -66,6 +66,13 @@ const adventurers = (function(){
     this.equipment[item.type] = item;
   }
 
+  Adventurer.prototype.addCombatLog = function(message) {
+    if (! this.combatLog) {
+      this.combatLog = [];
+    }
+    this.addCombatLog.push(message);
+  }
+
   const dispatchAdventurers = function(newAdventurers) {
     const payload = {
       type: SET_ADVENTURERS,
@@ -97,6 +104,8 @@ const adventurers = (function(){
         if (townAdventurer.checkAccount(totalCost)) {
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
+          const combatLogMessage = `${thisAdventurer.name} stayed at the inn. ${thisAdventurer.name} is now informed.`;
+          townAdventurer.addCombatLog(combatLogMessage);
         }
       }
     })

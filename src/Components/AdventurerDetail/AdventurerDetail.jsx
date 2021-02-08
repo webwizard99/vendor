@@ -27,7 +27,18 @@ class AdventurerDetail extends React.Component {
 
   getCombatLog(adventurer) {
     if (!adventurer) return 'no combat log';
-    return 'combat log goes here!';
+    const adventurerCombatLog = adventurer.getCombatLog();
+    if (adventurerCombatLog.length <= 0) {
+      return 'No combat log entries.'
+    }
+    return adventurerCombatLog.map(logEntry => {
+      return (
+        <div className="combatLogEntry">
+          {logEntry}
+        </div>
+      )
+    });
+    
   }
 
   handleBack() {
