@@ -60,7 +60,7 @@ const dungeon = (function(){
     });
     const resolvedDrops = getDrops(monsterDrops);
     this.monstersLoot.push(...resolvedDrops);
-    
+
   }
 
   const dispatchLevels = function() {
@@ -142,7 +142,7 @@ const dungeon = (function(){
 
   const fetchDrops = async function(listOfDrops) {
     let fetchedDrops = [];
-    listOfDrops.forEach(dropToFetch => {
+    listOfDrops.forEach(dropToFetch = async() => {
       const fetchUrl = `/${dropToFetch.dropType}-id?id=${dropToFetch.itemId}`;
       let fetchedDrop;
       try {
