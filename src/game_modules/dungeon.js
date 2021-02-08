@@ -189,26 +189,29 @@ const dungeon = (function(){
         .then(initLevels => {
           console.log(initLevels);
           if (!initLevels) return false;
-          let newLevel = initLevels.shift();
-          if (Array.isArray(newLevel)) {
-            newLevel = newLevel[0];
+          while (initLevels.length > 0) {
+            let newLevel = initLevels.shift();
+            if (Array.isArray(newLevel)) {
+              newLevel = newLevel[0];
+            }
+            const levelPayload = {
+              number: newLevel.number,
+              boss: newLevel.boss,
+              bossId: newLevel.boss_id,
+              monstersMinLevel: newLevel.monsters_min_level,
+              monstersMaxLevel: newLevel.monsters_max_level,
+              tileAssignments: newLevel.tile_assignments,
+              treasureDropList: newLevel.drop_list
+            }
+            let thisLevel = new Level(levelPayload);
+            levels.push(thisLevel);
           }
-          const levelPayload = {
-            number: newLevel.number,
-            boss: newLevel.boss,
-            bossId: newLevel.boss_id,
-            monstersMinLevel: newLevel.monsters_min_level,
-            monstersMaxLevel: newLevel.monsters_max_level,
-            tileAssignments: newLevel.tile_assignments,
-            treasureDropList: newLevel.drop_list
-          }
-          let thisLevel = new Level(levelPayload);
-          levels.push(thisLevel);
+        }).then(() => {
+          orderLevels();
+          dispatchLevels();
+          dispatchExploredLevel();
+          console.log(levels);
         });
-      orderLevels();
-      dispatchLevels();
-      dispatchExploredLevel();
-      console.log(levels);
     },
     updateLevels: function() {
       dispatchLevels();
