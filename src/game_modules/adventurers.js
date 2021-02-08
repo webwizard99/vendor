@@ -200,6 +200,11 @@ const adventurers = (function(){
             }
           }
         }
+        // cancel buy if adventurer inventory is full
+        if (thisAdventurer.inventory.length >= maxInventory) {
+          willBuy = false;
+        }
+        
         if (willBuy && !taken) {
           const totalPrice = Math.floor(item.item.value * (1 + (item.markup / 1000)));
           if (thisAdventurer.checkAccount(totalPrice)) {
