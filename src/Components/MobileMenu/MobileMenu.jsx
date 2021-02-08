@@ -73,13 +73,18 @@ class MobileMenu extends React.Component {
   }
   
   render() {
+    let mobileMenuName = this.props.mobileScreen;
+    let allScreens = mobileScreens.getAllScreens();
+    if (mobileMenuName === allScreens.adventurersPartial) {
+      mobileMenuName = allScreens.adventurers;
+    }
     return (
       <div className="MobileMenu primary-saturated">
         <span className="previousScreen screenArrow"
           onClick={this.handlePrevious}
         >&#8592;</span>
         <span className="mobileTitle"
-          onClick={this.handleDropdown}>{this.props.mobileScreen}</span>
+          onClick={this.handleDropdown}>{mobileMenuName}</span>
         <span className="nextScreen screenArrow"
           onClick={this.handleNext}
         >&#8594;</span>

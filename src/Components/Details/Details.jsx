@@ -5,6 +5,7 @@ import './Details.css';
 import DetailPCMenu from '../DetailPCMenu/DetailPCMenu';
 import Adventurers from '../Adventurers/Adventurers';
 import AdventurerDetail from '../AdventurerDetail/AdventurerDetail';
+import AdventurersPartial from '../AdventurersPartial/AdventurersPartial';
 import Dungeon from '../Dungeon/Dungeon';
 
 // redux imports
@@ -44,6 +45,7 @@ class Details extends React.Component {
     this.formTable[menuTypes.adventurers] = <Adventurers />;
     this.formTable[menuTypes.adventurer] = <AdventurerDetail />;
     this.formTable[menuTypes.dungeon] = <Dungeon />;
+    this.formTable[menuTypes.adventurersPartial] = <AdventurersPartial />;
   }
 
   getDetail() {

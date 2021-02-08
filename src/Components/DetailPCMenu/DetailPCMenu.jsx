@@ -7,7 +7,7 @@ import { SET_PC_DETAIL, SET_PC_DROPDOWN } from '../../actions/types';
 
 // utility imports
 import pcDetailMenus from '../../Utilities/pcDetailMenus';
-// import pcMenus from '../../Utilities/pcMenus';
+import pcMenus from '../../Utilities/pcMenus';
 
 class DetailPCMenu extends React.Component {
   constructor(props) {
@@ -71,13 +71,17 @@ class DetailPCMenu extends React.Component {
   }
 
   render() {
+    let menuName = this.props.pcDetailMenu;
+    if (menuName === pcMenus.adventurersPartial) {
+      menuName = pcMenus.adventurers;
+    }
     return (
       <div className="PCDetailMenu primary-saturated">
         <span className="previousMenu screenArrowPC"
           onClick={this.handlePrevious}
         >&#8592;</span>
         <span className="PCMenuTitle"
-          onClick={this.handleDropdown}>{this.props.pcDetailMenu}</span>
+          onClick={this.handleDropdown}>{menuName}</span>
         <span className="nextMenu screenArrowPC"
           onClick={this.handleNext}
         >&#8594;</span>
