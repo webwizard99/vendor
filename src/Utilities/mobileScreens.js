@@ -13,7 +13,8 @@ const mobileScreens = (function(){
     suppliers: 'suppliers',
     adventurers: 'adventurers',
     adventurer: 'adventurer',
-    dungeon: 'dungeon'
+    dungeon: 'dungeon',
+    adventurersPartial: 'adventurersPartial'
   }
 
   let screenMap = {};

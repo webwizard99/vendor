@@ -1,7 +1,8 @@
-import { SET_ADVENTURERS } from '../actions/types';
+import { SET_ADVENTURERS, SET_PARTIAL_ADVENTURERS } from '../actions/types';
 
 const initialState = {
-  adventurers: null
+  adventurers: null,
+  partialAdventurers: null
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         adventurers: action.payload
+      }
+    case SET_PARTIAL_ADVENTURERS:
+      return {
+        ...state,
+        partialAdventurers: action.payload
       }
     default:
       return state;

@@ -1,7 +1,8 @@
 const pcMenus = {
   adventurers: 'adventurers',
   adventurer: 'adventurer',
-  dungeon: 'dungeon'
+  dungeon: 'dungeon',
+  adventurersPartial: 'adventurersPartial'
 }
 
 export default pcMenus;
