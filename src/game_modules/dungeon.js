@@ -87,6 +87,7 @@ const dungeon = (function(){
       console.log(levelOne);
       if (!levelOne) return false;
       levelOne.initialize();
+      exploredLevel = 1;
     }
     console.log('adventurer added to dungeon');
   }
