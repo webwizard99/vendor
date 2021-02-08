@@ -17,7 +17,7 @@ class Dungeon extends React.Component {
     const levels = this.props.levels;
     const levelsToDisplay = levels.filter(level => level.number <= this.props.exploredLevel)
     return levelsToDisplay.map(level => {
-      <DungeonLevel level={level} />
+      return <DungeonLevel level={level} />
     });
   }
   
