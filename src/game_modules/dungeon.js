@@ -5,7 +5,9 @@ import fetcher from '../Utilities/fetcher';
 
 // redux imports
 import { store } from '../index';
-import { SET_DUNGEON_LEVELS, SET_DUNGEON_LEVEL_EXPLORED } from '../actions/types';
+import { SET_DUNGEON_LEVELS, 
+  SET_DUNGEON_LEVEL_EXPLORED,
+  SET_DUNGEON_ADVENTURERS } from '../actions/types';
 
 const dungeon = (function(){
   let levels = [];
@@ -92,6 +94,14 @@ const dungeon = (function(){
     const payload = {
       type: SET_DUNGEON_LEVEL_EXPLORED,
       level: exploredLevel
+    }
+    store.dispatch(payload);
+  }
+
+  const dispatchAdventurers = function() {
+    const payload = {
+      type: SET_DUNGEON_ADVENTURERS,
+      adventurers: adventurers
     }
     store.dispatch(payload);
   }
@@ -208,9 +218,11 @@ const dungeon = (function(){
     },
     receiveAdventurer: function(adventurerId) {
       addAdventurer(adventurerId);
+      dispatchAdventurers();
     },
     releaseAdventurer: function(adventurerId) {
       deleteAdventurer(adventurerId);
+      dispatchAdventurers();
     }
   }
 }());
