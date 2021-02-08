@@ -114,7 +114,7 @@ const dungeon = (function(){
             monstersMinLevel: newLevel.monsters_min_level,
             monstersMaxLevel: newLevel.monsters_max_level,
             tileAssignments: newLevel.tile_assignments,
-            treasureDropList: newLevel.dropList
+            treasureDropList: newLevel.drop_list
           }
           let thisLevel = new Level(levelPayload);
           levels.push(thisLevel);
