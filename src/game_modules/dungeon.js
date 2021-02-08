@@ -134,7 +134,7 @@ const dungeon = (function(){
   }
 
   const getMonstersForLevel = function*(minLevel, maxLevel) {
-    return fetchMonstersInRange(minLevel, maxLevel);
+    yield fetchMonstersInRange(minLevel, maxLevel);
   }
 
   const fetchMonstersInRange = async function(minLevel, maxLevel) {
@@ -154,7 +154,7 @@ const dungeon = (function(){
   }
 
   const getDrops = function*(listOfDrops) {
-    return fetchDrops(listOfDrops);
+    yield fetchDrops(listOfDrops);
   }
 
   const fetchDrops = async function(listOfDrops) {
