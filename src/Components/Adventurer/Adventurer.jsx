@@ -28,6 +28,7 @@ class Adventurer extends React.Component {
         breadcrumbName = 'adventurersPartial';
       }
     }
+    console.log(breadcrumbName);
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;
