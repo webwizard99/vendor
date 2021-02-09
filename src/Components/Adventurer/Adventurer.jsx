@@ -22,15 +22,12 @@ class Adventurer extends React.Component {
     if (!this.props.adventurer) return;
     const partialAdventurers = this.props.partialAdventurers;
     let breadcrumbName = 'adventurers';
-    console.log(partialAdventurers);
-    console.log(this.props.adventurer.id);
     const matched = partialAdventurers.find(adventurerId => adventurerId === this.props.adventurer.id);
     if (partialAdventurers) {
       if (matched !== undefined) {
         breadcrumbName = 'adventurersPartial';
       }
     }
-    console.log(breadcrumbName);
     this.props.setDetailId(this.props.adventurer.id);
     const advDOM = document.querySelector('.adventurers');
     const scrollY = advDOM.scrollTop;

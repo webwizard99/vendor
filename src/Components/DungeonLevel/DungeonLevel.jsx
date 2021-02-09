@@ -21,7 +21,6 @@ class DungeonLevel extends React.Component {
 
   handleAdventurerList(levelAdventurers) {
     const adventurerIds = levelAdventurers.map(adventurer => adventurer.adventurerId);
-    console.log(adventurerIds);
     this.props.setPartialAdventurers(adventurerIds);
     const dunDOM = document.querySelector('.Dungeon');
     const scrollY = dunDOM.scrollTop;
@@ -37,7 +36,6 @@ class DungeonLevel extends React.Component {
   render() {
     if (!this.props.level) return '';
     const level = this.props.level;
-    console.log(level);
     let levelAdventurers = [];
     const dungeonAdventurers = this.props.dungeonAdventurers;
     if (dungeonAdventurers) {
