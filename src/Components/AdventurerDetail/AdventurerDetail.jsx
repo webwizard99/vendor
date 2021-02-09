@@ -31,6 +31,23 @@ class AdventurerDetail extends React.Component {
       return 'No combat log entries.'
     }
     return adventurerCombatLog.map(logEntry => {
+      const globalRegex = /%status%\w*%endstatus%/g;
+      if (logEntry.includes(globalRegex)){
+        let splitEntry = logEntry.split(globalRegex);
+        logEntry = splitEntry.map(entry => {
+          if (entry.includes(globalRegex)) {
+            let moddedEntry = entry;
+            moddedEntry = moddedEntry.replace('%status%', '');
+            moddedEntry = moddedEntry.replace('%endstatus%', '');
+            return (
+              <span className="status">{moddedEntry}</span>
+            )
+          } else {
+            return entry;
+          }
+        });
+        logEntry = logEntry.join();
+      }
       return (
         <div className="combatLogEntry">
           {logEntry}
