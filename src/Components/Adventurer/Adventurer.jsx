@@ -23,6 +23,7 @@ class Adventurer extends React.Component {
     const partialAdventurers = this.props.partialAdventurers;
     let breadcrumbName = 'adventurers';
     console.log(partialAdventurers);
+    console.log(this.props.adventurer.id);
     if (partialAdventurers) {
       if (partialAdventurers.find(adventurerId => adventurerId === this.props.adventurer.id)) {
         breadcrumbName = 'adventurersPartial';

@@ -68,6 +68,7 @@ const dungeon = (function(){
         console.log(resolvedDrops);
         resolvedDrops.forEach(resolvedDrop => {
           Promise.resolve(resolvedDrop).then(drop => {
+            console.log(drop);
             this.monstersLoot.push(drop);
           })
         });
@@ -86,6 +87,7 @@ const dungeon = (function(){
         console.log(resolvedDrops);
         resolvedDrops.forEach(resolvedDrop => {
           Promise.resolve(resolvedDrop).then(drop => {
+            console.log(drop);
             this.treasures.push(drop);
           });
         })
