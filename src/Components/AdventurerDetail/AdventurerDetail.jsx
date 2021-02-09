@@ -58,6 +58,7 @@ class AdventurerDetail extends React.Component {
           if (nameRegex.test(entry)) {
             let splitEntry = entry.split(nameRegex);
             entry = splitEntry.map(innerEntry => {
+              console.log(innerEntry);
               if (nameRegex.test(innerEntry)) {
                 let moddedEntry = innerEntry;
                 moddedEntry = moddedEntry.replace('%name%', '');
