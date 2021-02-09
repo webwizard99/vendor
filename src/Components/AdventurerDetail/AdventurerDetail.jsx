@@ -35,7 +35,7 @@ class AdventurerDetail extends React.Component {
       if (logEntry.includes(globalRegex)){
         let splitEntry = logEntry.split(globalRegex);
         logEntry = splitEntry.map(entry => {
-          if (entry.includes(globalRegex)) {
+          if (entry.test(globalRegex)) {
             let moddedEntry = entry;
             moddedEntry = moddedEntry.replace('%status%', '');
             moddedEntry = moddedEntry.replace('%endstatus%', '');
