@@ -63,15 +63,12 @@ const dungeon = (function(){
         }
       });
       console.log(monsterDrops);
-      const mGetDrops = getDrops(monsterDrops);
-      mGetDrops.next().value.then((resolvedDrops) => {
-        console.log(resolvedDrops);
-        resolvedDrops.forEach(resolvedDrop => {
-          Promise.resolve(resolvedDrop).then(drop => {
-            console.log(drop);
-            this.monstersLoot.push(drop);
-          })
-        });
+      monsterDrops.forEach(monsterDrop => {
+        const mGetDrop = getDrop(monsterDrop);
+        mGetDrop.next().value.then((resolvedDrop) => {
+          console.log(resolvedDrop);
+          this.monstersLoot.push(resolvedDrop);
+      })
         
       });
       let treasureDrops = [];
@@ -82,16 +79,14 @@ const dungeon = (function(){
         }
       });
       console.log(treasureDrops);
-      const tGetDrops = getDrops(treasureDrops);
-      tGetDrops.next().value.then((resolvedDrops) => {
-        console.log(resolvedDrops);
-        resolvedDrops.forEach(resolvedDrop => {
-          Promise.resolve(resolvedDrop).then(drop => {
-            console.log(drop);
-            this.treasures.push(drop);
-          });
-        })
-      });
+      treasureDrops.forEach(treasureDrop => {
+        const tGetDrop = getDrop(treasureDrop);
+        tGetDrop.next().value.then((resolvedDrop) => {
+          console.log(resolvedDrops);
+          this.treasures.push(resolvedDrop)
+        });
+      })
+      
       console.log(this);
     })
     
@@ -178,27 +173,24 @@ const dungeon = (function(){
     return fetchedMonsters;
   }
 
-  const getDrops = function*(listOfDrops) {
-    yield fetchDrops(listOfDrops);
+  const getDrop = function*(drop) {
+    yield fetchDrop(drop);
   }
 
-  const fetchDrops = async function(listOfDrops) {
-    let fetchedDrops = [];
-    listOfDrops.forEach(async (dropToFetch)  => {
-      const fetchUrl = `/${dropToFetch.dropType}-id?id=${dropToFetch.itemId}`;
-      let fetchedDrop;
-      try {
-        fetchedDrop = await fetch(fetchUrl);
-      } catch (err) {
-        console.log(err);
-      }
+  const fetchDrop = async function(drop) {
+    const fetchUrl = `/${drop.dropType}-id?id=${drop.itemId}`;
+    let fetchedDrop;
+    try {
+      fetchedDrop = await fetch(fetchUrl);
+    } catch (err) {
+      console.log(err);
+    }
 
-      if (fetchedDrop) {
-        fetchedDrop = fetchedDrop.json();
-      }
-      fetchedDrops.push(fetchedDrop)
-    });
-    return fetchedDrops;
+    if (fetchedDrop) {
+      fetchedDrop = fetchedDrop.json();
+    }
+  
+    return fetchedDrop;
   }
 
   return {
