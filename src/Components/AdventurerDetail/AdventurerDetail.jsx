@@ -50,7 +50,7 @@ class AdventurerDetail extends React.Component {
             return entry;
           }
         });
-        // logEntry = logEntry.join('');
+        
       }
       const nameRegex = /%name%\w*%endname%/;
       if (Array.isArray(logEntry)) {
@@ -76,6 +76,7 @@ class AdventurerDetail extends React.Component {
         if (nameRegex.test(logEntry)) {
           let splitEntry = logEntry.split(nameRegex);
           logEntry = splitEntry.map(entry => {
+            console.log(entry);
             if (nameRegex.test(entry)) {
               let moddedEntry = entry;
               moddedEntry = moddedEntry.replace('%name%', '');
