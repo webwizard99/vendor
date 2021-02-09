@@ -32,7 +32,7 @@ class AdventurerDetail extends React.Component {
     }
     return adventurerCombatLog.map(logEntry => {
       // const globalRegex = /%status%\w*%endstatus%/g;
-      const statusRegex = new RegExp('%status%\w*%endstatus%');
+      const statusRegex = new RegExp('%status%(\w)*%endstatus%');
       if (statusRegex.test(logEntry)){
         let splitEntry = logEntry.split(statusRegex);
         logEntry = splitEntry.map(entry => {
@@ -52,7 +52,7 @@ class AdventurerDetail extends React.Component {
         });
         
       }
-      const nameRegex = new RegExp('%name%\w*%endname%');
+      const nameRegex = new RegExp('%name%(\w)*%endname%');
       if (Array.isArray(logEntry)) {
         logEntry.forEach(entry => {
           if (nameRegex.test(entry)) {
