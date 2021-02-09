@@ -52,6 +52,7 @@ class AdventurerDetail extends React.Component {
         });
         
       }
+      // comment to push update
       const nameRegex = /%name%\w*%endname%/;
       if (Array.isArray(logEntry)) {
         logEntry.forEach(entry => {
