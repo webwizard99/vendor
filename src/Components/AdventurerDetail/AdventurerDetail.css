@@ -64,6 +64,10 @@
   margin-bottom: .3rem;
 }
 
+.status {
+  color: rgb(110, 135, 245)
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .AdventurerDetail {
