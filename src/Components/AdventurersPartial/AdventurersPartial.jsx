@@ -46,6 +46,7 @@ class AdventurersPartial extends React.Component {
         <div className="back-button partial-back primary"
             onClick={this.handleBack}>&#8592;</div>
         {this.getAdventurers(partialAdventurers)}
+        <div className="spacer-vertical"></div>
       </div>
     )
   }
