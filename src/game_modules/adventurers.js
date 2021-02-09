@@ -125,7 +125,7 @@ const adventurers = (function(){
         if (townAdventurer.checkAccount(totalCost)) {
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
-          const combatLogMessage = `${townAdventurer.name} stayed at the inn. ${townAdventurer.name} is now %status%informed%endstatus%.`;
+          const combatLogMessage = `%name%${townAdventurer.name}%endname% stayed at the inn. %name%${townAdventurer.name}%endname% is now %status%informed%endstatus%.`;
           townAdventurer.addCombatLog(combatLogMessage);
         }
       }
@@ -240,7 +240,7 @@ const adventurers = (function(){
 
       if (willEnter) {
         dungeonAdventurer.inDungeon = true;
-        const combatLogMessage = `${dungeonAdventurer.name} entered the dungeon.`;
+        const combatLogMessage = `%name%${dungeonAdventurer.name}%endname% entered the dungeon.`;
         dungeonAdventurer.addCombatLog(combatLogMessage);
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }

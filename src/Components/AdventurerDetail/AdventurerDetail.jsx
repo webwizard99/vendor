@@ -31,14 +31,17 @@ class AdventurerDetail extends React.Component {
       return 'No combat log entries.'
     }
     return adventurerCombatLog.map(logEntry => {
-      const globalRegex = /%status%\w*%endstatus%/g;
-      if (globalRegex.test(logEntry)){
-        let splitEntry = logEntry.split(globalRegex);
+      // const globalRegex = /%status%\w*%endstatus%/g;
+      const statusRegex = /%status%\w*%endstatus%/;
+      if (statusRegex.test(logEntry)){
+        let splitEntry = logEntry.split(statusRegex);
         logEntry = splitEntry.map(entry => {
-          if (globalRegex.test(entry)) {
+          if (statusRegex.test(entry)) {
             let moddedEntry = entry;
+            console.log(moddedEntry);
             moddedEntry = moddedEntry.replace('%status%', '');
             moddedEntry = moddedEntry.replace('%endstatus%', '');
+            console.log(moddedEntry);
             return (
               <span className="status">{moddedEntry}</span>
             )
@@ -46,7 +49,44 @@ class AdventurerDetail extends React.Component {
             return entry;
           }
         });
-        logEntry = logEntry.join();
+        // logEntry = logEntry.join('');
+      }
+      const nameRegex = /%name%\w*%endname%/;
+      if (Array.isArray(logEntry)) {
+        logEntry.forEach(entry => {
+          if (nameRegex.test(entry)) {
+            let splitEntry = entry.split(nameRegex);
+            entry = splitEntry.map(innerEntry => {
+              if (nameRegex.test(innerEntry)) {
+                let moddedEntry = innerEntry;
+                moddedEntry = moddedEntry.replace('%name%', '');
+                moddedEntry = moddedEntry.replace('%endname%', '');
+                return (
+                  <span class="namespan">{moddedEntry}</span>
+                )
+              } else {
+                return entry;
+              }
+              
+            })
+          }
+        });
+      } else {
+        if (nameRegex.test(logEntry)) {
+          let splitEntry = logEntry.split(nameRegex);
+          logEntry = splitEntry.map(entry => {
+            if (nameRegex.test(entry)) {
+              let moddedEntry = entry;
+              moddedEntry = moddedEntry.replace('%name%', '');
+              moddedEntry = moddedEntry.replace('%endname%', '');
+              return (
+                <span class="namespan">{moddedEntry}</span>
+              )
+            } else {
+              return entry;
+            }
+          })
+        }
       }
       return (
         <div className="combatLogEntry">
