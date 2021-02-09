@@ -16,6 +16,7 @@ class AdventurersPartial extends React.Component {
     super(props);
 
     this.getAdventurers = this.getAdventurers.bind(this);
+    this.handleBack = this.handleBack.bind(this);
   }
 
   getAdventurers(adventurers) {

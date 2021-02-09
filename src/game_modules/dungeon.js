@@ -66,10 +66,10 @@ const dungeon = (function(){
       const mGetDrops = getDrops(monsterDrops);
       mGetDrops.next().value.then((resolvedDrops) => {
         console.log(resolvedDrops);
-        Promise.all(resolvedDrops)
+        Promise.allSettled(resolvedDrops)
           .then((resultDrops) => {
             console.log(resultDrops);
-            this.monstersLoot = resultDrops;
+            this.monstersLoot = resolvedDrops;
           });
         
       });
@@ -84,10 +84,10 @@ const dungeon = (function(){
       const tGetDrops = getDrops(treasureDrops);
       tGetDrops.next().value.then((resolvedDrops) => {
         console.log(resolvedDrops);
-        Promise.all(resolvedDrops)
+        Promise.allSettled(resolvedDrops)
           .then((resultDrops) => {
             console.log(resultDrops);
-            this.treasures = resultDrops;
+            this.treasures = resolvedDrops;
           });
       });
       console.log(this);
