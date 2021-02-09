@@ -32,7 +32,7 @@ class AdventurerDetail extends React.Component {
     }
     return adventurerCombatLog.map(logEntry => {
       const globalRegex = /%status%\w*%endstatus%/g;
-      if (logEntry.includes(globalRegex)){
+      if (logEntry.test(globalRegex)){
         let splitEntry = logEntry.split(globalRegex);
         logEntry = splitEntry.map(entry => {
           if (entry.test(globalRegex)) {
