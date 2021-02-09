@@ -67,6 +67,9 @@ const dungeon = (function(){
         const mGetDrop = getDrop(monsterDrop);
         mGetDrop.next().value.then((resolvedDrop) => {
           console.log(resolvedDrop);
+          if (Array.isArray(resolvedDrop)) {
+            resolvedDrop = resolvedDrop[0];
+          }
           this.monstersLoot.push(resolvedDrop);
       })
         
@@ -83,6 +86,9 @@ const dungeon = (function(){
         const tGetDrop = getDrop(treasureDrop);
         tGetDrop.next().value.then((resolvedDrop) => {
           console.log(resolvedDrop);
+          if (Array.isArray(resolvedDrop)) {
+            resolvedDrop = resolvedDrop[0];
+          }
           this.treasures.push(resolvedDrop)
         });
       })
