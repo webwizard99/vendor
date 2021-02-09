@@ -82,7 +82,7 @@ const dungeon = (function(){
       treasureDrops.forEach(treasureDrop => {
         const tGetDrop = getDrop(treasureDrop);
         tGetDrop.next().value.then((resolvedDrop) => {
-          console.log(resolvedDrops);
+          console.log(resolvedDrop);
           this.treasures.push(resolvedDrop)
         });
       })
