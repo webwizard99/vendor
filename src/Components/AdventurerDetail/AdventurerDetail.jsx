@@ -35,6 +35,7 @@ class AdventurerDetail extends React.Component {
   
     return adventurerCombatLog.map(logEntry => {
       let logArray = logEntry.split(' ');
+      console.log(logArray);
       const tags = tagProcessor.getTags();
       if (logArray.find(tags.nameStart)) {
         logArray.map(subStr => {
