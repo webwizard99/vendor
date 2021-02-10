@@ -38,23 +38,23 @@ class AdventurerDetail extends React.Component {
     return adventurerCombatLog.map(logEntry => {
       let processedEntry = logEntry;
       
-      processedEntry = reactStringReplace(/%name%\w*%endname%/, (match, i) => {
+      processedEntry = reactStringReplace(processedEntry, /%name%\w*%endname%/, (match, i) => {
         const tags = tagProcessor.getTags();
         let text = match;
         text = text.replace(tags.nameStart, '');
         text = text.replace(tags.nameEnd, '');
         return (
-          <span key={i} className="adventurerName">{text}</span>
+          <span key={match + i} className="adventurerName">{text}</span>
         )
       });
 
-      processedEntry = reactStringReplace(/%status%\w*%endstatus%/, (match, i) => {
+      processedEntry = reactStringReplace(processedEntry, /%status%\w*%endstatus%/, (match, i) => {
         const tags = tagProcessor.getTags();
         let text = match;
         text = text.replace(tags.statusStart, '');
         text = text.replace(tags.statusEnd, '');
         return (
-          <span key={i} className="status">{text}</span>
+          <span key={match + i} className="status">{text}</span>
         )
       });
 
