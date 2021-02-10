@@ -1,7 +1,7 @@
 const tagProcessor = (function(){
   const tags = {
     nameStart: '%name%',
-    nameEnd: '$endname%',
+    nameEnd: '%endname%',
     statusStart: '%status%',
     statusEnd: '%statusend%'
   }

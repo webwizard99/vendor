@@ -38,7 +38,8 @@ class AdventurerDetail extends React.Component {
     return adventurerCombatLog.map(logEntry => {
       let processedEntry = logEntry;
       
-      processedEntry = reactStringReplace(processedEntry, /%name%\w*%endname%/, (match, i) => {
+      processedEntry = reactStringReplace(processedEntry, /%name%\w*%endname%/g, (match, i) => {
+        console.log('matched name');
         const tags = tagProcessor.getTags();
         let text = match;
         text = text.replace(tags.nameStart, '');
@@ -48,7 +49,7 @@ class AdventurerDetail extends React.Component {
         )
       });
 
-      processedEntry = reactStringReplace(processedEntry, /%status%\w*%endstatus%/, (match, i) => {
+      processedEntry = reactStringReplace(processedEntry, /%status%\w*%endstatus%/g, (match, i) => {
         const tags = tagProcessor.getTags();
         let text = match;
         text = text.replace(tags.statusStart, '');
