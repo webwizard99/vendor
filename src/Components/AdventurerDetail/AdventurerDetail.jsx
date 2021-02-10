@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
+import tagProcessor from '../../Utilities/tagProcessor';
 // import tagProcessor from '../../Utilities/tagProcessor';
 
 class AdventurerDetail extends React.Component {
@@ -31,12 +32,28 @@ class AdventurerDetail extends React.Component {
     if (adventurerCombatLog.length <= 0) {
       return 'No combat log entries.'
     }
-
+  
     return adventurerCombatLog.map(logEntry => {
-
+      let logArray = logEntry.split(' ');
+      const tags = tagProcessor.getTags();
+      if (logArray.find(tags.nameStart)) {
+        logArray.map(subStr => {
+          if (typeof subStr !== 'string') return subStr;
+          if (subStr.includes(tags.nameStart)) {
+            let replacementStr = subStr;
+            replacementStr = replacementStr.replace(tags.nameStart, '');
+            replacementStr = replacementStr.replace(tags.nameEnd);
+            return (
+              <span className="adventurerName">{replacementStr}</span>
+            )
+          } else {
+            return subStr;
+          }
+        })
+      }
       return (
         <div className="combatLogEntry">
-          {logEntry}
+          {logArray.map(entry => entry)}
         </div>
       )
     });
