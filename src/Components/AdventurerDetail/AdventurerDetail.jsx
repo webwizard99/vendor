@@ -40,10 +40,12 @@ class AdventurerDetail extends React.Component {
       
       processedEntry = reactStringReplace(processedEntry, /%name%[\w\s]*%endname%/g, (match, i) => {
         console.log('matched name');
+        console.log(match);
         const tags = tagProcessor.getTags();
         let text = match;
         text = text.replace(tags.nameStart, '');
         text = text.replace(tags.nameEnd, '');
+        console.log(text);
         return (
           <span key={match + i} className="adventurerName">{text}</span>
         )
