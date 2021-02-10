@@ -10,6 +10,7 @@ import dungeon from './dungeon';
 // utility imports
 import fetcher from '../Utilities/fetcher';
 import itemTypes from '../Utilities/itemTypes';
+import tagProcessor from '../Utilities/tagProcessor';
 
 // redux imports
 import { store } from '../index';
@@ -112,6 +113,7 @@ const adventurers = (function(){
   }
 
   const doInn = function() {
+    const tags = tagProcessor.getTags();
     const availableAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
     availableAdventurers.forEach(townAdventurer => {
       let totalFactor = townAdventurer.townBehavior.use_tavern / 1000;
@@ -125,7 +127,7 @@ const adventurers = (function(){
         if (townAdventurer.checkAccount(totalCost)) {
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
-          const combatLogMessage = `%name%${townAdventurer.name}%endname% stayed at the inn. %name%${townAdventurer.name}%endname% is now %status%informed%endstatus%.`;
+          const combatLogMessage = `${tags.nameStart}${townAdventurer.name}${tags.nameEnd} stayed at the inn. ${tags.nameStart}${townAdventurer.name}${tags.nameEnd} is now ${tags.statusStart}informed${tags.statusEnd}.`;
           townAdventurer.addCombatLog(combatLogMessage);
         }
       }
@@ -239,8 +241,9 @@ const adventurers = (function(){
       let willEnter = totalFactor >= Math.random();
 
       if (willEnter) {
+        const tags = tagProcessor.getTags();
         dungeonAdventurer.inDungeon = true;
-        const combatLogMessage = `%name%${dungeonAdventurer.name}%endname% entered the dungeon.`;
+        const combatLogMessage = `${tags.nameStart}${dungeonAdventurer.name}${tags.nameEnd} entered the dungeon.`;
         dungeonAdventurer.addCombatLog(combatLogMessage);
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }

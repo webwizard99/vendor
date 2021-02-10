@@ -1,11 +1,15 @@
 import React from 'react';
 import './AdventurerDetail.css';
 
+// library imports
+import reactStringReplace from 'react-string-replace';
+
 // redux imports
 import { connect } from 'react-redux';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
+import tagProcessor from '../../Utilities/tagProcessor';
 
 class AdventurerDetail extends React.Component {
   constructor(props) {
@@ -30,70 +34,33 @@ class AdventurerDetail extends React.Component {
     if (adventurerCombatLog.length <= 0) {
       return 'No combat log entries.'
     }
+
     return adventurerCombatLog.map(logEntry => {
-      // const globalRegex = /%status%\w*%endstatus%/g;
-      const statusRegex = new RegExp(/%status%\w*%endstatus%/);
-      if (statusRegex.test(logEntry)){
-        let splitEntry = logEntry.split(statusRegex);
-        logEntry = splitEntry.map(entry => {
-          console.log(entry)
-          if (statusRegex.test(entry)) {
-            let moddedEntry = entry;
-            console.log(moddedEntry);
-            moddedEntry = moddedEntry.replace('%status%', '');
-            moddedEntry = moddedEntry.replace('%endstatus%', '');
-            console.log(moddedEntry);
-            return (
-              <span className="status">{moddedEntry}</span>
-            )
-          } else {
-            return entry;
-          }
-        });
-        
-      }
-      const nameRegex = new RegExp(/%name%\w*%endname%/);
-      if (Array.isArray(logEntry)) {
-        logEntry.forEach(entry => {
-          if (nameRegex.test(entry)) {
-            let splitEntry = entry.split(nameRegex);
-            entry = splitEntry.map(innerEntry => {
-              console.log(innerEntry);
-              if (nameRegex.test(innerEntry)) {
-                let moddedEntry = innerEntry;
-                moddedEntry = moddedEntry.replace('%name%', '');
-                moddedEntry = moddedEntry.replace('%endname%', '');
-                return (
-                  <span class="namespan">{moddedEntry}</span>
-                )
-              } else {
-                return entry;
-              }
-              
-            })
-          }
-        });
-      } else {
-        if (nameRegex.test(logEntry)) {
-          let splitEntry = logEntry.split(nameRegex);
-          logEntry = splitEntry.map(entry => {
-            console.log(entry);
-            if (nameRegex.test(entry)) {
-              let moddedEntry = entry;
-              moddedEntry = moddedEntry.replace('%name%', '');
-              moddedEntry = moddedEntry.replace('%endname%', '');
-              return (
-                <span class="namespan">{moddedEntry}</span>
-              )
-            } else {
-              return entry;
-            }
-          })
-        }
-      }
+      let processedEntry = logEntry;
+      
+      processedEntry = reactStringReplace(/%name%\w*%endname%/, (match, i) => {
+        const tags = tagProcessor.getTags();
+        let text = match;
+        text = text.replace(tags.nameStart, '');
+        text = text.replace(tags.nameEnd, '');
+        return (
+          <span key={i} className="adventurerName">{text}</span>
+        )
+      });
+
+      processedEntry = reactStringReplace(/%status%\w*%endstatus%/, (match, i) => {
+        const tags = tagProcessor.getTags();
+        let text = match;
+        text = text.replace(tags.statusStart, '');
+        text = text.replace(tags.statusEnd, '');
+        return (
+          <span key={i} className="status">{text}</span>
+        )
+      });
+
       return (
         <div className="combatLogEntry">
-          {logEntry}
+          {processedEntry}
         </div>
       )
     });
