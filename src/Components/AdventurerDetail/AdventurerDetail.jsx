@@ -37,7 +37,7 @@ class AdventurerDetail extends React.Component {
       let logArray = logEntry.split(' ');
       console.log(logArray);
       const tags = tagProcessor.getTags();
-      if (logArray.find(tags.nameStart)) {
+      if (logArray.find(substr => substr === tags.nameStart)) {
         logArray.map(subStr => {
           if (typeof subStr !== 'string') return subStr;
           if (subStr.includes(tags.nameStart)) {
