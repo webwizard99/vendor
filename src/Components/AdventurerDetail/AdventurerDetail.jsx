@@ -1,15 +1,12 @@
 import React from 'react';
 import './AdventurerDetail.css';
 
-// library imports
-import reactStringReplace from 'react-string-replace';
-
 // redux imports
 import { connect } from 'react-redux';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
-import tagProcessor from '../../Utilities/tagProcessor';
+// import tagProcessor from '../../Utilities/tagProcessor';
 
 class AdventurerDetail extends React.Component {
   constructor(props) {
@@ -36,34 +33,10 @@ class AdventurerDetail extends React.Component {
     }
 
     return adventurerCombatLog.map(logEntry => {
-      let processedEntry = logEntry;
-      
-      processedEntry = reactStringReplace(processedEntry, /%name%[\w\s]*%endname%/g, (match, i) => {
-        console.log('matched name');
-        console.log(match);
-        const tags = tagProcessor.getTags();
-        let text = match;
-        text = text.replace(tags.nameStart, '');
-        text = text.replace(tags.nameEnd, '');
-        console.log(text);
-        return (
-          <span key={match + i} className="adventurerName">{text}</span>
-        )
-      });
-
-      processedEntry = reactStringReplace(processedEntry, /%status%[\w\s]*%endstatus%/g, (match, i) => {
-        const tags = tagProcessor.getTags();
-        let text = match;
-        text = text.replace(tags.statusStart, '');
-        text = text.replace(tags.statusEnd, '');
-        return (
-          <span key={match + i} className="status">{text}</span>
-        )
-      });
 
       return (
         <div className="combatLogEntry">
-          {processedEntry}
+          {logEntry}
         </div>
       )
     });
