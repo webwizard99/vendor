@@ -129,7 +129,7 @@ const adventurers = (function(){
           const filterClasses = tagProcessor.getFilterClasses();
           const innJSX = (
             <div className="combatLogEntry">
-              <span className={filterClasses.name}>{townAdventurer.name}</span>  stayed at the inn. <span className={filterClasses.name}>{townAdventurer.name}</span> is now <span className={filterClasses.status}>informed</span>.
+              <span className={filterClasses.name}>{townAdventurer.name} </span>  stayed at the inn. <span className={filterClasses.name}>{townAdventurer.name} </span> is now <span className={filterClasses.status}>informed</span>.
             </div>);
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
@@ -250,7 +250,7 @@ const adventurers = (function(){
         const filterClasses = tagProcessor.getFilterClasses();
         const dungeonJSX = (
           <div className="combatLogEntry">
-            <span className={filterClasses.name}>{dungeonAdventurer.name}</span> entered the dungeon.
+            <span className={filterClasses.name}>{dungeonAdventurer.name} </span> entered the dungeon.
           </div>
         );
         dungeonAdventurer.inDungeon = true;
