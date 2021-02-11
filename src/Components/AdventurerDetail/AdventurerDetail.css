@@ -62,6 +62,7 @@
 
 .combatLogEntry {
   margin-bottom: .3rem;
+  width: 95%;
 }
 
 .adventurerNameTag {
@@ -73,11 +74,11 @@
 }
 
 .combatLogEntry span {
-  margin-left: .2rem;
+  padding-left: .2rem;
 }
 
-.combatLogEntry:first-child {
-  margin-left: 0px;
+.combatLogEntry + span {
+  padding-left: 0px;
 }
 
 /* mobile styles */
