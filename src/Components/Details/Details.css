@@ -4,3 +4,11 @@
   box-sizing: border-box;
   border-left: 1px solid rgb(30, 25, 25);
 }
+
+.adventurerNameTag {
+  color: rgb(135, 245, 110);
+}
+
+.status {
+  color: rgb(110, 135, 245)
+}

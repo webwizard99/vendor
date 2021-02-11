@@ -64,8 +64,16 @@
   margin-bottom: .3rem;
 }
 
+.adventurerNameTag {
+  color: rgb(135, 245, 110);
+}
+
 .status {
   color: rgb(110, 135, 245)
+}
+
+.combatLogEntry span {
+  margin-left: .2rem;
 }
 
 /* mobile styles */
