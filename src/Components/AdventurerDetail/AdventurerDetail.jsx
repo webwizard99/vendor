@@ -31,14 +31,7 @@ class AdventurerDetail extends React.Component {
       return 'No combat log entries.'
     }
   
-    return adventurerCombatLog.map(logEntry => {
-      
-      return (
-        <div className="combatLogEntry">
-          {logEntry}
-        </div>
-      )
-    });
+    return adventurerCombatLog;
     
   }
 

@@ -76,6 +76,10 @@
   margin-left: .2rem;
 }
 
+.combatLogEntry:first-child {
+  margin-left: 0px;
+}
+
 /* mobile styles */
 @media only screen and (max-width: 650px) {
   .AdventurerDetail {

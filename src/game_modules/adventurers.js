@@ -127,7 +127,10 @@ const adventurers = (function(){
         const totalCost = 10 * townAdventurer.level;
         if (townAdventurer.checkAccount(totalCost)) {
           const filterClasses = tagProcessor.getFilterClasses();
-          const innJSX = (<p><span className={filterClasses.name}>{townAdventurer.name}</span>  stayed at the inn. <span className={filterClasses.name}>{townAdventurer.name}</span> is now <span className={filterClasses.status}>informed</span>.</p>);
+          const innJSX = (
+            <div className="combatLogEntry">
+              <span className={filterClasses.name}>{townAdventurer.name}</span>  stayed at the inn. <span className={filterClasses.name}>{townAdventurer.name}</span> is now <span className={filterClasses.status}>informed</span>.
+            </div>);
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
           const combatLogMessage = innJSX;
@@ -245,7 +248,11 @@ const adventurers = (function(){
 
       if (willEnter) {
         const filterClasses = tagProcessor.getFilterClasses();
-        const dungeonJSX = (<p><span className={filterClasses.name}>{dungeonAdventurer.name}</span> entered the dungeon.</p>)
+        const dungeonJSX = (
+          <div className="combatLogEntry">
+            <span className={filterClasses.name}>{dungeonAdventurer.name}</span> entered the dungeon.
+          </div>
+        );
         dungeonAdventurer.inDungeon = true;
         const combatLogMessage = dungeonJSX;
         dungeonAdventurer.addCombatLog(combatLogMessage);
