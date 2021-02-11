@@ -11,7 +11,7 @@ const tagProcessor = (function(){
     status: 'status'
   }
 
-  const tagArray = Object.values(tags);
+  // const tagArray = Object.values(tags);
   // const tagKeys = Object.keys(tags);
 
   // const tagifyStringArray = function(strArr) {

@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 
 // utility imports
 import breadcrumb from '../../Utilities/breadcrumb';
-import tagProcessor from '../../Utilities/tagProcessor';
-// import tagProcessor from '../../Utilities/tagProcessor';
 
 class AdventurerDetail extends React.Component {
   constructor(props) {

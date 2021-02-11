@@ -115,7 +115,6 @@ const adventurers = (function(){
   }
 
   const doInn = function() {
-    const tags = tagProcessor.getTags();
     const availableAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
     availableAdventurers.forEach(townAdventurer => {
       let totalFactor = townAdventurer.townBehavior.use_tavern / 1000;
