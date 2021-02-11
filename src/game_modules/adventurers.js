@@ -1,3 +1,5 @@
+import React from 'react';
+
 // constant imports
 import gameConstants from './gameConstants';
 
@@ -125,9 +127,11 @@ const adventurers = (function(){
       if (willDrink) {
         const totalCost = 10 * townAdventurer.level;
         if (townAdventurer.checkAccount(totalCost)) {
+          const filterClasses = tagProcessor.getFilterClasses();
+          const innJSX = (<p><span className={filterClasses.name}>{townAdventurer.name}</span>  stayed at the inn. <span className={filterClasses.name}>{townAdventurer.name}</span> is now <span className={filterClasses.status}>informed</span>.</p>);
           townAdventurer.chargeAccount(totalCost);
           townAdventurer.informed = true;
-          const combatLogMessage = `${tags.nameStart}${townAdventurer.name}${tags.nameEnd} stayed at the inn. ${tags.nameStart}${townAdventurer.name}${tags.nameEnd} is now ${tags.statusStart}informed${tags.statusEnd}.`;
+          const combatLogMessage = innJSX;
           townAdventurer.addCombatLog(combatLogMessage);
         }
       }
@@ -241,9 +245,10 @@ const adventurers = (function(){
       let willEnter = totalFactor >= Math.random();
 
       if (willEnter) {
-        const tags = tagProcessor.getTags();
+        const filterClasses = tagProcessor.getFilterClasses();
+        const dungeonJSX = (<p><span className={filterClasses.name}>{dungeonAdventurer.name}</span> entered the dungeon.</p>)
         dungeonAdventurer.inDungeon = true;
-        const combatLogMessage = `${tags.nameStart}${dungeonAdventurer.name}${tags.nameEnd} entered the dungeon.`;
+        const combatLogMessage = dungeonJSX;
         dungeonAdventurer.addCombatLog(combatLogMessage);
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }

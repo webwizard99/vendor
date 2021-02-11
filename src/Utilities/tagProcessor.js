@@ -6,7 +6,12 @@ const tagProcessor = (function(){
     statusEnd: '%statusend%'
   }
 
-  // const tagArray = Object.values(tags);
+  const filterClasses = {
+    name: 'adventurerName',
+    status: 'status'
+  }
+
+  const tagArray = Object.values(tags);
   // const tagKeys = Object.keys(tags);
 
   // const tagifyStringArray = function(strArr) {
@@ -31,6 +36,9 @@ const tagProcessor = (function(){
     getTags: function() {
       return tags;
     },
+    getFilterClasses: function() {
+      return filterClasses;
+    }
     // processString: function(str) {
     //   let arrTag = [str];
     //   const taggedArray = tagifyString(arrTag);

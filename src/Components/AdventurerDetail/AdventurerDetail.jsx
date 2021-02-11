@@ -34,27 +34,10 @@ class AdventurerDetail extends React.Component {
     }
   
     return adventurerCombatLog.map(logEntry => {
-      let logArray = logEntry.split(' ');
-      console.log(logArray);
-      const tags = tagProcessor.getTags();
-      if (logArray.find(substr => substr === tags.nameStart)) {
-        logArray.map(subStr => {
-          if (typeof subStr !== 'string') return subStr;
-          if (subStr.includes(tags.nameStart)) {
-            let replacementStr = subStr;
-            replacementStr = replacementStr.replace(tags.nameStart, '');
-            replacementStr = replacementStr.replace(tags.nameEnd);
-            return (
-              <span className="adventurerName">{replacementStr}</span>
-            )
-          } else {
-            return subStr;
-          }
-        })
-      }
+      
       return (
         <div className="combatLogEntry">
-          {logArray.map(entry => entry)}
+          {logEntry}
         </div>
       )
     });
