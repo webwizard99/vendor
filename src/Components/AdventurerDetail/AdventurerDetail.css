@@ -58,6 +58,7 @@
 .adventurer-combat-log {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
+  max-height: 20rem;
 }
 
 .combatLogEntry {
@@ -73,13 +74,6 @@
   color: rgb(110, 245, 193)
 }
 
-/* .combatLogEntry span {
-  padding-left: .2rem;
-}
-
-.combatLogEntry>span:first-child {
-  padding-left: 0px;
-} */
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {

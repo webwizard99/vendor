@@ -17,6 +17,7 @@ import { SET_DETAIL_UPDATE } from '../actions/types';
 const main = (function() {
   
   let currentMaxLevel = 1;
+  // let townFame = 0;
 
   const dispatchUpdate = function() {
     const payload = {
