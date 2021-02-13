@@ -77,8 +77,8 @@ const adventurers = (function(){
       this.informed = false;
       this.hasFoundStairs = false;
       this.currentTotalDungeonTurns = 0;
-      this.currentAction = null,
-      this.currentActionTurns = 0,
+      this.currentAction = null;
+      this.currentActionTurns = 0;
       this.id = currentId;
       currentId++;
   }
