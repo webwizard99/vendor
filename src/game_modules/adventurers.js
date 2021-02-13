@@ -117,7 +117,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.usePotion = function() {
-    let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
+  // let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
     
   }
 
@@ -362,7 +362,10 @@ const adventurers = (function(){
         thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
         thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
         console.log(thisDecision);
-        turnTaken = true;
+        if (!turnTaken) {
+          turnTaken = true;
+        }
+        
         remainingTurns -= 1;
       }
 
