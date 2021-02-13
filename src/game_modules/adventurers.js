@@ -357,10 +357,10 @@ const adventurers = (function(){
             }
           }
         }
-        thisDecision.checkTraps = thisAdventurer.checkTrapDecision();
-        thisDecision.checkForTreasure = thisAdventurer.checkTreasureDecision();
-        thisDecision.advance = thisAdventurer.checkAdvanceDecision();
-        thisDecision.returnToTown = thisAdventurer.checkReturnToTown();
+        thisDecision.checkTraps = dungeonAdventurer.checkTrapDecision();
+        thisDecision.checkForTreasure = dungeonAdventurer.checkTreasureDecision();
+        thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
+        thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
         console.log(thisDecision);
         turnTaken = true;
         remainingTurns -= 1;
