@@ -267,16 +267,19 @@ const adventurers = (function(){
         pairings.push([remainingOptions[offest], remainingOptions[optionsLength - (offest + 1)]]);
       }
       console.log(pairings);
+      let eliminated = [];
       pairings.forEach(pair => {
         const result1 = Math.random() * weights[pair[0]];
         const result2 = Math.random() * weights[pair[1]];
         const randomChoice = Math.random();
+        
         if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
-          remainingOptions = remainingOptions.filter(option => option !== pair[1]);
+          eliminated.push(pair[1])
         } else {
-          remainingOptions = remainingOptions.filter(option => option !== pair[0]);
+          eliminated.push(pair[0]);
         }
       });
+      remainingOptions.filter(option => !eliminated.find(elOption => elOption === option));
     }
     return remainingOptions[0];
   }
