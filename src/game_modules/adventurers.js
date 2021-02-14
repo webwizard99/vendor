@@ -258,6 +258,7 @@ const adventurers = (function(){
     }
 
     const tournamentRounds = Math.ceil(Math.log2(remainingOptions.length));
+    console.log(tournamentRounds);
     for (let round = 0; round < tournamentRounds; round++) {
       console.log(remainingOptions);
       const optionsLength = remainingOptions.length;
@@ -285,7 +286,7 @@ const adventurers = (function(){
       console.log(eliminated);
       eliminated.forEach(eliminate => {
         console.log(`eliminate: ${eliminate}`);
-        remainingOptions.filter(option => option !== eliminate);
+        remainingOptions = remainingOptions.filter(option => option !== eliminate);
       });
     }
     return remainingOptions[0];
