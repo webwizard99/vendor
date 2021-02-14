@@ -163,6 +163,7 @@ const adventurers = (function(){
 
   Adventurer.prototype.checkSetTrapDecision = function() {
     const setTrap = setTrapBehavior[this.adventurerClass.name];
+    console.log(setTrap);
     const decisionFactor = (setTrap / 1000) + (this.dungeonBehavior.prefer_weaker_monster / 4000);
     const doSetTrap = decisionFactor > Math.random();
     return doSetTrap;
@@ -227,16 +228,12 @@ const adventurers = (function(){
     const concernedAdventurer = adventurers.find(adventurer => adventurer.id === this.adventurerId);
     let remainingOptions = [];
     const weights = {
-      needHealing: concernedAdventurer.dungeonBehavior.check_for_traps,
       usePotion: concernedAdventurer.dungeonBehavior.use_potion,
       checkForTraps: concernedAdventurer.dungeonBehavior.check_for_traps,
       checkForTreasure: concernedAdventurer.dungeonBehavior.search_for_treasure,
       setTrap: setTrapBehavior[concernedAdventurer.adventurerClass.name],
       advance: concernedAdventurer.dungeonBehavior.advance,
       returnToTown: concernedAdventurer.dungeonBehavior.return_to_town
-    }
-    if (this.needHealing) {
-      remainingOptions.push(decisions.needHealing);
     }
     if (this.usePotion && this.hasPotion) {
       remainingOptions.push(decisions.usePotion);
@@ -276,7 +273,7 @@ const adventurers = (function(){
       pairings.forEach(pair => {
         const result1 = Math.random() * weights[pair[0]];
         const result2 = Math.random() * weights[pair[1]];
-        console.log(result1, result2);
+        console.log(`pair[0]: ${pair[0]}, result: ${result1}; pair[1]: ${pair1}, result: ${result2}`);
         const randomChoice = Math.random();
         
         if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
