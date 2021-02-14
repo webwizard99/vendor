@@ -276,6 +276,7 @@ const adventurers = (function(){
       pairings.forEach(pair => {
         const result1 = Math.random() * weights[pair[0]];
         const result2 = Math.random() * weights[pair[1]];
+        console.log(result1, result2);
         const randomChoice = Math.random();
         
         if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
@@ -284,7 +285,9 @@ const adventurers = (function(){
           eliminated.push(pair[0]);
         }
       });
-      remainingOptions.filter(option => !eliminated.find(elOption => elOption === option));
+      eliminated.forEach(eliminate => {
+        remainingOptions.filter(option => option !== eliminate);
+      });
     }
     return remainingOptions[0];
   }
