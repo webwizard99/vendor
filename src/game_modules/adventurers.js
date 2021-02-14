@@ -259,7 +259,10 @@ const adventurers = (function(){
     if (remainingOptions.length === 1) {
       return remainingOptions[0];
     }
-    while (remainingOptions.length > 1) {
+
+    const tournamentRounds = Math.ceil(Math.log2(remainingOptions.length));
+    for (let round = 0; round < tournamentRounds; round++) {
+      console.log(remainingOptions);
       const optionsLength = remainingOptions.length;
       let pairings = [];
       const pairCount = Math.floor(optionsLength / 2);
