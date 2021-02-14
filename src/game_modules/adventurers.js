@@ -273,7 +273,7 @@ const adventurers = (function(){
       pairings.forEach(pair => {
         const result1 = Math.random() * weights[pair[0]];
         const result2 = Math.random() * weights[pair[1]];
-        console.log(`pair[0]: ${pair[0]}, result: ${result1}; pair[1]: ${pair1}, result: ${result2}`);
+        console.log(`pair[0]: ${pair[0]}, result: ${result1}; pair[1]: ${pair[1]}, result: ${result2}`);
         const randomChoice = Math.random();
         
         if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
