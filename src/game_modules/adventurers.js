@@ -232,7 +232,7 @@ const adventurers = (function(){
       checkForTraps: concernedAdventurer.dungeonBehavior.check_for_traps,
       checkForTreasure: concernedAdventurer.dungeonBehavior.search_for_treasure,
       setTrap: setTrapBehavior[concernedAdventurer.adventurerClass.name],
-      advance: concernedAdventurer.dungeonBehavior.advance,
+      advance: concernedAdventurer.dungeonBehavior.advance_tile,
       returnToTown: concernedAdventurer.dungeonBehavior.return_to_town
     }
     if (this.usePotion && this.hasPotion) {
