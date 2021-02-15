@@ -112,6 +112,7 @@ const dungeon = (function(){
     });
     console.log(tileOutcomes);
     const resultTileI = tileOutcomes[0];
+    console.log(this.tileAssignments[resultTileI]);
     const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
     let innTreasureBoost = 0;
     if (adventurer.informed) {
