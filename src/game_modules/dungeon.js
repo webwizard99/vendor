@@ -133,6 +133,8 @@ const dungeon = (function(){
     if (treasureProb > encounterProb && treasureProb > trapProb) {
       const treasureIndex = Math.floor(Math.random() * this.treasures.length);
       const treasure = this.treasures[treasureIndex];
+      console.log(treasureIndex);
+      console.log(this.treasures);
       console.log(treasure);
       // compose payload for Item constructor
       const payload = items.composePayloadFromProto(treasure);
