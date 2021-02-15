@@ -235,6 +235,10 @@ const dungeon = (function(){
     releaseAdventurer: function(adventurerId) {
       deleteAdventurer(adventurerId);
       dispatchAdventurers();
+    },
+    executeTurn: function(adventurer) {
+      console.log(adventurer);
+      console.log('exectuteTurn');
     }
   }
 }());
