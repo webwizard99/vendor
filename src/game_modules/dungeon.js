@@ -105,13 +105,13 @@ const dungeon = (function(){
     }
     tileOutcomes.sort((outcome1, outcome2) => {
       if (outcome1.result > outcome2.result) {
-        return 1;
-      } else if (outcome1.result < outcome2.result) {
         return -1;
+      } else if (outcome1.result < outcome2.result) {
+        return 1;
       } else return 0;
     });
     console.log(tileOutcomes);
-    const resultTileI = tileOutcomes[0];
+    const resultTileI = tileOutcomes[0].tile;
     console.log(this.tileAssignments[resultTileI]);
     const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
     let innTreasureBoost = 0;
