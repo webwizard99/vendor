@@ -284,10 +284,11 @@ const adventurers = (function(){
         }
       });
       console.log(eliminated);
-      eliminated.forEach(eliminate => {
+      for (let elIndex = 0; elIndex < eliminated.length; elIndex++) {
+        const eliminate = eliminated[elIndex];
         console.log(`eliminate: ${eliminate}`);
         remainingOptions = remainingOptions.filter(option => option !== eliminate);
-      });
+      }
     }
     return remainingOptions[0];
   }
