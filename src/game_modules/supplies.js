@@ -118,28 +118,29 @@ const supplies = (function(){
     }
 
     // compose payload for Item constructor
-    let itemPayload = {};
-    itemPayload.level = newItem.level;
-    switch(newItem.item.type) {
-      case ItemTypes.potion:
-        itemPayload.type = newItem.type;
-        break;
-      case ItemTypes.weapon:
-        itemPayload.damage = newItem.damage;
-        break;
-      case ItemTypes.armor:
-        itemPayload.armor = newItem.armor;
-        break;
-      default:
-        break;
-    }
-    let payload = {};
-    payload.itemPayload = itemPayload;
-    payload.type = newItem.item.type;
-    payload.name = newItem.item.name;
-    payload.value = newItem.item.value;
-    payload.prototypeId = newItem.item.id;
-    payload.rarity = newItem.item.rarity;
+    // let itemPayload = {};
+    // itemPayload.level = newItem.level;
+    // switch(newItem.item.type) {
+    //   case ItemTypes.potion:
+    //     itemPayload.type = newItem.type;
+    //     break;
+    //   case ItemTypes.weapon:
+    //     itemPayload.damage = newItem.damage;
+    //     break;
+    //   case ItemTypes.armor:
+    //     itemPayload.armor = newItem.armor;
+    //     break;
+    //   default:
+    //     break;
+    // }
+    // let payload = {};
+    // payload.itemPayload = itemPayload;
+    // payload.type = newItem.item.type;
+    // payload.name = newItem.item.name;
+    // payload.value = newItem.item.value;
+    // payload.prototypeId = newItem.item.id;
+    // payload.rarity = newItem.item.rarity;
+    let payload = Items.composePayloadFromProto(newItem);
 
     // create item and add to total inventory in Items module
     let itemId = Items.createItem(payload);

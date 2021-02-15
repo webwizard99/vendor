@@ -200,6 +200,19 @@ const adventurers = (function(){
     return returnDecision; 
   }
 
+  Adventurer.prototype.considerTreasure = function(item) {
+    if (this.inventory.length < maxInventory) {
+      this.inventory.push(item);
+      return true;
+    }
+    // insert logic for weighing item values if inventory is full
+  }
+
+  Adventurer.prototype.encounterTrap = function(dungeonLevel) {
+    const trapDamage = 3 * (Math.pow(1.25, (dungeonLevel - 1)));
+    console.log(`trapDamage: ${trapDamage}`);
+  }
+
   const Decision = function(adventurerId) {
     this.adventurerId = adventurerId;
     this.needHealing = false;

@@ -140,6 +140,33 @@ const items = (function(){
 
     getItemTypes: function() {
       return itemTypes;
+    },
+
+    composePayloadFromProto: function(protoItem) {
+      // compose payload for Item constructor
+      let itemPayload = {};
+      itemPayload.level = protoItem.level;
+      switch(protoItem.item.type) {
+        case ItemTypes.potion:
+          itemPayload.type = protoItem.type;
+          break;
+        case ItemTypes.weapon:
+          itemPayload.damage = protoItem.damage;
+          break;
+        case ItemTypes.armor:
+          itemPayload.armor = protoItem.armor;
+          break;
+        default:
+          break;
+      }
+      let payload = {};
+      payload.itemPayload = itemPayload;
+      payload.type = protoItem.item.type;
+      payload.name = protoItem.item.name;
+      payload.value = protoItem.item.value;
+      payload.prototypeId = protoItem.item.id;
+      payload.rarity = protoItem.item.rarity;
+      return payload;
     }
   }
 }());

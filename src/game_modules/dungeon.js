@@ -1,4 +1,6 @@
 // game imports
+import items from './items';
+import adventurersModule from './adventurers';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -91,6 +93,56 @@ const dungeon = (function(){
         });
       });
     });
+  }
+
+  Level.prototype.activateTile = function(adventurer) {
+    console.log(this.tileAssignments);
+    let tileOutcomes = [];
+    for (let tileI = 0; tileI < this.tileAssignments.length; tileI++) {
+      const weight = this.tileAssignments[tileI].probability;
+      const result = Math.random() * weight;
+      tileOutcomes.push({ tile: tileI, result: result });
+    }
+    tileOutcomes.sort((outcome1, outcome2) => {
+      if (outcome1.result > outcome2.result) {
+        return 1;
+      } else if (outcome1.result < outcome2.result) {
+        return -1;
+      } else return 0;
+    });
+    console.log(tileOutcomes);
+    const resultTileI = tileOutcomes[0];
+    const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
+    let innTreasureBoost = 0;
+    if (adventurer.informed) {
+      innTreasureBoost = 200;
+    }
+    const actions = adventurersModule.getActions();;
+    let checkTreasureBoost = 0;
+    if (adventurer.action === actions.checkForTreasure) {
+      checkTreasureBoost = 100;
+    }
+    let checkTrapBoost = 0;
+    if (adventurer.action === actions.checkForTraps) {
+      checkTrapBoost = 125;
+    }
+    const treasureProb = Math.random() * (resultTile.treasure + innTreasureBoost + checkTreasureBoost);
+    const encounterProb = Math.random() * resultTile.encounter;
+    const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
+    if (treasureProb > encounterProb && treasureProb > trapProb) {
+      const treasureIndex = Math.floor(Math.random() * this.treasures.length);
+      const treasure = this.treasures[treasureIndex];
+
+      // compose payload for Item constructor
+      const payload = items.composePayloadFromProto(treasure);
+      let itemId = items.createItem(payload);
+      const treasureItem = items.getItem(itemId);
+      adventurer.considerTreasure(treasureItem);
+    } else if (trapProb > treasureProb && trapProb > encounterProb) {
+      adventurer.encounterTrap(this.number);
+    } else if (encounterProb > trapProb && encounterProb > treasureProb) {
+      console.log('perform encounter');
+    }
   }
 
   const dispatchLevels = function() {
@@ -237,8 +289,9 @@ const dungeon = (function(){
       dispatchAdventurers();
     },
     executeTurn: function(adventurer) {
-      console.log(adventurer);
-      console.log('exectuteTurn');
+      const dungeonEntry = adventurers.find(dunAdventurer => dunAdventurer.adventurerId === adventurer.id);
+      const currentLevel = levels.find(level => level.number === dungeonEntry.level);
+      currentLevel.activateTile(adventurer);
     }
   }
 }());
