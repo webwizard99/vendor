@@ -146,7 +146,7 @@ const adventurers = (function(){
 
   Adventurer.prototype.usePotion = function() {
   // let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
-    
+    console.log('use potion');
   }
 
   Adventurer.prototype.checkTrapDecision = function() {
@@ -490,10 +490,13 @@ const adventurers = (function(){
           resultDecision = thisDecision.weighDecisionTournament();
         }
         console.log(resultDecision);
+        if (resultDecision === decisions.usePotion) {
+          dungeonAdventurer.usePotion();
+        }
         if (resultDecision === decisions.checkForTraps || 
           resultDecision === decisions.checkForTreasure || 
           resultDecision === decisions.setTrap) {
-            dungeonAdventurer.action.currentAction === resultDecision;
+            dungeonAdventurer.action.currentAction = resultDecision;
             const turns = dungeonAdventurer.speed * defaultActionDays;
             dungeonAdventurer.action.turns = turns;
         }
