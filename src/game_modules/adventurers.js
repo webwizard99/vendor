@@ -77,8 +77,10 @@ const adventurers = (function(){
       this.informed = false;
       this.hasFoundStairs = false;
       this.currentTotalDungeonTurns = 0;
-      this.currentAction = null;
-      this.currentActionTurns = 0;
+      this.action = {
+        currentAction: null,
+        turns: 0
+      }
       this.id = currentId;
       currentId++;
   }
@@ -163,7 +165,6 @@ const adventurers = (function(){
 
   Adventurer.prototype.checkSetTrapDecision = function() {
     const setTrap = setTrapBehavior[this.adventurerClass.name];
-    console.log(setTrap);
     const decisionFactor = (setTrap / 1000) + (this.dungeonBehavior.prefer_weaker_monster / 4000);
     const doSetTrap = decisionFactor > Math.random();
     return doSetTrap;
@@ -227,6 +228,7 @@ const adventurers = (function(){
   Decision.prototype.weighDecisionTournament = function() {
     const concernedAdventurer = adventurers.find(adventurer => adventurer.id === this.adventurerId);
     let remainingOptions = [];
+    // populate hash table with weights for relevant behaviors
     const weights = {
       usePotion: concernedAdventurer.dungeonBehavior.use_potion,
       checkForTraps: concernedAdventurer.dungeonBehavior.check_for_traps,
@@ -235,6 +237,8 @@ const adventurers = (function(){
       advance: concernedAdventurer.dungeonBehavior.advance_tile,
       returnToTown: concernedAdventurer.dungeonBehavior.return_to_town
     }
+    // add decisions marked as valid to array for use in
+    // creating elimination tournament
     if (this.usePotion && this.hasPotion) {
       remainingOptions.push(decisions.usePotion);
     }
@@ -256,25 +260,22 @@ const adventurers = (function(){
     if (remainingOptions.length === 1) {
       return remainingOptions[0];
     }
-
+    // determine number of tournament rounds for iteration
     const tournamentRounds = Math.ceil(Math.log2(remainingOptions.length));
-    console.log(tournamentRounds);
     for (let round = 0; round < tournamentRounds; round++) {
-      console.log(remainingOptions);
+      // create pairings from outside ends inward
       const optionsLength = remainingOptions.length;
       let pairings = [];
       const pairCount = Math.floor(optionsLength / 2);
       for (let offest = 0; offest < pairCount; offest++) {
         const pair = [remainingOptions[offest], remainingOptions[optionsLength - (offest + 1)]];
-        console.log(pair);
-        pairings.push(pair);
       }
-      console.log(pairings);
       let eliminated = [];
+      // iterate over pairings and produce weighted outcomes to
+      // eliminate one decision from each pairing
       pairings.forEach(pair => {
         const result1 = Math.random() * weights[pair[0]];
         const result2 = Math.random() * weights[pair[1]];
-        console.log(`pair[0]: ${pair[0]}, result: ${result1}; pair[1]: ${pair[1]}, result: ${result2}`);
         const randomChoice = Math.random();
         
         if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
@@ -283,10 +284,10 @@ const adventurers = (function(){
           eliminated.push(pair[0]);
         }
       });
-      console.log(eliminated);
+      // remove eliminated options from array containing tournament
+      // entrants
       for (let elIndex = 0; elIndex < eliminated.length; elIndex++) {
         const eliminate = eliminated[elIndex];
-        console.log(`eliminate: ${eliminate}`);
         remainingOptions = remainingOptions.filter(option => option !== eliminate);
       }
     }
@@ -479,7 +480,6 @@ const adventurers = (function(){
         thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
         thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
         thisDecision.setTrap = dungeonAdventurer.checkSetTrapDecision();
-        console.log(thisDecision);
 
         // get decision from decision object
         let resultDecision;
