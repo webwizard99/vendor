@@ -136,6 +136,7 @@ const dungeon = (function(){
       const treasure = treasures[treasureIndex];
       console.log(treasureIndex);
       console.log(treasures);
+      console.log(treasures[0]);
       console.log(treasure);
       // compose payload for Item constructor
       const payload = items.composePayloadFromProto(treasure);
