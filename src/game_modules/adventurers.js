@@ -269,6 +269,7 @@ const adventurers = (function(){
       const pairCount = Math.floor(optionsLength / 2);
       for (let offest = 0; offest < pairCount; offest++) {
         const pair = [remainingOptions[offest], remainingOptions[optionsLength - (offest + 1)]];
+        pairings.push(pair);
       }
       let eliminated = [];
       // iterate over pairings and produce weighted outcomes to
