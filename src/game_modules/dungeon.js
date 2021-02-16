@@ -69,6 +69,15 @@ const dungeon = (function(){
           })
         }
       });
+
+      // compose list of items to fetch
+      let treasureDrops = [];
+      this.treasureDropList.drops.forEach(drop => {
+        const addId = drop.itemId;
+        if (!treasureDrops.find(item => item.itemId === addId)) {
+          treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
+        }
+      });
       
       // fetch monster drop list items
       monsterDrops.forEach(monsterDrop => {
@@ -79,28 +88,22 @@ const dungeon = (function(){
           }
           this.monstersLoot.push(resolvedDrop);
         })
-      });
-      // compose list of items to fetch
-      let treasureDrops = [];
-      this.treasureDropList.drops.forEach(drop => {
-        const addId = drop.itemId;
-        if (!treasureDrops.find(item => item.itemId === addId)) {
-          treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
-        }
-      });
-      
-      // fetch items for treasure drop lists
-      treasureDrops.forEach(treasureDrop => {
-        const tGetDrop = getDrop(treasureDrop);
-        tGetDrop.next().value.then((resolvedDrop) => {
-          if (Array.isArray(resolvedDrop)) {
-            resolvedDrop = resolvedDrop[0];
-          }
-          this.treasures.push(resolvedDrop)
+      })
+        .then(() => {
+          // fetch items for treasure drop lists
+          treasureDrops.forEach(treasureDrop => {
+            const tGetDrop = getDrop(treasureDrop);
+            tGetDrop.next().value.then((resolvedDrop) => {
+              if (Array.isArray(resolvedDrop)) {
+                resolvedDrop = resolvedDrop[0];
+              }
+              this.treasures.push(resolvedDrop)
+            });            
+          }).then(() => {
+            this.initialized = true;
+            return true;
+          });
         });
-
-        this.initialized = true;
-      });
     });
   }
 
@@ -259,7 +262,7 @@ const dungeon = (function(){
     return fetchedDrop;
   }
 
-  const loadLevel = function() {
+  const loadLevel = async function() {
     const nextLevelN = exploredLevel + 1;
     const nextLevel = levels.filter(level => level.number === nextLevelN);
     nextLevel.initialize()
@@ -336,7 +339,7 @@ const dungeon = (function(){
       return true;
     },
     loadNextLevel: function*() {
-      
+      yield loadLevel();
     }
   }
 }());
