@@ -80,28 +80,38 @@ const dungeon = (function(){
             treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
           }
         });
-        
-        // fetch monster drop list items
-        monsterDrops.forEach(monsterDrop => {
-          const mGetDrop = getDrop(monsterDrop);
-          mGetDrop.next().value.then((resolvedDrop) => {
-            if (Array.isArray(resolvedDrop)) {
-              resolvedDrop = resolvedDrop[0];
-            }
-            this.monstersLoot.push(resolvedDrop);
-          })
+        new Promise((resolveMonsterDrops, rejectMonsterDrops) => {
+          // fetch monster drop list items
+          monsterDrops.forEach((monsterDrop, mDropN) => {
+            const mGetDrop = getDrop(monsterDrop);
+            mGetDrop.next().value.then((resolvedDrop) => {
+              if (Array.isArray(resolvedDrop)) {
+                resolvedDrop = resolvedDrop[0];
+              }
+              this.monstersLoot.push(resolvedDrop);
+              if (mDropN === monsterDrops.length -1) {
+                resolveMonsterDrops();
+              }
+            })
+          });
         })
-          .then(() => {
-            // fetch items for treasure drop lists
-            treasureDrops.forEach(treasureDrop => {
-              const tGetDrop = getDrop(treasureDrop);
-              tGetDrop.next().value.then((resolvedDrop) => {
-                if (Array.isArray(resolvedDrop)) {
-                  resolvedDrop = resolvedDrop[0];
-                }
-                this.treasures.push(resolvedDrop)
-              });            
-            }).then(() => {
+        .then(() => {
+            new Promise((resolveTreasureDrops, rejectTreasureDrops) => {
+              // fetch items for treasure drop lists
+              treasureDrops.forEach((treasureDrop, tDropN) => {
+                const tGetDrop = getDrop(treasureDrop);
+                tGetDrop.next().value.then((resolvedDrop) => {
+                  if (Array.isArray(resolvedDrop)) {
+                    resolvedDrop = resolvedDrop[0];
+                  }
+                  this.treasures.push(resolvedDrop);
+                  if (tDropN === treasureDrops.length -1) {
+                    resolveTreasureDrops();
+                  }
+                });            
+              })
+            })
+            .then(() => {
               this.initialized = true;
               console.log('level initialized.');
               resolve(true);
