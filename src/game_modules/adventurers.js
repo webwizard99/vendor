@@ -451,7 +451,7 @@ const adventurers = (function(){
     })
   }
 
-  const dungeonEntry = function() {
+  const adventurersToDungeon = function() {
     const dungeonGoingAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
     dungeonGoingAdventurers.forEach(dungeonAdventurer => {
       let totalFactor = (dungeonAdventurer.townBehavior.enter_dungeon / 1000)
@@ -471,6 +471,10 @@ const adventurers = (function(){
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }
     })
+  }
+
+  const dungeonEntry = function*() {
+    yield adventurersToDungeon();
   }
 
   const dungeonTurns = function() {
@@ -561,9 +565,12 @@ const adventurers = (function(){
     takeAdventurerTurn: function() {
       doInn();
       doShopping();
-      dungeonEntry();
-      dungeonTurns()
-      dispatchAdventurers(adventurers);
+      const gDungeonEntry = dungeonEntry();
+      gDungeonEntry.next().value.then(() => {
+        dungeonTurns()
+        dispatchAdventurers(adventurers);
+      });
+      
     },
     getActions: function() {
       return actions;
