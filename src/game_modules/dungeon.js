@@ -101,6 +101,7 @@ const dungeon = (function(){
             });            
           }).then(() => {
             this.initialized = true;
+            console.log('level initialized.');
             return true;
           });
         });
@@ -268,6 +269,7 @@ const dungeon = (function(){
     console.log(nextLevel);
     nextLevel.initialize()
       .then((completed) => {
+        console.log(completed);
         return completed;
       })
   }
