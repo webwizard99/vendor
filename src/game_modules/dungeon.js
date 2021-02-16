@@ -82,6 +82,7 @@ const dungeon = (function(){
           treasureDrops.push({ itemId: addId, dropType: drop.drop_type });
         }
       });
+      let resolvedDrops = [];
       // fetch items for treasure drop lists
       treasureDrops.forEach(treasureDrop => {
         const tGetDrop = getDrop(treasureDrop);
@@ -89,9 +90,10 @@ const dungeon = (function(){
           if (Array.isArray(resolvedDrop)) {
             resolvedDrop = resolvedDrop[0];
           }
-          this.treasures.push(resolvedDrop)
+          resolvedDrops.push(resolvedDrop)
         });
       });
+      this.treasures = resolvedDrops;
     });
   }
 
