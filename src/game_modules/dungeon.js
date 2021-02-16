@@ -209,13 +209,10 @@ const dungeon = (function(){
 
   const addAdventurer = function(adventurerId) {
     adventurers.push({ adventurerId: adventurerId, level: 1});
-    // if (exploredLevel < 1) {
-    //   const levelOne = levels.find(level => level.number === 1);
-    //   if (!levelOne) return false;
-    //   levelOne.initialize();
-    //   exploredLevel = 1;
-    //   dispatchExploredLevel();
-    // }
+    if (exploredLevel < 1) {
+      exploredLevel = 1;
+      dispatchExploredLevel();
+    }
   }
 
   const deleteAdventurer = function(adventurerId) {
@@ -265,6 +262,7 @@ const dungeon = (function(){
   const loadLevel = async function() {
     const nextLevelN = exploredLevel + 1;
     const nextLevel = levels.filter(level => level.number === nextLevelN);
+    console.log(nextLevel);
     nextLevel.initialize()
       .then((completed) => {
         return completed;
