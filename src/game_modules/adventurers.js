@@ -451,7 +451,7 @@ const adventurers = (function(){
     })
   }
 
-  const adventurersToDungeon = function() {
+  const dungeonEntry = function() {
     const dungeonGoingAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === false);
     dungeonGoingAdventurers.forEach(dungeonAdventurer => {
       let totalFactor = (dungeonAdventurer.townBehavior.enter_dungeon / 1000)
@@ -470,11 +470,7 @@ const adventurers = (function(){
         dungeonAdventurer.addCombatLog(combatLogMessage);
         dungeon.receiveAdventurer(dungeonAdventurer.id);
       }
-    })
-  }
-
-  const dungeonEntry = function*() {
-    yield adventurersToDungeon();
+    });
   }
 
   const dungeonTurns = function() {
@@ -565,12 +561,20 @@ const adventurers = (function(){
     takeAdventurerTurn: function() {
       doInn();
       doShopping();
-      const gDungeonEntry = dungeonEntry();
-      gDungeonEntry.next().value.then(() => {
+      const loadNextLevel = !dungeon.checkLevelReadiness();
+      if (loadNextLevel) {
+        const loadLevel = dungeon.loadNextLevel();
+        loadLevel.next().value.then((loaded) => {
+          console.log(loaded);
+          dungeonEntry();
+          dungeonTurns()
+          dispatchAdventurers(adventurers);
+        })
+      } else {
+        dungeonEntry();
         dungeonTurns()
         dispatchAdventurers(adventurers);
-      });
-      
+      }
     },
     getActions: function() {
       return actions;

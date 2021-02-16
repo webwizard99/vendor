@@ -13,7 +13,12 @@ import { SET_DUNGEON_LEVELS,
 
 const dungeon = (function(){
   let levels = [];
+  // {
+  // adventurerId: n,
+  // level: n
+  //}
   let adventurers = [];
+  let levelCount;
 
   let exploredLevel = 0;
 
@@ -45,7 +50,7 @@ const dungeon = (function(){
     this.intialized = false;
   }
 
-  Level.prototype.initialize = function() {
+  Level.prototype.initialize = async function() {
     const tGetMonstersForLevel = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
     //const monstersToAdd = getMonstersForLevel(this.monstersMinLevel, this.monstersMaxLevel);
     tGetMonstersForLevel.next().value.then((monstersToAdd) => {
@@ -64,6 +69,7 @@ const dungeon = (function(){
           })
         }
       });
+      
       // fetch monster drop list items
       monsterDrops.forEach(monsterDrop => {
         const mGetDrop = getDrop(monsterDrop);
@@ -90,10 +96,10 @@ const dungeon = (function(){
           if (Array.isArray(resolvedDrop)) {
             resolvedDrop = resolvedDrop[0];
           }
-          console.log(resolvedDrop);
           this.treasures.push(resolvedDrop)
-          console.log(this.treasures);
         });
+
+        this.initialized = true;
       });
     });
   }
@@ -200,13 +206,13 @@ const dungeon = (function(){
 
   const addAdventurer = function(adventurerId) {
     adventurers.push({ adventurerId: adventurerId, level: 1});
-    if (exploredLevel < 1) {
-      const levelOne = levels.find(level => level.number === 1);
-      if (!levelOne) return false;
-      levelOne.initialize();
-      exploredLevel = 1;
-      dispatchExploredLevel();
-    }
+    // if (exploredLevel < 1) {
+    //   const levelOne = levels.find(level => level.number === 1);
+    //   if (!levelOne) return false;
+    //   levelOne.initialize();
+    //   exploredLevel = 1;
+    //   dispatchExploredLevel();
+    // }
   }
 
   const deleteAdventurer = function(adventurerId) {
@@ -253,6 +259,15 @@ const dungeon = (function(){
     return fetchedDrop;
   }
 
+  const loadLevel = function() {
+    const nextLevelN = exploredLevel + 1;
+    const nextLevel = levels.filter(level => level.number === nextLevelN);
+    nextLevel.initialize()
+      .then((completed) => {
+        return completed;
+      })
+  }
+
   return {
     initializeLevels: async function() {
       const genGetLevels = getLevels();
@@ -277,6 +292,7 @@ const dungeon = (function(){
             levels.push(thisLevel);
           }
         }).then(() => {
+          levelCount = levels.length;
           orderLevels();
           dispatchLevels();
           dispatchExploredLevel();
@@ -300,6 +316,27 @@ const dungeon = (function(){
       const dungeonEntry = adventurers.find(dunAdventurer => dunAdventurer.adventurerId === adventurer.id);
       const currentLevel = levels.find(level => level.number === dungeonEntry.level);
       currentLevel.activateTile(adventurer);
+    },
+    checkLevelReadiness: function() {
+      if (exploredLevel === 0) return false;
+      if (!adventurers) return false;
+      let highestLevel = 1;
+      for (let adventurerI = 0; adventurerI < adventurers.length; adventurerI++) {
+        if (adventurers[adventurerI].level > highestLevel) {
+          highestLevel = adventurers[adventurerI].level;
+        }
+      }
+      if (exploredLevel <= highestLevel) {
+        if (exploredLevel < levelCount) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      return true;
+    },
+    loadNextLevel: function*() {
+      
     }
   }
 }());
