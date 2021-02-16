@@ -265,16 +265,18 @@ const dungeon = (function(){
   }
 
   const loadLevel = async function() {
-    const nextLevelN = exploredLevel + 1;
-    let nextLevel = levels.find(level => level.number === nextLevelN);
-    // if (Array.isArray(nextLevel)) {
-    //   nextLevel = nextLevel[0];
-    // }
-    console.log(nextLevel);
-    nextLevel.initialize()
-      .then((completed) => {
-        console.log(completed);
-        return completed;
+    return new Promise((resolve, reject) => {
+      const nextLevelN = exploredLevel + 1;
+      let nextLevel = levels.find(level => level.number === nextLevelN);
+      // if (Array.isArray(nextLevel)) {
+      //   nextLevel = nextLevel[0];
+      // }
+      console.log(nextLevel);
+      nextLevel.initialize()
+        .then((completed) => {
+          console.log(completed);
+          resolve(completed);
+        })
       })
   }
 
