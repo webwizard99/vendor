@@ -477,50 +477,70 @@ const adventurers = (function(){
     const dungeonAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === true);
     dungeonAdventurers.forEach(dungeonAdventurer => {
       let totalTurns = dungeonAdventurer.speed;
-      for (let remainingTurns = 0; remainingTurns < totalTurns; remainingTurns++) {
-        let thisDecision = new Decision(dungeonAdventurer.id);
-        if (dungeonAdventurer.hp < dungeonAdventurer.maxHp) {
-          thisDecision.needHealing = dungeonAdventurer.checkHealthChoice();
-          thisDecision.hasPotion = dungeonAdventurer.checkHasPotion();
-          if (thisDecision.needHealing) {
-            if (thisDecision.hasPotion) {
-              thisDecision.usePotion = dungeonAdventurer.checkPotionUse();
+      let currentTurn = 0;
+      let evaluated = false;
+      while (currentTurn < totalTurns) {
+        if (evaluated) continue;
+        new Promise((resolve, reject) => {{
+          evaluated = true;
+          let thisDecision = new Decision(dungeonAdventurer.id);
+          if (dungeonAdventurer.hp < dungeonAdventurer.maxHp) {
+            thisDecision.needHealing = dungeonAdventurer.checkHealthChoice();
+            thisDecision.hasPotion = dungeonAdventurer.checkHasPotion();
+            if (thisDecision.needHealing) {
+              if (thisDecision.hasPotion) {
+                thisDecision.usePotion = dungeonAdventurer.checkPotionUse();
+              }
             }
           }
-        }
-        if (!dungeonAdventurer.action.currentAction) {
-          thisDecision.checkForTraps = dungeonAdventurer.checkTrapDecision();
-          thisDecision.checkForTreasure = dungeonAdventurer.checkTreasureDecision();
-          thisDecision.setTrap = dungeonAdventurer.checkSetTrapDecision();
-        }
-        thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
-        thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
+          if (!dungeonAdventurer.action.currentAction) {
+            thisDecision.checkForTraps = dungeonAdventurer.checkTrapDecision();
+            thisDecision.checkForTreasure = dungeonAdventurer.checkTreasureDecision();
+            thisDecision.setTrap = dungeonAdventurer.checkSetTrapDecision();
+          }
+          thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
+          thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
 
-        // get decision from decision object
-        let resultDecision;
-        resultDecision = thisDecision.weighDecisionLogical();
-        if (!resultDecision) {
-          resultDecision = thisDecision.weighDecisionTournament();
-        }
-        console.log(resultDecision);
-        if (resultDecision === decisions.usePotion) {
-          dungeonAdventurer.usePotion();
-        }
-        if (resultDecision === decisions.checkForTraps || 
-          resultDecision === decisions.checkForTreasure || 
-          resultDecision === decisions.setTrap) {
-            dungeonAdventurer.action.currentAction = resultDecision;
-            const turns = dungeonAdventurer.speed * defaultActionDays;
-            dungeonAdventurer.action.turns = turns;
-        }
-        if (resultDecision === decisions.returnToTown){
-          dungeon.releaseAdventurer(dungeonAdventurer.id);
-          dungeonAdventurer.inDungeon = false;
-          break;
-        }
-        if (resultDecision === decisions.advance) {
-          dungeon.executeTurn(dungeonAdventurer);
-        }
+          // get decision from decision object
+          let resultDecision;
+          resultDecision = thisDecision.weighDecisionLogical();
+          if (!resultDecision) {
+            resultDecision = thisDecision.weighDecisionTournament();
+          }
+          console.log(resultDecision);
+          if (resultDecision === decisions.usePotion) {
+            dungeonAdventurer.usePotion();
+          }
+          if (resultDecision === decisions.checkForTraps || 
+            resultDecision === decisions.checkForTreasure || 
+            resultDecision === decisions.setTrap) {
+              dungeonAdventurer.action.currentAction = resultDecision;
+              const turns = dungeonAdventurer.speed * defaultActionDays;
+              dungeonAdventurer.action.turns = turns;
+          }
+          if (resultDecision === decisions.returnToTown){
+            dungeon.releaseAdventurer(dungeonAdventurer.id);
+            dungeonAdventurer.inDungeon = false;
+            break;
+          }
+          new Promise((resolveTurn, rejectTurn) => {
+            if (resultDecision === decisions.advance) {
+              dungeon.executeTurn(dungeonAdventurer)
+                .then(() => {
+                  resolveTurn();
+                });
+            } else {
+              resolveTurn();
+            }
+            
+          }).then(() => {
+            resolve();
+          })
+        }}).then(() => {
+          currentTurn++;
+          evaluated = false;
+        })
+        
       }
     });
   }
@@ -564,8 +584,7 @@ const adventurers = (function(){
       const loadNextLevel = !dungeon.checkLevelReadiness();
       if (loadNextLevel) {
         const loadLevel = dungeon.loadNextLevel();
-        loadLevel.next().value.then((loaded) => {
-          console.log(loaded);
+        loadLevel.next().value.then(() => {
           dungeonEntry();
           dungeonTurns()
           dispatchAdventurers(adventurers);

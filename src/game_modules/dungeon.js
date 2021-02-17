@@ -122,59 +122,66 @@ const dungeon = (function(){
     
   }
 
-  Level.prototype.activateTile = function(adventurer) {
-    console.log(this.tileAssignments);
-    let tileOutcomes = [];
-    for (let tileI = 0; tileI < this.tileAssignments.length; tileI++) {
-      const weight = this.tileAssignments[tileI].probability;
-      const result = Math.random() * weight;
-      tileOutcomes.push({ tile: tileI, result: result });
-    }
-    tileOutcomes.sort((outcome1, outcome2) => {
-      if (outcome1.result > outcome2.result) {
-        return -1;
-      } else if (outcome1.result < outcome2.result) {
-        return 1;
-      } else return 0;
+  Level.prototype.activateTile = async function(adventurer) {
+    return new Promise((resolve, reject) => {
+      let tileOutcomes = [];
+      for (let tileI = 0; tileI < this.tileAssignments.length; tileI++) {
+        const weight = this.tileAssignments[tileI].probability;
+        const result = Math.random() * weight;
+        tileOutcomes.push({ tile: tileI, result: result });
+      }
+      tileOutcomes.sort((outcome1, outcome2) => {
+        if (outcome1.result > outcome2.result) {
+          return -1;
+        } else if (outcome1.result < outcome2.result) {
+          return 1;
+        } else return 0;
+      });
+      console.log(tileOutcomes);
+      const resultTileI = tileOutcomes[0].tile;
+      console.log(this.tileAssignments[resultTileI]);
+      const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
+      let innTreasureBoost = 0;
+      if (adventurer.informed) {
+        innTreasureBoost = 200;
+      }
+      const actions = adventurersModule.getActions();;
+      let checkTreasureBoost = 0;
+      if (adventurer.action === actions.checkForTreasure) {
+        checkTreasureBoost = 100;
+      }
+      let checkTrapBoost = 0;
+      if (adventurer.action === actions.checkForTraps) {
+        checkTrapBoost = 125;
+      }
+      const treasureProb = Math.random() * (resultTile.treasure + innTreasureBoost + checkTreasureBoost);
+      const encounterProb = Math.random() * resultTile.encounter;
+      const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
+      const threshholdProb = Math.random() * 500;
+      if (threshholdProb > treasureProb && threshholdProb > encounterProb && threshholdProb > trapProb) {
+        return;
+      }
+      if (treasureProb > encounterProb && treasureProb > trapProb) {
+        const treasureIndex = Math.floor(Math.random() * this.treasures.length);
+        const treasures = this.treasures;
+        const treasure = treasures[treasureIndex];
+        console.log(treasureIndex);
+        console.log(treasures);
+        console.log(treasures[0]);
+        console.log(treasure);
+        // compose payload for Item constructor
+        const payload = items.composePayloadFromProto(treasure);
+        let itemId = items.createItem(payload);
+        const treasureItem = items.getItem(itemId);
+        adventurer.considerTreasure(treasureItem);
+      } else if (trapProb > treasureProb && trapProb > encounterProb) {
+        adventurer.encounterTrap(this.number);
+      } else if (encounterProb > trapProb && encounterProb > treasureProb) {
+        console.log('perform encounter');
+      }
+      resolve();
     });
-    console.log(tileOutcomes);
-    const resultTileI = tileOutcomes[0].tile;
-    console.log(this.tileAssignments[resultTileI]);
-    const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
-    let innTreasureBoost = 0;
-    if (adventurer.informed) {
-      innTreasureBoost = 200;
-    }
-    const actions = adventurersModule.getActions();;
-    let checkTreasureBoost = 0;
-    if (adventurer.action === actions.checkForTreasure) {
-      checkTreasureBoost = 100;
-    }
-    let checkTrapBoost = 0;
-    if (adventurer.action === actions.checkForTraps) {
-      checkTrapBoost = 125;
-    }
-    const treasureProb = Math.random() * (resultTile.treasure + innTreasureBoost + checkTreasureBoost);
-    const encounterProb = Math.random() * resultTile.encounter;
-    const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
-    if (treasureProb > encounterProb && treasureProb > trapProb) {
-      const treasureIndex = Math.floor(Math.random() * this.treasures.length);
-      const treasures = this.treasures;
-      const treasure = treasures[treasureIndex];
-      console.log(treasureIndex);
-      console.log(treasures);
-      console.log(treasures[0]);
-      console.log(treasure);
-      // compose payload for Item constructor
-      const payload = items.composePayloadFromProto(treasure);
-      let itemId = items.createItem(payload);
-      const treasureItem = items.getItem(itemId);
-      adventurer.considerTreasure(treasureItem);
-    } else if (trapProb > treasureProb && trapProb > encounterProb) {
-      adventurer.encounterTrap(this.number);
-    } else if (encounterProb > trapProb && encounterProb > treasureProb) {
-      console.log('perform encounter');
-    }
+    
   }
 
   const dispatchLevels = function() {
@@ -278,13 +285,8 @@ const dungeon = (function(){
     return new Promise((resolve, reject) => {
       const nextLevelN = exploredLevel + 1;
       let nextLevel = levels.find(level => level.number === nextLevelN);
-      // if (Array.isArray(nextLevel)) {
-      //   nextLevel = nextLevel[0];
-      // }
-      console.log(nextLevel);
       nextLevel.initialize()
         .then((completed) => {
-          console.log(completed);
           resolve(completed);
         })
       })
@@ -334,10 +336,15 @@ const dungeon = (function(){
       deleteAdventurer(adventurerId);
       dispatchAdventurers();
     },
-    executeTurn: function(adventurer) {
-      const dungeonEntry = adventurers.find(dunAdventurer => dunAdventurer.adventurerId === adventurer.id);
-      const currentLevel = levels.find(level => level.number === dungeonEntry.level);
-      currentLevel.activateTile(adventurer);
+    executeTurn: async function(adventurer) {
+      return new Promise((resolve, reject) => {
+        const dungeonEntry = adventurers.find(dunAdventurer => dunAdventurer.adventurerId === adventurer.id);
+        const currentLevel = levels.find(level => level.number === dungeonEntry.level);
+        currentLevel.activateTile(adventurer)
+          .then(() => {
+            resolve();
+          });
+      })
     },
     checkLevelReadiness: function() {
       if (exploredLevel === 0) return false;
