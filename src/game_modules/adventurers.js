@@ -521,7 +521,9 @@ const adventurers = (function(){
           if (resultDecision === decisions.returnToTown){
             dungeon.releaseAdventurer(dungeonAdventurer.id);
             dungeonAdventurer.inDungeon = false;
-            break;
+            currentTurn = totalTurns;
+            evaluated = true;
+            resolve();
           }
           new Promise((resolveTurn, rejectTurn) => {
             if (resultDecision === decisions.advance) {
