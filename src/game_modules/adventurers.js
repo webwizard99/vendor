@@ -229,8 +229,20 @@ const adventurers = (function(){
       turn
     } = payload;
     const deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
-    currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
+    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
     deletedTurn = null;
+  }
+
+  TurnController.prototype.clearAdventurerTurns = function(payload) {
+    const {
+      adventurer,
+      day
+    }
+    const deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurer == adventurer  && this.foundTurn.day === day);
+    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer !== adventurer && clearTurn.day !== day);
+    deletedTurns.forEach(turn => {
+      turn = null
+    });
   }
 
   TurnController.prototype.startTurns = function() {
@@ -314,8 +326,8 @@ const adventurers = (function(){
       if (resultDecision === decisions.returnToTown){
         dungeon.releaseAdventurer(dungeonAdventurer.id);
         dungeonAdventurer.inDungeon = false;
-        currentTurn = totalTurns;
-        evaluated = true;
+        const clearPackage = { adventurer: this.adventurer, day: this.day };
+        turnController.clearAdventurerTurns(clearPackage);
         resolve();
       }
       new Promise((resolveTurn, rejectTurn) => {
