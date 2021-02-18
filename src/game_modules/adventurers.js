@@ -230,7 +230,10 @@ const adventurers = (function(){
     } = payload;
     let deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
     this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
-    deletedTurn = null;
+    if (deletedTurn) {
+      deletedTurn = null;
+    }
+    
   }
 
   TurnController.prototype.clearAdventurerTurns = function(payload) {
@@ -286,7 +289,7 @@ const adventurers = (function(){
   }
 
   Turn.prototype.runTurn = async function() {
-    new Promise((resolve, reject) => {{
+    new Promise((resolve, reject) => {
       const dungeonAdventurer = this.adventurer;
       let thisDecision = new Decision(dungeonAdventurer.id);
       if (dungeonAdventurer.hp < dungeonAdventurer.maxHp) {
@@ -343,7 +346,7 @@ const adventurers = (function(){
       }).then(() => {
         resolve();
       })
-    }}).then(() => {
+    }).then(() => {
       if (this.nextTurn) {
         const payload = { turn: this.nextTurn, adventurer: this.adventurer, day: this.day };
         turnController.startTurn(payload);
