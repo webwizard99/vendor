@@ -216,33 +216,34 @@ const adventurers = (function(){
 
   const TurnController = function() {
     this.currentTurns = [];
+    this.currentdId = 0;
   }
 
   TurnController.prototype.addTurn = function(turn) {
+    turn.id = this.currentId;
     this.currentTurns.push(turn);
+    this.currentId++;
   }
 
-  TurnController.prototype.clearTurn = function(payload) {
-    const {
-      adventurer,
-      day,
-      turn
-    } = payload;
-    let deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
-    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
+  TurnController.prototype.clearTurn = function(id) {
+    let deletedTurn = this.currentTurns.find(foundTurn => foundTurn.id === id);
+    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.id!== id);
     if (deletedTurn) {
       deletedTurn = null;
+    }
+    if (this.currentTurns.length === 0) {
+      this.currentId = 0;
     }
     
   }
 
   TurnController.prototype.clearAdventurerTurns = function(payload) {
     const {
-      adventurer,
+      adventurerId,
       day
     } = payload;
-    let deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer  && this.foundTurn.day === day);
-    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer !== adventurer && clearTurn.day !== day);
+    let deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurerId === adventurerId  && this.foundTurn.day === day);
+    this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurerId !== adventurerId && clearTurn.day !== day);
     deletedTurns.forEach(turn => {
       turn = null
     });
@@ -258,11 +259,11 @@ const adventurers = (function(){
 
   TurnController.prototype.startTurn = function(payload) {
     const {
-      adventurer,
+      adventurerId,
       day,
       turn
     } = payload;
-    const nextTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
+    const nextTurn = this.currentTurns.find(foundTurn => foundTurn.adventurerId === adventurerId && foundTurn.day === day && foundTurn.turnNumber === turn);
     if (nextTurn) {
       nextTurn.runTurn();
     } 
@@ -283,6 +284,7 @@ const adventurers = (function(){
       nextTurn
     } = payload;
     this.adventurer = adventurer;
+    this.adventurerId = adventurer.id;
     this.day = day;
     this.turnNumber = turnNumber;
     this.nextTurn = nextTurn;
@@ -329,7 +331,7 @@ const adventurers = (function(){
       if (resultDecision === decisions.returnToTown){
         dungeon.releaseAdventurer(dungeonAdventurer.id);
         dungeonAdventurer.inDungeon = false;
-        const clearPackage = { adventurer: this.adventurer, day: this.day };
+        const clearPackage = { adventurerId: this.adventurerId, day: this.day };
         turnController.clearAdventurerTurns(clearPackage);
         resolve();
       }
@@ -348,10 +350,10 @@ const adventurers = (function(){
       })
     }).then(() => {
       if (this.nextTurn) {
-        const payload = { turn: this.nextTurn, adventurer: this.adventurer, day: this.day };
+        const payload = { turn: this.nextTurn, adventurerId: this.adventurerId, day: this.day };
         turnController.startTurn(payload);
       }
-      turnController.clearTurn({ turn: this.currentTurn, adventurer: this.adventurer, day: this.day });
+      turnController.clearTurn(this.id);
     })
   }
 
