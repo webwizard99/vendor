@@ -8,6 +8,7 @@ import storeInventory from './storeInventory';
 import playerStore from './store';
 import items from './items';
 import dungeon from './dungeon';
+import days from './days';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -211,6 +212,132 @@ const adventurers = (function(){
   Adventurer.prototype.encounterTrap = function(dungeonLevel) {
     const trapDamage = 3 * (Math.pow(1.25, (dungeonLevel - 1)));
     console.log(`trapDamage: ${trapDamage}`);
+  }
+
+  const TurnController = function() {
+    this.currentTurns = [];
+  }
+
+  TurnController.prototype.addTurn = function(turn) {
+    this.currentTurns.push(turn);
+  }
+
+  TurnController.prototype.clearTurn = function(payload) {
+    const {
+      adventurer,
+      day,
+      turn
+    } = payload;
+    const deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
+    currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
+    deletedTurn = null;
+  }
+
+  TurnController.prototype.startTurns = function() {
+    if (this.currentTurns.length === 0) return false;
+    const firstTurns = this.currentTurns.filter(turn => turn.turnNumber === 1);
+    firstTurns.forEach(turn => {
+      turn.runTurn();
+    });
+  }
+
+  TurnController.prototype.startTurn = function(payload) {
+    const {
+      adventurer,
+      day,
+      turn
+    } = payload;
+    const nextTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
+    if (nextTurn) {
+      nextTurn.runTurn();
+    } 
+  }
+
+
+  let turnController;
+
+  const initializeTurnController = function() {
+    turnController = new TurnController();
+  }
+
+  const Turn = function(payload) {
+    const {
+      adventurer,
+      day,
+      turnNumber,
+      nextTurn
+    } = payload;
+    this.adventurer = adventurer;
+    this.day = day;
+    this.turnNumber = turnNumber;
+    this.nextTurn = nextTurn;
+  }
+
+  Turn.prototype.runTurn = async function() {
+    new Promise((resolve, reject) => {{
+      const dungeonAdventurer = this.adventurer;
+      let thisDecision = new Decision(dungeonAdventurer.id);
+      if (dungeonAdventurer.hp < dungeonAdventurer.maxHp) {
+        thisDecision.needHealing = dungeonAdventurer.checkHealthChoice();
+        thisDecision.hasPotion = dungeonAdventurer.checkHasPotion();
+        if (thisDecision.needHealing) {
+          if (thisDecision.hasPotion) {
+            thisDecision.usePotion = dungeonAdventurer.checkPotionUse();
+          }
+        }
+      }
+      if (!dungeonAdventurer.action.currentAction) {
+        thisDecision.checkForTraps = dungeonAdventurer.checkTrapDecision();
+        thisDecision.checkForTreasure = dungeonAdventurer.checkTreasureDecision();
+        thisDecision.setTrap = dungeonAdventurer.checkSetTrapDecision();
+      }
+      thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
+      thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
+
+      // get decision from decision object
+      let resultDecision;
+      resultDecision = thisDecision.weighDecisionLogical();
+      if (!resultDecision) {
+        resultDecision = thisDecision.weighDecisionTournament();
+      }
+      console.log(resultDecision);
+      if (resultDecision === decisions.usePotion) {
+        dungeonAdventurer.usePotion();
+      }
+      if (resultDecision === decisions.checkForTraps || 
+        resultDecision === decisions.checkForTreasure || 
+        resultDecision === decisions.setTrap) {
+          dungeonAdventurer.action.currentAction = resultDecision;
+          const turns = dungeonAdventurer.speed * defaultActionDays;
+          dungeonAdventurer.action.turns = turns;
+      }
+      if (resultDecision === decisions.returnToTown){
+        dungeon.releaseAdventurer(dungeonAdventurer.id);
+        dungeonAdventurer.inDungeon = false;
+        currentTurn = totalTurns;
+        evaluated = true;
+        resolve();
+      }
+      new Promise((resolveTurn, rejectTurn) => {
+        if (resultDecision === decisions.advance) {
+          dungeon.executeTurn(dungeonAdventurer)
+            .then(() => {
+              resolveTurn();
+            });
+        } else {
+          resolveTurn();
+        }
+        
+      }).then(() => {
+        resolve();
+      })
+    }}).then(() => {
+      if (this.nextTurn) {
+        const payload = { turn: this.nextTurn, adventurer: this.adventurer, day: this.day };
+        turnController.startTurn(payload);
+      }
+      turnController.clearTurn({ turn: this.currentTurn, adventurer: this.adventurer, day: this.day });
+    })
   }
 
   const Decision = function(adventurerId) {
@@ -475,75 +602,31 @@ const adventurers = (function(){
 
   const dungeonTurns = function() {
     const dungeonAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === true);
-    dungeonAdventurers.forEach(dungeonAdventurer => {
-      let totalTurns = dungeonAdventurer.speed;
-      let currentTurn = 0;
-      let evaluated = false;
-      while (currentTurn < totalTurns) {
-        if (evaluated) continue;
-        new Promise((resolve, reject) => {{
-          evaluated = true;
-          let thisDecision = new Decision(dungeonAdventurer.id);
-          if (dungeonAdventurer.hp < dungeonAdventurer.maxHp) {
-            thisDecision.needHealing = dungeonAdventurer.checkHealthChoice();
-            thisDecision.hasPotion = dungeonAdventurer.checkHasPotion();
-            if (thisDecision.needHealing) {
-              if (thisDecision.hasPotion) {
-                thisDecision.usePotion = dungeonAdventurer.checkPotionUse();
-              }
-            }
+    new Promise((resolve, reject) => {
+      dungeonAdventurers.forEach((dungeonAdventurer, dunAdN) => {
+        let totalTurns = dungeonAdventurer.speed;
+        for (let turnNumber = 1; turnNumber <= totalTurns; turnNumber++) {
+          let nextTurn = 0;
+          if (turnNumber < totalTurns) {
+            nextTurn = turnNumber + 1;
+          } else {
+            nextTurn = null;
           }
-          if (!dungeonAdventurer.action.currentAction) {
-            thisDecision.checkForTraps = dungeonAdventurer.checkTrapDecision();
-            thisDecision.checkForTreasure = dungeonAdventurer.checkTreasureDecision();
-            thisDecision.setTrap = dungeonAdventurer.checkSetTrapDecision();
+          const turnPayload = {
+            adventurer: dungeonAdventurer,
+            day: days.getDay(),
+            turnNumber: turnNumber,
+            nextTurn: nextTurn
           }
-          thisDecision.advance = dungeonAdventurer.checkAdvanceDecision();
-          thisDecision.returnToTown = dungeonAdventurer.checkReturnToTown();
-
-          // get decision from decision object
-          let resultDecision;
-          resultDecision = thisDecision.weighDecisionLogical();
-          if (!resultDecision) {
-            resultDecision = thisDecision.weighDecisionTournament();
-          }
-          console.log(resultDecision);
-          if (resultDecision === decisions.usePotion) {
-            dungeonAdventurer.usePotion();
-          }
-          if (resultDecision === decisions.checkForTraps || 
-            resultDecision === decisions.checkForTreasure || 
-            resultDecision === decisions.setTrap) {
-              dungeonAdventurer.action.currentAction = resultDecision;
-              const turns = dungeonAdventurer.speed * defaultActionDays;
-              dungeonAdventurer.action.turns = turns;
-          }
-          if (resultDecision === decisions.returnToTown){
-            dungeon.releaseAdventurer(dungeonAdventurer.id);
-            dungeonAdventurer.inDungeon = false;
-            currentTurn = totalTurns;
-            evaluated = true;
-            resolve();
-          }
-          new Promise((resolveTurn, rejectTurn) => {
-            if (resultDecision === decisions.advance) {
-              dungeon.executeTurn(dungeonAdventurer)
-                .then(() => {
-                  resolveTurn();
-                });
-            } else {
-              resolveTurn();
-            }
-            
-          }).then(() => {
-            resolve();
-          })
-        }}).then(() => {
-          currentTurn++;
-          evaluated = false;
-        })
-        
-      }
+          const newTurn = new Turn(turnPayload);
+          turnController.addTurn(newTurn);
+        }
+        if (dunAdN === dungeonAdventurers.length -1) {
+          resolve();
+        }
+      });
+    }).then(() => {
+      turnController.startTurns();
     });
   }
 
@@ -572,6 +655,7 @@ const adventurers = (function(){
               let thisAdventurer = new Adventurer(adventurerPayload);
               adventurers.push(thisAdventurer);
             }
+            initializeTurnController();
             dispatchAdventurers(adventurers);
             return adventurers;
           }
