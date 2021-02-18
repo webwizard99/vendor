@@ -112,6 +112,17 @@ const items = (function(){
       }
     },
 
+    destroyItem(id) {
+      let thisItem = allItems.find(item => item.id === id);
+      if (thisItem) {
+        allItems = allItems.filter(item => item.id !== id);
+        thisItem = null;
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     getItemType(id) {
       if (itemTypeIndex[id] !== null) {
         return itemTypeIndex[id];

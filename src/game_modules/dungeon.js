@@ -137,9 +137,7 @@ const dungeon = (function(){
           return 1;
         } else return 0;
       });
-      console.log(tileOutcomes);
       const resultTileI = tileOutcomes[0].tile;
-      console.log(this.tileAssignments[resultTileI]);
       const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
       let innTreasureBoost = 0;
       if (adventurer.informed) {
@@ -162,13 +160,10 @@ const dungeon = (function(){
         return;
       }
       if (treasureProb > encounterProb && treasureProb > trapProb) {
+        console.log('treasure event');
         const treasureIndex = Math.floor(Math.random() * this.treasures.length);
         const treasures = this.treasures;
         const treasure = treasures[treasureIndex];
-        console.log(treasureIndex);
-        console.log(treasures);
-        console.log(treasures[0]);
-        console.log(treasure);
         // compose payload for Item constructor
         const payload = items.composePayloadFromProto(treasure);
         let itemId = items.createItem(payload);

@@ -146,7 +146,43 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.usePotion = function() {
-  // let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
+    const filterClasses = tagProcessor.getFilterClasses();
+    let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
+    const hpDifferential = this.maxHp - this.hp;
+    const percentLost = hpDifferential / this.maxHp;
+    let potionToUse;
+    if (percentLost > .5) {
+      heldPotions.sort((potion1, potion2) => {
+        if (potion1.level < potion2.level) {
+          return 1;
+        } else if (potion1.level > potion2.level) {
+          return -1;
+        } else return 0;
+      });
+      potionToUse = heldPotions[0];
+    } else {
+      heldPotions.sort((potion1, potion2) => {
+        if (potion1.level < potion2.level) {
+          return -1;
+        } else if (potion1.level > potion2.level) {
+          return 1;
+        } else return 0;
+      });
+      potionToUse = heldPotions[0];
+    }
+    let hpToHeal = potionToUse.level * (4 * Math.pow(1.08, potionToUse.level));
+    if (hpToHeal > hpDifferential) {
+      hpToHeal = hpDifferential;
+    }
+    this.hp = this.hp + hpToHeal;
+    const healJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name} </span>  used {potionToUse.name}. <span className={filterClasses.name}>{this.name} </span> healed <span className={filterClasses.value}>{hpToHeal}</span>hp.
+      </div>);
+    this.addCombatLog(healJSX);
+    this.inventory = this.inventory.filter(item => item.id !== potionToUse.id);
+    potionToUse = null;
+    items.destroyItem(potionToUse.id);
     console.log('use potion');
   }
 

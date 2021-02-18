@@ -74,6 +74,10 @@
   color: rgb(110, 245, 193)
 }
 
+.value {
+  color: rgb(140, 240, 120)
+}
+
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {

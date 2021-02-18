@@ -2,7 +2,8 @@ const tagProcessor = (function(){
 
   const filterClasses = {
     name: 'adventurerNameTag',
-    status: 'status'
+    status: 'status',
+    value: 'value'
   }
 
   return {
