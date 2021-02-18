@@ -228,7 +228,7 @@ const adventurers = (function(){
       day,
       turn
     } = payload;
-    const deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
+    let deletedTurn = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer && foundTurn.day === day && foundTurn.currentTurn === turn);
     this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer!== adventurer && clearTurn.day !== day && clearTurn.currentTurn !== turn);
     deletedTurn = null;
   }
@@ -238,7 +238,7 @@ const adventurers = (function(){
       adventurer,
       day
     } = payload;
-    const deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurer == adventurer  && this.foundTurn.day === day);
+    let deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurer === adventurer  && this.foundTurn.day === day);
     this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurer !== adventurer && clearTurn.day !== day);
     deletedTurns.forEach(turn => {
       turn = null
