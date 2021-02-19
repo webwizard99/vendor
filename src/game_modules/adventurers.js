@@ -395,7 +395,7 @@ const adventurers = (function(){
           }
           const actionJSX = (
             <div className="combatLogEntry">
-              <span className={filterClasses.name}>{this.name} </span> is {actionMsg}.
+              <span className={filterClasses.name}>{dungeonAdventurer.name} </span> is {actionMsg}.
             </div>);
           dungeonAdventurer.addCombatLog(actionJSX);
       }
