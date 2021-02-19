@@ -156,6 +156,7 @@ const dungeon = (function(){
       const encounterProb = Math.random() * resultTile.encounter;
       const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
       const threshholdProb = Math.random() * 500;
+      console.log(`probs... treasure: ${treasureProb}, trap: ${trapProb}, encounter: ${encounterProb}, threshold: ${threshholdProb}`);
       if (threshholdProb > treasureProb && threshholdProb > encounterProb && threshholdProb > trapProb) {
         return;
       }
