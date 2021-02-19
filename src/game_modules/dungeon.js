@@ -158,7 +158,7 @@ const dungeon = (function(){
       const threshholdProb = Math.random() * 125;
       console.log(`probs... treasure: ${treasureProb}, trap: ${trapProb}, encounter: ${encounterProb}, threshold: ${threshholdProb}`);
       if (threshholdProb > treasureProb && threshholdProb > encounterProb && threshholdProb > trapProb) {
-        return;
+        resolve();
       }
       if (treasureProb > encounterProb && treasureProb > trapProb) {
         console.log('treasure event');
