@@ -246,6 +246,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.encounterTrap = function(dungeonLevel) {
+    const filterClasses = tagProcessor.getFilterClasses();
     const trapDamage = 3 * (Math.pow(1.25, (dungeonLevel - 1)));
     const trapFactor = (this.adventurerClass.traps + this.adventurerClass.agility + this.cunning) / ((this.level * 10) * (Math.pow(1.25, (dungeonLevel - 1))));
     let computedDamage = Math.floor(trapDamage * (1 / trapFactor));
