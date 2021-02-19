@@ -266,7 +266,7 @@ const adventurers = (function(){
     this.hp -= computedDamage;
     const trapJSX = (
       <div className="combatLogEntry">
-        <span className={filterClasses.name}>{this.name} </span>  took <span className={filterClasses.value}>{computedDamage}</span> damage from a trap!
+        <span className={filterClasses.name}>{this.name}</span> took <span className={filterClasses.value}>{computedDamage}</span> damage from a trap!
       </div>);
     this.addCombatLog(trapJSX);
   }
@@ -348,6 +348,7 @@ const adventurers = (function(){
   }
 
   Turn.prototype.runTurn = async function() {
+    const filterClasses = tagProcessor.getFilterClasses();
     new Promise((resolve, reject) => {
       const dungeonAdventurer = this.adventurer;
       let thisDecision = new Decision(dungeonAdventurer.id);
@@ -384,6 +385,19 @@ const adventurers = (function(){
           dungeonAdventurer.action.currentAction = resultDecision;
           const turns = dungeonAdventurer.speed * defaultActionDays;
           dungeonAdventurer.action.turns = turns;
+          let actionMsg = '';
+          if (resultDecision === decisions.checkForTraps) {
+            actionMsg = 'is checking for traps';
+          } else if (resultDecision === decisions.checkForTreasure) {
+            actionMsg = 'is checking for treasure';
+          } else if (resultDecision === decisions.setTrap) {
+            actionMsg = 'sets a trap';
+          }
+          const actionJSX = (
+            <div className="combatLogEntry">
+              <span className={filterClasses.name}>{this.name} </span> is {actionMsg}.
+            </div>);
+          dungeonAdventurer.addCombatLog(actionJSX);
       }
       if (resultDecision === decisions.returnToTown){
         dungeon.releaseAdventurer(dungeonAdventurer.id);
