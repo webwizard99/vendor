@@ -247,7 +247,27 @@ const adventurers = (function(){
 
   Adventurer.prototype.encounterTrap = function(dungeonLevel) {
     const trapDamage = 3 * (Math.pow(1.25, (dungeonLevel - 1)));
-    console.log(`trapDamage: ${trapDamage}`);
+    const trapFactor = (this.adventurerClass.traps + this.adventurerClass.agility + this.cunning) / ((this.level * 10) * (Math.pow(1.25, (dungeonLevel - 1))));
+    let computedDamage = Math.floor(trapDamage * (1 / trapFactor));
+    const avoidTrapChance = Math.random() * trapFactor;
+    if (avoidTrapChance > Math.random() * 10) {
+      const trapJSX = (
+        <div className="combatLogEntry">
+          <span className={filterClasses.name}>{this.name} </span> a trap.
+        </div>);
+      this.addCombatLog(trapJSX);
+      return false;
+    }
+    console.log(`trapDamage: ${computedDamage}`);
+    if (computedDamage > this.hp) {
+      computedDamage = this.hp;
+    }
+    this.hp -= computedDamage;
+    const trapJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name} </span>  took <span className={filterClasses.value}>{computedDamage}</span> damage from a trap!
+      </div>);
+    this.addCombatLog(trapJSX);
   }
 
   const TurnController = function() {
