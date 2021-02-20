@@ -138,7 +138,7 @@ const adventurers = (function(){
   Adventurer.prototype.checkHasPotion = function() {
     console.log(this.inventory);
     if (this.inventory.length < 1) return false;
-    return this.inventory.find(item => item.item.type === itemTypes.potion);
+    return this.inventory.find(item => item.type === itemTypes.potion);
   }
 
   Adventurer.prototype.checkPotionUse = function() {
@@ -149,30 +149,30 @@ const adventurers = (function(){
 
   Adventurer.prototype.usePotion = function() {
     const filterClasses = tagProcessor.getFilterClasses();
-    let heldPotions = this.inventory.filter(item => item.item.type === itemTypes.potion);
+    let heldPotions = this.inventory.filter(item => item.type === itemTypes.potion);
     const hpDifferential = this.maxHp - this.hp;
     const percentLost = hpDifferential / this.maxHp;
     let potionToUse;
     if (percentLost > .5) {
       heldPotions.sort((potion1, potion2) => {
-        if (potion1.level < potion2.level) {
+        if (potion1[itemTypes.potion].level < potion2[itemTypes.potion].level) {
           return 1;
-        } else if (potion1.level > potion2.level) {
+        } else if (potion1[itemTypes.potion].level > potion2[itemTypes.potion].level) {
           return -1;
         } else return 0;
       });
       potionToUse = heldPotions[0];
     } else {
       heldPotions.sort((potion1, potion2) => {
-        if (potion1.level < potion2.level) {
+        if (potion1[itemTypes.potion].level < potion2[itemTypes.potion].level) {
           return -1;
-        } else if (potion1.level > potion2.level) {
+        } else if (potion1[itemTypes.potion].level > potion2[itemTypes.potion].level) {
           return 1;
         } else return 0;
       });
       potionToUse = heldPotions[0];
     }
-    let hpToHeal = potionToUse.level * (4 * Math.pow(1.08, potionToUse.level));
+    let hpToHeal = potionToUse[itemTypes.potion].level * (4 * Math.pow(1.08, potionToUse[itemTypes.potion].level));
     if (hpToHeal > hpDifferential) {
       hpToHeal = hpDifferential;
     }
@@ -183,8 +183,8 @@ const adventurers = (function(){
       </div>);
     this.addCombatLog(healJSX);
     this.inventory = this.inventory.filter(item => item.id !== potionToUse.id);
-    potionToUse = null;
     items.destroyItem(potionToUse.id);
+    potionToUse = null;
     console.log('use potion');
   }
 
@@ -240,6 +240,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.considerTreasure = function(item) {
+    console.log(item);
     if (this.inventory.length < maxInventory) {
       this.inventory.push(item);
       return true;

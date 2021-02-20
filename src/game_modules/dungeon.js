@@ -166,6 +166,9 @@ const dungeon = (function(){
         const treasureIndex = Math.floor(Math.random() * this.treasures.length);
         const treasures = this.treasures;
         const treasure = treasures[treasureIndex];
+        if (!treasure) {
+          alert('treasure error!');
+        }
         // compose payload for Item constructor
         const payload = items.composePayloadFromProto(treasure);
         let itemId = items.createItem(payload);
