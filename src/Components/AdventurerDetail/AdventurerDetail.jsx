@@ -35,6 +35,12 @@ class AdventurerDetail extends React.Component {
     
   }
 
+  scrollCombatLog(e) {
+    const cLog = e.target;
+    console.log(cLog);
+    cLog.scrollTop = cLog.scrollHeight;
+  }
+
   handleBack() {
     const handled = breadcrumb.popBreadcrumb();
     if (!handled) {
@@ -117,7 +123,7 @@ class AdventurerDetail extends React.Component {
           {this.getInventory(thisAdventurer)}
         </div>
         <p className="adventurerInventoryHeadline">Combat Log</p>
-        <div className="adventurer-combat-log">
+        <div className="adventurer-combat-log" onLoad={this.scrollCombatLog}>
           {this.getCombatLog(thisAdventurer)}
         </div>
       </div>

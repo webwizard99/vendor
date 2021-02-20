@@ -141,12 +141,12 @@ const dungeon = (function(){
       const resultTile = this.tileAssignments[resultTileI].dungeon_tile;
       let innTreasureBoost = 0;
       if (adventurer.informed) {
-        innTreasureBoost = 40;
+        innTreasureBoost = 20;
       }
       const actions = adventurersModule.getActions();;
       let checkTreasureBoost = 0;
       if (adventurer.action === actions.checkForTreasure) {
-        checkTreasureBoost = 20;
+        checkTreasureBoost = 10;
       }
       let checkTrapBoost = 0;
       if (adventurer.action === actions.checkForTraps) {
