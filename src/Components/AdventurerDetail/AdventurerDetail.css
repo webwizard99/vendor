@@ -43,6 +43,10 @@
 
 .adventurerInventoryDetails {
   color: rgb(249, 245, 110);
+  max-height: 10rem;
+  overflow-y: auto;
+  scroll-snap-type: y;
+  width: 96%;
 }
 
 .AdventurerDetail .adventurerClassIcon {
@@ -58,7 +62,8 @@
 .adventurer-combat-log {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
-  max-height: 20rem;
+  max-height: 14rem;
+  width: 96%
 }
 
 .combatLogEntry {

@@ -172,7 +172,7 @@ const adventurers = (function(){
       });
       potionToUse = heldPotions[0];
     }
-    let hpToHeal = potionToUse[itemTypes.potion].level * (4 * Math.pow(1.08, potionToUse[itemTypes.potion].level));
+    let hpToHeal = Math.floor(potionToUse[itemTypes.potion].level * (4 * Math.pow(1.08, potionToUse[itemTypes.potion].level)));
     if (hpToHeal > hpDifferential) {
       hpToHeal = hpDifferential;
     }
@@ -398,7 +398,7 @@ const adventurers = (function(){
           }
           const actionJSX = (
             <div className="combatLogEntry">
-              <span className={filterClasses.name}>{dungeonAdventurer.name} </span> is {actionMsg}.
+              <span className={filterClasses.name}>{dungeonAdventurer.name} </span> {actionMsg}.
             </div>);
           dungeonAdventurer.addCombatLog(actionJSX);
       }
