@@ -136,6 +136,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkHasPotion = function() {
+    console.log(this.inventory);
     return this.inventory.find(item => item.item.type === itemTypes.potion);
   }
 
