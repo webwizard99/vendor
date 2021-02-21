@@ -43,6 +43,7 @@ class AdventurerDetail extends React.Component {
   scrollCombatLog() {
     const cLog = document.querySelector('.adventurer-combat-log');
     console.log(cLog);
+    if (!cLog) return;
     cLog.scrollTop = cLog.scrollHeight;
   }
 
