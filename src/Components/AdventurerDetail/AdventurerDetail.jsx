@@ -23,8 +23,14 @@ class AdventurerDetail extends React.Component {
     const adventurerInventory = adventurer.inventory;
     if (!adventurerInventory) return 'no inventory';
     return adventurerInventory.map(item => {
+      let equippedIndicator = '';
+      if (adventurer.equipment[item.type]) {
+        if (adventurer.equipment[item.type].id === item.id) {
+          equippedIndicator += ' *';
+        }
+      }
       return (
-        <div className="adventurerInventoryItem">{item.name}</div>
+        <div className="adventurerInventoryItem">{item.name}{equippedIndicator}</div>
       )
     })
   }
