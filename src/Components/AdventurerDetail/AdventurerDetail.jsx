@@ -12,6 +12,11 @@ class AdventurerDetail extends React.Component {
     super(props);
 
     this.handleBack = this.handleBack.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    this.scrollCombatLog();
   }
 
   getInventory(adventurer) {
@@ -35,8 +40,8 @@ class AdventurerDetail extends React.Component {
     
   }
 
-  scrollCombatLog(e) {
-    const cLog = e.target;
+  scrollCombatLog() {
+    const cLog = document.querySelector('.adventurer-combat-log');
     console.log(cLog);
     cLog.scrollTop = cLog.scrollHeight;
   }
@@ -123,7 +128,7 @@ class AdventurerDetail extends React.Component {
           {this.getInventory(thisAdventurer)}
         </div>
         <p className="adventurerInventoryHeadline">Combat Log</p>
-        <div className="adventurer-combat-log" onLoad={this.scrollCombatLog}>
+        <div className="adventurer-combat-log">
           {this.getCombatLog(thisAdventurer)}
         </div>
       </div>

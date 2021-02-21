@@ -74,6 +74,18 @@
   font-weight: 600; 
 }
 
+.adventurerDungeonIndicator {
+  width: 3rem;
+  height: 100%;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.dungeonIcon {
+  margin: auto;
+  color: rgb(230, 245, 230);
+}
+
 
 /* mobile styles */
 @media only screen and (max-width: 650px) {

@@ -101,6 +101,9 @@ class Adventurer extends React.Component {
             <p className="adventurerStat">{adventurer.constitution}</p>
           </div>
         </div>
+        <div className="adventurerDungeonIndicator">
+          {adventurer.inDungeon ? <span className="dungeonIcon">&#9751;</span> : <span className="dungeonIcon"></span>}
+        </div>
       </div>
     )
   }
