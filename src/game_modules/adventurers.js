@@ -286,16 +286,13 @@ const adventurers = (function(){
   }
 
   TurnController.prototype.clearTurn = function(id) {
-    console.log('clear turn');
     let deletedTurn = this.currentTurns.find(foundTurn => foundTurn.id === id);
     this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.id!== id);
-    console.log(this.currentTurns);
     if (deletedTurn) {
       deletedTurn = null;
     }
     if (this.currentTurns.length === 0) {
       this.currentId = 0;
-      console.log('turns finished');
       dispatchUpdate();
     }
     
