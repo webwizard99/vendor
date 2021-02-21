@@ -755,22 +755,27 @@ const adventurers = (function(){
     updateAdventurers: function() {
       dispatchAdventurers(adventurers);
     },
-    takeAdventurerTurn: function() {
-      doInn();
-      doShopping();
-      const loadNextLevel = !dungeon.checkLevelReadiness();
-      if (loadNextLevel) {
-        const loadLevel = dungeon.loadNextLevel();
-        loadLevel.next().value.then(() => {
+    takeAdventurerTurn: async function() {
+      new Promise ((resolve, reject) => {
+        doInn();
+        doShopping();
+        const loadNextLevel = !dungeon.checkLevelReadiness();
+        if (loadNextLevel) {
+          const loadLevel = dungeon.loadNextLevel();
+          loadLevel.next().value.then(() => {
+            dungeonEntry();
+            dungeonTurns()
+            dispatchAdventurers(adventurers);
+            resolve();
+          })
+        } else {
           dungeonEntry();
           dungeonTurns()
           dispatchAdventurers(adventurers);
-        })
-      } else {
-        dungeonEntry();
-        dungeonTurns()
-        dispatchAdventurers(adventurers);
-      }
+          resolve();
+        }
+      }).then(() => { return true });
+      
     },
     getActions: function() {
       return actions;
