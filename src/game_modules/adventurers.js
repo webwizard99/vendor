@@ -661,14 +661,17 @@ const adventurers = (function(){
             thisAdventurer.chargeAccount(totalPrice);
             playerStore.creditGold(totalPrice);
             playerStore.updateGold();
+            console.log(item);
+            const baseItem = items.getItem(item.itemid);
             storeInventory.removeItem(item.itemId);
             storeInventory.updateStoreInventory();
-            thisAdventurer.inventory.push(item.item);
+            thisAdventurer.inventory.push(baseItem);
             if (!item.item.type === itemTypes.potion) {
-              if (thisAdventurer.equipment[item.item.type]) {
-                thisAdventurer.unequipItem(item.item.type);
+              console.log('item not potion');
+              if (thisAdventurer.equipment[baseItem.type]) {
+                thisAdventurer.unequipItem(baseItem.type);
               }
-              thisAdventurer.equipItem(item.item);
+              thisAdventurer.equipItem(baseItem);
             }
             taken = true;
             adventurerTurn = adventurerIndex + 1;
