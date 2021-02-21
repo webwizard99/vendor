@@ -17,7 +17,7 @@ import tagProcessor from '../Utilities/tagProcessor';
 
 // redux imports
 import { store } from '../index';
-import { SET_ADVENTURERS } from '../actions/types';
+import { SET_ADVENTURERS, SET_DETAIL_UPDATE } from '../actions/types';
 
 const adventurers = (function(){
   let adventurers = [];
@@ -293,6 +293,7 @@ const adventurers = (function(){
     }
     if (this.currentTurns.length === 0) {
       this.currentId = 0;
+      dispatchUpdate();
     }
     
   }
@@ -534,6 +535,14 @@ const adventurers = (function(){
     store.dispatch(payload);
   }
 
+  const dispatchUpdate = function() {
+    const payload = {
+      type: SET_DETAIL_UPDATE,
+      value: true
+    }
+    store.dispatch(payload);
+  }
+
   const fetchAdventurers = async function() {
     let initAdventurers = fetcher.fetchRoute('adventurers-full');
     return initAdventurers;
@@ -755,27 +764,22 @@ const adventurers = (function(){
     updateAdventurers: function() {
       dispatchAdventurers(adventurers);
     },
-    takeAdventurerTurn: async function() {
-      new Promise ((resolve, reject) => {
-        doInn();
-        doShopping();
-        const loadNextLevel = !dungeon.checkLevelReadiness();
-        if (loadNextLevel) {
-          const loadLevel = dungeon.loadNextLevel();
-          loadLevel.next().value.then(() => {
-            dungeonEntry();
-            dungeonTurns()
-            dispatchAdventurers(adventurers);
-            resolve();
-          })
-        } else {
+    takeAdventurerTurn: function() {
+      doInn();
+      doShopping();
+      const loadNextLevel = !dungeon.checkLevelReadiness();
+      if (loadNextLevel) {
+        const loadLevel = dungeon.loadNextLevel();
+        loadLevel.next().value.then(() => {
           dungeonEntry();
           dungeonTurns()
           dispatchAdventurers(adventurers);
-          resolve();
-        }
-      }).then(() => { return true });
-      
+        })
+      } else {
+        dungeonEntry();
+        dungeonTurns()
+        dispatchAdventurers(adventurers);
+      }
     },
     getActions: function() {
       return actions;
