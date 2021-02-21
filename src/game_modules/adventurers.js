@@ -666,7 +666,7 @@ const adventurers = (function(){
             storeInventory.removeItem(item.itemId);
             storeInventory.updateStoreInventory();
             thisAdventurer.inventory.push(baseItem);
-            if (!item.item.type === itemTypes.potion) {
+            if (baseItem.type !== itemTypes.potion) {
               console.log('item not potion');
               if (thisAdventurer.equipment[baseItem.type]) {
                 thisAdventurer.unequipItem(baseItem.type);
