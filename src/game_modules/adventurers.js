@@ -293,6 +293,7 @@ const adventurers = (function(){
     }
     if (this.currentTurns.length === 0) {
       this.currentId = 0;
+      console.log('turns finished');
       dispatchUpdate();
     }
     
