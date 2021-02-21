@@ -276,7 +276,7 @@ const adventurers = (function(){
 
   const TurnController = function() {
     this.currentTurns = [];
-    this.currentdId = 0;
+    this.currentId = 0;
   }
 
   TurnController.prototype.addTurn = function(turn) {
