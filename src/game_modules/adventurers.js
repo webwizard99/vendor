@@ -94,6 +94,10 @@ const adventurers = (function(){
     this.gold -= value;
   }
 
+  Adventurer.prototype.creditAccount = function(value) {
+    this.gold += value;
+  }
+
   Adventurer.prototype.unequipItem = function(slot) {
     this.equipment[slot] = null;
   }

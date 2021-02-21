@@ -166,14 +166,26 @@ const dungeon = (function(){
         const treasureIndex = Math.floor(Math.random() * this.treasures.length);
         const treasures = this.treasures;
         const treasure = treasures[treasureIndex];
-        if (!treasure) {
-          alert('treasure error!');
+        console.log(treasure);
+        const treasureDropRef = this.treasureDropList.drops.find(drop => drop.itemId === treasure.id);
+        const itemDropped = (treasureDropRef.dropChance / 1000) > Math.random();
+        console.log(this.treasureDropList);
+        const goldMin = this.treasureDropList.gold_min;
+        const goldRange = this.treasureDropList.gold_max - goldMin;
+        const randomAward = Math.floor(Math.random() * goldRange) + goldMin;
+        const awardGold = (this.treasureDropList.gold_chance / 1000) > Math.random();
+
+        if (awardGold) {
+          adventurer.creditAccount(randomAward);
         }
-        // compose payload for Item constructor
-        const payload = items.composePayloadFromProto(treasure);
-        let itemId = items.createItem(payload);
-        const treasureItem = items.getItem(itemId);
-        adventurer.considerTreasure(treasureItem);
+        if (itemDropped) {
+          // compose payload for Item constructor
+          const payload = items.composePayloadFromProto(treasure);
+          let itemId = items.createItem(payload);
+          const treasureItem = items.getItem(itemId);
+          adventurer.considerTreasure(treasureItem);
+        }
+        
       } else if (trapProb > treasureProb && trapProb > encounterProb) {
         adventurer.encounterTrap(this.number);
       } else if (encounterProb > trapProb && encounterProb > treasureProb) {
