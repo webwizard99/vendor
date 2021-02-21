@@ -99,7 +99,10 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.equipItem = function(item) {
+    console.log('equip item');
+    console.log(item);
     this.equipment[item.type] = item;
+    console.log(this.equipment);
   }
 
   Adventurer.prototype.getCurrentItemCount = function(protoId) {
@@ -631,7 +634,6 @@ const adventurers = (function(){
         }
         // determine if adventurer will buy item
         let willBuy = totalFactor >= Math.random();
-        console.log(item);
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
           if (item.item.type === itemTypes.weapon) {
