@@ -662,7 +662,7 @@ const adventurers = (function(){
             playerStore.creditGold(totalPrice);
             playerStore.updateGold();
             console.log(item);
-            const baseItem = items.getItem(item.itemid);
+            const baseItem = items.getItem(item.itemId);
             storeInventory.removeItem(item.itemId);
             storeInventory.updateStoreInventory();
             thisAdventurer.inventory.push(baseItem);
