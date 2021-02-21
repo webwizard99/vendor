@@ -56,6 +56,13 @@ class Adventurer extends React.Component {
     adventurerClassColor += ` ${classColors[adventurerClass.name]}`
     adventurerClassIconColor += ` ${classColors[adventurerClass.name]}`
     const classIcon = adventurerClass.name.charAt(0);
+    const dungeonIndicator = (
+      <div className="dungeonIcon">
+        <p>D</p>
+        <p>U</p>
+        <p>N</p>
+      </div>
+    )
     return (
       <div className="adventurerDisplay primary"
         onClick={this.handleZoom}
@@ -102,7 +109,7 @@ class Adventurer extends React.Component {
           </div>
         </div>
         <div className="adventurerDungeonIndicator">
-          {adventurer.inDungeon ? <span className="dungeonIcon">&#9751;</span> : <span className="dungeonIcon"></span>}
+          {adventurer.inDungeon ? dungeonIndicator : <span className="dungeonIcon"></span>}
         </div>
       </div>
     )
