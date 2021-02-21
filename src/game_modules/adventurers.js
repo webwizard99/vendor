@@ -618,7 +618,7 @@ const adventurers = (function(){
         }
         decisionFactor += '_' + item.item.type;
         const desireWeight = thisAdventurer.townBehavior[decisionFactor];
-        let totalFactor = (desireWeight / 1000) - (item.markup / 1000);
+        let totalFactor = (desireWeight / 1000) - (item.markup / 1600);
         if (totalFactor < 0) {
           totalFactor = 0;
         }
