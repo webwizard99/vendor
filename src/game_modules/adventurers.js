@@ -631,6 +631,7 @@ const adventurers = (function(){
         }
         // determine if adventurer will buy item
         let willBuy = totalFactor >= Math.random();
+        console.log(item);
         if (thisAdventurer.equipment[item.item.type]) {
           const currentGear = thisAdventurer.equipment[item.item.type];
           if (item.item.type === itemTypes.weapon) {
