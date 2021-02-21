@@ -99,8 +99,6 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.equipItem = function(item) {
-    console.log('equip item');
-    console.log(item);
     this.equipment[item.type] = item;
     console.log(this.equipment);
   }
@@ -661,13 +659,11 @@ const adventurers = (function(){
             thisAdventurer.chargeAccount(totalPrice);
             playerStore.creditGold(totalPrice);
             playerStore.updateGold();
-            console.log(item);
             const baseItem = items.getItem(item.itemId);
             storeInventory.removeItem(item.itemId);
             storeInventory.updateStoreInventory();
             thisAdventurer.inventory.push(baseItem);
             if (baseItem.type !== itemTypes.potion) {
-              console.log('item not potion');
               if (thisAdventurer.equipment[baseItem.type]) {
                 thisAdventurer.unequipItem(baseItem.type);
               }

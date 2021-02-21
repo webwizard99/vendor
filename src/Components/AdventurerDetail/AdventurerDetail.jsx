@@ -26,7 +26,7 @@ class AdventurerDetail extends React.Component {
       let equippedIndicator = '';
       if (adventurer.equipment[item.type]) {
         if (adventurer.equipment[item.type].id === item.id) {
-          equippedIndicator += ' *';
+          equippedIndicator += ' (equipped)';
         }
       }
       return (
