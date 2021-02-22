@@ -3,18 +3,18 @@
 }
 
 .coin-outer {
-  height: 1rem;
-  width: 1rem;
+  height: .9rem;
+  width: .9rem;
   border-radius: .5rem;
-  border: 1px dashed darkgoldenrod;
+  border: 1px solid darkgoldenrod;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .coin-inner {
-  height: .6rem;
-  width: .6rem;
+  height: .5rem;
+  width: .5rem;
   border-radius: .3rem;
-  border: 2px solid darkgoldenrod;
+  border: 1px solid darkgoldenrod;
 }

@@ -23,10 +23,16 @@
   cursor: pointer;
 }
 
+.InventoryItemValue {
+  display: flex;
+  align-items: center;
+}
+
 .CoinSymbol {
   color: rgb(255, 215, 0);
   width: 1.2rem;
   font-weight: 800;
+  margin-right: .2rem;
 }
 
 .GoldDisplay {
@@ -40,6 +46,7 @@
   width: 6rem;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .FilterGroup {
