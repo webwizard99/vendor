@@ -20,22 +20,12 @@ class AdventurersPartial extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  componentDidMount() {
-    this.scrollCombatLog();
-  }
-
   getAdventurers(adventurers) {
     return adventurers.map(adventurer => {
       return <Adventurer adventurer={adventurer} />
     });
   }
-
-  scrollCombatLog() {
-    const cLog = document.querySelector('.adventurer-combat-log');
-    console.log(cLog);
-    cLog.scrollTop = cLog.scrollHeight;
-  }
-
+  
   handleBack() {
     this.props.setPartialAdventurers(null);
     const handled = breadcrumb.popBreadcrumb();
