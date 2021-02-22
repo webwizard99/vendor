@@ -1,6 +1,9 @@
 import React from 'react';
 import './StoreInventory.css';
 
+// component imports
+import Coin from '../Coin/Coin';
+
 import { connect } from 'react-redux';
 import { SET_STORE_INVENTORY,
   SET_STORE_UPDATE_STATUS,
@@ -240,7 +243,7 @@ class StoreInventory extends React.Component {
               {this.props.isPc ? this.getIncrementOneButtons(item.id) : ''}
               {this.props.isPc ? this.getIncrementAllButtons(item.prototypeId) : ''}
               <div className="ItemValueGroup">
-                <span className="InventoryItemValue"><span className="CoinSymbol">&#x2689; </span>{composedPrice}</span>
+                <span className="InventoryItemValue"><span className="CoinSymbol"><Coin /> </span>{composedPrice}</span>
               </div>
               
             </div>

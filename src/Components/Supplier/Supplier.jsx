@@ -2,6 +2,7 @@ import React from 'react';
 import './Supplier.css';
 
 import SupplierBuyButton from '../SupplierBuyButton/SupplierBuyButton';
+import Coin from '../Coin/Coin';
 
 // game module imports
 import gameItems from '../../game_modules/items';
@@ -11,8 +12,6 @@ import gameStoreInventory from '../../game_modules/storeInventory';
 
 // redux imports
 import { connect } from 'react-redux';
-import { SET_DETAIL_UPDATE } from '../../actions/types';
-
 
 class Supplier extends React.Component {
   constructor(props) {
@@ -115,7 +114,7 @@ class Supplier extends React.Component {
         <div className="SupplierInventoryItem itemBackground" key={item.id}>
           <span className="SupplierInventoryItemName">{item.name} ({item.count})</span>
           <div className="SupplierItemsValueGroup">  
-            <span className="CoinSymbol">&#x2689; </span>
+            <span className="CoinSymbol"><Coin /> </span>
             <span className="InventoryItemValue">{composedValue}</span>
           </div>
           <div className="BuyButtonContainer" onClick={() => this.handlePurchase({ ids: item.ids, price: composedValue })}>
@@ -127,10 +126,6 @@ class Supplier extends React.Component {
   }
 
   render() {
-    if (this.props.detailUpdate) {
-      this.props.setDetailUpdate(false);
-      return '';
-    }
     let supplierClass = "Supplier primary";
     if (this.props.isMobile) {
       supplierClass += " mobileSupplier";
@@ -140,7 +135,7 @@ class Supplier extends React.Component {
         <div className="SupplierName">
           {this.props.supplier.name}
           <div className="SupplierValueGroup">  
-            <span className="CoinSymbol">&#x2689; </span>
+            <span className="CoinSymbol"><Coin /> </span>
             <span className="InventoryItemValue">{this.props.supplier.gold}</span>
           </div>
         </div>
@@ -156,15 +151,8 @@ const mapStateToProps = state => {
   return {
     supplyReady: state.supplies.ready,
     storeGold: state.storeState.gold,
-    isMobile: state.app.isMobile,
-    detailUpdate: state.detail.update
+    isMobile: state.app.isMobile
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setDetailUpdate: (value) => dispatch({ type: SET_DETAIL_UPDATE, value: value })
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Supplier);
+export default connect(mapStateToProps)(Supplier);

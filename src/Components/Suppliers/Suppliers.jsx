@@ -44,6 +44,9 @@ class Suppliers extends React.Component {
   }
 
   getSuppliers() {
+    if (this.props.detailUpdate) {
+      return '';
+    }
     let supplierContainerClass = "suppliersContainer";
     let spacerClass = "spacer";
     if (!this.props.isPc) {
@@ -92,7 +95,8 @@ const mapStateToProps = state => {
     supplySpawned: state.supplies.spawned,
     isPc: state.app.isPc,
     isMobile: state.app.isMobile,
-    suppliersInitialized: state.suppliers.initialized
+    suppliersInitialized: state.suppliers.initialized,
+    detailUpdate: state.detail.update
   }
 }
 
