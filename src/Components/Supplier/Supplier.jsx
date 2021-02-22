@@ -11,6 +11,7 @@ import gameStoreInventory from '../../game_modules/storeInventory';
 
 // redux imports
 import { connect } from 'react-redux';
+import { SET_DETAIL_UPDATE } from '../../actions/types';
 
 
 class Supplier extends React.Component {
@@ -126,6 +127,10 @@ class Supplier extends React.Component {
   }
 
   render() {
+    if (this.props.detailUpdate) {
+      this.props.setDetailUpdate(false);
+      return '';
+    }
     let supplierClass = "Supplier primary";
     if (this.props.isMobile) {
       supplierClass += " mobileSupplier";
@@ -151,8 +156,15 @@ const mapStateToProps = state => {
   return {
     supplyReady: state.supplies.ready,
     storeGold: state.storeState.gold,
-    isMobile: state.app.isMobile
+    isMobile: state.app.isMobile,
+    detailUpdate: state.detail.update
   }
 }
 
-export default connect(mapStateToProps)(Supplier);
+const mapDispatchToProps = dispatch => {
+  return {
+    setDetailUpdate: (value) => dispatch({ type: SET_DETAIL_UPDATE, value: value })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Supplier);
