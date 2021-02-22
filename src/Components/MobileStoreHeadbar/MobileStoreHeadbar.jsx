@@ -1,6 +1,8 @@
 import React from 'react';
 import './MobileStoreHeadbar.css';
 
+import Coin from '../Coin/Coin';
+
 // redux imports
 import { connect } from 'react-redux';
 
@@ -10,7 +12,7 @@ class MobileStoreHeadbar extends React.Component {
       <div className="MobileStoreHeadbar">
         <h2 className="StoreName">{this.props.storeName}</h2>
         <div className="GoldDisplay">
-            <div className="StoreGold"><span className="CoinSymbol" role="img" aria-label="coin">&#x2689; </span>{this.props.gold}</div>
+            <div className="StoreGold"><span className="CoinSymbol" role="img" aria-label="coin"><Coin /> </span>{this.props.gold}</div>
           </div>
       </div>
     )
