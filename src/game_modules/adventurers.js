@@ -230,7 +230,6 @@ const adventurers = (function(){
     const percentLost = hpDifferential / this.maxHp;
     let turnsInfluence = 1;
     let turnsFactor;
-    const minTurnsWeight = 10;
     if (this.currentTotalDungeonTurns < 15) {
       turnsInfluence = -1;
       turnsFactor = (15 - (turnsInfluence * this.currentTotalDungeonTurns)) / 15; 
