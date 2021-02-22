@@ -17,7 +17,6 @@ class AdventurersPartial extends React.Component {
 
     this.getAdventurers = this.getAdventurers.bind(this);
     this.handleBack = this.handleBack.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   getAdventurers(adventurers) {
@@ -25,7 +24,7 @@ class AdventurersPartial extends React.Component {
       return <Adventurer adventurer={adventurer} />
     });
   }
-  
+
   handleBack() {
     this.props.setPartialAdventurers(null);
     const handled = breadcrumb.popBreadcrumb();
