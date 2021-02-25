@@ -5,7 +5,7 @@ const monsters = (function(){
 
   const Monster = function(payload) {
     const {
-      id: protoId,
+      protoId,
       name,
       boss,
       level,
@@ -34,6 +34,7 @@ const monsters = (function(){
     this.dropList = dropList;
     this.monsterBehavior = monsterBehavior;
     this.id = currentId;
+    currentId++;
   }
 
   return {
@@ -49,6 +50,24 @@ const monsters = (function(){
       } else {
         return false;
       }
+    },
+    composePayloadFromProto: function(protoMonster) {
+      const monsterPayload = {
+        protoId: protoMonster.id,
+        name: protoMonster.name,
+        boss: protoMonster.boss,
+        level: protoMonster.level,
+        hp: protoMonster.hp,
+        damage: protoMonster.damage,
+        defense: protoMonster.defense,
+        stealth: protoMonster.stealth,
+        initiative: protoMonster.initiative,
+        special: protoMonster.special,
+        heal: protoMonster.heal,
+        dropList: protoMonster.drop_list,
+        monsterBehavior: protoMonster.monster_behavior
+      }
+      return monsterPayload;
     }
   }
 }());

@@ -300,7 +300,6 @@ const adventurers = (function(){
       this.currentId = 0;
       dispatchUpdate();
     }
-    
   }
 
   TurnController.prototype.clearAdventurerTurns = function(payload) {

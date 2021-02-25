@@ -1,6 +1,7 @@
 // game imports
 import items from './items';
 import adventurersModule from './adventurers';
+import monsters from './monsters';
 
 // utility imports
 import fetcher from '../Utilities/fetcher';
@@ -166,10 +167,8 @@ const dungeon = (function(){
         const treasureIndex = Math.floor(Math.random() * this.treasures.length);
         const treasures = this.treasures;
         const treasure = treasures[treasureIndex];
-        console.log(treasure);
         const treasureDropRef = this.treasureDropList.drops.find(drop => drop.itemId === treasure.id);
         const itemDropped = (treasureDropRef.dropChance / 1000) > Math.random();
-        console.log(this.treasureDropList);
         const goldMin = this.treasureDropList.gold_min;
         const goldRange = this.treasureDropList.gold_max - goldMin;
         const randomAward = Math.floor(Math.random() * goldRange) + goldMin;
@@ -190,10 +189,45 @@ const dungeon = (function(){
         adventurer.encounterTrap(this.number);
       } else if (encounterProb > trapProb && encounterProb > treasureProb) {
         console.log('perform encounter');
+        const monsterIndex = Math.floor(Math.random() * this.monsters.length);
+        const monsterProto = this.monsters[monsterIndex];
+        const monsterPayload = monsters.composePayloadFromProto(monsterProto);
+        const newMonsterId = monsters.createMonster(monsterPayload);
+        const newMonster = monsters.getMonster(newMonsterId);
+        const newBattle = new Battle({ adventurer: adventurer, monster: newMonster });
+        battleController.addBattle(newBattle);
+        console.log('battle created.');
       }
       resolve();
     });
     
+  }
+
+  const BattleController = function() {
+    this.currentBattles = [];
+    this.currentBattleId = 0;
+  }
+
+  BattleController.prototype.addBattle = function(battle) {
+    battle.id = this.currentBattleId;
+    this.currentBattles.push(battle);
+    this.currentBattleId++;
+    return battle.id;
+  }
+
+  const Battle = function(payload) {
+    const {
+      adventurer,
+      monster,
+    } = payload;
+    this.adventurer = adventurer;
+    this.monster = monster;
+  }
+
+  let battleController;
+
+  const initializeBattleController = function() {
+    battleController = new BattleController();
   }
 
   const dispatchLevels = function() {
@@ -306,6 +340,7 @@ const dungeon = (function(){
 
   return {
     initializeLevels: async function() {
+      initializeBattleController();
       const genGetLevels = getLevels();
       genGetLevels.next().value
         .then(initLevels => {
