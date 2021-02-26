@@ -356,6 +356,7 @@ const adventurers = (function(){
   }
 
   Turn.prototype.runTurn = async function() {
+    console.log(`Adventurer: ${this.adventurer}, currentTurn: ${this.turnNumber}, nextTurn: ${this.nextTurn}`);
     const filterClasses = tagProcessor.getFilterClasses();
     new Promise((resolve, reject) => {
       const dungeonAdventurer = this.adventurer;
