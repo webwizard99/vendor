@@ -37,6 +37,11 @@ const monsters = (function(){
     currentId++;
   }
 
+  Monster.prototype.getInitiativeRoll = function() {
+    const initiativeFactor = this.initiative / 10;
+    return Math.random() * initiativeFactor;
+  }
+
   return {
     createMonster: function (payload) {
       const newMonster = new Monster(payload);

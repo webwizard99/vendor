@@ -157,7 +157,7 @@ const dungeon = (function(){
       const encounterProb = Math.random() * resultTile.encounter;
       const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
       const threshholdProb = Math.random() * 125;
-      console.log(`probs... treasure: ${treasureProb}, trap: ${trapProb}, encounter: ${encounterProb}, threshold: ${threshholdProb}`);
+      // console.log(`probs... treasure: ${treasureProb}, trap: ${trapProb}, encounter: ${encounterProb}, threshold: ${threshholdProb}`);
       if (threshholdProb > treasureProb && threshholdProb > encounterProb && threshholdProb > trapProb) {
         resolve();
         return;
@@ -283,12 +283,28 @@ const dungeon = (function(){
   }
 
   Round.prototype.startRound = function() {
-    console.log(`Round number: ${this.roundNumber}`);
-    if (this.roundNumber < 5) {
-      const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.battleId });
-      battleController.addBattleRound({ newRound, battleId: this.battleId });
-      newRound.startRound();
+    // console.log(`Round number: ${this.roundNumber}`);
+    const adventurerInitiative = this.adventurer.getInitiativeRoll();
+    const monsterInitiative = this.monster.getInitiativeRoll();
+    console.log(`adv: ${adventurerInitiative}, mon: ${monsterInitiative}`);
+    if (adventurerInitiative > monsterInitiative) {
+      console.log('adventurer goes first');
+    } else {
+      console.log('monster goes first');
     }
+    if (this.roundNumber < 5) {
+      this.addRound();
+    }
+    this.clearSelf();
+  }
+
+  Round.prototype.addRound = function() {
+    const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.battleId });
+    battleController.addBattleRound({ newRound, battleId: this.battleId });
+    newRound.startRound();
+  }
+
+  Round.prototype.clearSelf = function() {
     battleController.clearBattleRound({ roundNumber: this.roundNumber, battleId: this.battleId });
   }
 

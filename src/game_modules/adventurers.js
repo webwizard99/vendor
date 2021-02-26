@@ -279,6 +279,15 @@ const adventurers = (function(){
     this.addCombatLog(trapJSX);
   }
 
+  Adventurer.prototype.getInitiativeRoll = function() {
+    const initiativeFactor = ((this.adventurerClass.tactics * .7) / 10) + ((this.adventurerClass.agility * .3) / 10);
+    return Math.random() * initiativeFactor;
+  }
+
+  // Adventurer.prototype.checkFlee = function() {
+
+  // }
+
   const TurnController = function() {
     this.currentTurns = [];
     this.currentId = 0;
@@ -356,7 +365,7 @@ const adventurers = (function(){
   }
 
   Turn.prototype.runTurn = async function() {
-    console.log(`Adventurer: ${this.adventurer.name}, currentTurn: ${this.turnNumber}, nextTurn: ${this.nextTurn}`);
+    // console.log(`Adventurer: ${this.adventurer.name}, currentTurn: ${this.turnNumber}, nextTurn: ${this.nextTurn}`);
     const filterClasses = tagProcessor.getFilterClasses();
     new Promise((resolve, reject) => {
       const dungeonAdventurer = this.adventurer;
