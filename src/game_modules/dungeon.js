@@ -184,9 +184,12 @@ const dungeon = (function(){
           const treasureItem = items.getItem(itemId);
           adventurer.considerTreasure(treasureItem);
         }
-        
+        resolve();
+        return;
       } else if (trapProb > treasureProb && trapProb > encounterProb) {
         adventurer.encounterTrap(this.number);
+        resolve();
+        return;
       } else if (encounterProb > trapProb && encounterProb > treasureProb) {
         console.log('perform encounter');
         const monsterIndex = Math.floor(Math.random() * this.monsters.length);
@@ -196,9 +199,9 @@ const dungeon = (function(){
         const newMonster = monsters.getMonster(newMonsterId);
         const newBattle = new Battle({ adventurer: adventurer, monster: newMonster });
         battleController.addBattle(newBattle);
+        newBattle.startBattle(resolve);
         console.log('battle created.');
       }
-      resolve();
     });
     
   }
@@ -215,6 +218,24 @@ const dungeon = (function(){
     return battle.id;
   }
 
+  BattleController.prototype.clearBattleRound = function(payload) {
+    const {
+      roundNumber,
+      battleId
+    } =  payload;
+    const foundBattle = currentBattles.find(battle => battle.id === battleId);
+    foundBattle.clearRound(roundNumber);
+  }
+
+  BattleController.prototype.addBattleRound = function(payload) {
+    const {
+      battleId,
+      newRound
+    } = payload;
+    const foundBattle = currentBattles.find(battle => battle.id === battleId);
+    foundBattle.addRound(newRound);
+  }
+
   const Battle = function(payload) {
     const {
       adventurer,
@@ -222,6 +243,52 @@ const dungeon = (function(){
     } = payload;
     this.adventurer = adventurer;
     this.monster = monster;
+    this.rounds = [];
+    this.currentRoundNumber = 0;
+  }
+
+  Battle.prototype.startBattle = function(turnResolve) {
+    this.resolution = turnResolve;
+    const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.id});
+    this.addRound(newRound);
+    newRound.startRound();
+  }
+
+  Battle.prototype.addRound = function(round) {
+    round.roundNumber = this.currentRoundNumber;
+    this.currentRoundNumber++;
+    this.rounds.push(round);
+  }
+
+  Battle.prototype.clearRound = function(roundNumber) {
+    let deletedRound = this.rounds.find(foundRound => foundRound.roundNumber === roundNumber);
+    this.rounds = this.rounds.filter(clearRound => clearRound.roundNumber !== roundNumber);
+    if (deletedRound) {
+      deletedRound = null;
+    }
+    if (this.rounds.length === 0) {
+      this.resolution();
+    }
+  }
+
+  const Round = function(payload) {
+    const {
+      adventurer,
+      monster,
+      battleId
+    } = payload;
+    this.battleId = battleId;
+    this.adventurer = adventurer;
+    this.monster = monster;
+  }
+
+  Round.prototype.startRound = function() {
+    console.log(`Round number: ${this.roundNumber}`);
+    if (this.roundNumber < 5) {
+      const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.battleId });
+      battleController.addBattleRound({ newRound, battleId: this.battleId });
+    }
+    battleController.clearBattleRound({ roundNumber: this.roundNumber, battleId: this.battleId });
   }
 
   let battleController;
