@@ -223,7 +223,7 @@ const dungeon = (function(){
       roundNumber,
       battleId
     } =  payload;
-    const foundBattle = currentBattles.find(battle => battle.id === battleId);
+    const foundBattle = this.currentBattles.find(battle => battle.id === battleId);
     foundBattle.clearRound(roundNumber);
   }
 
@@ -232,7 +232,7 @@ const dungeon = (function(){
       battleId,
       newRound
     } = payload;
-    const foundBattle = currentBattles.find(battle => battle.id === battleId);
+    const foundBattle = this.currentBattles.find(battle => battle.id === battleId);
     foundBattle.addRound(newRound);
   }
 
