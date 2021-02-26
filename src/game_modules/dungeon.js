@@ -287,6 +287,7 @@ const dungeon = (function(){
     if (this.roundNumber < 5) {
       const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.battleId });
       battleController.addBattleRound({ newRound, battleId: this.battleId });
+      newRound.startRound();
     }
     battleController.clearBattleRound({ roundNumber: this.roundNumber, battleId: this.battleId });
   }
