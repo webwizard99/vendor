@@ -283,19 +283,36 @@ const dungeon = (function(){
   }
 
   Round.prototype.startRound = function() {
+    const actions = adventurersModule.getActions();
     // console.log(`Round number: ${this.roundNumber}`);
     const adventurerInitiative = this.adventurer.getInitiativeRoll();
     const monsterInitiative = this.monster.getInitiativeRoll();
     console.log(`adv: ${adventurerInitiative}, mon: ${monsterInitiative}`);
+    if (this.adventurer.action.currentAction === actions.setTrap) {
+      const trapDamage = this.monster.takeTrapDamage(this.adventurer.level);
+      this.adventurer.logTrap({ trapDamage, monsterName: this.monster.name });
+      this.adventurer.unsetTrap();
+    }
     if (adventurerInitiative > monsterInitiative) {
-      console.log('adventurer goes first');
+      this.adventurerTurn();
+      this.monsterTurn()
     } else {
-      console.log('monster goes first');
+      this.monsterTurn();
+      this.adventurerTurn();
     }
     if (this.roundNumber < 5) {
       this.addRound();
     }
     this.clearSelf();
+  }
+
+  Round.prototype.adventurerTurn = function() {
+    console.log('adventurer turn');
+  }
+
+  Round.prototype.monsterTurn = function() {
+    const monsterMove = this.monster.getBattleDecision();
+    console.log(monsterMove);
   }
 
   Round.prototype.addRound = function() {

@@ -262,7 +262,7 @@ const adventurers = (function(){
     if (avoidTrapChance > Math.random() * 10) {
       const trapJSX = (
         <div className="combatLogEntry">
-          <span className={filterClasses.name}>{this.name} </span> a trap.
+          <span className={filterClasses.name}>{this.name} </span> avoided a trap.
         </div>);
       this.addCombatLog(trapJSX);
       return false;
@@ -277,6 +277,26 @@ const adventurers = (function(){
         <span className={filterClasses.name}>{this.name}</span> took <span className={filterClasses.value}>{computedDamage}</span> damage from a trap!
       </div>);
     this.addCombatLog(trapJSX);
+  }
+
+  Adventurer.prototype.logTrap = function(payload) {
+    const {
+      trapDamage,
+      monsterName
+    } = payload;
+    const filterClasses = tagProcessor.getFilterClasses();
+    const trapJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span>'s' trap hit <span className={filterClasses.name}>{monsterName}</span> for <span className={filterClasses.value}>{trapDamage}</span> damage.
+      </div>);
+    this.addCombatLog(trapJSX);
+  }
+
+  Adventurer.prototype.unsetTrap = function() {
+    this.action = {
+      currentAction: null,
+      turns: 0
+    };
   }
 
   Adventurer.prototype.getInitiativeRoll = function() {
