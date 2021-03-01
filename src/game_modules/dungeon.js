@@ -335,7 +335,7 @@ const dungeon = (function(){
         }
       }
       const damagePayload = {
-        monsterName = this.monster.name,
+        monsterName: this.monster.name,
         damage: calculatedDamage
       }
       this.adventurer.takeBattleDamage(damagePayload);
