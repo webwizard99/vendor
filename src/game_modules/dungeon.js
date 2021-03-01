@@ -311,8 +311,35 @@ const dungeon = (function(){
   }
 
   Round.prototype.monsterTurn = function() {
+    const monsterDecisions = monsters.getMonsterDecisions();
     const monsterMove = this.monster.getBattleDecision();
     console.log(monsterMove);
+    if (monsterMove === monsterDecisions.defend) {
+      this.monster.defending = true;
+    } else {
+      this.monster.defending = false;
+    }
+    if (monsterMove === monsterDecisions.attack) {
+      const damageFloor = Math.floor(this.monster.damage / 2);
+      const randomizeDamage = this.monster.damage = damageFloor;
+      const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
+      let calculatedDamage = damageFloor + Math.floor(Math.random() * randomizeDamage) - adventurerShield;
+      if (this.adventurer.defending) {
+        calculatedDamage = Math.floor(calculatedDamage / 2);
+      }
+      if (calculatedDamage < 1) {
+        if (Math.random() > .5) {
+          calculatedDamage = 1;
+        } else {
+          calculatedDamage = 0;
+        }
+      }
+      const damagePayload = {
+        monsterName = this.monster.name,
+        damage: calculatedDamage
+      }
+      this.adventurer.takeBattleDamage(damagePayload);
+    }
   }
 
   Round.prototype.addRound = function() {

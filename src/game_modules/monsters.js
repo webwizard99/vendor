@@ -43,6 +43,7 @@ const monsters = (function(){
     this.monsterBehavior = monsterBehavior;
     this.id = currentId;
     this.specialCooldown = specialCooldownTurns;
+    this.defending = false;
     currentId++;
   }
 
@@ -198,6 +199,9 @@ const monsters = (function(){
         monsterBehavior: protoMonster.monster_behavior
       }
       return monsterPayload;
+    },
+    getMonsterDecisions: function() {
+      return monsterDecisions;
     }
   }
 }());

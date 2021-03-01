@@ -83,6 +83,7 @@ const adventurers = (function(){
         turns: 0
       }
       this.id = currentId;
+      this.defending = false;
       currentId++;
   }
 
@@ -287,7 +288,7 @@ const adventurers = (function(){
     const filterClasses = tagProcessor.getFilterClasses();
     const trapJSX = (
       <div className="combatLogEntry">
-        <span className={filterClasses.name}>{this.name}</span>'s' trap hit <span className={filterClasses.name}>{monsterName}</span> for <span className={filterClasses.value}>{trapDamage}</span> damage.
+        <span className={filterClasses.name}>{this.name}</span>'s' trap hit <span className={filterClasses.monsterName}>{monsterName}</span> for <span className={filterClasses.value}>{trapDamage}</span> damage.
       </div>);
     this.addCombatLog(trapJSX);
   }
@@ -302,6 +303,33 @@ const adventurers = (function(){
   Adventurer.prototype.getInitiativeRoll = function() {
     const initiativeFactor = ((this.adventurerClass.tactics * .7) / 10) + ((this.adventurerClass.agility * .3) / 10);
     return Math.random() * initiativeFactor;
+  }
+
+  Adventurer.prototype.takeBattleDamage = function(payload) {
+    const {
+      monsterName,
+      damage
+    } = payload;
+    let computedDamage = damage;
+    if (computedDamage > this.hp) {
+      computedDamage = this.hp
+    }
+    this.hp -= computedDamage;
+
+    let battleJSX;
+    if (computedDamage > 0) {
+      battleJSX = (
+        <div className="combatLogEntry">
+          <span className={filterClasses.monsterName}>{monsterName}</span> hit <span className={filterClasses.name}>{this.name}</span> for <span className={filterClasses.value}>{computedDamage}</span> damage. 
+        </div>);
+    } else {
+      battleJSX = (
+        <div className="combatLogEntry">
+          <span className={filterClasses.monsterName}>{monsterName}</span> attempted to hit <span className={filterClasses.name}>{this.name}</span>, but did no damage. 
+        </div>)
+    }
+    
+    this.addCombatLog(battleJSX);
   }
 
   // Adventurer.prototype.checkFlee = function() {

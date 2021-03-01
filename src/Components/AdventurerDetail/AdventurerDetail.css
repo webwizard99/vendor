@@ -75,6 +75,10 @@
   color: rgb(233, 245, 124);
 }
 
+.monsterNameTag {
+  color: rgb(255, 80, 80)
+}
+
 .status {
   color: rgb(110, 245, 193)
 }
