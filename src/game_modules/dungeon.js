@@ -321,7 +321,7 @@ const dungeon = (function(){
     }
     if (monsterMove === monsterDecisions.attack) {
       const damageFloor = Math.floor(this.monster.damage / 2);
-      const randomizeDamage = this.monster.damage = damageFloor;
+      const randomizeDamage = this.monster.damage - damageFloor;
       const randomDamage = Math.floor(Math.random() * randomizeDamage);
       const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
       console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
