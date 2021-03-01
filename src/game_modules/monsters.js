@@ -113,9 +113,9 @@ const monsters = (function(){
     let remainingOptions = [];
     // populate hash table with weights for relevant behaviors
     const weights = {
-      useHeal: concernedMonster.dungeonBehavior.heal,
-      useSpecial: concernedMonster.dungeonBehavior.special_move,
-      defend: concernedMonster.dungeonBehavior.defend
+      useHeal: concernedMonster.monsterBehavior.heal,
+      useSpecial: concernedMonster.monsterBehavior.special_move,
+      defend: concernedMonster.monsterBehavior.defend
     }
     // add decisions marked as valid to array for use in
     // creating elimination tournament
