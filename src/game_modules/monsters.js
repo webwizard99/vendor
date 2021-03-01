@@ -108,7 +108,7 @@ const monsters = (function(){
     this.defend = false;
   }
 
-  MonsterDecision.weighDecisionTournament = function() {
+  MonsterDecision.prototype.weighDecisionTournament = function() {
     const concernedMonster = monsters.find(monster => monster.id === this.monsterId);
     let remainingOptions = [];
     // populate hash table with weights for relevant behaviors
