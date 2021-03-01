@@ -306,6 +306,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.takeBattleDamage = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
     const {
       monsterName,
       damage
