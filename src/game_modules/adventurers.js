@@ -280,6 +280,23 @@ const adventurers = (function(){
     this.addCombatLog(trapJSX);
   }
 
+  Adventurer.prototype.logEncounterStart = function(monsterName) {
+    const filterClasses = tagProcessor.getFilterClasses();
+    let vowelAdj = '';
+    switch(monsterName.charAt(0).toLowerCase()) {
+      case 'a', 'e', 'i', 'o', 'u':
+        vowelAdj = 'n';
+        break;
+      default:
+        vowelAdj = '';
+    }
+    const encounterJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> encountered a{vowelAdj} <span className={filterClasses.monsterName}>{monsterName}</span>!
+      </div>);
+    this.addCombatLog(encounterJSX);
+  }
+
   Adventurer.prototype.logTrap = function(payload) {
     const {
       trapDamage,

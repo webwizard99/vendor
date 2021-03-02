@@ -197,6 +197,7 @@ const dungeon = (function(){
         const monsterPayload = monsters.composePayloadFromProto(monsterProto);
         const newMonsterId = monsters.createMonster(monsterPayload);
         const newMonster = monsters.getMonster(newMonsterId);
+        adventurer.logEncounterStart(newMonster.name);
         const newBattle = new Battle({ adventurer: adventurer, monster: newMonster });
         battleController.addBattle(newBattle);
         newBattle.startBattle(resolve);
@@ -324,8 +325,12 @@ const dungeon = (function(){
       const randomizeDamage = this.monster.damage - damageFloor;
       const randomDamage = Math.floor(Math.random() * randomizeDamage);
       const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
+      let adventurerArmor;
+      if (this.adventurer.equipment.armor) {
+        adventurerArmor = this.adventurer.equipment.armor.armor;
+      }
       console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
-      let calculatedDamage = damageFloor + randomDamage - adventurerShield;
+      let calculatedDamage = damageFloor + randomDamage - adventurerShield - adventurerArmor;
       if (this.adventurer.defending) {
         calculatedDamage = Math.floor(calculatedDamage / 2);
       }
