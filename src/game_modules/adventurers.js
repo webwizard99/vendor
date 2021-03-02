@@ -328,7 +328,6 @@ const adventurers = (function(){
       monsterName,
       damage
     } = payload;
-    console.log(typeof damage);
     let computedDamage = Number.parseInt(damage);
     if (computedDamage > this.hp) {
       computedDamage = this.hp

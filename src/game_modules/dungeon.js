@@ -325,7 +325,7 @@ const dungeon = (function(){
       const randomizeDamage = this.monster.damage - damageFloor;
       const randomDamage = Math.floor(Math.random() * randomizeDamage);
       const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
-      let adventurerArmor;
+      let adventurerArmor = 0;
       if (this.adventurer.equipment.armor) {
         adventurerArmor = this.adventurer.equipment.armor.armor;
       }
