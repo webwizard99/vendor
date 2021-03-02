@@ -81,6 +81,7 @@ const monsters = (function(){
   }
 
   Monster.prototype.checkDefend = function() {
+    if (this.defending) return false;
     let decisionFactor = (this.monsterBehavior.defend / 1000);
     const useDefend = decisionFactor > Math.random();
     return useDefend;

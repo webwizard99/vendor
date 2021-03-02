@@ -42,6 +42,13 @@ const adventurers = (function(){
     advanceNextLevel: 'advanceNextLevel'
   }
 
+  const battleDecisions = {
+    usePotion: 'usePotion',
+    defend: 'defend',
+    flee: 'flee',
+    checkWeakness: 'checkWeakness'
+  }
+
   const setTrapBehavior = {
     thief: 600,
     soldier: 200,
@@ -185,7 +192,7 @@ const adventurers = (function(){
     this.hp = this.hp + hpToHeal;
     const healJSX = (
       <div className="combatLogEntry">
-        <span className={filterClasses.name}>{this.name} </span>  used {potionToUse.name}. <span className={filterClasses.name}>{this.name} </span> healed <span className={filterClasses.value}>{hpToHeal}</span>hp.
+        <span className={filterClasses.name}>{this.name} </span>  used {potionToUse.name}. <span className={filterClasses.name}>{this.name} </span> healed <span className={filterClasses.value}>{hpToHeal}</span> hp.
       </div>);
     this.addCombatLog(healJSX);
     this.inventory = this.inventory.filter(item => item.id !== potionToUse.id);
@@ -351,6 +358,14 @@ const adventurers = (function(){
     }
     
     this.addCombatLog(battleJSX);
+  }
+
+  Adventurer.prototype.getBattleDecision = function(monster) {
+    let thisDecision = new BattleDecision(this.id);
+    thisDecision.needHealing = this.checkHealthChoice();
+    thisDecision.hasPotion = this.checkHasPotion();
+    thisDecision.usePotion = this.checkPotionUse();
+    return thisDecision;
   }
 
   // Adventurer.prototype.checkFlee = function() {
@@ -611,6 +626,18 @@ const adventurers = (function(){
     return remainingOptions[0];
   }
 
+  const BattleDecision = function(adventurerId) {
+    this.adventurerId = adventurerId;
+    this.needHealing = false;
+    this.hasPotion = false;
+    this.usePotion = false;
+    this.defend = false;
+    this.flee = false;
+    this.checkWeakness = false;
+
+
+  }
+
   const dispatchAdventurers = function(newAdventurers) {
     const payload = {
       type: SET_ADVENTURERS,
@@ -868,6 +895,9 @@ const adventurers = (function(){
     },
     getActions: function() {
       return actions;
+    },
+    getBattleDecisions: function() {
+      return battleDecisions;
     }
   }
 }());

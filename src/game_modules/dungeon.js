@@ -309,6 +309,9 @@ const dungeon = (function(){
 
   Round.prototype.adventurerTurn = function() {
     console.log('adventurer turn');
+    //const battleDecisions = adventurers.getBattleDecisions();
+    const adventurerMove = this.adventurer.getBattleDecision(this.monster);
+    console.log(adventurerMove);
   }
 
   Round.prototype.monsterTurn = function() {
