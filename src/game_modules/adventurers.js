@@ -284,7 +284,7 @@ const adventurers = (function(){
     const filterClasses = tagProcessor.getFilterClasses();
     let vowelAdj = '';
     switch(monsterName.charAt(0).toLowerCase()) {
-      case 'a', 'e', 'i', 'o', 'u':
+      case 'a': case 'e': case 'i': case 'o': case 'u':
         vowelAdj = 'n';
         break;
       default:
