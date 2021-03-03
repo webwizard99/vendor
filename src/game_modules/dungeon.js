@@ -285,6 +285,7 @@ const dungeon = (function(){
     this.battleId = battleId;
     this.adventurer = adventurer;
     this.monster = monster;
+    this.weaknessChecked = weaknessChecked;
   }
 
   Round.prototype.startRound = function() {
