@@ -160,6 +160,32 @@ const adventurers = (function(){
     return usePotion;
   }
 
+  Adventurer.prototype.checkDefend = function() {
+    let decisionFactor = (this.dungeonBehavior.defend / 1000) - (this.dungeonBehavior.attack / 2000);
+    const defend = decisionFactor > Math.random();
+    return defend;
+  }
+
+  Adventurer.prototype.checkFlee = function(monster) {
+    let levelDiff = monster.level - this.level;
+    if (levelDiff < 0) {
+      levelDiff = 1;
+    } else {
+      levelDiff = levelDiff + 1;
+    }
+    const hpDifferential = this.maxHp - this.hp;
+    const percentLost = hpDifferential / this.maxHp;
+    const mosterHpDiff = monster.maxHp - monster.hp;
+    const monsterPercentLost = mosterHpDiff / monster.maxHp;
+    let decisionFactor = (percentLost - (monsterPercentLost * .8)) / levelDiff;
+    const flee = decisionFactor > Math.random();
+    return flee;
+  }
+
+  Adventurer.prototype.checkWeakness = function() {
+
+  }
+
   Adventurer.prototype.usePotion = function() {
     const filterClasses = tagProcessor.getFilterClasses();
     let heldPotions = this.inventory.filter(item => item.type === itemTypes.potion);
@@ -365,6 +391,10 @@ const adventurers = (function(){
     thisDecision.needHealing = this.checkHealthChoice();
     thisDecision.hasPotion = this.checkHasPotion();
     thisDecision.usePotion = this.checkPotionUse();
+    thisDecision.defend = this.checkDefend();
+    thisDecision.flee = this.checkFlee(monster);
+    thisDecision.checkWeakness = this.checkWeakness();
+
     return thisDecision;
   }
 

@@ -250,7 +250,10 @@ const dungeon = (function(){
 
   Battle.prototype.startBattle = function(turnResolve) {
     this.resolution = turnResolve;
-    const newRound = new Round({ adventurer: this.adventurer, monster: this.monster, battleId: this.id});
+    const newRound = new Round({ adventurer: this.adventurer,
+      monster: this.monster,
+      battleId: this.id,
+      weaknessChecked: false });
     this.addRound(newRound);
     newRound.startRound();
   }
@@ -276,7 +279,8 @@ const dungeon = (function(){
     const {
       adventurer,
       monster,
-      battleId
+      battleId,
+      weaknessChecked
     } = payload;
     this.battleId = battleId;
     this.adventurer = adventurer;
