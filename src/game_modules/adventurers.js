@@ -677,7 +677,8 @@ const adventurers = (function(){
       usePotion: concernedAdventurer.dungeonBehavior.use_potion,
       defend: concernedAdventurer.dungeonBehavior.defend,
       flee: concernedAdventurer.dungeonBehavior.flee_encounter,
-      checkWeakness: concernedAdventurer.dungeonBehavior.check_monster_weakness
+      checkWeakness: concernedAdventurer.dungeonBehavior.check_monster_weakness,
+      attack: concernedAdventurer.dungeonBehavior.attack
     }
     // add decisions marked as valid to array for use in
     // creating elimination tournament
