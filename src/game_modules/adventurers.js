@@ -46,7 +46,8 @@ const adventurers = (function(){
     usePotion: 'usePotion',
     defend: 'defend',
     flee: 'flee',
-    checkWeakness: 'checkWeakness'
+    checkWeakness: 'checkWeakness',
+    attack: 'attack'
   }
 
   const setTrapBehavior = {
@@ -183,7 +184,9 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkWeakness = function() {
-
+    let decisionFactor = (this.dungeonBehavior.check_monster_weakness / 1000);
+    const checkWeak = decisionFactor > Math.random();
+    return checkWeak;
   }
 
   Adventurer.prototype.usePotion = function() {
@@ -394,8 +397,8 @@ const adventurers = (function(){
     thisDecision.defend = this.checkDefend();
     thisDecision.flee = this.checkFlee(monster);
     thisDecision.checkWeakness = this.checkWeakness();
-
-    return thisDecision;
+    const resultDecision = thisDecision.weighDecisionTournament();
+    return resultDecision;
   }
 
   // Adventurer.prototype.checkFlee = function() {
@@ -664,8 +667,69 @@ const adventurers = (function(){
     this.defend = false;
     this.flee = false;
     this.checkWeakness = false;
+  }
 
-
+  BattleDecision.prototype.weighDecisionTournament = function() {
+    const concernedAdventurer = adventurers.find(adventurer => adventurer.id === this.adventurerId);
+    let remainingOptions = [];
+    // populate hash table with weights for relevant behaviors
+    const weights = {
+      usePotion: concernedAdventurer.dungeonBehavior.use_potion,
+      defend: concernedAdventurer.dungeonBehavior.defend,
+      flee: concernedAdventurer.dungeonBehavior.flee_encounter,
+      checkWeakness: concernedAdventurer.dungeonBehavior.check_monster_weakness
+    }
+    // add decisions marked as valid to array for use in
+    // creating elimination tournament
+    if (this.usePotion && this.hasPotion) {
+      remainingOptions.push(battleDecisions.usePotion);
+    }
+    if (this.defend) {
+      remainingOptions.push(battleDecisions.defend);
+    }
+    if (this.flee) {
+      remainingOptions.push(battleDecisions.flee);
+    }
+    if (this.checkWeakness) {
+      remainingOptions.push(battleDecisions.checkWeakness);
+    }
+    remainingOptions.push(battleDecisions.attack);
+    if (remainingOptions.length === 1) {
+      return remainingOptions[0];
+    }
+    // determine number of tournament rounds for iteration
+    const tournamentRounds = Math.ceil(Math.log2(remainingOptions.length));
+    for (let round = 0; round < tournamentRounds; round++) {
+      // create pairings from outside ends inward
+      const optionsLength = remainingOptions.length;
+      let pairings = [];
+      const pairCount = Math.floor(optionsLength / 2);
+      for (let offest = 0; offest < pairCount; offest++) {
+        const pair = [remainingOptions[offest], remainingOptions[optionsLength - (offest + 1)]];
+        pairings.push(pair);
+      }
+      let eliminated = [];
+      // iterate over pairings and produce weighted outcomes to
+      // eliminate one decision from each pairing
+      pairings.forEach(pair => {
+        const result1 = Math.random() * weights[pair[0]];
+        const result2 = Math.random() * weights[pair[1]];
+        const randomChoice = Math.random();
+        
+        if (result1 > result2 || (result1 === result2 && randomChoice < .5)) {
+          eliminated.push(pair[1])
+        } else {
+          eliminated.push(pair[0]);
+        }
+      });
+      // remove eliminated options from array containing tournament
+      // entrants
+      for (let elIndex = 0; elIndex < eliminated.length; elIndex++) {
+        const eliminate = eliminated[elIndex];
+        remainingOptions = remainingOptions.filter(option => option !== eliminate);
+      }
+    }
+    return remainingOptions[0];
   }
 
   const dispatchAdventurers = function(newAdventurers) {
