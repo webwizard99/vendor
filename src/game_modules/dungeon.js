@@ -312,7 +312,7 @@ const dungeon = (function(){
 
   Round.prototype.adventurerTurn = function() {
     console.log('adventurer turn');
-    const battleDecisions = adventurers.getBattleDecisions();
+    const battleDecisions = adventurersModule.getBattleDecisions();
     const adventurerMove = this.adventurer.getBattleDecision(this.monster);
     console.log(adventurerMove);
     if (adventurerMove === battleDecisions.defend) {
