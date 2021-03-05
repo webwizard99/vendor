@@ -304,9 +304,9 @@ const dungeon = (function(){
       this.monsterTurn();
       this.adventurerTurn();
     }
-    if (this.roundNumber < 5) {
+    if (this.adventurer.hp > 0 && this.monster.hp > 0) {
       this.addRound();
-    }
+    } 
     this.clearSelf();
   }
 
