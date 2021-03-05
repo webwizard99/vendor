@@ -392,6 +392,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.logHitMonster = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
     const {
       monsterName,
       damage

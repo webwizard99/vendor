@@ -362,6 +362,7 @@ const dungeon = (function(){
         damage: calculatedDamage
       }
       this.adventurer.logHitMonster(damagePayload);
+      console.log(this.monster.hp);
     }
   }
 
