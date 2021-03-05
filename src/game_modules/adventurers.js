@@ -92,6 +92,7 @@ const adventurers = (function(){
       }
       this.id = currentId;
       this.defending = false;
+      this.weaknessChecked = false;
       currentId++;
   }
 
@@ -184,6 +185,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkWeakness = function() {
+    if (this.weaknessChecked) return false;
     let decisionFactor = (this.dungeonBehavior.check_monster_weakness / 1000);
     const checkWeak = decisionFactor > Math.random();
     return checkWeak;
@@ -383,6 +385,28 @@ const adventurers = (function(){
       battleJSX = (
         <div className="combatLogEntry">
           <span className={filterClasses.monsterName}>{monsterName}</span> attempted to hit <span className={filterClasses.name}>{this.name}</span>, but did no damage. 
+        </div>)
+    }
+    
+    this.addCombatLog(battleJSX);
+  }
+
+  Adventurer.prototype.logHitMonster = function(payload) {
+    const {
+      monsterName,
+      damage
+    } = payload;
+
+    let battleJSX;
+    if (damage > 0) {
+      battleJSX = (
+        <div className="combatLogEntry">
+          <span className={filterClasses.name}>{this.name}</span> hit <span className={filterClasses.monsterName}>{monsterName}</span> for <span className={filterClasses.value}>{damage}</span> damage. 
+        </div>);
+    } else {
+      battleJSX = (
+        <div className="combatLogEntry">
+          <span className={filterClasses.name}>{this.name}</span> attempted to hit <span className={filterClasses.monsterName}>{monsterName}</span>, but did no damage.
         </div>)
     }
     

@@ -102,6 +102,10 @@ const monsters = (function(){
     return decided;
   }
 
+  Monster.prototype.takeBattleDamage = function(calculatedDamage) {
+    this.hp -= calculatedDamage;
+  }
+
   const MonsterDecision = function(monsterId) {
     this.monsterId = monsterId;
     this.needHealing = false;
