@@ -178,7 +178,7 @@ const adventurers = (function(){
     const percentLost = hpDifferential / this.maxHp;
     const mosterHpDiff = monster.maxHp - monster.hp;
     const monsterPercentLost = mosterHpDiff / monster.maxHp;
-    let decisionFactor = (percentLost - (monsterPercentLost * .8)) / levelDiff;
+    let decisionFactor = (((percentLost - (monsterPercentLost * .8)) / levelDiff) * 0.3) + (this.dungeonBehavior.flee_encounter / 4000);
     const flee = decisionFactor > Math.random();
     return flee;
   }
