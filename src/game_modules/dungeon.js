@@ -362,6 +362,7 @@ const dungeon = (function(){
       } else {
         damageFactor = this.adventurer.strength;
       }
+      console.log(damageFactor);
       let weaponDamage = 0;
       if (this.adventurer.equipment.weapon) {
         weaponDamage = this.adventurer.equipment.weapon.damage;
@@ -375,8 +376,10 @@ const dungeon = (function(){
         calculatedDamage = Math.floor(calculatedDamage / 2);
       }
       if (this.adventurer.weaknessChecked) {
-        calculatedDamage *= Math.floor(1.2 * Math.log2(1.4, this.adventurer.cunning));
+        calculatedDamage *= Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning));
       }
+      console.log(calculatedDamage);
+      calculatedDamage = Number.parseInt(calculatedDamage);
       if (calculatedDamage < 1) {
         if (Math.random() > .5) {
           calculatedDamage = 1;

@@ -57,7 +57,7 @@ const monsters = (function(){
     if (trapDamage > this.hp) {
       trapDamage = this.hp;
     }
-    this.hhp -= trapDamage;
+    this.hp -= trapDamage;
     return trapDamage;
   }
 
