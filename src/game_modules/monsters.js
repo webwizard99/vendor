@@ -87,6 +87,12 @@ const monsters = (function(){
     return useDefend;
   }
 
+  Monster.prototype.checkBlockFlee = function() {
+    let decisionFactor = (this.monsterBehavior.flee / 1000);
+    const blockFlee = decisionFactor > Math.random();
+    return blockFlee;
+  }
+
   Monster.prototype.getBattleDecision = function() {
     let thisDecision = new MonsterDecision(this.id);
     if (this.monsterBehavior.heal) {

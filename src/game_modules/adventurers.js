@@ -229,7 +229,6 @@ const adventurers = (function(){
     this.inventory = this.inventory.filter(item => item.id !== potionToUse.id);
     items.destroyItem(potionToUse.id);
     potionToUse = null;
-    console.log('use potion');
   }
 
   Adventurer.prototype.checkTrapDecision = function() {
@@ -355,6 +354,10 @@ const adventurers = (function(){
     };
   }
 
+  Adventurer.prototype.setWeaknessChecked = function(value) {
+    this.weaknessChecked = value;
+  }
+
   Adventurer.prototype.getInitiativeRoll = function() {
     const initiativeFactor = ((this.adventurerClass.tactics * .7) / 10) + ((this.adventurerClass.agility * .3) / 10);
     return Math.random() * initiativeFactor;
@@ -389,6 +392,42 @@ const adventurers = (function(){
     }
     
     this.addCombatLog(battleJSX);
+  }
+
+  Adventurer.prototype.logDefend = function() {
+    const filterClasses = tagProcessor.getFilterClasses();
+    let defendJSX;
+    defendJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> assumed a defensive posture. 
+      </div>);
+    this.addCombatLog(defendJSX);
+  }
+
+  Adventurer.prototype.logFlee = function() {
+    const filterClasses = tagProcessor.getFilterClasses();
+    let fleeJSX;
+    fleeJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> fled from battle! 
+      </div>);
+    this.addCombatLog(fleeJSX);
+  }
+
+  Adventurer.prototype.logWeaknessChecked = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
+    const {
+      monsterName
+    } = payload;
+
+    let weaknessJSX;
+    weaknessJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> checked <span className={filterClasses.monsterName}>{monsterName}</span> for weaknesses. 
+      </div>);
+  
+    
+    this.addCombatLog(weaknessJSX);
   }
 
   Adventurer.prototype.logHitMonster = function(payload) {

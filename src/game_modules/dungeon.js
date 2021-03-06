@@ -197,8 +197,9 @@ const dungeon = (function(){
         const monsterPayload = monsters.composePayloadFromProto(monsterProto);
         const newMonsterId = monsters.createMonster(monsterPayload);
         const newMonster = monsters.getMonster(newMonsterId);
+        adventurer.setWeaknessChecked(false);
         adventurer.logEncounterStart(newMonster.name);
-        const newBattle = new Battle({ adventurer: adventurer, monster: newMonster });
+        const newBattle = new Battle({ adventurer: adventurer, monster: newMonster, level: this.number });
         battleController.addBattle(newBattle);
         newBattle.startBattle(resolve);
         console.log('battle created.');
@@ -241,12 +242,13 @@ const dungeon = (function(){
     const {
       adventurer,
       monster,
+      level
     } = payload;
     this.adventurer = adventurer;
     this.monster = monster;
     this.rounds = [];
     this.currentRoundNumber = 0;
-    this.adventurer.weaknessChecked = false;
+    this.level = level;
   }
 
   Battle.prototype.startBattle = function(turnResolve) {
@@ -266,6 +268,10 @@ const dungeon = (function(){
 
   Battle.prototype.clearRound = function(roundNumber) {
     let deletedRound = this.rounds.find(foundRound => foundRound.roundNumber === roundNumber);
+    if (deletedRound.fleed) {
+      const thisLevel = levels.find(level => level.number === this.level);
+      thisLevel.lurkingMonsters.push(this.monster);
+    }
     this.rounds = this.rounds.filter(clearRound => clearRound.roundNumber !== roundNumber);
     if (deletedRound) {
       deletedRound = null;
@@ -284,6 +290,7 @@ const dungeon = (function(){
     this.battleId = battleId;
     this.adventurer = adventurer;
     this.monster = monster;
+    this.fleed = false;
   }
 
   Round.prototype.startRound = function() {
@@ -304,7 +311,7 @@ const dungeon = (function(){
       this.monsterTurn();
       this.adventurerTurn();
     }
-    if (this.adventurer.hp > 0 && this.monster.hp > 0) {
+    if (this.adventurer.hp > 0 && this.monster.hp > 0 || this.fleed) {
       this.addRound();
     } 
     this.clearSelf();
@@ -317,11 +324,28 @@ const dungeon = (function(){
     console.log(adventurerMove);
     if (adventurerMove === battleDecisions.defend) {
       this.adventurer.defending = true;
+      this.adventurer.logDefend();
     } else {
       this.adventurer.defending = false;
     }
     if (adventurerMove === battleDecisions.usePotion) {
       this.adventurer.usePotion();
+    }
+    if (adventurerMove === battleDecisions.flee) {
+      const doBlock = this.monster.checkBlockFlee();
+      if (doBlock) {
+        const levelDiff = this.monster.level - this.adventurer.level;
+        let fleeFactor = .05 + (levelDiff / 10);
+        const doesFlee = fleeFactor > Math.random();
+        if (doesFlee) {
+          this.fleed = true;
+          this.adventurer.logFlee();
+        }
+      }
+    }
+    if (adventurerMove === battleDecisions.checkWeakness) {
+      this.adventurer.setWeaknessChecked(true);
+      this.adventurer.logWeaknessChecked({ monsterName: this.monster.name });
     }
     if (adventurerMove === battleDecisions.attack) {
       let damageFactor = 0;
@@ -345,6 +369,9 @@ const dungeon = (function(){
       let calculatedDamage = damageFloor + randomDamage + weaponDamage - monsterShield;
       if (this.monster.defending) {
         calculatedDamage = Math.floor(calculatedDamage / 2);
+      }
+      if (this.adventurer.weaknessChecked) {
+        calculatedDamage *= Math.floor(1.2 * Math.log2(1.4, this.adventurer.cunning));
       }
       if (calculatedDamage < 1) {
         if (Math.random() > .5) {
