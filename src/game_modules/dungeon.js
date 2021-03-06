@@ -315,7 +315,7 @@ const dungeon = (function(){
         this.adventurerTurn();
       }
     }
-    if ((this.adventurer.hp > 0 && this.monster.hp > 0) || this.fleed) {
+    if ((this.adventurer.hp > 0 && this.monster.hp > 0) || !this.fleed) {
       this.addRound();
     } 
     this.clearSelf();
