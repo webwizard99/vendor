@@ -306,10 +306,14 @@ const dungeon = (function(){
     }
     if (adventurerInitiative > monsterInitiative) {
       this.adventurerTurn();
-      this.monsterTurn()
+      if (this.monster.hp > 0) {
+        this.monsterTurn();
+      }
     } else {
       this.monsterTurn();
-      this.adventurerTurn();
+      if (this.adventurer.hp > 0) {
+        this.adventurerTurn();
+      }
     }
     if ((this.adventurer.hp > 0 && this.monster.hp > 0) || this.fleed) {
       this.addRound();
@@ -389,6 +393,9 @@ const dungeon = (function(){
         damage: calculatedDamage
       }
       this.adventurer.logHitMonster(damagePayload);
+      if (this.monster.hp <= 0) {
+        this.adventurer.logVictory({ monsterName: this.monster.name });
+      }
       console.log(this.monster.hp);
     }
   }

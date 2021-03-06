@@ -430,6 +430,22 @@ const adventurers = (function(){
     this.addCombatLog(weaknessJSX);
   }
 
+  Adventurer.prototype.logVictory = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
+    const {
+      monsterName
+    } = payload;
+
+    let victoryJSX;
+    victoryJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> defeated <span className={filterClasses.monsterName}>{monsterName}</span>! 
+      </div>);
+  
+    
+    this.addCombatLog(victoryJSX);
+  }
+
   Adventurer.prototype.logHitMonster = function(payload) {
     const filterClasses = tagProcessor.getFilterClasses();
     const {
