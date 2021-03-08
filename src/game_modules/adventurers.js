@@ -615,6 +615,7 @@ const adventurers = (function(){
           dungeonAdventurer.addCombatLog(actionJSX);
       }
       if (resultDecision === decisions.returnToTown){
+        // something to look at
         dungeon.releaseAdventurer(dungeonAdventurer.id);
         dungeonAdventurer.inDungeon = false;
         const clearPackage = { adventurerId: this.adventurerId, day: this.day };
