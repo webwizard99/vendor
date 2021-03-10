@@ -379,7 +379,9 @@ const dungeon = (function(){
         calculatedDamage = Math.floor(calculatedDamage / 2);
       }
       if (this.adventurer.weaknessChecked) {
-        calculatedDamage *= Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning));
+        const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
+        console.log(`ampDamage: ${ampDamage}`);
+        calculatedDamage = ampDamage;
       }
       console.log(calculatedDamage);
       calculatedDamage = Number.parseInt(calculatedDamage);
