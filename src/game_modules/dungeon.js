@@ -344,7 +344,10 @@ const dungeon = (function(){
         if (doesFlee) {
           this.fleed = true;
           this.adventurer.logFlee();
-        }
+        } 
+      } else {
+        this.fleed = true;
+        this.adventurer.logFlee();
       }
     }
     if (adventurerMove === battleDecisions.checkWeakness) {
