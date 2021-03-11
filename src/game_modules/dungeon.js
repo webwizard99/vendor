@@ -305,12 +305,12 @@ const dungeon = (function(){
     }
     if (adventurerInitiative > monsterInitiative) {
       this.adventurerTurn();
-      if (this.monster.hp > 0) {
+      if (this.monster.hp > 0 && !this.fleed) {
         this.monsterTurn();
       }
     } else {
       this.monsterTurn();
-      if (this.adventurer.hp > 0 && !this.fleed) {
+      if (this.adventurer.hp > 0) {
         this.adventurerTurn();
       }
     }
