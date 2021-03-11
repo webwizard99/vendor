@@ -324,7 +324,6 @@ const dungeon = (function(){
     console.log('adventurer turn');
     const battleDecisions = adventurersModule.getBattleDecisions();
     const adventurerMove = this.adventurer.getBattleDecision(this.monster);
-    console.log(adventurerMove);
     if (adventurerMove === battleDecisions.defend) {
       this.adventurer.defending = true;
       this.adventurer.logDefend();
@@ -364,7 +363,6 @@ const dungeon = (function(){
       } else {
         damageFactor = this.adventurer.strength;
       }
-      console.log(damageFactor);
       let weaponDamage = 0;
       if (this.adventurer.equipment.weapon) {
         weaponDamage = this.adventurer.equipment.weapon.damage;
@@ -381,7 +379,6 @@ const dungeon = (function(){
         const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
         calculatedDamage = ampDamage;
       }
-      console.log(calculatedDamage);
       calculatedDamage = Number.parseInt(calculatedDamage);
       if (calculatedDamage < 1) {
         if (Math.random() > .5) {
