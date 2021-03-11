@@ -298,7 +298,6 @@ const dungeon = (function(){
     // console.log(`Round number: ${this.roundNumber}`);
     const adventurerInitiative = this.adventurer.getInitiativeRoll();
     const monsterInitiative = this.monster.getInitiativeRoll();
-    console.log(`adv: ${adventurerInitiative}, mon: ${monsterInitiative}`);
     if (this.adventurer.action.currentAction === actions.setTrap) {
       const trapDamage = this.monster.takeTrapDamage(this.adventurer.level);
       this.adventurer.logTrap({ trapDamage, monsterName: this.monster.name });
@@ -311,7 +310,7 @@ const dungeon = (function(){
       }
     } else {
       this.monsterTurn();
-      if (this.adventurer.hp > 0) {
+      if (this.adventurer.hp > 0 && !this.fleed) {
         this.adventurerTurn();
       }
     }
@@ -380,7 +379,6 @@ const dungeon = (function(){
       }
       if (this.adventurer.weaknessChecked) {
         const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
-        console.log(`ampDamage: ${ampDamage}`);
         calculatedDamage = ampDamage;
       }
       console.log(calculatedDamage);
@@ -404,14 +402,12 @@ const dungeon = (function(){
       if (this.monster.hp <= 0) {
         this.adventurer.logVictory({ monsterName: this.monster.name });
       }
-      console.log(this.monster.hp);
     }
   }
 
   Round.prototype.monsterTurn = function() {
     const monsterDecisions = monsters.getMonsterDecisions();
     const monsterMove = this.monster.getBattleDecision();
-    console.log(monsterMove);
     if (monsterMove === monsterDecisions.defend) {
       this.monster.defending = true;
     } else {
@@ -426,7 +422,7 @@ const dungeon = (function(){
       if (this.adventurer.equipment.armor) {
         adventurerArmor = this.adventurer.equipment.armor.armor;
       }
-      console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
+      // console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
       let calculatedDamage = damageFloor + randomDamage - adventurerShield - adventurerArmor;
       if (this.adventurer.defending) {
         calculatedDamage = Math.floor(calculatedDamage / 2);

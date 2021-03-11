@@ -104,7 +104,6 @@ const monsters = (function(){
     }
     thisDecision.defend = this.checkDefend();
     const decided = thisDecision.weighDecisionTournament();
-    console.log(decided);
     return decided;
   }
 

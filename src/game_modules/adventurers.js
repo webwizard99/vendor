@@ -151,7 +151,6 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkHasPotion = function() {
-    console.log(this.inventory);
     if (this.inventory.length < 1) return false;
     return this.inventory.find(item => item.type === itemTypes.potion);
   }
@@ -597,7 +596,6 @@ const adventurers = (function(){
       if (!resultDecision) {
         resultDecision = thisDecision.weighDecisionTournament();
       }
-      console.log(resultDecision);
       if (resultDecision === decisions.usePotion) {
         dungeonAdventurer.usePotion();
       }
