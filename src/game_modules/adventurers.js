@@ -273,6 +273,7 @@ const adventurers = (function(){
     const inventoryPercentEmpty = maxInventory - (inventoryCount / maxInventory);
     const fillInventoryDesire = ((this.dungeonBehavior.fill_inventory) * inventoryPercentEmpty) / 1000;
     const decisionFactor = (this.dungeonBehavior.return_to_town / 1000) - (fillInventoryDesire * 5) + (percentLost * 2) + turnsFactor;
+    console.log(`${this.name} returnToTown decisionFactor: ${decisionFactor}`);
     const returnDecision = decisionFactor > Math.random();
     return returnDecision; 
   }
