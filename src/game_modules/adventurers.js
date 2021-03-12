@@ -50,12 +50,6 @@ const adventurers = (function(){
     attack: 'attack'
   }
 
-  const setTrapBehavior = {
-    thief: 600,
-    soldier: 200,
-    bard: 450
-  }
-
   const Adventurer = function(payload) {
     const { name, 
       strength, 
@@ -246,7 +240,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkSetTrapDecision = function() {
-    const setTrap = setTrapBehavior[this.adventurerClass.name];
+    const setTrap = this.dungeonBehavior.set_trap;
     const decisionFactor = (setTrap / 1000) + (this.dungeonBehavior.prefer_weaker_monster / 4000);
     const doSetTrap = decisionFactor > Math.random();
     return doSetTrap;
@@ -683,7 +677,7 @@ const adventurers = (function(){
       usePotion: concernedAdventurer.dungeonBehavior.use_potion,
       checkForTraps: concernedAdventurer.dungeonBehavior.check_for_traps,
       checkForTreasure: concernedAdventurer.dungeonBehavior.search_for_treasure,
-      setTrap: setTrapBehavior[concernedAdventurer.adventurerClass.name],
+      setTrap: concernedAdventurer.dungeonBehavior.set_trap,
       advance: concernedAdventurer.dungeonBehavior.advance_tile,
       returnToTown: concernedAdventurer.dungeonBehavior.return_to_town
     }
