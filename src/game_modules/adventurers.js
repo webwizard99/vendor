@@ -997,6 +997,8 @@ const adventurers = (function(){
   const dungeonTurns = function() {
     const dungeonAdventurers = adventurers.filter(adventurer => adventurer.inDungeon === true);
     new Promise((resolve, reject) => {
+      const currentDay = days.getDay();
+      console.log(currentDay);
       dungeonAdventurers.forEach((dungeonAdventurer, dunAdN) => {
         let totalTurns = dungeonAdventurer.speed;
         for (let turnNumber = 1; turnNumber <= totalTurns; turnNumber++) {
@@ -1008,7 +1010,7 @@ const adventurers = (function(){
           }
           const turnPayload = {
             adventurer: dungeonAdventurer,
-            day: days.getDay(),
+            day: currentDay,
             turnNumber: turnNumber,
             nextTurn: nextTurn
           }
