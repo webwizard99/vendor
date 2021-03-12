@@ -407,7 +407,7 @@ const dungeon = (function(){
         this.adventurer.gainExperience(this.monster.experience);
         console.log('monster treasure event');
         console.log(this.monster.dropList.drops);
-        const treasureIndex = Math.floor(Math.random() * this.monster.dropList.drops.length);
+        // const treasureIndex = Math.floor(Math.random() * this.monster.dropList.drops.length);
         let treasureLevelReference = battleController.getBattleLevelLoot(this.battleId);
         let treasureMonsterRef = this.monster.dropList.drops;
         console.log(`levelRef: ${treasureLevelReference}`);
