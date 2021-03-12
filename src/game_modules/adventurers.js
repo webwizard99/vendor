@@ -137,6 +137,7 @@ const adventurers = (function(){
   }
 
   Adventurer.prototype.checkHealthChoice = function() {
+    if (this.hp === this.maxHp) return false;
     const hpDifferential = this.maxHp - this.hp;
     const percentLost = hpDifferential / this.maxHp;
     let decisionFactor = percentLost + (this.dungeonBehavior.conserve_health / 1000);
