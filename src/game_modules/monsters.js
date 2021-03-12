@@ -24,6 +24,7 @@ const monsters = (function(){
       initiative,
       special,
       heal,
+      experience,
       dropList,
       monsterBehavior
     } = payload;
@@ -39,6 +40,7 @@ const monsters = (function(){
     this.initiative = initiative;
     this.special = special;
     this.heal = heal;
+    this.experience = experience;
     this.dropList = dropList;
     this.monsterBehavior = monsterBehavior;
     this.id = currentId;
@@ -205,6 +207,7 @@ const monsters = (function(){
         initiative: protoMonster.initiative,
         special: protoMonster.special,
         heal: protoMonster.heal,
+        experience: protoMonster.experience,
         dropList: protoMonster.drop_list,
         monsterBehavior: protoMonster.monster_behavior
       }

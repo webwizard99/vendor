@@ -199,7 +199,7 @@ const dungeon = (function(){
         const newMonster = monsters.getMonster(newMonsterId);
         adventurer.setWeaknessChecked(false);
         adventurer.logEncounterStart(newMonster.name);
-        const newBattle = new Battle({ adventurer: adventurer, monster: newMonster, level: this.number });
+        const newBattle = new Battle({ adventurer: adventurer, monster: newMonster, level: this.number, levelLoot: this.monstersLoot });
         battleController.addBattle(newBattle);
         newBattle.startBattle(resolve);
         console.log('battle created.');
@@ -238,17 +238,24 @@ const dungeon = (function(){
     foundBattle.addRound(newRound);
   }
 
+  BattleController.prototype.getBattleLevelLoot = function(battleId) {
+    const foundBattle = this.currentBattles.find(battle => battle.id === battleId);
+    return foundBattle.levelLoot;
+  }
+
   const Battle = function(payload) {
     const {
       adventurer,
       monster,
-      level
+      level,
+      levelLoot
     } = payload;
     this.adventurer = adventurer;
     this.monster = monster;
     this.rounds = [];
     this.currentRoundNumber = 0;
     this.level = level;
+    this.levelLoot = levelLoot;
   }
 
   Battle.prototype.startBattle = function(turnResolve) {
@@ -397,6 +404,36 @@ const dungeon = (function(){
       }
       this.adventurer.logHitMonster(damagePayload);
       if (this.monster.hp <= 0) {
+        this.adventurer.gainExperience(this.monster.experience);
+        console.log('monster treasure event');
+        console.log(this.monster.dropList.drops);
+        const treasureIndex = Math.floor(Math.random() * this.monster.dropList.drops.length);
+        let treasureLevelReference = battleController.getBattleLevelLoot(this.battleId);
+        let treasureMonsterRef = this.monster.dropList.drops;
+        console.log(`levelRef: ${treasureLevelReference}`);
+        console.log(`treasureMonsterRef: ${treasureMonsterRef}`);
+        // let treasures = treasureMonsterRef.map(monsterRef => {
+        //   const treasureRef = treasureLevelReference.find(item => item.)
+        // })
+        // const treasure = treasures[treasureIndex];
+        // const treasureDropRef = this.treasureDropList.drops.find(drop => drop.itemId === treasure.id);
+        // const itemDropped = (treasureDropRef.dropChance / 1000) > Math.random();
+        // const goldMin = this.treasureDropList.gold_min;
+        // const goldRange = this.treasureDropList.gold_max - goldMin;
+        // const randomAward = Math.floor(Math.random() * goldRange) + goldMin;
+        // const awardGold = (this.treasureDropList.gold_chance / 1000) > Math.random();
+
+        // if (awardGold) {
+        //   adventurer.creditAccount(randomAward);
+        // }
+        // if (itemDropped) {
+        //   // compose payload for Item constructor
+        //   const payload = items.composePayloadFromProto(treasure);
+        //   let itemId = items.createItem(payload);
+        //   const treasureItem = items.getItem(itemId);
+        //   adventurer.considerTreasure(treasureItem);
+        // }
+
         this.adventurer.logVictory({ monsterName: this.monster.name });
       }
     }
