@@ -270,7 +270,7 @@ const adventurers = (function(){
       turnsFactor = (turnsInfluence * this.currentTotalDungeonTurns) / 400;
     }
     const inventoryCount = this.inventory.length;
-    const inventoryPercentEmpty = maxInventory - (inventoryCount / maxInventory);
+    const inventoryPercentEmpty = (maxInventory - inventoryCount) / maxInventory;
     const fillInventoryDesire = ((this.dungeonBehavior.fill_inventory / 1000) * inventoryPercentEmpty);
     const decisionFactor = (this.dungeonBehavior.return_to_town / 1000) - (fillInventoryDesire * 5) + (percentLost * 2) + turnsFactor;
     console.log(`${this.name} returnToTown decisionFactor: ${decisionFactor}, fillInventory: ${fillInventoryDesire}, turnsFactor: ${turnsFactor}`);
