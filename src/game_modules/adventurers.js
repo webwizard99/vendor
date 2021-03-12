@@ -667,11 +667,11 @@ const adventurers = (function(){
     if (this.needHealing && this.hasPotion && this.usePotion && !this.advance) {
       return decisions.usePotion;
     }
-    if (!this.usePotion && this.advance && !this.checkForTraps && !this.checkTreasure) {
-      return decisions.advance;
-    }
     if (this.returnToTown && !this.usePotion && !this.hasPotion && !this.advance) {
       return decisions.returnToTown;
+    }
+    if (!this.usePotion && this.advance && !this.checkForTraps && !this.checkTreasure) {
+      return decisions.advance;
     }
     return false;
   }
