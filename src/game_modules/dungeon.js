@@ -321,6 +321,7 @@ const dungeon = (function(){
         this.adventurerTurn();
       }
     }
+    console.log(this.monster.hp);
     if (this.adventurer.hp > 0 && this.monster.hp > 0 && !this.fleed) {
       this.addRound();
     } 
@@ -342,7 +343,8 @@ const dungeon = (function(){
         const monsterDropItemId = monsterRef.itemid;
         const treasureRef = treasureLevelReference.find(item => item.itemId === monsterDropItemId);
         return treasureRef;
-      })
+      });
+      console.log(treasures);
       const treasure = treasures[treasureIndex];
       console.log(treasure);
       const treasureDropRef = treasureMonsterRef[treasureIndex];
