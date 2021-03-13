@@ -426,14 +426,14 @@ const dungeon = (function(){
         const awardGold = (this.monster.dropList.gold_chance / 1000) > Math.random();
 
         if (awardGold) {
-          adventurer.creditAccount(randomAward);
+          this.adventurer.creditAccount(randomAward);
         }
         if (itemDropped) {
           // compose payload for Item constructor
           const payload = items.composePayloadFromProto(treasure);
           let itemId = items.createItem(payload);
           const treasureItem = items.getItem(itemId);
-          adventurer.considerTreasure(treasureItem);
+          this.adventurer.considerTreasure(treasureItem);
         }
 
         this.adventurer.logVictory({ monsterName: this.monster.name });
