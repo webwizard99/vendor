@@ -341,7 +341,7 @@ const dungeon = (function(){
       console.log(treasureMonsterRef);
       let treasures = treasureMonsterRef.map(monsterRef => {
         console.log(monsterRef);
-        const monsterDropItemId = monsterRef.itemid;
+        const monsterDropItemId = monsterRef.itemId;
         console.log(monsterDropItemId);
         const treasureRef = treasureLevelReference.find(item => item.itemId === monsterDropItemId);
         return treasureRef;
