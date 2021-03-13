@@ -411,7 +411,7 @@ const dungeon = (function(){
         let treasureLevelReference = battleController.getBattleLevelLoot(this.battleId);
         let treasureMonsterRef = this.monster.dropList.drops;
         console.log(treasureLevelReference);
-        console.log(treasureMonsterRef});
+        console.log(treasureMonsterRef);
         // let treasures = treasureMonsterRef.map(monsterRef => {
         //   const treasureRef = treasureLevelReference.find(item => item.)
         // })
