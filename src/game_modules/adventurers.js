@@ -410,6 +410,20 @@ const adventurers = (function(){
     this.addCombatLog(fleeJSX);
   }
 
+  Adventurer.prototype.logFleeFail = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
+    const {
+      monsterName
+    } = payload;
+    
+    let fleeFailJSX;
+    fleeFailJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> attempted to flee from <span className={filterClasses.monsterName}>{monsterName}</span> but failed! 
+      </div>)
+    this.addCombatLog(fleeFailJSX);
+  }
+
   Adventurer.prototype.logBattleLoss = function(payload) {
     const filterClasses = tagProcessor.getFilterClasses();
     const {
