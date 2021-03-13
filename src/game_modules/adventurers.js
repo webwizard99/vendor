@@ -410,6 +410,20 @@ const adventurers = (function(){
     this.addCombatLog(fleeJSX);
   }
 
+  Adventurer.prototype.logBattleLoss = function(payload) {
+    const filterClasses = tagProcessor.getFilterClasses();
+    const {
+      monsterName
+    } = payload;
+    
+    let lossJSX;
+    lossJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.monsterName}>{monsterName}</span> defeated <span className={filterClasses.name}>{this.name}</span> and is now roaming loose in the dungeon! 
+      </div>)
+    this.addCombatLog(lossJSX);
+  }
+
   Adventurer.prototype.logReturnToTown = function() {
     const filterClasses = tagProcessor.getFilterClasses();
     let returnJSX;
@@ -479,6 +493,15 @@ const adventurers = (function(){
     this.experience += amount;
   }
 
+  Adventurer.prototype.returnToTown = function() {
+    // something to look at
+    dungeon.releaseAdventurer(this.id);
+    this.inDungeon = false;
+    const clearPackage = { adventurerId: this.id, day: days.getDay() };
+    turnController.clearAdventurerTurns(clearPackage);
+    this.hp = this.maxHp;
+    this.logReturnToTown();
+  }
 
   Adventurer.prototype.getBattleDecision = function(monster) {
     let thisDecision = new BattleDecision(this.id);

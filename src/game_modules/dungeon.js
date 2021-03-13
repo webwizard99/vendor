@@ -324,6 +324,11 @@ const dungeon = (function(){
     if (this.adventurer.hp > 0 && this.monster.hp > 0 && !this.fleed) {
       this.addRound();
     } 
+    if (this.adventurer.hp <= 0) {
+      this.adventurer.logBattleLoss({ monsterName: this.monster.name });
+      this.adventurer.returnToTown();
+      this.fleed = true;
+    }
     this.clearSelf();
   }
 
