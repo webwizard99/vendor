@@ -607,6 +607,9 @@ const adventurers = (function(){
       if (!resultDecision) {
         resultDecision = thisDecision.weighDecisionTournament();
       }
+      if (dungeonAdventurer.hp === 0) {
+        resultDecision = decisions.returnToTown;
+      }
       if (resultDecision === decisions.usePotion) {
         dungeonAdventurer.usePotion();
       }
