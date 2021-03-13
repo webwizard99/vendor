@@ -520,7 +520,7 @@ const adventurers = (function(){
       adventurerId,
       day
     } = payload;
-    let deletedTurns = this.currentTurns.find(foundTurn => foundTurn.adventurerId === adventurerId  && this.foundTurn.day === day);
+    let deletedTurns = this.currentTurns.filter(foundTurn => foundTurn.adventurerId === adventurerId  && foundTurn.day === day);
     this.currentTurns = this.currentTurns.filter(clearTurn => clearTurn.adventurerId !== adventurerId && clearTurn.day !== day);
     deletedTurns.forEach(turn => {
       turn = null
