@@ -417,7 +417,7 @@ const dungeon = (function(){
         })
         const treasure = treasures[treasureIndex];
         console.log(treasure);
-        const treasureDropRef = this.monster.dropList.drops.find(drop => drop.itemId === treasure.itemId);
+        const treasureDropRef = treasureMonsterRef[treasureIndex];
         const itemDropped = (treasureDropRef.dropChance / 1000) > Math.random();
         const goldMin = this.monster.dropList.gold_min;
         const goldRange = this.monster.dropList.gold_max - goldMin;
