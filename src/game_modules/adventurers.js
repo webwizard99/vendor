@@ -410,6 +410,16 @@ const adventurers = (function(){
     this.addCombatLog(fleeJSX);
   }
 
+  Adventurer.prototype.logReturnToTown = function() {
+    const filterClasses = tagProcessor.getFilterClasses();
+    let returnJSX;
+    returnJSX = (
+      <div className="combatLogEntry">
+        <span className={filterClasses.name}>{this.name}</span> returned to town. 
+      </div>);
+    this.addCombatLog(returnJSX);
+  }
+
   Adventurer.prototype.logWeaknessChecked = function(payload) {
     const filterClasses = tagProcessor.getFilterClasses();
     const {
@@ -626,6 +636,8 @@ const adventurers = (function(){
         dungeonAdventurer.inDungeon = false;
         const clearPackage = { adventurerId: this.adventurerId, day: this.day };
         turnController.clearAdventurerTurns(clearPackage);
+        dungeonAdventurer.hp = dungeonAdventurer.maxHp;
+        dungeonAdventurer.logReturnToTown();
         resolve();
       }
       new Promise((resolveTurn, rejectTurn) => {
