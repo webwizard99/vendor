@@ -308,7 +308,7 @@ const dungeon = (function(){
   }
 
   Round.prototype.startRound = function() {
-    this.runTurns.then(() => {
+    this.runTurns().then(() => {
       console.log(this.monster.hp);
       if (this.adventurer.hp > 0 && this.monster.hp > 0 && !this.fleed) {
         this.addRound();
