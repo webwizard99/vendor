@@ -308,31 +308,46 @@ const dungeon = (function(){
   }
 
   Round.prototype.startRound = function() {
-    const actions = adventurersModule.getActions();
-    // console.log(`Round number: ${this.roundNumber}`);
-    const adventurerInitiative = this.adventurer.getInitiativeRoll();
-    const monsterInitiative = this.monster.getInitiativeRoll();
-    if (this.adventurer.action.currentAction === actions.setTrap) {
-      const trapDamage = this.monster.takeTrapDamage(this.adventurer.level);
-      this.adventurer.logTrap({ trapDamage, monsterName: this.monster.name });
-      this.adventurer.unsetTrap();
-    }
-    if (adventurerInitiative > monsterInitiative) {
-      this.adventurerTurn();
-      if (this.monster.hp > 0 && !this.fleed) {
-        this.monsterTurn();
+    this.runTurns.then(() => {
+      console.log(this.monster.hp);
+      if (this.adventurer.hp > 0 && this.monster.hp > 0 && !this.fleed) {
+        this.addRound();
+      } 
+      this.clearSelf();
+    });
+  }
+
+  Round.prototype.runTurns = async function() {
+    return new Promise((resolve, reject) => {
+      const actions = adventurersModule.getActions();
+      // console.log(`Round number: ${this.roundNumber}`);
+      const adventurerInitiative = this.adventurer.getInitiativeRoll();
+      const monsterInitiative = this.monster.getInitiativeRoll();
+      
+      if (this.adventurer.action.currentAction === actions.setTrap) {
+        const trapDamage = this.monster.takeTrapDamage(this.adventurer.level);
+        this.adventurer.logTrap({ trapDamage, monsterName: this.monster.name });
+        this.adventurer.unsetTrap();
       }
-    } else {
-      this.monsterTurn();
-      if (this.adventurer.hp > 0) {
+      if (adventurerInitiative > monsterInitiative) {
         this.adventurerTurn();
+        if (this.monster.hp > 0 && !this.fleed) {
+          this.monsterTurn();
+          resolve();
+        } else {
+          resolve();
+        }
+      } else {
+        this.monsterTurn();
+        if (this.adventurer.hp > 0) {
+          this.adventurerTurn();
+          resolve();
+        } else{
+          resolve();
+        }
       }
-    }
-    console.log(this.monster.hp);
-    if (this.adventurer.hp > 0 && this.monster.hp > 0 && !this.fleed) {
-      this.addRound();
-    } 
-    this.clearSelf();
+    })
+    
   }
 
   Round.prototype.adventurerVictory = function() {
