@@ -256,6 +256,7 @@ const dungeon = (function(){
     this.currentRoundNumber = 0;
     this.level = level;
     this.levelLoot = levelLoot;
+    this.ended = false;
   }
 
   Battle.prototype.startBattle = function(turnResolve) {
@@ -279,11 +280,13 @@ const dungeon = (function(){
       const thisLevel = levels.find(level => level.number === this.level);
       thisLevel.lurkingMonsters.push(this.monster);
     }
-    if (deletedRound.adventurer.hp <= 0) {
+    if (deletedRound.adventurer.hp <= 0 && !this.ended) {
       deletedRound.adventurerLoss();
+      this.ended = true;
     }
-    if (deletedRound.monster.hp <= 0) {
+    if (deletedRound.monster.hp <= 0 && !this.ended) {
       deletedRound.adventurerVictory();
+      this.ended = true;
     }
     
     this.rounds = this.rounds.filter(clearRound => clearRound.roundNumber !== roundNumber);
