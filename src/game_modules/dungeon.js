@@ -330,24 +330,28 @@ const dungeon = (function(){
         this.adventurer.unsetTrap();
       }
       if (adventurerInitiative > monsterInitiative) {
-        this.adventurerTurn();
-        if (this.monster.hp > 0 && !this.fleed) {
-          this.monsterTurn();
-          resolve();
-        } else {
-          resolve();
-        }
+        this.adventurerTurn().then(() => {
+          if (this.monster.hp > 0 && !this.fleed) {
+            this.monsterTurn().then(() => {
+              resolve();
+            });
+          } else {
+            resolve();
+          }
+        });
+        
       } else {
-        this.monsterTurn();
-        if (this.adventurer.hp > 0) {
-          this.adventurerTurn();
-          resolve();
-        } else{
-          resolve();
-        }
+        this.monsterTurn().then(() => {
+          if (this.adventurer.hp > 0) {
+            this.adventurerTurn().then(() => {
+              resolve();
+            });
+          } else{
+            resolve();
+          }
+        });
       }
-    })
-    
+    });
   }
 
   Round.prototype.adventurerVictory = function() {
@@ -396,123 +400,134 @@ const dungeon = (function(){
     this.adventurer.returnToTown();
   }
 
-  Round.prototype.adventurerTurn = function() {
-    console.log('adventurer turn');
-    const battleDecisions = adventurersModule.getBattleDecisions();
-    const adventurerMove = this.adventurer.getBattleDecision(this.monster);
-    if (adventurerMove === battleDecisions.defend) {
-      this.adventurer.defending = true;
-      this.adventurer.logDefend();
-    } else {
-      this.adventurer.defending = false;
-    }
-    if (adventurerMove === battleDecisions.usePotion) {
-      this.adventurer.usePotion();
-    }
-    if (adventurerMove === battleDecisions.flee) {
-      const doBlock = this.monster.checkBlockFlee();
-      if (doBlock) {
-        const levelDiff = this.monster.level - this.adventurer.level;
-        let fleeFactor = .05 + (levelDiff / 10);
-        const doesFlee = fleeFactor > Math.random();
-        if (doesFlee) {
+  Round.prototype.adventurerTurn = async function() {
+    return new Promise((resolve, reject => {
+      console.log('adventurer turn');
+      const battleDecisions = adventurersModule.getBattleDecisions();
+      const adventurerMove = this.adventurer.getBattleDecision(this.monster);
+      if (adventurerMove === battleDecisions.defend) {
+        this.adventurer.defending = true;
+        this.adventurer.logDefend();
+      } else {
+        this.adventurer.defending = false;
+      }
+      if (adventurerMove === battleDecisions.usePotion) {
+        this.adventurer.usePotion();
+      }
+      if (adventurerMove === battleDecisions.flee) {
+        const doBlock = this.monster.checkBlockFlee();
+        if (doBlock) {
+          const levelDiff = this.monster.level - this.adventurer.level;
+          let fleeFactor = .05 + (levelDiff / 10);
+          const doesFlee = fleeFactor > Math.random();
+          if (doesFlee) {
+            this.fleed = true;
+            this.adventurer.logFlee();
+          } else {
+            this.adventurer.logFleeFail(this.monster.name);
+          }
+        } else {
           this.fleed = true;
           this.adventurer.logFlee();
-        } else {
-          this.adventurer.logFleeFail(this.monster.name);
-        }
-      } else {
-        this.fleed = true;
-        this.adventurer.logFlee();
-      }
-    }
-    if (adventurerMove === battleDecisions.checkWeakness) {
-      this.adventurer.setWeaknessChecked(true);
-      this.adventurer.logWeaknessChecked({ monsterName: this.monster.name });
-    }
-    if (adventurerMove === battleDecisions.attack) {
-      let damageFactor = 0;
-      if (this.adventurer.adventurerClass.name === 'thief') {
-        damageFactor = Math.floor(this.adventurer.cunning * .75) + this.adventurer.strength;
-      } else if (this.adventurer.adventurerClass.name === 'bard') {
-        damageFactor = Math.floor(this.adventurer.cunning * .5) + this.adventurer.strength;
-      } else if (this.adventurer.adventurerClass.name === 'soldier') {
-        damageFactor = Math.floor(this.adventurer.cunning * .2) + this.adventurer.strength;
-      } else {
-        damageFactor = this.adventurer.strength;
-      }
-      let weaponDamage = 0;
-      if (this.adventurer.equipment.weapon) {
-        weaponDamage = this.adventurer.equipment.weapon.damage;
-      }
-      const damageFloor = Math.floor(damageFactor / 2);
-      const randomizeDamage = damageFactor - damageFloor;
-      const randomDamage = Math.floor(Math.random() * randomizeDamage);
-      const monsterShield = Math.floor(Math.random() * (this.monster.defense * .5) + (this.monster.defense * .5));
-      let calculatedDamage = damageFloor + randomDamage + weaponDamage - monsterShield;
-      if (this.monster.defending) {
-        calculatedDamage = Math.floor(calculatedDamage / 2);
-      }
-      if (this.adventurer.weaknessChecked) {
-        const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
-        calculatedDamage = ampDamage;
-      }
-      calculatedDamage = Number.parseInt(calculatedDamage);
-      if (calculatedDamage < 1) {
-        if (Math.random() > .5) {
-          calculatedDamage = 1;
-        } else {
-          calculatedDamage = 0;
         }
       }
-      if (calculatedDamage > this.monster.hp) {
-        calculatedDamage = this.monster.hp;
+      if (adventurerMove === battleDecisions.checkWeakness) {
+        this.adventurer.setWeaknessChecked(true);
+        this.adventurer.logWeaknessChecked({ monsterName: this.monster.name });
       }
-      this.monster.takeBattleDamage(calculatedDamage);
-      const damagePayload = {
-        monsterName: this.monster.name,
-        damage: calculatedDamage
+      if (adventurerMove === battleDecisions.attack) {
+        let damageFactor = 0;
+        if (this.adventurer.adventurerClass.name === 'thief') {
+          damageFactor = Math.floor(this.adventurer.cunning * .75) + this.adventurer.strength;
+        } else if (this.adventurer.adventurerClass.name === 'bard') {
+          damageFactor = Math.floor(this.adventurer.cunning * .5) + this.adventurer.strength;
+        } else if (this.adventurer.adventurerClass.name === 'soldier') {
+          damageFactor = Math.floor(this.adventurer.cunning * .2) + this.adventurer.strength;
+        } else {
+          damageFactor = this.adventurer.strength;
+        }
+        let weaponDamage = 0;
+        if (this.adventurer.equipment.weapon) {
+          weaponDamage = this.adventurer.equipment.weapon.damage;
+        }
+        const damageFloor = Math.floor(damageFactor / 2);
+        const randomizeDamage = damageFactor - damageFloor;
+        const randomDamage = Math.floor(Math.random() * randomizeDamage);
+        const monsterShield = Math.floor(Math.random() * (this.monster.defense * .5) + (this.monster.defense * .5));
+        let calculatedDamage = damageFloor + randomDamage + weaponDamage - monsterShield;
+        if (this.monster.defending) {
+          calculatedDamage = Math.floor(calculatedDamage / 2);
+        }
+        if (this.adventurer.weaknessChecked) {
+          const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
+          calculatedDamage = ampDamage;
+        }
+        calculatedDamage = Number.parseInt(calculatedDamage);
+        if (calculatedDamage < 1) {
+          if (Math.random() > .5) {
+            calculatedDamage = 1;
+          } else {
+            calculatedDamage = 0;
+          }
+        }
+        if (calculatedDamage > this.monster.hp) {
+          calculatedDamage = this.monster.hp;
+        }
+        this.monster.takeBattleDamage(calculatedDamage);
+        const damagePayload = {
+          monsterName: this.monster.name,
+          damage: calculatedDamage
+        }
+        this.adventurer.logHitMonster(damagePayload);
+        resolve();
+      } else {
+        resolve();
       }
-      this.adventurer.logHitMonster(damagePayload);
-      
-    }
+    }));
+    
   }
 
-  Round.prototype.monsterTurn = function() {
-    const monsterDecisions = monsters.getMonsterDecisions();
-    const monsterMove = this.monster.getBattleDecision();
-    if (monsterMove === monsterDecisions.defend) {
-      this.monster.defending = true;
-    } else {
-      this.monster.defending = false;
-    }
-    if (monsterMove === monsterDecisions.attack) {
-      const damageFloor = Math.floor(this.monster.damage / 2);
-      const randomizeDamage = this.monster.damage - damageFloor;
-      const randomDamage = Math.floor(Math.random() * randomizeDamage);
-      const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
-      let adventurerArmor = 0;
-      if (this.adventurer.equipment.armor) {
-        adventurerArmor = this.adventurer.equipment.armor.armor;
+  Round.prototype.monsterTurn = async function() {
+    return new Promise((resolve, reject) => {
+      const monsterDecisions = monsters.getMonsterDecisions();
+      const monsterMove = this.monster.getBattleDecision();
+      if (monsterMove === monsterDecisions.defend) {
+        this.monster.defending = true;
+      } else {
+        this.monster.defending = false;
       }
-      // console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
-      let calculatedDamage = damageFloor + randomDamage - adventurerShield - adventurerArmor;
-      if (this.adventurer.defending) {
-        calculatedDamage = Math.floor(calculatedDamage / 2);
-      }
-      if (calculatedDamage < 1) {
-        if (Math.random() > .5) {
-          calculatedDamage = 1;
-        } else {
-          calculatedDamage = 0;
+      if (monsterMove === monsterDecisions.attack) {
+        const damageFloor = Math.floor(this.monster.damage / 2);
+        const randomizeDamage = this.monster.damage - damageFloor;
+        const randomDamage = Math.floor(Math.random() * randomizeDamage);
+        const adventurerShield = Math.floor((this.adventurer.adventurerClass.armor + Math.floor(this.adventurer.adventurerClass.tactics / 2)) / 2);
+        let adventurerArmor = 0;
+        if (this.adventurer.equipment.armor) {
+          adventurerArmor = this.adventurer.equipment.armor.armor;
         }
+        // console.log(`damage: ${damageFloor + randomDamage}, shield: ${adventurerShield}`);
+        let calculatedDamage = damageFloor + randomDamage - adventurerShield - adventurerArmor;
+        if (this.adventurer.defending) {
+          calculatedDamage = Math.floor(calculatedDamage / 2);
+        }
+        if (calculatedDamage < 1) {
+          if (Math.random() > .5) {
+            calculatedDamage = 1;
+          } else {
+            calculatedDamage = 0;
+          }
+        }
+        const damagePayload = {
+          monsterName: this.monster.name,
+          damage: calculatedDamage
+        }
+        this.adventurer.takeBattleDamage(damagePayload);
+        resolve();
+      } else {
+        resolve();
       }
-      const damagePayload = {
-        monsterName: this.monster.name,
-        damage: calculatedDamage
-      }
-      this.adventurer.takeBattleDamage(damagePayload);
-    }
+    })
+    
   }
 
   Round.prototype.addRound = function() {
