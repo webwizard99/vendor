@@ -401,7 +401,7 @@ const dungeon = (function(){
   }
 
   Round.prototype.adventurerTurn = async function() {
-    return new Promise((resolve, reject => {
+    return new Promise((resolve, reject) => {
       console.log('adventurer turn');
       const battleDecisions = adventurersModule.getBattleDecisions();
       const adventurerMove = this.adventurer.getBattleDecision(this.monster);
@@ -483,7 +483,7 @@ const dungeon = (function(){
       } else {
         resolve();
       }
-    }));
+    });
     
   }
 
