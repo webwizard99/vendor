@@ -458,6 +458,7 @@ const dungeon = (function(){
         const randomDamage = Math.floor(Math.random() * randomizeDamage);
         const monsterShield = Math.floor(Math.random() * (this.monster.defense * .5) + (this.monster.defense * .5));
         let calculatedDamage = damageFloor + randomDamage + weaponDamage - monsterShield;
+        console.log(`damageFloor: ${damageFloor}, randomDamage: ${randomDamage}, monsterShield: ${monsterShield}`);
         if (this.monster.defending) {
           calculatedDamage = Math.floor(calculatedDamage / 2);
         }
@@ -465,7 +466,11 @@ const dungeon = (function(){
           const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
           calculatedDamage = ampDamage;
         }
+        console.log(calculatedDamage);
         calculatedDamage = Number.parseInt(calculatedDamage);
+        if (isNaN(calculatedDamage)) {
+          calculatedDamage = 0;
+        }
         if (calculatedDamage < 1) {
           if (Math.random() > .5) {
             calculatedDamage = 1;
@@ -512,6 +517,10 @@ const dungeon = (function(){
         let calculatedDamage = damageFloor + randomDamage - adventurerShield - adventurerArmor;
         if (this.adventurer.defending) {
           calculatedDamage = Math.floor(calculatedDamage / 2);
+        }
+        calculatedDamage = Number.parseInt(calculatedDamage);
+        if (isNaN(calculatedDamage)) {
+          calculatedDamage = 0;
         }
         if (calculatedDamage < 1) {
           if (Math.random() > .5) {
