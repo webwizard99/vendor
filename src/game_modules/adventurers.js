@@ -25,6 +25,7 @@ const adventurers = (function(){
 
   const maxInventory = 15;
   const defaultActionDays = 2;
+  const dungeonTurnsThreshold = 8;
 
   const actions = {
     checkForTreasure: 'checkForTreasure',
@@ -263,9 +264,9 @@ const adventurers = (function(){
     const percentLost = hpDifferential / this.maxHp;
     let turnsInfluence = 1;
     let turnsFactor;
-    if (this.currentTotalDungeonTurns < 15) {
+    if (this.currentTotalDungeonTurns < dungeonTurnsThreshold) {
       turnsInfluence = -1;
-      turnsFactor = (15 - (turnsInfluence * this.currentTotalDungeonTurns)) / 15; 
+      turnsFactor = (dungeonTurnsThreshold - (turnsInfluence * this.currentTotalDungeonTurns)) / dungeonTurnsThreshold; 
     } else {
       turnsFactor = (turnsInfluence * this.currentTotalDungeonTurns) / 400;
     }

@@ -125,6 +125,7 @@ const dungeon = (function(){
 
   Level.prototype.activateTile = async function(adventurer) {
     return new Promise((resolve, reject) => {
+      const encounterWeight = 1.4;
       let tileOutcomes = [];
       for (let tileI = 0; tileI < this.tileAssignments.length; tileI++) {
         const weight = this.tileAssignments[tileI].probability;
@@ -154,7 +155,7 @@ const dungeon = (function(){
         checkTrapBoost = 50;
       }
       const treasureProb = Math.random() * (resultTile.treasure + innTreasureBoost + checkTreasureBoost);
-      const encounterProb = Math.random() * resultTile.encounter;
+      const encounterProb = Math.random() * resultTile.encounter * encounterWeight;
       const trapProb = Math.random() * (resultTile.trap - checkTrapBoost);
       const threshholdProb = Math.random() * 125;
       // console.log(`probs... treasure: ${treasureProb}, trap: ${trapProb}, encounter: ${encounterProb}, threshold: ${threshholdProb}`);
