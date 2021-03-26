@@ -454,11 +454,14 @@ const dungeon = (function(){
         const randomDamage = Math.floor(Math.random() * randomizeDamage);
         const monsterShield = Math.floor(Math.random() * (this.monster.defense * .5) + (this.monster.defense * .5));
         let calculatedDamage = damageFloor + randomDamage + weaponDamage - monsterShield;
-        console.log(`damageFloor: ${damageFloor}, randomDamage: ${randomDamage}, monsterShield: ${monsterShield}`);
+        console.log(`damageFloor: ${damageFloor}, randomDamage: ${randomDamage}, weaponDamage: ${weaponDamage}, monsterShield: ${monsterShield}`);
+        console.log(calculatedDamage);
         if (this.monster.defending) {
+          console.log('defending');
           calculatedDamage = Math.floor(calculatedDamage / 2);
         }
         if (this.adventurer.weaknessChecked) {
+          console.log('weakness check');
           const ampDamage = calculatedDamage * (Math.floor(1.3 * Math.pow(1.14, this.adventurer.cunning)));
           calculatedDamage = ampDamage;
         }
